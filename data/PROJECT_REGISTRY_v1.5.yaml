@@ -1,0 +1,980 @@
+schema_version: 1
+registry_version: "1.5"
+generated_at: "2026-09-15"
+revised_by: "Claude (Opus 5) — records the Gate 3 first tranche: v0.7 relocated, and agoraxai-control-plane added as the 18th row"
+owner: "George Gokmen"
+status: "GATE_1B CLOSED · GATE_2A COMPLETE · GATE_2B SUPERSEDED · GATE_2C COMPLETE · GATE_2D COMPLETE · GATE_3 FIRST TRANCHE COMPLETE (A1 A2 A3 C1) · B2 BLOCKED"
+project_row_count: 18
+
+supersedes:
+  - {version: "1.0-draft", sha256: "cefdb0ff7b900ff7045e79118d64f1032d937a3c3b2c2652640925d29ebdb58c"}
+  - {version: "1.1",       sha256: "88ec721acb7f0f562df17f1518656c9a49e93b1c30a3e362af7ad99f847fd7b9"}
+  - {version: "1.2-interim", sha256: "162b593fe9f6e38f9cd2df3999a1b95a017c71d9cec21f7bff88c8b2b99f2561", note: "WITHDRAWN — predates the Atlas correction."}
+  - {version: "1.2",       sha256: "1146e5dd5820a289109eb8b1e2f95499099a1ec345b5d756e00e45135aee1050"}
+  - {version: "1.3",       sha256: "f534ccc43d839775db432cf95fce07d49d6db99ee42d5eecdf5d3c60acaf0c5a", note: "DEFECTIVE — carried only 10 project rows. Never authoritative."}
+  - {version: "1.3.1",     sha256: "320914a0b45a2449724c15f2020671be92eec1b2d7be2d7d0fe963cc6a878b1d", note: "Superseded. Sound at the time; its schema-absence statements were bounded by a search that has since been completed and corrected."}
+  - {version: "1.4",       sha256: "bd2e2310b4ea385279e843524d6437afcc6bec0c2d73d3ba0f12810899d72514", note: "Superseded by this file. Accurate as issued; superseded because v0.7 was relocated at Gate 3 and agoraxai-control-plane was discovered unregistered. A byte-identical copy remains at ~/Projects/agoraxai/control-plane/data/ as that tool's pinned input until it is repointed at v1.5."}
+
+# =============================================================================
+# CORRECTIONS TO v1.3.1
+# =============================================================================
+
+corrections_to_v1_4:
+  - id: "v07-path-changed"
+    was: "lycian-turkiye-atlas.git_state.path = ~/Desktop/v0.7"
+    now: "~/Projects/agoraxai/atlas/lycian-turkiye"
+    why: >-
+      Gate 3 row C1b relocated the repository on 2026-09-15 after C1a cleared. The move was
+      verified: HEAD unchanged, commit count unchanged, file count unchanged, and all 151
+      content hashes identical before and after. Not a correction of an error — a record of
+      a state change.
+    rollback: "mv ~/Projects/agoraxai/atlas/lycian-turkiye ~/Desktop/v0.7"
+
+  - id: "control-plane-unregistered"
+    was: "17 project rows; agoraxai-control-plane absent"
+    now: "18 rows; agoraxai-control-plane recorded"
+    why: >-
+      Found during Gate 3 C1a triage, which flagged three of its files as containing the v0.7
+      path. Investigation showed those were ingested copies of this registry, not code that
+      opens the path — but it also showed a real project that the registry had never recorded.
+      A registry that omits a project is incomplete in the same way v1.3 was, and is corrected
+      the same way: by adding the row, never by lowering the count.
+    note: "The completeness rule forbids a DECREASE without an explicit retirement entry. An increase needs no exemption."
+
+  - id: "control-plane-category-choice"
+    decision: "category: AGORAXAI_PLATFORM"
+    why: >-
+      The owner specified umbrella AGORAXAI_UMBRELLA, kind INTERNAL_PLATFORM, visibility
+      private, codename Octopus — and those are recorded verbatim as their own fields. But
+      `category` is a separate, constrained field: the control-plane importer validates it
+      against a fixed list of eight values, and INTERNAL_PLATFORM is not among them, so
+      using it as the category would make the tool throw on its own registry. AGORAXAI_PLATFORM
+      is the closest valid value. THIS CHOICE IS CLAUDE'S, NOT THE OWNER'S, and is flagged
+      here so it can be overridden.
+
+corrections_to_v1_3_1:
+  - id: "case-sensitive-search-defect"
+    severity: "DEFECT in the evidence instrument, not in the registry text"
+    what_happened: >-
+      The schema search that produced the 60-branch result was case-sensitive. Patterns such as
+      EXCLUDE USING and 'create table[^;]*booking' could not match the opposite casing. The defect
+      was found by Claude during a self-audit of GATE_2C_OWNER_COMMANDS.sh before it was run, and
+      fixed with git grep -i.
+    consequence: >-
+      Positive hits from that pass remain valid. The NEGATIVE half — 'no other branch contains
+      schema' — was produced by an instrument that could not see half the plausible casings and is
+      WITHDRAWN. The Gate 2C closure run re-searched all 61 branches from scratch, case-insensitively.
+    outcome: "The re-run found migrations the case-sensitive pass would have missed entirely. See branch_search."
+
+  - id: "sixty-one-of-sixty-one-now-complete"
+    was: "Global absence remains UNPROVEN pending the 61-branch search."
+    now: "The 61/61 search is COMPLETE. Scope of the resulting negative is stated exactly in branch_search.proves / does_not_prove."
+    why: "The one unsearchable branch was fetched additively into refs/gate2c/ and searched. 0 branches remain unavailable."
+
+  - id: "dayos-supabase-now-measured"
+    was: "DayOS: 'Commit history shows a dedicated dayos schema, a persistence core migration...' (reported from commit messages)"
+    now: "Five DayOS migration files are identified by path, and their object inventory is measured directly. See projects[dayos].supabase."
+    why: "Commit-message evidence has been replaced by file evidence. This is an upgrade in evidence level, not a correction of fact."
+
+  - id: "pinar-asset-candidate-pool"
+    was: "74 Spotlight matches pending narrowing."
+    now: "72 unique paths after deduplication. Shortlist of true candidates: ZERO. See projects[pinarevleri].asset_status."
+    why: "Two paths were counted twice. All 72 were examined; none is Pinar Evleri property photography."
+
+# =============================================================================
+# BRANCH SEARCH — 61/61 COMPLETE
+# =============================================================================
+
+branch_search:
+  status: "COMPLETE"
+  executed: "Gate 2C --evidence-closure, run 20260915T141807Z"
+  authority: "git ls-remote --heads origin — the sole authority for what exists on the remote"
+  branches_advertised: 61
+  branches_searched: 61
+  branches_unavailable: 0
+  method: "Case-insensitive categorised git grep keyed on authoritative remote SHAs, plus a filename inventory of every .sql file on every branch."
+
+  closure_mechanism:
+    missing_ref: "feature/dayos-next-integration-preview"
+    fetched_into: "refs/gate2c/feature/dayos-next-integration-preview"
+    sha: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14"
+    guarantee: "Additive only — no branch created or deleted, no checkout, no merge, no prune, no reset, no index or working-tree change."
+    removal: "git -C ~/Projects/artemis-omni update-ref -d refs/gate2c/feature/dayos-next-integration-preview"
+    note: >-
+      This branch is live and moving. Gate 2B observed it at e045dfbf035f; the Gate 2C closure run
+      fetched 1f9d2346e8ca. Any SHA recorded for it is a timestamped reading, not a fixed fact.
+
+  sql_inventory_complete:
+    total_files: 6
+    files:
+      - {branch: "feature/dayos-next-integration-preview", path: "supabase/migrations/20260913_dayos_gate2_core.sql"}
+      - {branch: "feature/dayos-next-integration-preview", path: "supabase/migrations/20260915_dayos_timeline_import_idempotency.sql"}
+      - {branch: "feature/dayos-next-integration-preview", path: "supabase/migrations/20260915_dayos_timeline_quality.sql"}
+      - {branch: "feature/dayos-next-integration-preview", path: "supabase/migrations/20260915_dayos_timeline_quality_function.sql"}
+      - {branch: "feature/dayos-next-integration-preview", path: "supabase/migrations/20260915_dayos_timeline_segments.sql"}
+      - {branch: "feature/pinarevleri-manager-mvp",        path: "ENGINEERING/pinar-evleri/06_decision_policy_schema.sql"}
+
+  hits:
+    - id: 1
+      category: "RLS_POLICY"
+      branch: "feature/dayos-next-integration-preview"
+      branch_sha: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14"
+      paths:
+        - "supabase/migrations/20260913_dayos_gate2_core.sql"
+        - "supabase/migrations/20260915_dayos_timeline_segments.sql"
+      classification: "EXECUTABLE_DDL_IN_MIGRATION"
+      belongs_to: "dayos"
+
+    - id: 2
+      category: "TRIGGER"
+      branch: "feature/dayos-next-integration-preview"
+      branch_sha: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14"
+      paths: ["supabase/migrations/20260913_dayos_gate2_core.sql"]
+      classification: "EXECUTABLE_DDL_IN_MIGRATION"
+      belongs_to: "dayos"
+
+    - id: 3
+      category: "ERRCODE_23P01"
+      branch: "feature/pinarevleri-manager-mvp"
+      branch_sha: "085c67e5c830cc1cd6373113b67ce4f4608eb1f4"
+      paths: ["lib/pinar-evleri-demo-api.ts"]
+      classification: "CLIENT_SIDE_ERROR_HANDLING"
+      belongs_to: "pinarevleri"
+      not_ddl_because: "A TypeScript module cannot define a constraint. 23P01 is a PostgreSQL error code; code can only receive it, never declare it. The only .sql file on this branch is 06_decision_policy_schema.sql."
+      evidence_provenance: "Classified at Gate 2A from direct file inspection; Gate 2D confirms the category match and the .sql inventory are consistent with that reading. The file was NOT re-read at Gate 2D — it is not in any reachable working tree and no shell on the Mac was available."
+      residual_ambiguity: "Error handling versus an incidental mention in a comment or constant. Closed by one read-only command: git -C ~/Projects/artemis-omni grep -n -E '23P01|exclusion_violation' 085c67e5c830 -- lib/pinar-evleri-demo-api.ts"
+
+  proves:
+    migrations_in_git: >-
+      PROVEN and complete for this repository: six .sql files exist across all 61 authoritative
+      remote branches. Five are DayOS. One is Pinar's 06_. Files 01_-05_ are not among them.
+    dayos_migrations_are_not_pinar: >-
+      MEASURED, not assumed. The five DayOS files define schema `dayos` only, and contain ZERO
+      occurrences of: EXCLUDE USING; tstzrange or daterange; 23P01 or exclusion_violation;
+      pinar, evleri, booking, reservation or guest; and zero secret-shaped tokens.
+    application_code_reference: >-
+      PROVEN to exist. lib/pinar-evleri-demo-api.ts handles 23P01. This is evidence THAT an
+      exclusion constraint exists in the database; it is NOT a definition of one and cannot be
+      used to reconstruct one — an error code carries no column list, operator set or predicate.
+
+  does_not_prove:
+    global_absence: >-
+      The search covers the 61 remote branches of artemis-omni. It does NOT cover unpushed local
+      branches in either checkout, ~/Desktop/motion graphic/artemis-omni, other repositories,
+      ~/Desktop at large, or any backup. The supported claim is 'not in artemis-omni', NOT 'does not exist'.
+    live_schema_contents: >-
+      INFERRED, NOT VERIFIED. Nobody has read the live Supabase schema. The inference chain is
+      strong — an observed production 23P01, application code handling it, no EXCLUDE USING in any
+      of the six .sql files, and 06_ defining only decision-policy tables — but the final link is
+      an unread database. Labelled an inference until Phase A runs.
+    recoverability_of_01_to_05: >-
+      UNKNOWN. Two surfaces remain unchecked: supabase_migrations.schema_migrations statement text,
+      and SQL Editor saved snippets / query history. These are the ONLY remaining paths to the
+      original files as opposed to their effect. Supabase schema recovery is NOT complete and is
+      NOT marked complete anywhere in this registry.
+
+  new_datapoint:
+    finding: "~/Projects/artemis-omni/supabase/ contains only migrations/. There is no config.toml."
+    weight: >-
+      WEAK HINT ONLY. A Supabase CLI project initialised in this repository would normally carry
+      config.toml. Combined with the CLI not being installed locally, this leans toward the DDL
+      having been pasted into the SQL Editor rather than applied via the CLI — which would make
+      SQL Editor history the more promising surface. It could equally mean the CLI was run
+      elsewhere, or that config.toml is gitignored. Not a finding.
+
+# =============================================================================
+# GATE 2C — EXECUTED AND INDEPENDENTLY VERIFIED
+# =============================================================================
+
+gate_2c:
+  status: "COMPLETE"
+  script: "GATE_2C_OWNER_COMMANDS.sh"
+  script_version: "2C.2"
+  script_sha256: "13f09feeadb67f2682283ed1e3337d8788d3007c75d64b492a188fef9718b99e"
+  supersedes_script: {name: "GATE_2B_OWNER_COMMANDS.sh", sha256: "4761316b9effd2365decf14db2dced2913006d7a05ad3feb2c87f05f39100b0a", status: "NEVER EXECUTED"}
+  pre_release_verification: "bash -n exit 0; 10 prohibition/compatibility greps clean; 106 assertions across 17 sandbox scenarios, all passing; 11 defects found in self-audit and fixed before hand-off."
+
+  runs:
+    - mode: "--evidence-closure"
+      utc: "20260915T141807Z"
+      rows: "3 OK, 0 failed, 0 skipped"
+      evidence: "~/Projects/_governance/gate2c/20260915T141807Z"
+      manifest_entries: 13
+
+    - mode: "--local-actions"
+      utc: "20260915T142150Z"
+      rows: "3 OK, 0 failed, 0 skipped"
+      evidence: "~/Projects/_governance/gate2c/20260915T142150Z"
+      manifest_entries: 16
+      share_safe_summary_sha256: "27eda5c6758987e81025184f3c7686d964f9a57acc20b6ddbb30f648f66a9fd6"
+
+  completed_actions:
+    - id: "L1-v07-commit"
+      project: "lycian-turkiye-atlas"
+      pre: {commits: 0, staged: 0}
+      post: {head: "bee2593f3b3e528e4f174e75d2a6a2d4e837f703", branch: "main", commits: 1, files: 52, insertions: 33364}
+      excluded_retained_on_disk: {reference_pngs: 5, dist: true}
+      excluded_paths_in_tree: 0
+      remotes: 0
+      tags: 0
+      verified_by: "Gate 2D, from .git/HEAD, .git/refs/heads/main, .git/logs/HEAD, .git/config, .git/refs/tags/, filesystem listing"
+      rollback: "git -C ~/Projects/agoraxai/atlas/lycian-turkiye reset --soft HEAD~1  (the repository was at ~/Desktop/v0.7 when this commit was made; it moved at Gate 3)"
+
+    - id: "L2-dayos-explicit-ff"
+      project: "dayos"
+      pre: {head: "8584010a02898a9f83feae43860424e8acdc6c6a", worktree: "clean"}
+      post: {head: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14", commits_gained: 21}
+      verification: "Three-way agreement — local branch ref == refs/remotes/origin/feature/dayos-next-integration-preview == refs/gate2c/feature/dayos-next-integration-preview"
+      worktree_after: "clean, proven by the row's own post-check passing; current-moment state not re-verified at Gate 2D (no shell available)"
+      rollback: "Nothing lost — 8584010a0289 remains reachable. Check out another ref, then: git branch --force feature/dayos-next-integration-preview 8584010a02898a9f83feae43860424e8acdc6c6a. Do NOT use reset --hard."
+
+    - id: "L3-fcc-exact-commit"
+      project: "financial-command-center"
+      pre: {head: "d563ac765e07da9feda24fa362453ca07fca800d", commits: 1, remotes: 0}
+      post: {head: "2731c29f53dcde7d565a84acc1e4f1886da29c6a", commits: 2, remotes: 0, tags: 0}
+      files_committed: ["PHASE_1_IMPLEMENTATION_PLAN.md", "README.md"]
+      method: "git add -- <file> per file; never add -A; staged set verified to be exactly these two before commit"
+      significance: "Closes the Gate 1B gap — both files previously existed only in the working tree and in no bundle."
+      rollback: "git -C ~/Projects/financial-command-center reset --soft d563ac765e07da9feda24fa362453ca07fca800d"
+
+  not_run:
+    - {mode: "--copy-selected-assets", reason: "The Pinar asset shortlist is empty. An allowlist would have no entries. Running it would accomplish nothing."}
+    - {mode: "--fcc-private-remote", reason: "BLOCKED — see fcc_remote_blockers. Untested in sandbox (gh unavailable) and carrying two confirmed defects."}
+
+# =============================================================================
+# GATE 3 — FIRST TRANCHE EXECUTED
+# =============================================================================
+
+gate_3:
+  status: "FIRST TRANCHE COMPLETE — A1, A2, A3, C1 executed and verified"
+  script: "GATE_3_OWNER_COMMANDS.sh"
+  versions:
+    - {version: "3.2", sha256: "babb0df564cf4e584bf0a38269da9525e30f3a1243db833970c96e3ce42b145b", status: "EXECUTED 20260915T174728Z — 3 OK, 1 FAILED (C1a, by design), 1 SKIPPED. Superseded: its secret classifier had a confirmed bypass."}
+    - {version: "3.3", sha256: "e840e4b5fc088e8c4a4719b0ff9fbe35a38312604a72d3967b5d2850b6a22ed4", status: "EXECUTED — 5 OK. Fixes the comment-silences-a-key bypass; adds hash-pinned C1a acknowledgement. 135 assertions passing."}
+  push_capability: "NONE. No git push, no gh repo create, no gh repo edit anywhere in the file. --fcc-private-remote is not an accepted argument."
+
+  completed_actions:
+    - id: "A1-fcc-bundle"
+      artifact: "~/Projects/_archives/2026-09-15/financial-command-center-2731c29f53dc-20260915T174728Z.bundle"
+      bytes: 74751
+      sha256: "321502d849b2e5f5e0ae003cdd1a0fea8b6051bc35206f46204243658677a99d"
+      head: "2731c29f53dcde7d565a84acc1e4f1886da29c6a"
+      verification: "bundle verify twice (partial path and final path), list-heads contains HEAD"
+      prior_bundle: "financial-command-center-20260914T230736Z.bundle, 69204 bytes — hashed BEFORE creation and re-hashed AFTER; byte-identical. Neither overwritten nor deleted."
+      rollback: "delete the new bundle file; it is purely additive"
+
+    - id: "A2-v07-bundle"
+      artifact: "~/Projects/_archives/2026-09-15/lycian-turkiye-atlas-v0.7-bee2593f3b3e-20260915T174728Z.bundle"
+      bytes: 2691020
+      sha256: "ee1f2a914501231feda7604162ee6322de88b3d0f51438e71e23b5184f2caea5"
+      head: "bee2593f3b3e528e4f174e75d2a6a2d4e837f703"
+      note: "Bundle size independently corroborates the Gate 2C exclusion — see projects[lycian-turkiye-atlas].bundles"
+      rollback: "delete the new bundle file"
+
+    - id: "A3-restore-evidence"
+      result: "1 restored byte-exact, 0 already correct, 1 documented gap retained"
+      method: "7 candidate .txt files considered, matched by SHA-256 only — never by filename"
+      restored: "20260915T142150Z/SHARE_SAFE_SUMMARY.txt (27eda5c6758987e81025184f3c7686d964f9a57acc20b6ddbb30f648f66a9fd6)"
+      gap_retained: "20260915T141807Z/SHARE_SAFE_SUMMARY.txt (8e8f2735ee9cdac9e999006efcab1eaeba0cb82dad54712d6ad6f97672ee3e51) — no byte-exact source existed anywhere among the candidates. NOTHING WAS RECONSTRUCTED."
+      rollback: "delete the restored copy"
+
+    - id: "C1a-v07-dependency-scan"
+      result: "8 references found on the first run; 0 blocking on the second"
+      finding: "ALL EIGHT WERE DOCUMENTATION. Zero code on the machine opens the v0.7 path."
+      groups:
+        - {group: "Desktop gate paperwork", count: 5, paths: ["GATE_1B_OWNER_COMMANDS.sh", "GATE_1B_OWNER_COMMANDS_v2.sh", "GATE_1B_OWNER_COMMANDS_v2_1.sh", "GATE_2B_OWNER_COMMANDS.sh", "PROJECT_REGISTRY_v1.1.yaml"], note: "Loose at the ~/Desktop root, outside the artemis-website exclusion. Byte sizes match their artemis-website twins."}
+        - {group: "agoraxai-control-plane", count: 3, paths: ["data/PROJECT_REGISTRY_v1.4.yaml", "data/snapshot.json", "dist/main.js"], note: "Ingested registry text and its derivatives. scripts/import-registry.mjs reads only data/<name>; NO source file matched though the scan covered *.ts, *.mjs, *.js and *.json."}
+      open_detail: >-
+        The disposition of the five Desktop duplicates is NOT KNOWN to this registry. C1a
+        cleared, and the acknowledgement file was subsequently removed. If those five were
+        acknowledged rather than archived, a future C1a run will block on them again. Confirm
+        whether they were moved to _archives/2026-09-15/desktop-gate-paperwork/.
+
+    - id: "C1b-v07-relocate"
+      result: "COMPLETE — ~/Desktop/v0.7 -> ~/Projects/agoraxai/atlas/lycian-turkiye"
+      verification: "HEAD unchanged; commit count unchanged; file count unchanged; 151/151 content hashes identical"
+      rollback: "mv ~/Projects/agoraxai/atlas/lycian-turkiye ~/Desktop/v0.7"
+
+  defects_found_and_fixed_while_preparing:
+    - {id: "nul-binary-check", severity: "CRITICAL", detail: "grep -q $'\\0' matched EVERY file — bash cannot hold a NUL in a variable, so the pattern collapsed to the empty string. Every blob was skipped as binary and the gate reported a CLEAN SCAN on a repository with a token committed in it.", found_by: "test T11"}
+    - {id: "hit-count-zero", severity: "HIGH", detail: "C1a counted zero while printing the hit — grep -l prints filenames, and a filename does not contain the path pattern being re-grepped. The relocation would have proceeded.", found_by: "test T6"}
+    - {id: "classifier-case", severity: "HIGH", detail: "SUPABASE_SERVICE_ROLE_KEY= filed as benign because the classifier globbed lowercase while the scan grepped case-insensitively.", found_by: "gate self-test"}
+    - {id: "comment-silences-key", severity: "CRITICAL", detail: "Any line containing example/dummy/fake/sample/redacted/your_/replace_ returned BENIGN before the category and entropy logic. A live key with '// example key' after it passed the gate, and appending '// sample' to any line silenced the scanner. Seven self-identifying categories can now only be downgraded by the MATCHED TOKEN itself.", found_by: "external reviewer", fixed_in: "3.3"}
+
+  not_run: ["--fcc-private-remote does not exist in this script", "B2 remains unauthorized"]
+
+# =============================================================================
+# EVIDENCE INTEGRITY — RESOLVED IN PART
+# =============================================================================
+
+evidence_integrity:
+  status: "PARTIALLY RESOLVED at Gate 3 A3 — one folder restored, one documented gap retained"
+  cause: "SHARE_SAFE_SUMMARY.txt was MOVED out of both evidence folders. A copy of the local-actions one is at ~/Desktop/SHARE_SAFE_SUMMARY.txt."
+  tampering: "NONE. The Desktop copy hashes to 27eda5c6758987e81025184f3c7686d964f9a57acc20b6ddbb30f648f66a9fd6, byte-identical to the manifest entry. Moved, not altered."
+  impact: "A future reviewer running --verify-evidence sees a missing manifested file and a nonzero exit, which reads like tampering."
+  folders:
+    - {folder: "20260915T141807Z", manifest_entries: 13, status: "STILL FAILS — accepted documented gap", missing: "SHARE_SAFE_SUMMARY.txt", missing_sha256: "8e8f2735ee9cdac9e999006efcab1eaeba0cb82dad54712d6ad6f97672ee3e51", located: false, note: "No byte-exact source existed among the 7 candidates. It was NOT reconstructed. Its other 12 files verify against their own hashes, and the summary content is derivable from the intact RUN_LOG.txt and ROW_STATUS.txt."}
+    - {folder: "20260915T142150Z", manifest_entries: 16, status: "RESTORED AND VERIFYING — Gate 3 A3", restored_sha256: "27eda5c6758987e81025184f3c7686d964f9a57acc20b6ddbb30f648f66a9fd6"}
+    - {folder: "20260915T174728Z", manifest_entries: 14, status: "VERIFIES — Gate 3 run, self-check PASSED"}
+  remedy: "cp (never mv) the file back into its evidence folder, then re-run --verify-evidence."
+  fallback: "If the closure-run summary cannot be produced, record it as an accepted documented gap: the folder's other 12 files verify against their own hashes, and the summary is reconstructible from the intact RUN_LOG.txt and ROW_STATUS.txt."
+  standing_rule: "An evidence folder is immutable once written. Copy out of it; never move out of it."
+
+# =============================================================================
+# FCC PRIVATE REMOTE — BLOCKED
+# =============================================================================
+
+fcc_remote_blockers:
+  status: "DEFECTS FIXED — B2 STILL BLOCKED"
+  why_still_blocked: >-
+    Both defects the owner raised are corrected and tested in GATE_3_OWNER_COMMANDS.sh v3.3,
+    and a third (a comment could silence a real key) was found by an external reviewer and
+    fixed. But the gate has never been run against the REAL Financial Command Center
+    repository — every proof so far is against synthetic repositories built for the tests.
+    Private-visibility verification also remains out of scope, because it cannot be done
+    without contacting GitHub, which the Gate 3 script deliberately cannot do.
+  next_step: "Run --fcc-gate-audit against the real repository and read the share-safe summary. Only then is clearing B2 worth reopening."
+  historical_status: "BLOCKED — --fcc-private-remote must not be cleared"
+  raised_by: "Owner (item 10), confirmed by Claude at Gate 2D"
+  defects:
+    - id: "origin-substring-match"
+      severity: "HIGH"
+      detail: >-
+        The existing-origin test globs the raw URL for *yazilimlar/financial-command-center*. That
+        substring also matches .../yazilimlar/financial-command-center-public.git and hostile
+        look-alike hosts. A plausible accident passes the gate.
+      required_fix: >-
+        Normalise SSH (git@host:owner/repo.git) and HTTPS (https://host/owner/repo.git) forms to a
+        canonical host/owner/repo triple with any .git suffix stripped, and require EXACT equality
+        against github.com/yazilimlar/financial-command-center — host included.
+
+    - id: "secret-scan-wrong-set"
+      severity: "HIGH"
+      detail: >-
+        F1c walks the FILESYSTEM and matches on FILENAME. A push sends TRACKED CONTENT across all
+        history reachable from HEAD. Consequences, both directions: a gitignored .env blocks the
+        push though it would never be sent (false positive that trains the owner to override the
+        gate); a service-role key inside a tracked .ts or .md file passes untouched (the false
+        negative that matters); a secret present in commit d563ac76 and removed later is still
+        pushed, because a push sends history; and .next/ build output is walked for no reason.
+      required_fix: >-
+        Scan what git would actually send — tracked content at every commit reachable from HEAD —
+        for CONTENT patterns (eyJ JWT prefixes, sk_live_, AKIA, ghp_, service_role, PEM BEGIN
+        PRIVATE KEY headers, long high-entropy strings). Report paths and match counts only.
+        NEVER print a matched value.
+  gate_2d_observation: >-
+    A read of the FCC tree found zero files matching the current gate's extension list outside
+    node_modules/ and .git/. That is a statement about FILENAMES only, and the listing hit the
+    file bridge's 2000-entry cap, so it is not a complete enumeration. It is NOT a clean bill of
+    health and must not be cited as one.
+  clearance_condition: "Both defects corrected, re-tested, and reviewed. Until then no repository is created and nothing is pushed."
+
+# =============================================================================
+# PRODUCTION STATE — unchanged from v1.3.1, verified against the Vercel API
+# =============================================================================
+
+production_state:
+  host: "https://artemis.agoraxai.com"
+  evidence: "Vercel API (read-only) + live HTTP probes, 2026-09-15"
+
+  serving_deployment:
+    id: "dpl_Hg27275LGFNYfkBiSQFWLKFS4X7m"
+    target: "production"
+    state: "READY"
+    created_at: 1789330238502
+    git_commit_ref: "feature/utility-3d-public-demo"
+    git_commit_sha: "dd623e07da243967baa217ca5b8ce75eb9ac0d1c"
+    git_commit_message: "feat: publish interactive utility 3d demo"
+    source: "cli"
+    actor: "codex"
+    aliases: ["artemis.agoraxai.com", "artemis-omni.vercel.app", "artemis-omni-gokmen1313-3041s-projects.vercel.app"]
+
+  root_cause_of_missing_routes: >-
+    Production is NOT built from main. It is a CLI deployment (source: cli) made by an agent
+    session from the side branch feature/utility-3d-public-demo, pinned to commit dd623e07.
+    /pinarevleri, /workbench and /dayos-next are absent because that commit's tree is what
+    production serves — not because production is an older main build.
+
+  consequences:
+    - "Pushing to main does NOT update production. No git-integration production deployment exists in the recent window."
+    - "Production is effectively frozen at dd623e07 until someone runs another production deploy or promotes a deployment."
+    - "The deployment mechanism for production is manual CLI from a non-canonical branch. This is a governance finding in its own right."
+
+  recent_deployment_pattern:
+    observed: "All 20 most recent deployments have target: null — previews, not production"
+    all_from_branch: "feature/dayos-next-integration-preview"
+    implication: "Active development deploys as previews only; production is untouched by them."
+
+  project:
+    id: "prj_qHFkwHePIlDCuHEDIbKIv0Sk9RN5"
+    name: "artemis-omni"
+    team: "team_JzrJAUuKZ7Y31aU1d0VYdZTB"
+    vercel_account: "gokmen1313-3041s-projects"
+    live_flag: false
+    framework: "nextjs"
+    node: "24.x"
+
+  github:
+    org: "yazilimlar"
+    owner_type: "User"   # NOT an organization — settles the FCC repository owner question
+    repo: "artemis-omni"
+    visibility: "private"
+
+  dayos_branch_now: "Fast-forwarded at Gate 2C to 1f9d2346e8ca (+21 from 8584010a0289). Still advancing — treat any recorded SHA as a timestamped reading."
+
+  live_200: ["/", "/contact", "/labs", "/products", "/erp", "/rainbowbotanics"]
+  not_deployed_404: ["/pinarevleri", "/workbench", "/dayos-next", "/images/pinarevleri/*.webp (all 8)"]
+  control: "A deliberately bogus route returns the same 404 status and body — these are genuine 404s, not soft 404s."
+
+# =============================================================================
+# ARCHITECTURE — unchanged. Atlas remains a sibling platform, not an Artemis subproject.
+# =============================================================================
+
+architecture:
+  umbrella: "AgoraXAI"
+  layers:
+    - {id: agoraxai,          name: "AgoraXAI",          role: "Umbrella / company / discovery"}
+    - {id: artemis-platform,  name: "Artemis Platform",  role: "Engineering, automation, geometric workbench, Foundry, Marine"}
+    - {id: agoraxai-atlas,    name: "AgoraXAI Atlas",    role: "Independent spatial, geographic, heritage, botanical, property, evidence platform"}
+    - {id: agoraxai-products, name: "AgoraXAI Products", role: "DayOS, BidRoomLive, Financial Command Center, Prime Industrial ERP"}
+    - {id: ventures,          name: "Ventures",          role: "Pinar Evleri, Rainbow Botanics, Young Explorers"}
+    - {id: labs,              name: "Labs",              role: "Immature experiments"}
+    - {id: archive,           name: "Archive / Legacy",  role: "Superseded snapshots and verified duplicates"}
+  governing_principles:
+    - "A project does not belong inside Artemis Omni merely because Artemis technology was used to build it."
+    - "Atlas is not an Artemis subproject. Artemis may CONSUME Atlas; it does not own, brand, house, or govern it."
+    - "Platform relationships are dependencies, not ownership."
+    - "Repository topology, deployment topology, and URL topology are three separate decisions."
+    - "The historical name 'Artemis Atlas MVP' is never erased from documentation or commit history."
+
+governance:
+  inference_rule: >-
+    Operational metadata (reflog length, folder age, file size, mtime, directory presence, a
+    surviving local ref, a 404 today) is evidence ABOUT a state and never a substitute for
+    measuring the thing claimed. Content claims require content measurement; deployment claims
+    require deployment evidence; historical claims require historical evidence.
+  registry_completeness_rule: >-
+    Added in v1.3.1 after a row-loss defect. Every revision restates project_row_count and may not
+    reduce it without an explicit retirement entry naming the removed row. RETAINED IN 1.4.
+  retirement_rule: >-
+    No project row may be removed except by an explicit retirement entry naming the row, the
+    reason, and the evidence. No row has been retired as of 1.4.
+  evidence_instrument_rule: >-
+    Added in 1.4. A negative finding is only as good as the instrument that produced it. When a
+    search tool is found defective, every negative it produced is withdrawn, not patched. Positive
+    findings survive; absences do not.
+  evidence_immutability_rule: >-
+    Added in 1.4. An evidence folder is immutable once written. Copy out of it; never move out of it.
+
+current_freeze:
+  - "No Pinar extraction and no Pinar branch merge"
+  - "No Rainbow Botanics extraction"
+  - "ERP untouched — no file, database, cron, or launchd change"
+  - "No secret value read, printed, deleted, or rotated"
+  - "No DNS change and no domain purchase"
+  - "No Supabase or database mutation; no `supabase link`; no SQL execution; no dump"
+  - "No software installation"
+  - "No production deployment, redirect, alias, or route change"
+  - "No public repository, ever, for Financial Command Center"
+  - "No private remote creation until fcc_remote_blockers is cleared"
+  - "No bulk asset copying — allowlist only, and the allowlist is currently empty"
+  - "$0 budget — no billable operation"
+
+# =============================================================================
+# PROJECTS — 17 rows. Count restated per registry_completeness_rule.
+# =============================================================================
+
+projects:
+
+  - id: "agoraxai-web"
+    canonical_name: "AgoraXAI"
+    category: "AGORAXAI_UMBRELLA"
+    lifecycle: "ACTIVE"
+    evidence_level: "unknown"
+    canonical_repo: null
+    current_local_paths: []
+    intended_url: "https://agoraxai.com"
+    intended_local_path: "~/Projects/agoraxai/web"
+    proposed_navigation: ["Products", "Artemis", "Atlas", "Labs", "Ventures", "Research", "Portfolio", "Academy", "About", "Contact"]
+    next_evidence: ["No local checkout found under ~/Projects or ~/Desktop — may be Vercel/GitHub-only"]
+    restored_in: "1.3.1"
+
+  - id: "agoraxai-atlas"
+    canonical_name: "AgoraXAI Atlas"
+    category: "AGORAXAI_PLATFORM"
+    lifecycle: "PLATFORM_DEFINITION"
+    evidence_level: "unknown"
+    intended_url: "https://atlas.agoraxai.com"
+    intended_local_path: "~/Projects/agoraxai/atlas/core"
+    sequencing_recommendation: >-
+      Do NOT create atlas/core yet. One substantial implementation exists; extracting a core from a
+      single implementation produces a speculative abstraction. The real seams appear when the
+      second implementation needs them.
+    consumed_by: ["artemis-omni", "rainbow-botanics", "pinarevleri", "dayos", "bidroomlive", "young-explorers"]
+    provenance: "Artemis Atlas MVP -> historical predecessor -> AgoraXAI Atlas platform. Historical name preserved."
+    not_an_artemis_subproject: true
+
+  - id: "artemis-omni"
+    canonical_name: "Artemis Omni"
+    category: "ARTEMIS_PLATFORM"
+    lifecycle: "CORE"
+    evidence_level: "verified"
+    canonical_repo: "git@github.com:yazilimlar/artemis-omni.git"
+    canonical_authority: "The GitHub repository is canonical. Neither local checkout is designated canonical."
+    remote_branches: 61
+    branches_searched_at_gate_2c: 61
+    stale_local_refs: 0
+    gate2c_refs_namespace: {ref: "refs/gate2c/feature/dayos-next-integration-preview", sha: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14", removable_with: "git update-ref -d"}
+    current_local_paths:
+      - {path: "~/Projects/artemis-omni", role: "DayOS feature checkout", branch: "feature/dayos-next-integration-preview", head: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14", working_tree: "clean at Gate 2C run time", note: "Fast-forwarded +21 at Gate 2C"}
+      - {path: "~/Desktop/motion graphic/artemis-omni", role: "main-oriented checkout, holds the local Vercel link and a plaintext .env.preview.local", branch: "main", working_tree: "clean"}
+    production_deployment: "See production_state — CLI deploy from feature/utility-3d-public-demo at dd623e07, NOT main"
+    transition_preconditions:
+      - {id: 1, precondition: "Ahead/behind resolved", status: "MET — fast-forwarded at Gate 2C; branch continues to advance, so re-read before acting"}
+      - {id: 2, precondition: "Unpushed work preserved", status: "MET — none existed"}
+      - {id: 3, precondition: "origin/main verified", status: "MET"}
+      - {id: 4, precondition: "Clean canonical checkout builds", status: "NOT YET"}
+      - {id: 5, precondition: "Vercel linkage reconciled", status: "PARTIALLY MET — production source identified; the CLI-from-side-branch practice still needs a decision"}
+      - {id: 6, precondition: "Untracked files inventoried in both checkouts", status: "MET — both clean"}
+
+  - id: "artemis-workbench"
+    canonical_name: "Artemis Geometric Workbench"
+    category: "ARTEMIS_PLATFORM"
+    lifecycle: "ACTIVE"
+    evidence_level: "verified"
+    canonical_repo: null
+    intended_local_path: "~/Projects/artemis/workbench"
+    production_status: "/workbench — HTTP 404, not in the deployed commit"
+    current_local_paths:
+      - {path: "~/Projects/artemis-omni/artemis-workbench", role: "Nested source — no .git of its own"}
+      - {path: "~/Projects/artemis-omni/workbench-foundation", role: "Related nested folder"}
+      - {path: "~/Projects/artemis-omni/reference/geometric-workbench", role: "Reference copy"}
+    open_decisions:
+      - "workbench.agoraxai.com vs workbench.artemis.agoraxai.com"
+      - "Three folders for one component — owner clarification needed"
+      - "og:url correction pending the authoritative URL choice — separate small PR"
+    restored_in: "1.3.1"
+
+  - id: "artemis-app-foundry"
+    canonical_name: "Artemis App Foundry"
+    category: "ARTEMIS_PLATFORM"
+    lifecycle: "ACTIVE"
+    evidence_level: "verified"
+    canonical_repo: "git@github.com:yazilimlar/artemis-app-foundry.git"
+    intended_local_path: "~/Projects/artemis/foundry"
+    current_local_paths:
+      - {path: "~/Desktop/motion graphic/artemis-app-foundry", role: "Sole copy — own remote, 5-commit linear history, branch main"}
+    blockers: []
+    restored_in: "1.3.1"
+
+  - id: "artemis-marine"
+    canonical_name: "Artemis Marine"
+    category: "ARTEMIS_PLATFORM"
+    lifecycle: "CONCEPT_OR_EARLY_BUILD"
+    evidence_level: "unknown"
+    canonical_repo: null
+    intended_local_path: "~/Projects/artemis/marine"
+    current_local_paths: []
+    next_evidence: ["Not found under ~/Projects or ~/Desktop — locate code, docs, deployment, maturity"]
+    restored_in: "1.3.1"
+
+  - id: "artemis-atlas-mvp"
+    canonical_name: "Artemis Atlas MVP"
+    historical_name: "Artemis Atlas MVP"
+    category: "ARCHIVE"
+    lifecycle: "LEGACY_PREDECESSOR"
+    successor_candidate: "agoraxai-atlas"
+    evidence_level: "verified"
+    archival_status: "EXECUTED AND VERIFIED at Gate 1B"
+    current_local_paths:
+      - {path: "~/Desktop/artemis-atlas-mvp", role: "PRESERVED LEGACY ORIGINAL — untouched"}
+      - {path: "~/Projects/_archives/2026-09-14/artemis-atlas-mvp 2", role: "archived, hash-verified after move"}
+      - {path: "~/Projects/_archives/2026-09-14/artemis-atlas-mvp 3", role: "archived, hash-verified after move"}
+    shared_digest: "b2e2b0858471a4d07d5da8831e23b27ca9ef734b7868d3d459dfc64399476936"
+    rollback: "mv the two directories from ~/Projects/_archives/2026-09-14/ back to ~/Desktop/"
+
+  - id: "lycian-turkiye-atlas"
+    former_id: "atlas-v0-7"
+    canonical_name: "Lycian / Turkiye Atlas"
+    category: "AGORAXAI_PLATFORM"
+    platform_parent: "agoraxai-atlas"
+    lifecycle: "ACTIVE_PROTOTYPE"
+    visibility: "PRIVATE"
+    evidence_level: "verified"
+    git_state:
+      status: "FIRST COMMIT COMPLETE — Gate 2C, 20260915T142150Z"
+      path: "~/Projects/agoraxai/atlas/lycian-turkiye"
+      former_path: "~/Desktop/v0.7"
+      branch: "main"
+      head: "bee2593f3b3e528e4f174e75d2a6a2d4e837f703"
+      commit_count: 1
+      files_committed: 52
+      insertions: 33364
+      author: "yazilimlar <gokmen1313@gmail.com> — pre-existing configured identity; none was invented"
+      remotes: 0
+      tags: 0
+      verified_by: "Gate 2D — .git/HEAD, .git/refs/heads/main, .git/logs/HEAD (single initial entry), .git/config (no [remote] section), .git/refs/tags/ (empty), filesystem listing"
+      rollback: "git -C ~/Projects/agoraxai/atlas/lycian-turkiye reset --soft HEAD~1"
+      rollback_note: "At the time of the commit the repository was at ~/Desktop/v0.7. The command above targets its CURRENT location so that it actually runs."
+    exclusions:
+      excluded: ["assets/reference/*.png (5 files, ~9.4 MB)", "dist/"]
+      retained_on_disk: "YES — 5 reference PNGs and dist/validation_report.txt confirmed present after the commit"
+      in_committed_tree: 0
+      reason: "Screenshots of a commercial strategy game used as mood reference, in a repo wired for PUBLIC GitHub Pages. A copyright exposure, not a security one. dist/ is generated output."
+      arithmetic: "58 proposed - 5 PNGs - 1 dist file = 52 committed. Accounts for the difference exactly."
+    credential_scan: "CLEAN at Gate 1B — zero matches for pk.eyJ / sk.eyJ / sk_live_ / AKIA / ghp_ / JWT"
+    relocation:
+      status: "COMPLETE — Gate 3 row C1b, 2026-09-15"
+      from: "~/Desktop/v0.7"
+      to: "~/Projects/agoraxai/atlas/lycian-turkiye"
+      verification: "HEAD unchanged at bee2593f3b3e; commit count unchanged; file count unchanged; 151/151 content hashes identical before and after"
+      precondition_met: "C1a reported 0 blocking references after the owner resolved 8 documentation references"
+      rollback: "mv ~/Projects/agoraxai/atlas/lycian-turkiye ~/Desktop/v0.7"
+    bundles:
+      - {path: "~/Projects/_archives/2026-09-15/lycian-turkiye-atlas-v0.7-bee2593f3b3e-20260915T174728Z.bundle", bytes: 2691020, sha256: "ee1f2a914501231feda7604162ee6322de88b3d0f51438e71e23b5184f2caea5", head: "bee2593f3b3e528e4f174e75d2a6a2d4e837f703", note: "2.7 MB is consistent with the 52 committed files and inconsistent with the 9.4 MB of reference PNGs being in history — an independent corroboration of the exclusion."}
+    recovery_copy: "~/Projects/_archives/2026-09-14/v0.7-pre-git-<stamp>, verified 58/58"
+    version_ambiguity: "Directory is v0.7; the handoff document inside is named v0_6_handoff.md. Settle before tagging."
+    open_items: ["No remote yet — repository topology decision pending Gate 3", "No tag — deliberate"]
+
+  - id: "dayos"
+    canonical_name: "DayOS"
+    category: "PRODUCT"
+    lifecycle: "ACTIVE_DEVELOPMENT"
+    evidence_level: "verified"
+    production_status: "/dayos-next — HTTP 404, not in the deployed commit"
+    git_state:
+      status: "FAST-FORWARDED — Gate 2C, 20260915T142150Z"
+      branch: "feature/dayos-next-integration-preview"
+      pre: "8584010a02898a9f83feae43860424e8acdc6c6a"
+      post: "1f9d2346e8ca7f1d9c16f1500a53663a2413ac14"
+      commits_gained: 21
+      method: "explicit refspec fetch + merge --ff-only to the exact fetched SHA; no implicit upstream"
+      verification: "local branch ref == refs/remotes/origin/... == refs/gate2c/... (three-way agreement, Gate 2D)"
+      rollback: "Nothing lost — 8584010a0289 remains reachable. Check out another ref, then: git branch --force feature/dayos-next-integration-preview 8584010a02898a9f83feae43860424e8acdc6c6a. Do NOT use reset --hard."
+      caveat: "Branch is live and still advancing. This SHA is a timestamped reading."
+    supabase:
+      evidence_level: "MEASURED at Gate 2C (upgraded from commit-message evidence in 1.3.1)"
+      migration_files:
+        - "supabase/migrations/20260913_dayos_gate2_core.sql"
+        - "supabase/migrations/20260915_dayos_timeline_import_idempotency.sql"
+        - "supabase/migrations/20260915_dayos_timeline_quality.sql"
+        - "supabase/migrations/20260915_dayos_timeline_quality_function.sql"
+        - "supabase/migrations/20260915_dayos_timeline_segments.sql"
+      object_inventory:
+        schema: ["dayos"]
+        extension: ["pgcrypto"]
+        function: ["dayos.set_updated_at"]
+        tables: ["operating_events", "evidence_records", "event_evidence_links", "user_corrections", "timeline_imports", "media_selections", "narrative_segments", "timeline_segments"]
+        index_count: 14
+        triggers: ["operating_events_set_updated_at", "narrative_segments_set_updated_at"]
+        rls_policy_count: 15
+        rls_enabled_tables: 8
+      isolation_from_pinar: "MEASURED — zero occurrences of EXCLUDE USING, tstzrange/daterange, 23P01/exclusion_violation, or pinar/evleri/booking/reservation/guest. Zero secret-shaped tokens. These migrations are NOT the missing Pinar files."
+      config_toml: "ABSENT from ~/Projects/artemis-omni/supabase/ — only migrations/ exists"
+    live_api_routes_in_repo: ["app/api/auth/google/", "app/api/auth/google/callback/", "app/api/auth/google/disconnect/", "app/api/calendar/events/"]
+    blockers:
+      - "Four route folders (a-d) but only three cached v098 branch refs (a-c) — reconcile"
+      - "Google OAuth redirect URIs must be re-pointed before any URL change"
+      - "Whether the dayos migrations have been APPLIED to a live project, and to which project, is unknown and unexamined"
+
+  - id: "bidroomlive"
+    canonical_name: "BidRoomLive"
+    category: "PRODUCT"
+    lifecycle: "ACTIVE_DEVELOPMENT"
+    evidence_level: "reported"
+    canonical_repo: "git@github.com:yazilimlar/artemis-omni.git (branch cluster)"
+    intended_url: "https://bidroomlive.agoraxai.com"
+    intended_local_path: "~/Projects/products/bidroomlive"
+    current_local_paths:
+      - {path: "app/api/civicbid/signal-forge/route.ts", role: "Live API route in repo (6,196 B)"}
+      - {path: "lib/civicbid", role: "Shared library directory"}
+      - {path: "data/civicBid.ts", role: "Data module (12,275 B)"}
+    dependencies: ["NYC City Record feed: reported, not verified", "May consume AgoraXAI Atlas for market terrain and subcontractor mapping"]
+    next_evidence: ["Confirm via ls-remote which civicbid/bidroom branches remain and which are merged"]
+    restored_in: "1.3.1"
+
+  - id: "financial-command-center"
+    canonical_name: "Financial Command Center"
+    category: "PRODUCT"
+    lifecycle: "INTERNAL_ALPHA"
+    visibility: "PRIVATE"
+    commercial_intent: "FUTURE_COMMERCIAL"
+    evidence_level: "verified"
+    git_state:
+      status: "DOCUMENTATION COMMIT COMPLETE — Gate 2C, 20260915T142150Z"
+      path: "~/Projects/financial-command-center"
+      branch: "main"
+      pre: "d563ac765e07da9feda24fa362453ca07fca800d"
+      head: "2731c29f53dcde7d565a84acc1e4f1886da29c6a"
+      commit_count: 2
+      files_committed: ["PHASE_1_IMPLEMENTATION_PLAN.md", "README.md"]
+      method: "git add -- <file> per file; never add -A; staged set verified to be exactly these two"
+      remotes: 0
+      tags: 0
+      verified_by: "Gate 2D — .git/HEAD, .git/refs/heads/main, .git/logs/HEAD (2 entries, correct parent), .git/config (no [remote] section), .git/refs/tags/ (empty), L3c staged list"
+      rollback: "git -C ~/Projects/financial-command-center reset --soft d563ac765e07da9feda24fa362453ca07fca800d"
+    github_owner: "yazilimlar (User account, verified from Vercel deployment metadata)"
+    backup_status:
+      bundle: "~/Projects/_archives/2026-09-14/financial-command-center-<stamp>.bundle — verified, contains HEAD d563ac7"
+      gap: "CLOSED for the working-tree files — both are now in committed history. The bundle itself is STALE: it predates 2731c29f and does not contain them. A refreshed bundle is Gate 3 item 1."
+    uncommitted_work: "NONE — both previously uncommitted files are committed"
+    security_assessment:
+      sensitive_extension_files: "ZERO found in the working tree outside node_modules/ and .git/ (Gate 2D read; the listing hit a 2000-entry cap, so this is not a complete enumeration)"
+      account_number_patterns_in_tracked: "NONE (Gate 2A)"
+      credential_pattern_matches: "8 tracked files at Gate 2A — ALL benign: UI copy and security docs asserting the ABSENCE of credentials"
+      verdict: "NOT CLEARED. The Gate 2A verdict was based on a filename-and-pattern scan of the working tree. The push gate must scan TRACKED CONTENT ACROSS HISTORY before any remote is created. See fcc_remote_blockers."
+    push_conditions:
+      - "fcc_remote_blockers CLEARED — normalised exact origin comparison and a tracked-content history scan"
+      - "PRIVATE at creation — never create-then-flip"
+      - "Verify visibility=PRIVATE BEFORE pushing and AGAIN after; stop on any security failure"
+      - "Refreshed bundle taken first, so a local backup exists that contains the current HEAD"
+      - "Never expose publicly"
+
+  - id: "prime-industrial-erp"
+    canonical_name: "Prime Industrial ERP"
+    category: "PRODUCT"
+    lifecycle: "BLOCKED — ACTIVE PRODUCTION DEPENDENCY CONFIRMED"
+    evidence_level: "verified"
+    production_route: "/erp — HTTP 200, LIVE"
+    active_automation:
+      cron: {schedule: "0 */4 * * * — every 4 hours", action: "cd into ~/Desktop/motion graphic, source .env, run invoice_emailer.py", implication: "Renaming or moving that folder BREAKS LIVE INVOICE AUTOMATION — the path is hard-coded twice"}
+      launchd: "~/Library/LaunchAgents/com.primeindustrial.erp.plist — PRESENT"
+      open_db_handles: "none at scan instant (lsof exit 1) — an instant observation, NOT evidence of dormancy"
+    data_handling_warning: "Any copy or move MUST take prime_industrial.db together with its -wal and -shm sidecars, or checkpoint the WAL first."
+    prohibited_until_unblocked: ["Move scripts or databases", "Rename the containing directory", "Change scheduled-job paths", "Remove or redirect the live ERP route"]
+
+  - id: "pinarevleri"
+    canonical_name: "Pinar Evleri"
+    category: "VENTURE"
+    lifecycle: "ACTIVE_DEVELOPMENT"
+    evidence_level: "verified"
+    canonical_repo: "git@github.com:yazilimlar/artemis-omni.git"
+    production_status: "NOT CURRENTLY DEPLOYED — /pinarevleri and all 8 asset URLs return genuine 404. Historical serving not examined."
+    intended_url: "https://pinarevleri.agoraxai.com"
+    intended_local_path: "~/Projects/ventures/pinar-evleri"
+    target_structure:
+      note: "One private repository initially"
+      layout: "apps/site · apps/manager · packages/property-data"
+      rationale: "House A capacity 5 (later 6 with extra bed) and House B capacity 6 are property facts, not site facts."
+      caveat: "The code has NO such split today — the manager is app/pinarevleri/manage/*, a child route with its own layout.tsx. This boundary would be introduced, not preserved."
+    public_site_surface:
+      files: ["app/pinarevleri/page.tsx (19,933 B)", "components/pinarevleri/HouseIdentityCard.tsx (2,800 B)", "components/pinarevleri/SitePlan.tsx (3,489 B)", "lib/pinarevleri/houses.ts (3,099 B)"]
+      shared_artemis_imports: "NONE"
+      api_routes: "NONE"
+      backend: "NONE — 'use client'"
+      env_vars: "NEXT_PUBLIC_SITE_URL only"
+    asset_status:
+      local_checkout: "5 of 8 .webp files are not valid images — no RIFF header, ~7.99 bits/byte entropy, undecodable"
+      valid: ["pool-garden.webp (640x480)", "pool-sunset.webp (640x480)", "pool-villa.webp (640x480)"]
+      invalid: ["entrance-garden.webp", "garden-pool-wide.webp", "pinar-evleri-logo.webp", "pool-mountain.webp", "vision-triptych.webp"]
+      page_references: "12 total; 9 point at a file that cannot decode, including the logo in all 3 placements"
+      git_recovery: "IMPOSSIBLE — feat/pinar-evleri-photo-gallery and feat/pinar-evleri-vision-logo carry blob SHAs IDENTICAL to main for every image. A blob SHA is the content hash, so the files were committed broken."
+      local_search_result:
+        status: "COMPLETE — Gate 2C"
+        unique_paths_examined: 72
+        correction: "Previously reported as 74. Two paths were counted twice."
+        term_counts: {pinar: 1, evleri: 1, gokova: 22, marmaris: 25}
+        finding: >-
+          The only paths containing 'pinar' or 'evleri' are the seven repository files themselves —
+          the search found its own inputs. Every other match is a Turkish PLACE-NAME appearing in an
+          unrelated project (george-aegean-quest world art, artemis_atlas_ruins_reborn_handoff
+          AI-generated illustrations), plus residual noise (a Python test fixture, Grainger product
+          photos, a wooden dowel rod).
+        closest_candidate: {path: "~/Desktop/George folder/Marmaris turkiye 2.png", dimensions: "1024x1536", sha256_prefix: "1e9b18585cec3bbb55b61d44", verdict: "REJECTED — rendered as a generated illustrated tourism poster, not property photography, and not of Pinar Evleri"}
+      shortlist: "EMPTY — zero true candidates"
+      recovery_path: >-
+        ORIGINAL PHOTOGRAPHY MUST COME FROM OUTSIDE THE REPOSITORY AND OUTSIDE THIS MACHINE'S
+        SEARCHABLE FILENAMES. Candidate sources: the owner's phone or camera roll, iCloud not
+        downloaded locally, Dropbox not synced, an external drive, a message thread, or the two live
+        Airbnb listings (rooms/36961615, rooms/36963978).
+      proposed_next_instrument: >-
+        A filename search structurally cannot find files named IMG_4821.jpeg. A read-only search by
+        image CAPTURE DATE and DIMENSIONS, given a rough date window, is the better instrument.
+        PROPOSED ONLY — not performed, not authorized.
+    schema_exposure:
+      severity: "HIGHEST data-loss exposure in the portfolio"
+      finding_01_to_05: "ABSENT from all 61 authoritative remote branches of artemis-omni. This is now a completed search, not an unsearched gap."
+      scope_of_that_negative: >-
+        Covers the 61 remote branches of artemis-omni ONLY. Does NOT cover unpushed local branches,
+        ~/Desktop/motion graphic/artemis-omni, other repositories, ~/Desktop at large, or any backup.
+        Supported claim: 'not in artemis-omni'. NOT supported: 'does not exist'.
+      only_pinar_sql_in_repo: "ENGINEERING/pinar-evleri/06_decision_policy_schema.sql (133 lines) on feature/pinarevleri-manager-mvp"
+      what_06_contains: "5 decision-policy tables (decision_policy_profiles, decision_policy_values, decision_policy_versions, decision_rule_definitions, environment_feature_flags) + 2 indexes. NO booking table. NO EXCLUDE constraint."
+      live_schema_hypothesis:
+        claim: "The booking overlap constraint exists in the live Supabase project and in no file in this repository."
+        status: "INFERENCE, NOT VERIFIED — nobody has read the live schema"
+        supporting_chain: ["An observed production 23P01", "lib/pinar-evleri-demo-api.ts handles 23P01", "Zero EXCLUDE USING in any of the six .sql files repository-wide", "06_ defines only decision-policy tables"]
+        remaining_gap: "The database itself has not been observed."
+      recovery_status: "NOT COMPLETE. NOT STARTED. Phase A is prepared and awaiting the owner."
+      recovery_surfaces_unchecked:
+        - {surface: "supabase_migrations.schema_migrations statement text", outcome_if_present: "01_-05_ RECOVERED VERBATIM, not reconstructed", checked: false}
+        - {surface: "SQL Editor saved snippets and query history", outcome_if_present: "Original pasted DDL may survive", checked: false}
+      reconstruction_verdict: >-
+        Unless one of the two surfaces above pays off, 01_-05_ CANNOT be reconstructed — only the
+        schema they produced can. The live schema does not encode the split into five files, the
+        ordering, intermediate states, dropped objects, comments, data migrations, or the original
+        SQL text. The correct output would then be ONE consolidated baseline, dated and labelled
+        as reconstructed-from-live-schema, with a header recording that 01_-05_ were lost.
+        Manufacturing plausible 01_-05_ files would put a fabricated history into the repository.
+    manager_branch:
+      ref: "feature/pinarevleri-manager-mvp"
+      sha: "085c67e5c830cc1cd6373113b67ce4f4608eb1f4"
+      remote_status: "LIVE_ON_REMOTE"
+      ahead_behind_vs_main: "12 main-only, 7 branch-only"
+      insertions: 675
+      files_added: ["app/pinarevleri/manage/page.tsx (245)", "ENGINEERING/pinar-evleri/06_decision_policy_schema.sql (133)", "app/pinarevleri/manage/persistent-demo/page.tsx (120)", "app/pinarevleri/manage/demo/page.tsx (104)", "lib/pinar-evleri-demo-api.ts (51)", "app/pinarevleri/manage/layout.tsx (22)"]
+      only_23P01_reference: "lib/pinar-evleri-demo-api.ts — classified CLIENT_SIDE_ERROR_HANDLING; see branch_search.hits[3] for provenance and residual ambiguity"
+      classification: "Potentially required product scope. PRESERVE. DO NOT MERGE."
+      open_question: "Route names say 'demo' and 'persistent-demo' — demo-grade or intended production?"
+    branch_cluster: "8 related refs (7 feat/pinar-evleri-*, 1 feature/pinarevleri-manager-mvp)"
+    blockers:
+      - "Schema recovery not started — Phase A awaiting owner"
+      - "Original photography does not exist on this machine under any searchable name"
+      - "No extraction until schema is captured and assets are sourced"
+      - "Do not merge the manager branch"
+
+  - id: "rainbow-botanics"
+    canonical_name: "Rainbow Botanics"
+    category: "VENTURE"
+    lifecycle: "LIVE_VERIFIED"
+    evidence_level: "verified"
+    production_status: "/rainbowbotanics — HTTP 200, LIVE"
+    current_local_paths:
+      - {path: "app/rainbowbotanics", role: "page.tsx + [slug] — the live tree"}
+      - {path: "app/rainbowbotanics-2026", role: "[slug] only, no page.tsx — not live"}
+    dependencies: ["Consumes AgoraXAI Atlas for the Rainbow House botanical/spatial twin"]
+    blockers:
+      - "Confirm which route tree is canonical before extraction"
+      - "This one IS live — extraction DOES require redirect planning, unlike Pinar"
+      - "Extraction remains on hold"
+
+  - id: "young-explorers"
+    canonical_name: "AgoraXAI Young Explorers / Rome at 13"
+    category: "VENTURE"
+    lifecycle: "PROGRAM_DESIGN"
+    evidence_level: "unknown"
+    canonical_repo: null
+    intended_local_path: "~/Projects/ventures/young-explorers"
+    current_local_paths: []
+    dependencies: ["May use AgoraXAI Atlas for Rome, Vatican, and field-learning maps"]
+    next_evidence: ["Not found under ~/Projects or ~/Desktop"]
+    restored_in: "1.3.1"
+
+  - id: "omnirouter"
+    canonical_name: "OmniRouter"
+    category: "LAB"
+    lifecycle: "CLASSIFICATION_OPEN"
+    evidence_level: "unknown"
+    canonical_repo: null
+    current_local_paths: []
+    classification_decision: "Open: shared infrastructure vs standalone product"
+    next_evidence: ["Not found under ~/Projects or ~/Desktop"]
+    restored_in: "1.3.1"
+
+  - id: "agoraxai-control-plane"
+    canonical_name: "AgoraXAI Control Plane"
+    codename: "Octopus"
+    umbrella: "AGORAXAI_UMBRELLA"
+    kind: "INTERNAL_PLATFORM"
+    category: "AGORAXAI_PLATFORM"   # see corrections_to_v1_4.control-plane-category-choice
+    lifecycle: "ACTIVE_DEVELOPMENT"
+    visibility: "private"
+    evidence_level: "verified"
+    added_in: "1.5"
+    purpose: "Private, loopback-only portfolio evidence dashboard. Renders this registry and the gate documents as a browsable portfolio, project matrix, ecosystem map and deployment-drift view."
+    discovered: >-
+      Gate 3 C1a flagged three of its files as containing the ~/Desktop/v0.7 path. Triage showed
+      those were ingested copies of this registry rather than code opening the path — and also
+      showed a real project the registry had never recorded.
+    current_local_paths:
+      - {path: "~/Projects/agoraxai/control-plane", role: "sole checkout", remote: "NONE — its own audit asserts zero Git remotes"}
+    stack: "Node >= 24 · TypeScript 5.9 · esbuild 0.25 · yaml 2.8 · Playwright 1.56 (dev only)"
+    consumes:
+      - {name: "PROJECT_REGISTRY_v1.4.yaml", role: "pinned input — MUST be repointed at v1.5", location: "data/"}
+      - {name: "GATE_2D_REPORT.md", role: "ingested document", location: "data/"}
+      - {name: "GATE_3_APPROVAL_CHECKLIST.md", role: "parsed for approval candidates", location: "data/"}
+    ingestion_contract:
+      note: "The importer is deliberately FAIL-CLOSED — it pins the registry filename, version and row count and throws on any mismatch. That is the property that would have caught the v1.3 row-loss regression, so it is a feature to preserve, not a rigidity to remove."
+      pinned_in:
+        - "scripts/import-registry.mjs — filename, registry_version, project_row_count (x2), console text"
+        - "tests/core.test.ts — filename, project_row_count, unique-id count"
+        - "tests/browser.mjs — five rendered-count assertions"
+        - "data/schema.json — registry_version const, project_row_count const, projects minItems/maxItems"
+      also_pinned: "data/schema.json fixes sources at exactly 3 and approvalCandidates at exactly 22. Replacing a source document, or a checklist with a different number of '### X0 · ' headings, breaks validation independently of any row-count change."
+    security_posture:
+      server: "loopback 127.0.0.1 only; read-only static; CSP connect-src 'none'"
+      client: "audit asserts no fetch / XMLHttpRequest / WebSocket / sendBeacon in the built bundle"
+      repo: "audit asserts zero Git remotes"
+      gitignored: ["node_modules/", "dist/", "work/", ".env", ".env.*", "*.pem", "*.key"]
+    self_reference: "From v1.5 onward this tool renders a registry that contains its own row."
+    blockers:
+      - "Must be repointed from v1.4 to v1.5 across four files before its next build — see ingestion_contract.pinned_in"
+      - "Not covered by any bundle or backup; it has no remote and no archive entry"
+
+  - id: "vercel-env-backup-artemis-omni"
+    canonical_name: "Vercel Env Backup (Artemis Omni)"
+    category: "NOT_A_PROJECT"
+    lifecycle: "SECURITY_REVIEW_NEEDED"
+    evidence_level: "verified (metadata and digests only — contents never read)"
+    permissions: "HARDENED at Gate 1B — chmod 700 directory, 600 files"
+    icloud_sync: "CONFIRMED OFF by owner"
+    locations:
+      - {path: "~/Desktop/vercel-env-backup-artemis-omni/", files: "env.development 1308B, env.preview 2191B, env.production 2220B"}
+      - {path: "~/Desktop/motion graphic/artemis-omni/.vercel/.env.preview.local", bytes: 2191, gitignored: true}
+    preview_comparison:
+      result: "DIFFERENT"
+      digests: ["28339aca… (Desktop env.preview)", "290d77d6… (.vercel/.env.preview.local)"]
+      implication: "TWO DISTINCT preview environments. Neither is redundant. An encrypted recovery copy must preserve BOTH, and whichever is stale is a live misconfiguration risk."
+    authoritative_store: "Vercel"
+    intended_end_state: "ONE encrypted emergency recovery copy"
+
+non_project_artifacts:
+  - {id: "artemis-website-governance-folder", path: "~/Desktop/artemis-website", role: "Working folder for this reorganization — FEEDBACK.md, ORGANIZATION_PLAN.md, all gate documents and registry versions. Not a product."}
+  - {id: "governance-evidence-root", path: "~/Projects/_governance/gate2c/", role: "Gate 2C evidence folders. Immutable once written — see evidence_integrity."}
+  - {id: "gate3-bundles", path: "~/Projects/_archives/2026-09-15/", role: "Gate 3 A1/A2 bundles. Additive — the 2026-09-14 bundles were hash-verified untouched."}
+  - {id: "archives-bundle", path: "~/Projects/_archives/artemis-test-legacy.bundle", bytes: 17366973, role: "Pre-existing git bundle. Inspect with git bundle list-heads (non-destructive) before deciding whether it duplicates anything on disk."}
+
+# =============================================================================
+# MIGRATION WAVES
+# =============================================================================
+
+migration_waves:
+  - {gate: "0A", status: "COMPLETE"}
+  - {gate: "0B", status: "COMPLETE"}
+  - {gate: "1A", status: "COMPLETE"}
+  - {gate: "1B", status: "CLOSED — 4 rows OK, 0 failed, 0 skipped"}
+  - {gate: "2A", status: "COMPLETE"}
+  - {gate: "2B", status: "SUPERSEDED BY 2C — script never executed"}
+  - {gate: "2C", status: "COMPLETE — closure 3 OK, local actions 3 OK, 0 failed, 0 skipped; all three actions independently verified at 2D"}
+  - {gate: "2D", status: "COMPLETE — verification and governance pass, no mutations"}
+  - {gate: "3-tranche-1", status: "COMPLETE — A1, A2, A3, C1 executed and verified; 5 rows OK"}
+  - gate: 3
+    name: "Approval-gated consolidation"
+    status: "AWAITING OWNER APPROVAL — see GATE_3_APPROVAL_CHECKLIST.md"
+    categories: ["local bundle/backup", "private-remote creation", "directory relocation", "Pinar schema recovery", "Pinar asset replacement", "Pinar extraction", "production/deployment changes"]
+    proposed_order:
+      - "Refresh the FCC bundle — it is stale and no longer contains HEAD"
+      - "lycian-turkiye-atlas — simplest, no production dependency"
+      - "pinarevleri — schema captured and assets sourced first; no live route to preserve"
+      - "rainbow-botanics — IS live, requires redirect planning"
+      - "dayos — after route/branch reconciliation and OAuth redirect URI planning"
+      - "prime-industrial-erp — LAST, active cron and launchd dependency"
+  - gate: 4
+    name: "URL and portfolio normalization"
+    exit_criteria:
+      - "New URLs return genuine 200 responses, distinguished from soft 404s"
+      - "Old URLs retain content or return intentional 301 responses"
+      - "AgoraXAI navigation shows Atlas as a top-level peer of Artemis"
+      - "Production deployment mechanism decided — the current CLI-from-side-branch practice is itself a governance item"
+
+open_questions:
+  - "Were the five loose Desktop gate files ARCHIVED or merely acknowledged? The acknowledgement file has been removed, so if they were only acknowledged a future C1a run blocks on them again."
+  - "Pinar extraction: history option B (fresh history with blob-SHA provenance) or C (path-filtered history)? No script will be written until this is settled."
+  - "agoraxai-control-plane has no bundle, no archive entry and no remote. It is the only project row with no backup of any kind."
+  - "Does supabase_migrations.schema_migrations hold statement text? Decides whether 01_-05_ are recoverable or only reconstructable."
+  - "Have the five DayOS migrations been applied to a live project, and to which one? Unknown and unexamined."
+  - "lib/pinar-evleri-demo-api.ts — error handling versus incidental reference. One read-only command settles it."
+  - "Where is the closure-run SHARE_SAFE_SUMMARY.txt (8e8f2735ee9c…)?"
+  - "Pinar original photography — which off-machine source?"
+  - "v0.7 version ambiguity: directory says v0.7, handoff document says v0_6."
+  - "Production deployment practice: CLI from a side branch. Decision needed."

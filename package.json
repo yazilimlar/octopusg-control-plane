@@ -1,0 +1,17 @@
+{
+  "name": "agoraxai-control-plane", "version": "0.1.0", "private": true, "type": "module",
+  "description": "Private, loopback-only AgoraXAI portfolio evidence dashboard",
+  "engines": {"node": ">=24"},
+  "scripts": {
+    "import:registry": "node scripts/import-registry.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run import:registry && npm run typecheck && node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "dev": "npm run build && npm start",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test:browser": "node tests/browser.mjs",
+    "audit:local": "node scripts/audit.mjs",
+    "validate": "npm run build && npm test && npm run audit:local"
+  },
+  "devDependencies": {"typescript": "~5.9.3", "esbuild": "~0.25.12", "yaml": "~2.8.2", "@types/node": "^24.10.0", "@playwright/test": "~1.56.1"}
+}

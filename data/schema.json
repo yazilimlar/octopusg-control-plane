@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agoraxai:control-plane:snapshot:1",
+  "title": "AgoraXAI Control Plane snapshot v1",
+  "type": "object",
+  "required": ["schemaVersion", "classification", "asOf", "sources", "registry", "approvalCandidates"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "classification": {"type":"object","required":["umbrella","kind","visibility","codename"],"additionalProperties":false,"properties":{"umbrella":{"const":"AGORAXAI_UMBRELLA"},"kind":{"const":"INTERNAL_PLATFORM"},"visibility":{"const":"private"},"codename":{"const":"Octopus"}}},
+    "asOf": {"type":"string","format":"date"},
+    "sources": {"type":"array","minItems":3,"maxItems":3,"items":{"type":"object","required":["name","sha256"],"additionalProperties":false,"properties":{"name":{"type":"string"},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}}},
+    "registry": {"type":"object","required":["registry_version","project_row_count","projects","production_state","architecture"],"properties":{"registry_version":{"const":"1.5.1"},"project_row_count":{"const":18},"projects":{"type":"array","minItems":18,"maxItems":18,"items":{"$ref":"#/$defs/registryProject"}},"production_state":{"type":"object"},"architecture":{"type":"object"}},"additionalProperties":true},
+    "approvalCandidates": {"type":"array","minItems":22,"maxItems":22,"items":{"type":"object","required":["id","title","evidence","source"],"additionalProperties":false,"properties":{"id":{"type":"string","pattern":"^[A-Z][0-9]+$"},"title":{"type":"string","minLength":1},"evidence":{"type":"string"},"source":{"type":"string"}}}}
+  },
+  "$defs": {
+    "evidenceKind":{"enum":["observed","inferred","unknown","blocked"]},
+    "registryProject":{"type":"object","required":["id","canonical_name","category","lifecycle","evidence_level"],"properties":{"id":{"type":"string","minLength":1},"canonical_name":{"type":"string","minLength":1},"category":{"enum":["AGORAXAI_UMBRELLA","AGORAXAI_PLATFORM","ARTEMIS_PLATFORM","PRODUCT","VENTURE","LAB","ARCHIVE","NOT_A_PROJECT"]},"lifecycle":{"type":"string"},"evidence_level":{"type":"string"}},"additionalProperties":true},
+    "fact":{"type":"object","required":["value","kind","source"],"additionalProperties":false,"properties":{"value":{"type":"string"},"kind":{"$ref":"#/$defs/evidenceKind"},"source":{"type":"string"},"note":{"type":"string"}}},
+    "observation":{"type":"object","required":["projectId","field","value","evidence","source","observedAt","collectedAt","expiresAt","status"],"additionalProperties":false,"properties":{"projectId":{"type":"string"},"field":{"type":"string"},"value":{},"evidence":{"$ref":"#/$defs/evidenceKind"},"source":{"type":"object","required":["adapter","resource"],"additionalProperties":false,"properties":{"adapter":{"enum":["github","vercel","supabase","http-uptime","mac-status"]},"resource":{"type":"string"}}},"observedAt":{"type":["string","null"],"format":"date-time"},"collectedAt":{"type":"string","format":"date-time"},"expiresAt":{"type":["string","null"],"format":"date-time"},"status":{"enum":["ok","unknown","blocked","error"]},"reason":{"type":"string"}}},
+    "stage":{"enum":["PROPOSED","EVIDENCE","REVIEWED","OWNER_APPROVED","EXECUTING","VERIFIED","COMPLETED","ROLLED_BACK"]},
+    "simulationEntry":{"type":"object","required":["id","title","stage","note","updatedAt","demo"],"additionalProperties":false,"properties":{"id":{"type":"string"},"title":{"type":"string"},"stage":{"$ref":"#/$defs/stage"},"note":{"type":"string"},"updatedAt":{"type":"string"},"demo":{"const":true}}}
+  }
+}
