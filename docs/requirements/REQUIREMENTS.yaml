@@ -744,7 +744,7 @@ requirements:
   milestone: v0.2
   work_package: WP-10
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S2#multi-device-control
@@ -762,7 +762,7 @@ requirements:
   milestone: v0.2
   work_package: WP-10
   priority: NEXT
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#requirements-and-completeness-model

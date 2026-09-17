@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 61 |
-| IMPLEMENTED | 10 |
+| PROPOSED | 59 |
+| IMPLEMENTED | 12 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
@@ -78,8 +78,8 @@
 | OG-REG-005 | Declared legal-entity ownership records | CONTROL | VERIFIED | LOW | WP-04 | OG-REG-004 | [S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/resources.test.ts` |
 | OG-UI-002 | OctopusG naming in the interface | MANAGEMENT | IMPLEMENTED | LOW | WP-06 | — | [S1#octopusg-product-definition](../sources/S1-2026-09-17-conversation-export.md#octopusg-product-definition) | `tests/browser.mjs` |
 | OG-UI-003 | Truth and freshness badges | MANAGEMENT | IMPLEMENTED | LOW | WP-06 | OG-DATA-002 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center) | `tests/browser.mjs` |
-| OG-UI-004 | Devices screen (declared) | MANAGEMENT | PROPOSED | LOW | WP-10 | OG-DEV-001 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/browser.mjs` |
-| OG-UI-005 | Requirements and capability status view | MANAGEMENT | PROPOSED | LOW | WP-10 | OG-GOV-002 | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) | `tests/browser.mjs` |
+| OG-UI-004 | Devices screen (declared) | MANAGEMENT | IMPLEMENTED | LOW | WP-10 | OG-DEV-001 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/browser.mjs` |
+| OG-UI-005 | Requirements and capability status view | MANAGEMENT | IMPLEMENTED | LOW | WP-10 | OG-GOV-002 | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) | `tests/browser.mjs` |
 | OG-MAP-002 | Typed relationship graph including resources | CONTROL | VERIFIED | MEDIUM | WP-04 | OG-REG-004, OG-DATA-001 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/graph.test.ts` |
 | OG-MAP-003 | Generated lane-layout map | MANAGEMENT | VERIFIED | LOW | WP-05 | OG-MAP-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/graph.test.ts`<br>`tests/browser.mjs` |
 | OG-MAP-004 | Map presets: portfolio and repository views | MANAGEMENT | VERIFIED | LOW | WP-05 | OG-MAP-003 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |

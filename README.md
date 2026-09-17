@@ -50,6 +50,8 @@ The package lock fixes dependency resolution. Installation requires npm registry
 - **Approval queue:** all 22 Gate 3 proposals, source excerpts, sequential simulation states, evidence notes, local persistence, reset and export.
 - **Timeline:** recorded gate history, completed Gate 2C actions, evidence-integrity caveat, and separately labelled local simulation events.
 - **KPIs:** transparent registry calculations and seven unavailable operational metrics with proposed definitions, owners, windows, and unagreed targets.
+- **Devices:** the declared device records and the trust-zone, tier and level policy. Nothing is measured from a machine, and the company laptop stays BROWSER_ONLY / UNMANAGED / NO_LOCAL_ACCESS with no capability.
+- **Requirements:** capability and requirement status generated from the ledger at build time — ID, title, plane, milestone, status, dependencies, acceptance criteria, tests and evidence file.
 - **Connectors:** five disabled adapter stubs; inspecting a stub produces a blocked observation without network or filesystem access.
 
 ## Evidence and simulation

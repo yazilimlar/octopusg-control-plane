@@ -25,7 +25,9 @@ Read this first in every AI session. Keep it under one page.
 - Batch B is on `octopusg/batch-b-status-devices`: WP-06 adds declared-versus-observed drift,
   truth and freshness badges and the visible OctopusG naming (OD-08: UI text only — the schema
   constant and the `agoraxai.octopus.workflow.v1` key are unchanged).
-  Evidence: [WP-06](docs/evidence/WP-06.md).
+  Evidence: [WP-06](docs/evidence/WP-06.md). WP-10 then added the Devices and Requirements views
+  (declared records only; the ledger projected into `data/requirements.json` at build time).
+  Evidence: [WP-10](docs/evidence/WP-10.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 

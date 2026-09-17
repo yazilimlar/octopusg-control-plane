@@ -139,6 +139,16 @@ The checks run in that order, so no failure path can fall through to `match`, an
 summary takes the **weakest** of its rows rather than the best. Every badge carries the same
 information as text in its `aria-label`: truth kind, freshness, observation time and confidence.
 
+### Build inputs for the two status views (OG-UI-004, OG-UI-005)
+
+The devices view reads `config/devices.json` and `config/policy.json` through the same
+validators the observer uses, so the screen can only show records that already passed the
+no-machine-identifier rule and the employer-device rule. The requirements view reads
+`data/requirements.json`, a deterministic projection of `docs/requirements/REQUIREMENTS.yaml`
+written by `npm run spec:write`; `npm run validate:spec` fails if it is stale and also fails if
+it ever contains a machine-specific path. Both views are read-only: they approve nothing, change
+nothing and collect nothing.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.

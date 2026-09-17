@@ -1,0 +1,2926 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/validate-spec.mjs",
+  "updated": "2026-09-17",
+  "milestones": [
+    {
+      "id": "v0.1",
+      "title": "Control Plane v0.1 (frozen baseline)"
+    },
+    {
+      "id": "B0",
+      "title": "Architecture Definition Sprint"
+    },
+    {
+      "id": "v0.2",
+      "title": "Local read-only cockpit"
+    },
+    {
+      "id": "v0.3",
+      "title": "First read-only connectors"
+    },
+    {
+      "id": "v0.4",
+      "title": "Device network inventory"
+    },
+    {
+      "id": "v0.5",
+      "title": "Local device agents"
+    },
+    {
+      "id": "v0.6",
+      "title": "State store, webhooks, n8n bridge"
+    },
+    {
+      "id": "v0.7",
+      "title": "Gmail inquiry drafts"
+    },
+    {
+      "id": "v0.8",
+      "title": "Social and WhatsApp communications"
+    },
+    {
+      "id": "v0.9",
+      "title": "Commerce, KPIs, Supabase metadata"
+    },
+    {
+      "id": "v0.10",
+      "title": "Real approvals and guarded changes"
+    },
+    {
+      "id": "v0.11",
+      "title": "Bounded AI agents"
+    },
+    {
+      "id": "unscheduled",
+      "title": "Recorded, not scheduled"
+    }
+  ],
+  "workPackages": [
+    {
+      "id": "WP-01",
+      "title": "Baseline reconciliation and registry lock"
+    },
+    {
+      "id": "WP-02",
+      "title": "Truth model and observation store"
+    },
+    {
+      "id": "WP-03",
+      "title": "Local Git observer and device record"
+    },
+    {
+      "id": "WP-04",
+      "title": "Resource catalog and typed graph"
+    },
+    {
+      "id": "WP-05",
+      "title": "Generated map and presets"
+    },
+    {
+      "id": "WP-06",
+      "title": "Freshness badges, drift, OctopusG naming"
+    },
+    {
+      "id": "WP-07",
+      "title": "Connection Center framework"
+    },
+    {
+      "id": "WP-08",
+      "title": "Event envelope and simulated inbox"
+    },
+    {
+      "id": "WP-09",
+      "title": "Action model and safe open actions"
+    },
+    {
+      "id": "WP-10",
+      "title": "Devices and requirements views"
+    },
+    {
+      "id": "WP-11",
+      "title": "v0.2 acceptance"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "spec-governance",
+      "title": "Specification, traceability and AI session guardrails",
+      "status": "VALIDATING",
+      "target": "B0",
+      "requirements": [
+        "OG-GOV-001",
+        "OG-GOV-002",
+        "OG-GOV-003",
+        "OG-GOV-004",
+        "OG-GOV-005",
+        "OG-GOV-006"
+      ]
+    },
+    {
+      "id": "platform-resilience",
+      "title": "Local isolation boundary and recovery copy",
+      "status": "PLANNED",
+      "target": "v0.2",
+      "requirements": [
+        "OG-SEC-001",
+        "OG-SEC-008"
+      ]
+    },
+    {
+      "id": "portfolio-registry",
+      "title": "Authoritative portfolio registry",
+      "status": "VALIDATING",
+      "target": "v0.2",
+      "requirements": [
+        "OG-REG-001",
+        "OG-REG-002",
+        "OG-REG-003"
+      ]
+    },
+    {
+      "id": "resource-catalog",
+      "title": "Products and their resources",
+      "status": "AVAILABLE",
+      "target": "v0.2",
+      "requirements": [
+        "OG-REG-004",
+        "OG-REG-005"
+      ]
+    },
+    {
+      "id": "owner-cockpit",
+      "title": "Owner cockpit screens",
+      "status": "BUILDING",
+      "target": "v0.2",
+      "requirements": [
+        "OG-UI-001",
+        "OG-UI-002",
+        "OG-UI-003",
+        "OG-UI-005",
+        "OG-UI-006"
+      ]
+    },
+    {
+      "id": "system-maps",
+      "title": "Generated system maps",
+      "status": "BUILDING",
+      "target": "v0.2",
+      "requirements": [
+        "OG-MAP-001",
+        "OG-MAP-002",
+        "OG-MAP-003",
+        "OG-MAP-004",
+        "OG-MAP-005",
+        "OG-MAP-006"
+      ]
+    },
+    {
+      "id": "truth-and-provenance",
+      "title": "Declared / observed / derived truth with freshness",
+      "status": "AVAILABLE",
+      "target": "v0.2",
+      "requirements": [
+        "OG-DATA-001",
+        "OG-DATA-002"
+      ]
+    },
+    {
+      "id": "local-git-observation",
+      "title": "Local repository observation and drift",
+      "status": "BUILDING",
+      "target": "v0.2",
+      "requirements": [
+        "OG-OBS-001",
+        "OG-OBS-002",
+        "OG-OBS-003"
+      ]
+    },
+    {
+      "id": "device-registry",
+      "title": "Devices and trust zones",
+      "status": "BUILDING",
+      "target": "v0.2",
+      "requirements": [
+        "OG-DEV-001",
+        "OG-UI-004"
+      ]
+    },
+    {
+      "id": "connection-center",
+      "title": "Connection Center",
+      "status": "PLANNED",
+      "target": "v0.2",
+      "requirements": [
+        "OG-CONN-002",
+        "OG-CONN-003",
+        "OG-CONN-004",
+        "OG-CONN-007",
+        "OG-OBS-004",
+        "OG-SEC-005"
+      ]
+    },
+    {
+      "id": "event-inbox",
+      "title": "Unified event inbox",
+      "status": "PLANNED",
+      "target": "v0.2",
+      "requirements": [
+        "OG-EVT-001",
+        "OG-EVT-002",
+        "OG-EVT-004",
+        "OG-DATA-004"
+      ]
+    },
+    {
+      "id": "approvals-and-policy",
+      "title": "Action tiers, levels and approvals",
+      "status": "PLANNED",
+      "target": "v0.2",
+      "requirements": [
+        "OG-ACT-002",
+        "OG-ACT-003",
+        "OG-SEC-002",
+        "OG-ACT-008"
+      ]
+    },
+    {
+      "id": "safe-open-actions",
+      "title": "Open website, provider and folder",
+      "status": "PLANNED",
+      "target": "v0.2",
+      "requirements": [
+        "OG-ACT-001"
+      ]
+    },
+    {
+      "id": "credential-management",
+      "title": "Credential store and containment gate",
+      "status": "PLANNED",
+      "target": "v0.3",
+      "requirements": [
+        "OG-SEC-003",
+        "OG-SEC-004"
+      ]
+    },
+    {
+      "id": "vercel-readonly",
+      "title": "Vercel projects, deployments, domains",
+      "status": "PLANNED",
+      "target": "v0.3",
+      "requirements": [
+        "OG-CONN-001",
+        "OG-EVT-003"
+      ]
+    },
+    {
+      "id": "github-readonly",
+      "title": "GitHub repository metadata",
+      "status": "PLANNED",
+      "target": "v0.3",
+      "requirements": [
+        "OG-CONN-005"
+      ]
+    },
+    {
+      "id": "http-probes",
+      "title": "Approved route probes",
+      "status": "PLANNED",
+      "target": "v0.3",
+      "requirements": [
+        "OG-CONN-006"
+      ]
+    },
+    {
+      "id": "ai-registry-mcp",
+      "title": "Registry MCP server for AI sessions",
+      "status": "CONCEPT",
+      "target": "v0.3",
+      "requirements": [
+        "OG-AI-001"
+      ]
+    },
+    {
+      "id": "tailscale-inventory",
+      "title": "Private device network inventory",
+      "status": "PLANNED",
+      "target": "v0.4",
+      "requirements": [
+        "OG-CONN-008",
+        "OG-DEV-002"
+      ]
+    },
+    {
+      "id": "local-device-agent",
+      "title": "Mac and Windows local agent",
+      "status": "CONCEPT",
+      "target": "v0.5",
+      "requirements": [
+        "OG-DEV-003",
+        "OG-DEV-004",
+        "OG-DEV-005",
+        "OG-DEV-006",
+        "OG-ACT-004"
+      ]
+    },
+    {
+      "id": "n8n-workflow-bridge",
+      "title": "Workflow engine bridge",
+      "status": "CONCEPT",
+      "target": "v0.6",
+      "requirements": [
+        "OG-CONN-009",
+        "OG-WF-001",
+        "OG-WF-002"
+      ]
+    },
+    {
+      "id": "ai-assistance",
+      "title": "Summaries, diagnostics and bounded agents",
+      "status": "CONCEPT",
+      "target": "v0.6",
+      "requirements": [
+        "OG-AI-002",
+        "OG-AI-003",
+        "OG-AI-004",
+        "OG-WF-006"
+      ]
+    },
+    {
+      "id": "gmail-inquiry-drafts",
+      "title": "Inquiry to Gmail draft pilot",
+      "status": "CONCEPT",
+      "target": "v0.7",
+      "requirements": [
+        "OG-CONN-010",
+        "OG-WF-003",
+        "OG-DATA-003",
+        "OG-WF-007"
+      ]
+    },
+    {
+      "id": "instagram-comment-to-dm",
+      "title": "Instagram comment-to-DM campaigns",
+      "status": "DEFERRED",
+      "target": "v0.8",
+      "requirements": [
+        "OG-CONN-011",
+        "OG-CONN-012",
+        "OG-WF-004",
+        "OG-EVT-005",
+        "OG-SEC-006"
+      ]
+    },
+    {
+      "id": "whatsapp-business",
+      "title": "WhatsApp Business messaging",
+      "status": "DEFERRED",
+      "target": "v0.8",
+      "requirements": [
+        "OG-CONN-013",
+        "OG-WF-005"
+      ]
+    },
+    {
+      "id": "commerce-and-kpis",
+      "title": "Sales events and business KPIs",
+      "status": "CONCEPT",
+      "target": "v0.9",
+      "requirements": [
+        "OG-CONN-014",
+        "OG-OBS-005"
+      ]
+    },
+    {
+      "id": "supabase-observation",
+      "title": "Supabase metadata",
+      "status": "CONCEPT",
+      "target": "v0.9",
+      "requirements": [
+        "OG-CONN-015"
+      ]
+    },
+    {
+      "id": "guarded-changes",
+      "title": "Guarded deployments, migrations and critical changes",
+      "status": "CONCEPT",
+      "target": "v0.10",
+      "requirements": [
+        "OG-ACT-005",
+        "OG-ACT-006",
+        "OG-ACT-007"
+      ]
+    },
+    {
+      "id": "external-observability",
+      "title": "Logs and incident tooling",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-OBS-006"
+      ]
+    },
+    {
+      "id": "third-party-comms-backends",
+      "title": "Social publishing and unified inbox products",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-CONN-016"
+      ]
+    },
+    {
+      "id": "cloud-control-plane",
+      "title": "Hosted OctopusG",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-SEC-007"
+      ]
+    },
+    {
+      "id": "registry-repoint",
+      "title": "One-command registry repoint",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-REG-006"
+      ]
+    },
+    {
+      "id": "approval-outcome-records",
+      "title": "Approval outcomes written to governance records",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-ACT-009"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "OG-GOV-001",
+      "title": "Source-cited OctopusG specification pack",
+      "plane": "GOVERNANCE",
+      "milestone": "B0",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "docs/00–10, ADR-0001…0005, REQUIREMENTS.yaml, TRACEABILITY.md and SESSION_BRIEF.md exist.",
+        "Every requirement and capability cites at least one resolvable source in docs/sources/.",
+        "The five planes are defined, including the meaning of Data Plane and State Store."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S1#canonical-next-step",
+        "S1#claude-architecture-sprint-prompt",
+        "S1#system-architecture",
+        "S1#development-roadmap",
+        "S1#final-decisions-carried-forward",
+        "S2#next-step-and-completeness",
+        "S2#specification-pack-and-requirement-families",
+        "S3#change-1--sources-must-be-in-the-repo"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-GOV-002",
+      "title": "Specification validator and generated traceability",
+      "plane": "GOVERNANCE",
+      "milestone": "B0",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-GOV-001"
+      ],
+      "acceptance": [
+        "`npm run validate:spec` checks YAML syntax, duplicate IDs, required fields, enums, dependency existence, cycles and milestone order, source anchors, internal Markdown links, capability coverage, milestone coverage, requirement IDs mentioned in docs, and staleness of generated sections.",
+        "`npm run spec:write` regenerates TRACEABILITY.md, the capability table and the SESSION_BRIEF status block.",
+        "The validator uses only dependencies already in package-lock.json."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S1#claude-architecture-sprint-prompt",
+        "S3#change-1--sources-must-be-in-the-repo"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-GOV-003",
+      "title": "AI session guardrails in the repository",
+      "plane": "GOVERNANCE",
+      "milestone": "B0",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-GOV-001"
+      ],
+      "acceptance": [
+        "CLAUDE.md states identity, authoritative files, rules and prohibited actions, and imports SESSION_BRIEF.md.",
+        ".claude/settings.json denies push, remote changes, provider CLIs, network tools, dependency installs and secret-file reads.",
+        ".claude/settings.local.json is git-ignored."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S2#owner-request",
+        "S2#session-startup-protocol",
+        "S2#claude-and-gpt-collaboration",
+        "S1#ai-collaboration-model",
+        "S3#session-setup-guidance"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-GOV-004",
+      "title": "Work-package evidence records",
+      "plane": "GOVERNANCE",
+      "milestone": "v0.2",
+      "workPackage": "WP-11",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Each finished work package has docs/evidence/WP-nn.md listing commands run, results, requirement status changes and open questions.",
+        "validate:spec fails if a requirement is IMPLEMENTED or VERIFIED without an evidence file naming it."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S1#requirements-and-completeness-model",
+        "S2#specification-pack-and-requirement-families"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-GOV-005",
+      "title": "Reconcile README and v0.1 documents with repository state",
+      "plane": "GOVERNANCE",
+      "milestone": "v0.2",
+      "workPackage": "WP-01",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "README.md names OctopusG, states the pinned registry version and row count, and has no broken links.",
+        "docs/DATA_MODEL.md registry-version statements match the importer."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S4#stale-documentation"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md",
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-GOV-006",
+      "title": "Governance archive of Gate artifacts",
+      "plane": "GOVERNANCE",
+      "milestone": "v0.2",
+      "workPackage": "WP-01",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "docs/archive/ holds (or records the location and SHA-256 of) PROJECT_REGISTRY_v1.6.yaml, GATE_3B_COMPLETION.md, PRODUCT_BACKLOG.md, GATE_2C_2D_3_3B_ACTION_LOG.md and the v0.1 Git bundle.",
+        "Recorded hashes match S1; the historical HTML map is marked non-authoritative.",
+        "PRODUCT_BACKLOG.md items are checked against the capability atlas and any missing idea is added as CONCEPT."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/validate-spec.mjs"
+      ],
+      "sources": [
+        "S1#named-artifacts-and-retention-guidance",
+        "S4#registry-discrepancy"
+      ],
+      "ownerDecisions": [
+        "OD-01",
+        "OD-02"
+      ],
+      "evidence": [
+        "B0.md",
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-REG-001",
+      "title": "Fail-closed registry ingestion (v0.1 baseline)",
+      "plane": "CONTROL",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "MEDIUM",
+      "dependencies": [],
+      "acceptance": [
+        "Importer rejects wrong filename, version, row count, duplicate IDs, unknown categories and duplicate YAML keys.",
+        "Snapshot is deterministic and preserves every registry field."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S1#control-plane-completion",
+        "S4#validation-baseline"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-REG-002",
+      "title": "Single registry lock manifest",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-01",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-REG-001"
+      ],
+      "acceptance": [
+        "data/registry.lock.json holds filename, registry_version, sha256 and project_row_count.",
+        "Importer, schema checks, unit tests and browser tests read expected values from the lock instead of hard-coded literals.",
+        "A hash or count mismatch still fails the build with a message naming the file."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts",
+        "tests/registry-lock.test.ts"
+      ],
+      "sources": [
+        "S4#registry-discrepancy",
+        "S1#octopusg-v02-boundary"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-REG-003",
+      "title": "Ingest PROJECT_REGISTRY v1.6",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-01",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-REG-002"
+      ],
+      "acceptance": [
+        "data/PROJECT_REGISTRY_v1.6.yaml is present and its SHA-256 equals 494bd33e056350c15524a87fe73e9adc02bb6e8bfcd79ea4e801ec58f5b43286.",
+        "The lock points to v1.6; all views render the v1.6 row count; v1.5.1 stays in data/ as history."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/registry-lock.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#current-position",
+        "S1#octopusg-v02-boundary",
+        "S4#registry-discrepancy"
+      ],
+      "ownerDecisions": [
+        "OD-01"
+      ],
+      "evidence": [
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-REG-004",
+      "title": "Typed resource catalog derived from the registry",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-04",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-REG-002",
+        "OG-DATA-001"
+      ],
+      "acceptance": [
+        "Repository, checkout, domain, deployment and document resources are derived from existing registry fields with the source path of each.",
+        "No resource is fetched or guessed; missing values stay unknown.",
+        "Each product lists its resources in the evidence drawer."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/resources.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#target-planes"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-03.md",
+        "WP-04.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-REG-005",
+      "title": "Declared legal-entity ownership records",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-04",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-REG-004"
+      ],
+      "acceptance": [
+        "Legal entities are declared data; a product without a declared owner entity shows \"undeclared\", never a default."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/resources.test.ts"
+      ],
+      "sources": [
+        "S3#historical-map-critique"
+      ],
+      "ownerDecisions": [
+        "OD-05"
+      ],
+      "evidence": [
+        "WP-03.md",
+        "WP-04.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-UI-001",
+      "title": "v0.1 views preserved",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Portfolio, Matrix, Ecosystem, Deployment drift, Approval queue, Timeline, KPIs and Connectors render with no browser errors or external requests."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#control-plane-completion",
+        "S4#validation-baseline"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-UI-002",
+      "title": "OctopusG naming in the interface",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-06",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Header, title and README show \"OctopusG — AgoraXAI Portfolio Operating System\".",
+        "Schema codename and localStorage key are unchanged so saved simulation state still loads."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#octopusg-product-definition"
+      ],
+      "ownerDecisions": [
+        "OD-08"
+      ],
+      "evidence": [
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-UI-003",
+      "title": "Truth and freshness badges",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-06",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DATA-002"
+      ],
+      "acceptance": [
+        "Catalog and matrix show the truth kind and observed_at for observed values; stale values are visibly marked.",
+        "Keyboard and screen-reader users get the same information as text."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#truth-and-evidence-model",
+        "S2#connection-center"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-UI-004",
+      "title": "Devices screen (declared)",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-10",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DEV-001"
+      ],
+      "acceptance": [
+        "Lists declared devices with trust zone, capabilities and prohibited operations.",
+        "The company laptop appears as BROWSER_ONLY / UNMANAGED / NO_LOCAL_ACCESS."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S2#multi-device-control",
+        "S2#work-laptop-trust-zone"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-04.md",
+        "WP-10.md"
+      ]
+    },
+    {
+      "id": "OG-UI-005",
+      "title": "Requirements and capability status view",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-10",
+      "priority": "NEXT",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-GOV-002"
+      ],
+      "acceptance": [
+        "A read-only view shows capability statuses and requirement counts by milestone and status, built from REQUIREMENTS.yaml at build time."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#requirements-and-completeness-model"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-06.md",
+        "WP-10.md"
+      ]
+    },
+    {
+      "id": "OG-UI-006",
+      "title": "Owner cockpit summary",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-EVT-004"
+      ],
+      "acceptance": [
+        "One screen answers: what happened, which product, which account, did automation respond, what needs approval, what executed, did it succeed, how the map changed."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S2#build-versus-buy"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-06.md",
+        "WP-10.md"
+      ]
+    },
+    {
+      "id": "OG-MAP-001",
+      "title": "Declared ecosystem graph (v0.1 baseline)",
+      "plane": "CONTROL",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Only explicit parent fields create ownership edges; Atlas is never owned by Artemis."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S1#resolved-portfolio-taxonomy",
+        "S4#architecture-as-built"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-MAP-002",
+      "title": "Typed relationship graph including resources",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-04",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-REG-004",
+        "OG-DATA-001"
+      ],
+      "acceptance": [
+        "Graph nodes include products and derived resources; every edge has a type from docs/02, a truth kind and a source.",
+        "Ownership edges still come only from declared fields."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/graph.test.ts"
+      ],
+      "sources": [
+        "S2#architecture-map-updates-from-connections",
+        "S1#core-capabilities-discussed"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-03.md",
+        "WP-04.md",
+        "WP-05.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-MAP-003",
+      "title": "Generated lane-layout map",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-05",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-MAP-002"
+      ],
+      "acceptance": [
+        "Node positions are computed from lanes; no coordinates are stored in data.",
+        "A toggle colors nodes by exactly one of lifecycle, risk band or truth kind.",
+        "Declared, observed and derived edges are visually distinct and also distinguishable without color."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/graph.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S2#architecture-map-updates-from-connections",
+        "S3#historical-map-critique"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-05.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-MAP-004",
+      "title": "Map presets: portfolio and repository views",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-05",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-MAP-003"
+      ],
+      "acceptance": [
+        "Portfolio view (products and relationships) and repository view (products, repositories, checkouts) are selectable and filter the same graph."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-05.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-MAP-005",
+      "title": "Deployment, domain, device, account and risk views",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-MAP-004",
+        "OG-CONN-001"
+      ],
+      "acceptance": [
+        "Additional presets render from connector-imported resources and show freshness."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-05.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-MAP-006",
+      "title": "Map regenerates after connection changes",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-MAP-003",
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "Connecting or revoking a connection changes graph resources on the next build; revoked resources are marked disconnected, not removed."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/graph.test.ts"
+      ],
+      "sources": [
+        "S2#architecture-map-updates-from-connections",
+        "S1#connection-center-lifecycle"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-05.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-OBS-001",
+      "title": "Owner-run local Git observer",
+      "plane": "INTEGRATION",
+      "milestone": "v0.2",
+      "workPackage": "WP-03",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-DATA-002",
+        "OG-DEV-001"
+      ],
+      "acceptance": [
+        "`npm run observe` reads only paths in config/observe.allowlist.json.",
+        "It runs only rev-parse, status --porcelain (counts only) and remote (names only) with GIT_OPTIONAL_LOCKS=0 and a timeout.",
+        "Output records ok, missing, not_a_repo or error per path with observed_at and expires_at; no filenames, file contents or remote URLs are stored.",
+        "The checkout is byte-for-byte unchanged after a run (including .git/index)."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/observe.test.ts"
+      ],
+      "sources": [
+        "S1#octopusg-v02-boundary",
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md",
+        "WP-04.md"
+      ]
+    },
+    {
+      "id": "OG-OBS-002",
+      "title": "Declared-versus-observed drift",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-06",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-OBS-001",
+        "OG-REG-004"
+      ],
+      "acceptance": [
+        "Drift view compares declared path, branch and remote presence with the latest observation and shows match, differs, stale or unknown.",
+        "A failed or stale observation is never shown as a match."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/drift.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#truth-and-evidence-model",
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md",
+        "WP-04.md",
+        "WP-06.md"
+      ]
+    },
+    {
+      "id": "OG-OBS-003",
+      "title": "Recorded deployment drift (v0.1 baseline)",
+      "plane": "CONTROL",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Compares recorded source and production SHAs; unknown stays unknown; no ancestry is inferred."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S4#architecture-as-built"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-04.md"
+      ]
+    },
+    {
+      "id": "OG-OBS-004",
+      "title": "Connector health and data freshness monitoring",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "Each connection shows last successful sync, error state and freshness; expired data raises observation.stale."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connections.test.ts"
+      ],
+      "sources": [
+        "S2#connection-center",
+        "S1#core-capabilities-discussed"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-OBS-005",
+      "title": "Business KPIs from sales and leads",
+      "plane": "CONTROL",
+      "milestone": "v0.9",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-014",
+        "OG-EVT-005"
+      ],
+      "acceptance": [
+        "KPIs have written definitions, owners and windows; simulated data never feeds them."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/kpi.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#first-communications-pilot"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-OBS-006",
+      "title": "External observability integration (logs, incidents)",
+      "plane": "INTEGRATION",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "VISION",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-OBS-004"
+      ],
+      "acceptance": [
+        "Evaluate Sentry, Better Stack or Grafana as observe-only sources before any build decision."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S2#existing-products-serving-parts-of-the-need"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-REG-006",
+      "title": "One-command registry repoint",
+      "plane": "CONTROL",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-REG-002"
+      ],
+      "acceptance": [
+        "One owner-run command verifies a new registry file, rewrites data/registry.lock.json, runs npm run validate and reports the result without committing."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S5#next--the-control-plane-earns-its-keep"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-ACT-009",
+      "title": "Approval outcomes written to a governance record",
+      "plane": "GOVERNANCE",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-ACT-008"
+      ],
+      "acceptance": [
+        "A completed, authenticated approval appends its outcome to a governance record inside the repository; simulated approvals never do."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S5#next--the-control-plane-earns-its-keep"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-DATA-001",
+      "title": "Five-kind truth model",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-02",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "MEDIUM",
+      "dependencies": [],
+      "acceptance": [
+        "declared, observed, derived, approved and executed are representable alongside unknown and blocked.",
+        "Existing v0.1 evidence values keep their meaning; v0.1 tests still pass unchanged."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts",
+        "tests/truth.test.ts"
+      ],
+      "sources": [
+        "S1#truth-and-evidence-model"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md"
+      ]
+    },
+    {
+      "id": "OG-DATA-002",
+      "title": "Observation store with freshness",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-02",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DATA-001"
+      ],
+      "acceptance": [
+        "Observations carry observed_at, collected_at, expires_at and status; the build reads work/observations/latest.json when present.",
+        "Absent observations render as \"not collected\", errors as errors, expired values as stale.",
+        "Secret-shaped values are rejected before persistence."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/truth.test.ts"
+      ],
+      "sources": [
+        "S1#truth-and-evidence-model",
+        "S2#connection-center"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md"
+      ]
+    },
+    {
+      "id": "OG-DATA-003",
+      "title": "Personal-data retention and redaction policy",
+      "plane": "CONTROL",
+      "milestone": "v0.7",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-DATA-004"
+      ],
+      "acceptance": [
+        "Before any message content is stored: written retention periods, redaction rules and deletion procedure approved by the owner."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/redaction.test.ts"
+      ],
+      "sources": [
+        "S1#messaging-boundaries",
+        "S2#automated-gmail-messages"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-DATA-004",
+      "title": "Append-only local state store",
+      "plane": "CONTROL",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-EVT-001"
+      ],
+      "acceptance": [
+        "Events, action requests, approvals and audit entries are appended, exportable and integrity-checked; nothing is edited in place."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/store.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#target-planes"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-001",
+      "title": "Vercel read-only connection",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-003",
+        "OG-EVT-001",
+        "OG-CONN-002",
+        "OG-SEC-004"
+      ],
+      "acceptance": [
+        "Owner can authorize a Vercel account.",
+        "Projects and deployments are discovered.",
+        "No production mutation is possible.",
+        "Imported relationships appear on the system map.",
+        "Deployments not created through the Git integration (e.g. CLI deployments from a side branch) are flagged."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connectors/vercel-readonly.test.ts"
+      ],
+      "sources": [
+        "S1#requirements-and-completeness-model",
+        "S2#per-service-management",
+        "S2#connector-implementation-order"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-CONN-002",
+      "title": "Connector contract and definitions",
+      "plane": "INTEGRATION",
+      "milestone": "v0.2",
+      "workPackage": "WP-07",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DATA-002",
+        "OG-SEC-002"
+      ],
+      "acceptance": [
+        "Connector definitions follow docs/04 (resources, observations, events, actions, maxLevel, scopes).",
+        "A connection can never exceed its connector maxLevel; tests prove it.",
+        "The five v0.1 stubs are expressed as definitions and still return blocked."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connections.test.ts",
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S1#connector-and-automation-strategy",
+        "S2#connection-center",
+        "S2#integration-levels"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-003",
+      "title": "Connection Center at Level 0",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-07",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "Cards show the fields listed in docs/08; owner actions are visible but disabled with the reason.",
+        "The lifecycle states are shown; no authorization flow exists; no network request is possible."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S2#connection-center",
+        "S1#connection-center-lifecycle"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-004",
+      "title": "Disabled connector stubs stay blocked (v0.1 baseline)",
+      "plane": "INTEGRATION",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "All five stubs return blocked observations without network or filesystem access."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S4#architecture-as-built"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-005",
+      "title": "GitHub read-only connection",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-003",
+        "OG-CONN-002",
+        "OG-SEC-004"
+      ],
+      "acceptance": [
+        "Allowlisted repositories report visibility, default branch, branch SHAs and check conclusions.",
+        "No contents, workflows, issues or writes."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connectors/github-readonly.test.ts"
+      ],
+      "sources": [
+        "S3#change-3--narrower-v02",
+        "S2#target-planes"
+      ],
+      "ownerDecisions": [
+        "OD-07"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-006",
+      "title": "Approved HTTP route probes",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "Only approved HTTPS routes; bounded redirects, time and size; soft-404 control; no bodies stored."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connectors/http-probe.test.ts"
+      ],
+      "sources": [
+        "S4#architecture-as-built"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-007",
+      "title": "Safe revoke and disconnect lifecycle",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-003"
+      ],
+      "acceptance": [
+        "Revocation stops events, removes webhooks, revokes the credential, keeps non-sensitive audit, marks resources disconnected and warns about dependent workflows."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connections.test.ts"
+      ],
+      "sources": [
+        "S2#disconnecting-safely"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-008",
+      "title": "Tailscale device inventory (read-only)",
+      "plane": "INTEGRATION",
+      "milestone": "v0.4",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-003",
+        "OG-DEV-001"
+      ],
+      "acceptance": [
+        "Enrolled devices and online state are observed with a read-only scoped client; ACL, tag and authorization changes stay manual.",
+        "Expired or disconnected devices are flagged."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/tailscale-readonly.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management",
+        "S2#connector-implementation-order"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-CONN-009",
+      "title": "n8n workflow bridge",
+      "plane": "INTEGRATION",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-EVT-004"
+      ],
+      "acceptance": [
+        "OctopusG can call one inbound n8n webhook for test workflows and receive normalized results; executions are observed."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/n8n.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management",
+        "S1#connector-and-automation-strategy"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-010",
+      "title": "Gmail watch and drafts",
+      "plane": "INTEGRATION",
+      "milestone": "v0.7",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-SEC-003",
+        "OG-DATA-003"
+      ],
+      "acceptance": [
+        "One owner-authorized mailbox; new inquiries become events; replies are created as drafts only."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/gmail-drafts.test.ts"
+      ],
+      "sources": [
+        "S2#automated-gmail-messages",
+        "S1#messaging-boundaries"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-011",
+      "title": "ManyChat observation and campaigns",
+      "plane": "INTEGRATION",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-006",
+        "OG-CONN-009"
+      ],
+      "acceptance": [
+        "Campaigns, keyword triggers and lead events are observed where the API permits; otherwise an Open in ManyChat link is shown."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/manychat.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management",
+        "S2#instagram-comment-to-dm-automation"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-012",
+      "title": "Instagram/Facebook via official Meta APIs",
+      "plane": "INTEGRATION",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-SEC-006"
+      ],
+      "acceptance": [
+        "Professional account only; comment webhooks and permitted private replies; no scraping or cold outreach."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/meta.test.ts"
+      ],
+      "sources": [
+        "S2#instagram-comment-to-dm-automation",
+        "S1#messaging-boundaries"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-013",
+      "title": "WhatsApp Business Platform",
+      "plane": "INTEGRATION",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-SEC-006"
+      ],
+      "acceptance": [
+        "Business Platform only; opt-in, templates and conversation windows enforced; no personal WhatsApp."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/whatsapp.test.ts"
+      ],
+      "sources": [
+        "S2#whatsapp-automation",
+        "S1#messaging-boundaries"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-014",
+      "title": "Squarespace read-only commerce and site events",
+      "plane": "INTEGRATION",
+      "milestone": "v0.9",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-003",
+        "OG-EVT-004"
+      ],
+      "acceptance": [
+        "Orders, sales and site events are observed read-only."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/squarespace.test.ts"
+      ],
+      "sources": [
+        "S1#connector-and-automation-strategy",
+        "S2#first-communications-pilot"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-015",
+      "title": "Supabase read-only metadata",
+      "plane": "INTEGRATION",
+      "milestone": "v0.9",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-SEC-003"
+      ],
+      "acceptance": [
+        "Owner-reviewed, sanitized schema/migration inventory only; no rows, credentials, function bodies or queries."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/connectors/supabase-readonly.test.ts"
+      ],
+      "sources": [
+        "S1#connector-and-automation-strategy"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-CONN-016",
+      "title": "Evaluate third-party social and inbox backends",
+      "plane": "INTEGRATION",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "VISION",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-011"
+      ],
+      "acceptance": [
+        "Written comparison of respond.io, SleekFlow, Trengo, Sprout Social, Hootsuite, Buffer against OctopusG needs before any integration."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S2#existing-products-serving-parts-of-the-need"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-EVT-001",
+      "title": "Normalized event envelope",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-08",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DATA-001"
+      ],
+      "acceptance": [
+        "Events follow docs/05; simulated events are labelled and excluded from KPIs.",
+        "Duplicate deliveries de-duplicate on (connector, provider_event_id)."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/events.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#build-versus-buy"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-EVT-002",
+      "title": "Simulated inbox from fixtures",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-08",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-EVT-001"
+      ],
+      "acceptance": [
+        "Inbox renders fixtures/events/*.json with filters for product, connector, severity, requires-decision and status.",
+        "Every item is visibly SIMULATED; no personal data appears in fixtures."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/events.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S1#octopusg-v02-boundary"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-EVT-003",
+      "title": "Real deployment events in the inbox",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-001",
+        "OG-EVT-002"
+      ],
+      "acceptance": [
+        "Vercel deployment created/succeeded/failed appear as observed events with links to the provider."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connectors/vercel-readonly.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management",
+        "S2#first-communications-pilot"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-EVT-004",
+      "title": "Local webhook receiver",
+      "plane": "INTEGRATION",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-DATA-004",
+        "OG-SEC-003"
+      ],
+      "acceptance": [
+        "A separately reviewed ADR defines the receiver; signatures are verified; the static app server is unchanged."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/webhooks.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-EVT-005",
+      "title": "Event correlation across channels",
+      "plane": "CONTROL",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-EVT-004"
+      ],
+      "acceptance": [
+        "comment → lead → draft → sent events share a correlation_id and appear as one story."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/events.test.ts"
+      ],
+      "sources": [
+        "S2#instagram-comment-to-dm-automation",
+        "S2#build-versus-buy"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-DEV-001",
+      "title": "Declared device registry and trust zones",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-03",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-002"
+      ],
+      "acceptance": [
+        "config/devices.json declares the personal Mac, personal Windows laptop (not enrolled) and company laptop (BROWSER_ONLY).",
+        "Validation rejects any capability on a company-owned device."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/devices.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control",
+        "S2#work-laptop-trust-zone",
+        "S1#device-and-trust-zone-model"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-02.md",
+        "WP-03.md",
+        "WP-04.md"
+      ]
+    },
+    {
+      "id": "OG-DEV-002",
+      "title": "Device online status and project location",
+      "plane": "INTEGRATION",
+      "milestone": "v0.4",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-008"
+      ],
+      "acceptance": [
+        "Map and devices screen show which device holds each checkout and whether it is online."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/devices.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-04.md"
+      ]
+    },
+    {
+      "id": "OG-DEV-003",
+      "title": "Local agent enrollment and allowlisted commands",
+      "plane": "EXECUTION",
+      "milestone": "v0.5",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-DEV-002",
+        "OG-ACT-002"
+      ],
+      "acceptance": [
+        "Enrollment is owner-initiated and authenticated; only allowlisted, parameter-validated commands run for an approved action ID."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/agent.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-DEV-004",
+      "title": "Offline action queue",
+      "plane": "EXECUTION",
+      "milestone": "v0.5",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-DEV-003"
+      ],
+      "acceptance": [
+        "Actions for an offline device wait and are re-validated against current policy before running."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/agent.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-DEV-005",
+      "title": "Directory move detection with confirmation",
+      "plane": "CONTROL",
+      "milestone": "v0.5",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-DEV-003",
+        "OG-OBS-002"
+      ],
+      "acceptance": [
+        "A moved checkout is proposed as a registry change; nothing is updated without owner confirmation."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/agent.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-DEV-006",
+      "title": "Personal Windows laptop enrollment",
+      "plane": "EXECUTION",
+      "milestone": "v0.5",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-DEV-003"
+      ],
+      "acceptance": [
+        "Windows agent passes the same contract tests as the Mac agent."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/agent.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control",
+        "S1#device-and-trust-zone-model"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-001",
+      "title": "Workflow catalog",
+      "plane": "CONTROL",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-CONN-009"
+      ],
+      "acceptance": [
+        "n8n workflows are listed with state and associated products."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-002",
+      "title": "Trigger approved test workflows and pause failing ones",
+      "plane": "EXECUTION",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-WF-001",
+        "OG-ACT-002"
+      ],
+      "acceptance": [
+        "Only approved test workflows can be triggered; a failing workflow can be paused with an audit record."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-003",
+      "title": "Artemis inquiry to Gmail draft pilot",
+      "plane": "EXECUTION",
+      "milestone": "v0.7",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-CONN-010",
+        "OG-WF-002"
+      ],
+      "acceptance": [
+        "Artemis inquiry → inbox → AI-prepared draft → owner approval → sent by owner → lead status updated."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#first-communications-pilot",
+        "S2#automated-gmail-messages"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-004",
+      "title": "Instagram keyword comment to lead flow",
+      "plane": "EXECUTION",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-CONN-011",
+        "OG-CONN-012",
+        "OG-WF-003",
+        "OG-EVT-005"
+      ],
+      "acceptance": [
+        "Keyword comment → approved private reply → n8n normalization → lead linked to product → Gmail follow-up draft."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#instagram-comment-to-dm-automation",
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-005",
+      "title": "WhatsApp Business inquiry and guest flows with human handoff",
+      "plane": "EXECUTION",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-CONN-013",
+        "OG-WF-003"
+      ],
+      "acceptance": [
+        "Approved templates only; human handoff for anything sensitive."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#whatsapp-automation"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-006",
+      "title": "AI-drafted workflows for approval",
+      "plane": "EXECUTION",
+      "milestone": "v0.11",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-AI-004",
+        "OG-WF-002"
+      ],
+      "acceptance": [
+        "AI may propose n8n workflow drafts; publishing needs owner approval."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-WF-007",
+      "title": "Approved-template automatic acknowledgments",
+      "plane": "EXECUTION",
+      "milestone": "v0.10",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-ACT-008",
+        "OG-WF-003"
+      ],
+      "acceptance": [
+        "Only named, owner-approved templates for narrow messages (e.g. inquiry acknowledgment) may send at Level 4; pricing, contracts, disputes and personal matters never qualify."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/workflows.test.ts"
+      ],
+      "sources": [
+        "S2#automated-gmail-messages",
+        "S2#integration-levels"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "B0.md"
+      ]
+    },
+    {
+      "id": "OG-ACT-001",
+      "title": "Safe open actions",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.2",
+      "workPackage": "WP-09",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-REG-004"
+      ],
+      "acceptance": [
+        "Open website and Open provider are plain links to registry-recorded HTTPS URLs with rel=\"noopener noreferrer\".",
+        "Open folder shows the path with a Copy button; `npm run open -- <product-id>` opens only allowlisted paths.",
+        "The audit still finds no browser network client."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/open.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S2#mvp-boundary",
+        "S1#octopusg-v02-boundary"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-002",
+      "title": "Action requests with tier and level policy (simulated)",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-09",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-002"
+      ],
+      "acceptance": [
+        "A pure policy function decides allow/deny from action tier, connection level, approval and preconditions, with the reason.",
+        "T3/T4 requests require all seven fields in docs/06 §3 before they can be approved.",
+        "Everything remains labelled simulation."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/policy.test.ts"
+      ],
+      "sources": [
+        "S2#database-and-configuration-changes",
+        "S1#action-authority-levels"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-003",
+      "title": "Approval simulation (v0.1 baseline)",
+      "plane": "CONTROL",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "LOW",
+      "dependencies": [],
+      "acceptance": [
+        "Sequential stages, mandatory notes, rollback only after execution, falsified state rejected."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/core.test.ts"
+      ],
+      "sources": [
+        "S4#architecture-as-built"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-004",
+      "title": "Allowlisted local actions",
+      "plane": "EXECUTION",
+      "milestone": "v0.5",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-DEV-003"
+      ],
+      "acceptance": [
+        "Launch an approved local app and run approved tests on an enrolled device, with evidence."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/agent.test.ts"
+      ],
+      "sources": [
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-005",
+      "title": "Guarded preview and deployment promotion",
+      "plane": "EXECUTION",
+      "milestone": "v0.10",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-ACT-008",
+        "OG-CONN-001"
+      ],
+      "acceptance": [
+        "Promotion requires a verified preview, explicit approval and a rollback path."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/actions.test.ts"
+      ],
+      "sources": [
+        "S2#database-and-configuration-changes",
+        "S2#per-service-management"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-006",
+      "title": "Guarded database migrations",
+      "plane": "EXECUTION",
+      "milestone": "v0.10",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-ACT-008",
+        "OG-CONN-015"
+      ],
+      "acceptance": [
+        "Proposed migration, affected objects, backup, dry-run, rollback, approval and evidence are all required."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/actions.test.ts"
+      ],
+      "sources": [
+        "S2#database-and-configuration-changes"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-007",
+      "title": "Critical actions: DNS, secrets, deletion, money",
+      "plane": "EXECUTION",
+      "milestone": "v0.10",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "DEFERRED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-ACT-008",
+        "OG-SEC-005"
+      ],
+      "acceptance": [
+        "Strong confirmation, verified backup and audit; never Level 4."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/actions.test.ts"
+      ],
+      "sources": [
+        "S2#database-and-configuration-changes"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-ACT-008",
+      "title": "Real authenticated approvals",
+      "plane": "CONTROL",
+      "milestone": "v0.10",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-DATA-004"
+      ],
+      "acceptance": [
+        "Authenticated owner identity, per-item scope, evidence references, append-only storage, integrity and revocation."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/approvals.test.ts"
+      ],
+      "sources": [
+        "S2#owner-approval-gates",
+        "S1#action-authority-levels"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-001",
+      "title": "Loopback-only static server and isolation audit (v0.1 baseline)",
+      "plane": "CONTROL",
+      "milestone": "v0.1",
+      "workPackage": null,
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "HIGH",
+      "dependencies": [],
+      "acceptance": [
+        "127.0.0.1 only, GET/HEAD only, Host check, CSP connect-src none, no browser network client, zero remotes, credential-pattern scan."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "scripts/audit.mjs",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S4#architecture-as-built",
+        "S4#validation-baseline"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-002",
+      "title": "Trust zones, tiers and levels as data",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-03",
+      "priority": "MVP",
+      "status": "VERIFIED",
+      "risk": "HIGH",
+      "dependencies": [],
+      "acceptance": [
+        "config/policy.json encodes trust zones, tiers T0–T4 with minimum levels, and the rule that Level 4 never applies to T3/T4.",
+        "Tests cover every tier/level combination."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/policy.test.ts"
+      ],
+      "sources": [
+        "S2#database-and-configuration-changes",
+        "S2#integration-levels",
+        "S2#work-laptop-trust-zone"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-03.md",
+        "WP-04.md"
+      ]
+    },
+    {
+      "id": "OG-SEC-003",
+      "title": "Credential references in macOS Keychain",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "Only collector/executor processes read credentials by reference; values never reach the bundle, logs, events or registry.",
+        "Audit extended to prove no credential value is present in dist/ or work/observations."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/credentials.test.ts",
+        "scripts/audit.mjs"
+      ],
+      "sources": [
+        "S1#connection-center-lifecycle",
+        "S3#change-4--security-containment-first"
+      ],
+      "ownerDecisions": [
+        "OD-04"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-004",
+      "title": "Secret containment precondition for connector authorization",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [],
+      "acceptance": [
+        "Connector authorization is refused while the registry records unresolved plaintext-secret exposure, unless the owner records an explicit exception."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connections.test.ts"
+      ],
+      "sources": [
+        "S3#change-4--security-containment-first"
+      ],
+      "ownerDecisions": [
+        "OD-03"
+      ],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-005",
+      "title": "Kill switch",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-CONN-002"
+      ],
+      "acceptance": [
+        "One control pauses every connection and executor; state is visible on every screen."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/connections.test.ts"
+      ],
+      "sources": [
+        "S3#change-4--security-containment-first"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-006",
+      "title": "Messaging compliance guard",
+      "plane": "CONTROL",
+      "milestone": "v0.8",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-DATA-003"
+      ],
+      "acceptance": [
+        "Consent, rate limits and messaging windows are enforced before any send; sensitive categories always need human approval."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/messaging-policy.test.ts"
+      ],
+      "sources": [
+        "S1#messaging-boundaries",
+        "S2#instagram-comment-to-dm-automation",
+        "S2#whatsapp-automation"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-007",
+      "title": "Cloud control plane security design",
+      "plane": "CONTROL",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "VISION",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-ACT-008"
+      ],
+      "acceptance": [
+        "An ADR covers hosting, authentication, MFA, secrets, agent channel and blast radius before any cloud deployment."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S3#change-4--security-containment-first",
+        "S2#multi-device-control"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-SEC-008",
+      "title": "Verified recovery copy of the control-plane repository",
+      "plane": "CONTROL",
+      "milestone": "v0.2",
+      "workPackage": "WP-01",
+      "priority": "MVP",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [],
+      "acceptance": [
+        "The owner confirms the location and hash of a current off-machine recovery copy (bundle or private remote) and it is recorded in docs/evidence/WP-01.md."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "docs/evidence/WP-01.md"
+      ],
+      "sources": [
+        "S4#registry-discrepancy",
+        "S3#pre-development-checklist"
+      ],
+      "ownerDecisions": [
+        "OD-02"
+      ],
+      "evidence": [
+        "WP-01.md"
+      ]
+    },
+    {
+      "id": "OG-AI-001",
+      "title": "Read-only registry MCP server for AI sessions",
+      "plane": "INTEGRATION",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-REG-004"
+      ],
+      "acceptance": [
+        "Local stdio server exposes read-only tools (get product, list resources, where is checkout, latest observation); no write tools; no network."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/mcp.test.ts"
+      ],
+      "sources": [
+        "S3#session-setup-guidance"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-AI-002",
+      "title": "Event summaries and suggested reply drafts",
+      "plane": "EXECUTION",
+      "milestone": "v0.7",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-CONN-010"
+      ],
+      "acceptance": [
+        "AI output is always a draft with its inputs cited; never sent automatically."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/ai.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#automated-gmail-messages"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-AI-003",
+      "title": "Diagnostics and recommendations",
+      "plane": "CONTROL",
+      "milestone": "v0.6",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-EVT-003"
+      ],
+      "acceptance": [
+        "Failed deployments and drift produce cited diagnostic notes labelled derived."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/ai.test.ts"
+      ],
+      "sources": [
+        "S2#target-planes",
+        "S1#core-capabilities-discussed"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-AI-004",
+      "title": "Bounded AI agents",
+      "plane": "EXECUTION",
+      "milestone": "v0.11",
+      "workPackage": null,
+      "priority": "LATER",
+      "status": "PROPOSED",
+      "risk": "CRITICAL",
+      "dependencies": [
+        "OG-ACT-008",
+        "OG-AI-003"
+      ],
+      "acceptance": [
+        "Agents act only through ActionRequest → policy → approval; hold no credentials; cannot raise levels."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/ai.test.ts"
+      ],
+      "sources": [
+        "S1#core-capabilities-discussed",
+        "S2#development-roadmap-blocks"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    }
+  ]
+}

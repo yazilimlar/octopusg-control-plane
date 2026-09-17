@@ -73,9 +73,39 @@ await check('visible naming is OctopusG while storage and schema keys are untouc
  await page.getByRole('button',{name:'Reset local simulation',exact:true}).click();});
 await check('simulated approval persists and logs without execution',async()=>{await nav('Approval queue');await page.locator('[data-workflow="A1"]').click();await page.getByRole('dialog').getByRole('textbox').fill('Browser test simulated evidence only');await page.getByRole('button',{name:'Save simulated transition'}).click();assert.match(await page.locator('tbody tr').first().innerText(),/EVIDENCE/);await page.reload();await nav('Approval queue');assert.match(await page.locator('tbody tr').first().innerText(),/EVIDENCE/);await nav('Timeline');assert.match(await page.locator('main').innerText(),/Browser test simulated evidence only/);});
 await check('reset simulation restores source proposals',async()=>{await nav('Approval queue');await page.getByRole('button',{name:'Reset simulation',exact:true}).click();await page.getByRole('button',{name:'Reset local simulation',exact:true}).click();assert.match(await page.locator('tbody tr').first().innerText(),/PROPOSED/);});
+await check('devices view shows declared records only, with no machine identifier',async()=>{await nav('Devices');
+ assert.equal(await page.locator('#devices tbody tr').count(),3);
+ const company=page.locator('[data-device="company-laptop"]');
+ assert.match(await company.innerText(),/BROWSER_ONLY \/ UNMANAGED \/ NO_LOCAL_ACCESS/);
+ assert.equal(await company.locator('[data-observe]').getAttribute('data-observe'),'no');
+ assert.match(await company.innerText(),/employer-owned; OctopusG never observes it/);
+ assert.equal(await page.locator('[data-device="personal-mac"] [data-observe]').getAttribute('data-observe'),'yes');
+ assert.equal(await page.locator('[data-device="personal-windows"] [data-observe]').getAttribute('data-observe'),'no');
+ const text=await page.locator('main').innerText();
+ for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/\b(?:[0-9a-f]{2}:){5}[0-9a-f]{2}\b/i,/\b(?:\d{1,3}\.){3}\d{1,3}\b/])
+  assert.ok(!pattern.test(text),`devices view must not show ${pattern}`);
+ // the policy grid is present and refuses level 4 for T3/T4
+ assert.equal(await page.locator('#tiers [data-tier="T4"][data-level="4"]').getAttribute('data-allowed'),'no');
+ assert.equal(await page.locator('#tiers [data-tier="T3"][data-level="4"]').getAttribute('data-allowed'),'no');
+ assert.equal(await page.locator('#tiers [data-tier="T0"][data-level="1"]').getAttribute('data-allowed'),'yes');
+ assert.equal(await page.locator('#devices').evaluate(t=>t.querySelectorAll('th[scope="col"]').length),6);
+ assert.ok(await page.locator('.table-scroll[aria-label="Declared devices, scrollable"]').count()>0,'the table is labelled and keyboard scrollable');});
+await check('requirements view exposes the ledger and its traceability',async()=>{await nav('Requirements');
+ assert.ok(await page.locator('#capabilities tbody tr').count()>=30);
+ assert.ok(await page.locator('[data-requirement]').count()>=80);
+ const row=page.locator('[data-requirement="OG-OBS-001"]');
+ assert.equal(await row.getAttribute('data-status'),'VERIFIED');
+ const text=await row.innerText();
+ for(const fragment of ['OG-OBS-001','INTEGRATION','WP-03','v0.2','OG-DATA-002','npm run observe','tests/observe.test.ts','WP-03.md'])
+  assert.ok(text.includes(fragment),`requirement row must expose ${fragment}`);
+ assert.match(await page.locator('[data-capability="truth-and-provenance"]').innerText(),/AVAILABLE/);
+ assert.ok((await page.locator('[data-capability="truth-and-provenance"]').innerText()).includes('OG-DATA-001'),'capability links to its requirements');
+ const all=await page.locator('main').innerText();
+ for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/ghp_[A-Za-z0-9]{20,}/])
+  assert.ok(!pattern.test(all),`requirements view must not show ${pattern}`);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});
 await check('disabled connector probes return blocked',async()=>{await nav('Connectors');assert.equal(await page.locator('[data-connector]').count(),5);for(const button of await page.locator('[data-connector]').all())await button.click();assert.equal(await page.locator('.connector-result:not([hidden])').count(),5);assert.match(await page.locator('#result-github').innerText(),/"status": "blocked"/);});
-await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
+await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Devices','Requirements','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
 await check('mobile main nav scrolls horizontally and does not clip item focus outlines',async()=>{const n=page.getByRole('navigation',{name:'Main navigation'});const m=await n.evaluate(el=>{const s=getComputedStyle(el);return{scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,overflowX:s.overflowX,padTop:parseFloat(s.paddingTop),padBottom:parseFloat(s.paddingBottom)};});assert.equal(m.overflowX,'auto','mobile nav must be a horizontal scroller');assert.ok(m.scrollWidth>m.clientWidth,`nav must overflow and scroll at 390px, got scrollWidth ${m.scrollWidth} <= clientWidth ${m.clientWidth}`);assert.ok(m.padTop>=4&&m.padBottom>=4,`the scroller needs block padding or it clips the 4px focus outline; got ${m.padTop}/${m.padBottom}`);const widths=await n.getByRole('button').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().width));assert.ok(Math.min(...widths)>=56,`nav items must keep intrinsic width, narrowest was ${Math.min(...widths)}`);});
 await check('all views contain meaningful content, no browser errors or external requests',async()=>{assert.deepEqual(errors,[]);assert.deepEqual(external,[]);});
 await writeFile('work/browser-results.json',JSON.stringify({passed:checks.length,checks,errors,externalRequests:external},null,2));

@@ -196,6 +196,41 @@ async function section(path, name, body) {
   if (out === s) return;
   if (WRITE) await writeFile(path, out); else err(`${path}: generated ${name} section is stale — run npm run spec:write`);
 }
+// ---------- generated build input for the requirements view (OG-UI-005)
+// Deterministic projection of the ledger, written next to the other generated artefacts.
+// It carries no path, no host and no secret: only requirement and capability metadata.
+const evidenceFiles = (await exists(evidenceDir)) ? (await readdir(evidenceDir)).filter((f) => f.endsWith('.md')).sort() : [];
+const evidenceByRequirement = {};
+for (const file of evidenceFiles) {
+  const body = await readFile(`${evidenceDir}/${file}`, 'utf8');
+  for (const r of reqs) if (body.includes(r.id)) (evidenceByRequirement[r.id] ??= []).push(file);
+}
+const requirementsData = {
+  schemaVersion: 1,
+  generatedBy: 'scripts/validate-spec.mjs',
+  updated: L.updated,
+  milestones: L.milestones.map((m) => ({id: m.id, title: m.title})),
+  workPackages: L.work_packages.map((w) => ({id: w.id, title: w.title})),
+  capabilities: caps.map((c) => ({id: c.id, title: c.title, status: c.status, target: c.target, requirements: [...c.requirements]})),
+  requirements: reqs.map((r) => ({
+    id: r.id, title: r.title, plane: r.plane, milestone: r.milestone, workPackage: r.work_package ?? null,
+    priority: r.priority, status: r.status, risk: r.risk, dependencies: [...(r.dependencies ?? [])],
+    acceptance: [...r.acceptance], acceptanceProvisional: r.acceptance_provisional === true,
+    tests: [...r.tests], sources: [...r.source], ownerDecisions: [...(r.owner_decisions ?? [])],
+    evidence: [...(evidenceByRequirement[r.id] ?? [])],
+  })),
+};
+const requirementsJson = JSON.stringify(requirementsData, null, 2) + '\n';
+const requirementsFile = 'data/requirements.json';
+const currentRequirements = (await exists(requirementsFile)) ? await readFile(requirementsFile, 'utf8') : '';
+if (currentRequirements !== requirementsJson) {
+  if (WRITE) await writeFile(requirementsFile, requirementsJson);
+  else err(`${requirementsFile} is stale — run npm run spec:write`);
+}
+// It is a build input for the browser: it must never carry a machine path or a secret shape.
+for (const [, hit] of requirementsJson.matchAll(/\/Users\/[^/"\s]+|\/home\/[^/"\s]+|C:\\\\Users\\\\[^\\"\s]+/g))
+  err(`${requirementsFile}: contains a machine-specific path (${hit.slice(0, 12)}…)`);
+
 const traceFile = 'docs/requirements/TRACEABILITY.md';
 const oldTrace = (await exists(traceFile)) ? await readFile(traceFile, 'utf8') : '';
 if (oldTrace !== trace) { if (WRITE) await writeFile(traceFile, trace); else err(`${traceFile} is stale — run npm run spec:write`); }
