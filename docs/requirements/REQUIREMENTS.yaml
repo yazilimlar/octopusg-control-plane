@@ -170,7 +170,7 @@ capabilities:
   - S1#core-capabilities-discussed
 - id: resource-catalog
   title: Products and their resources
-  status: PLANNED
+  status: VALIDATING
   target: v0.2
   requirements:
   - OG-REG-004
@@ -653,7 +653,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#core-capabilities-discussed
@@ -674,7 +674,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S3#historical-map-critique
@@ -811,7 +811,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S2#architecture-map-updates-from-connections
@@ -901,7 +901,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: MEDIUM
   source:
   - S1#octopusg-v02-boundary
@@ -1493,7 +1493,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: MEDIUM
   source:
   - S2#multi-device-control
@@ -1876,7 +1876,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: HIGH
   source:
   - S2#database-and-configuration-changes

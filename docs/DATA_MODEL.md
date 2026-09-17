@@ -73,6 +73,43 @@ accepted records into `snapshot.observations`. Nothing is fetched, at build time
   that exact project and field, and the declared value is kept in the fact's note. With no
   observations the read model is identical to v0.1's.
 
+## Typed resource catalog and graph (v0.2, OG-REG-004, OG-MAP-002)
+
+`src/resources.ts` derives a catalog from the pinned snapshot and the validated observations —
+nothing is fetched, no DNS is queried, no provider API is called and no directory is scanned.
+The same snapshot always produces the same catalog, sorted by identifier.
+
+| Kind | Derived from | Identifier |
+|---|---|---|
+| `repository` | `canonical_repo` (SSH or HTTPS form, parsed; an unparseable value yields no resource) | `repository:<host>:<owner>/<repo>` |
+| `checkout` | `intended_local_path`, `current_local_paths[].path`, `git_state.path` | `checkout:<device>:<path>` |
+| `domain` | `intended_url` (declared) and `production_state.serving_deployment.aliases` (observed) | `domain:<hostname>` |
+| `deployment` | `production_state.serving_deployment` | `deployment:<provider>:<id>` |
+| `document` | the SHA-256-verified sources of this build | `document:<file name>` |
+
+`<device>` is `undeclared`: the registry declares paths, not machines, and an observation records
+a path, not a device. Device attribution arrives with OG-DEV-002 (v0.4). A checkout becomes
+`observed` only where an observation covers that exact path with status `ok`; a failed, stale or
+differently-pathed observation leaves it `declared`.
+
+Edges are typed and directional, and every one carries a truth kind and a source path. The types
+are exactly those in [02 §3](02-DOMAIN-MODEL.md#3-relationship-types): `platform_parent`,
+`consumed_by`, `depends_on`, `successor_of`, `source_repository`, `checked_out_at`,
+`deployed_on`, `serves`. **Ownership is `platform_parent` and nothing else** — a shared
+repository or a shared production host is flagged as shared, never turned into ownership, and
+Artemis never owns an AgoraXAI Atlas row. The eight declared v0.1 edges are preserved inside the
+typed graph.
+
+### Legal entities (OG-REG-005, OD-05)
+
+A legal entity is declared data about **existence**, kept in `config/entities.json` rather than in
+the pinned registry. `legal_entity:great-order-llc` (Great Order LLC) is recorded with truth
+`declared` and source `owner-confirmed`. Nothing about ownership follows from it: ownership of a
+product, platform, domain, repository, venture, intellectual property or contract appears only
+where the owner declares that exact relationship, and every product without such a declaration
+reports `undeclared` with truth `unknown`. An entity is never a graph node and never an edge
+endpoint, and no entity is defaulted, inherited from a platform parent or inferred from a name.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.

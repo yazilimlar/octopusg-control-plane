@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "$comment": "OG-REG-005 / OD-05. Legal entities whose EXISTENCE the owner has confirmed. An entry here never implies that the entity owns any product, platform, domain, repository, venture, intellectual property or contract. Ownership appears only in `ownership`, only where the owner declares that specific relationship, and is empty until then.",
+  "entities": [
+    {
+      "id": "legal_entity:great-order-llc",
+      "label": "Great Order LLC",
+      "truth": "declared",
+      "source": "owner-confirmed",
+      "confirmedOn": "2026-09-17",
+      "note": "Existence confirmed by the owner on 2026-09-17. No ownership of AgoraXAI, Artemis, OctopusG, any domain, repository, product, venture, intellectual property or contract is declared."
+    }
+  ],
+  "ownership": []
+}

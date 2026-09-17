@@ -14,15 +14,19 @@ Read this first in every AI session. Keep it under one page.
   `snapshot.observations`) on `octopusg/wp-02-truth-model` and is **accepted by the owner at
   Gate G2** (`d1b8f8b`). Evidence: [WP-02](docs/evidence/WP-02.md).
 - WP-03 added the owner-run local Git observer (`npm run observe`), the declared device record
-  and the trust-zone / tier / level policy (`config/`, `src/observe.ts`, `src/devices.ts`,
-  `src/policy.ts`) on `octopusg/wp-03-local-observer`. Evidence: [WP-03](docs/evidence/WP-03.md).
+  and the trust-zone / tier / level policy and is **accepted by the owner at Gate G4**
+  (`e26d4ad`). Evidence: [WP-03](docs/evidence/WP-03.md).
+- Batch A is on `octopusg/batch-a-catalog-graph`: WP-04 adds the typed resource catalog and
+  graph (`src/resources.ts`, `config/entities.json`). OD-05 is resolved — Great Order LLC exists
+  as owner-confirmed declared data and owns nothing that is not separately declared.
+  Evidence: [WP-04](docs/evidence/WP-04.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 27 requirements (2 verified) |
+| Current milestone | **v0.2** — 27 requirements (5 verified) |
 | Ledger | 89 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |
