@@ -18,7 +18,7 @@ forgotten. **Listing a capability does not authorize building it.**
 |---|---|---|---|---|---|
 | **spec-governance** — Specification, traceability and AI session guardrails | VALIDATING | B0 | — | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 | [S1#requirements-and-completeness-model](sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) |
 | **platform-resilience** — Local isolation boundary and recovery copy | PLANNED | v0.2 | — | OG-SEC-001, OG-SEC-008 | [S4#registry-discrepancy](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) |
-| **portfolio-registry** — Authoritative portfolio registry | PLANNED | v0.2 | — | OG-REG-001, OG-REG-002, OG-REG-003 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
+| **portfolio-registry** — Authoritative portfolio registry | VALIDATING | v0.2 | — | OG-REG-001, OG-REG-002, OG-REG-003 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
 | **resource-catalog** — Products and their resources | PLANNED | v0.2 | — | OG-REG-004, OG-REG-005 | [S2#target-planes](sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) |
 | **owner-cockpit** — Owner cockpit screens | PLANNED | v0.2 | — | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006 | [S2#target-planes](sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) |
 | **system-maps** — Generated system maps | PLANNED | v0.2 | — | OG-MAP-001, OG-MAP-002, OG-MAP-003, OG-MAP-004, OG-MAP-005, OG-MAP-006 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
@@ -47,6 +47,8 @@ forgotten. **Listing a capability does not authorize building it.**
 | **external-observability** — Logs and incident tooling | CONCEPT | unscheduled | — | OG-OBS-006 | [S2#existing-products-serving-parts-of-the-need](sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) |
 | **third-party-comms-backends** — Social publishing and unified inbox products | CONCEPT | unscheduled | — | OG-CONN-016 | [S2#existing-products-serving-parts-of-the-need](sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) |
 | **cloud-control-plane** — Hosted OctopusG | CONCEPT | unscheduled | — | OG-SEC-007 | [S3#change-4--security-containment-first](sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) |
+| **registry-repoint** — One-command registry repoint | CONCEPT | unscheduled | — | OG-REG-006 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
+| **approval-outcome-records** — Approval outcomes written to governance records | CONCEPT | unscheduled | — | OG-ACT-009 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 
-31 capabilities · generated from REQUIREMENTS.yaml
+33 capabilities · generated from REQUIREMENTS.yaml
 <!-- GENERATED:CAPABILITIES:END -->

@@ -5,7 +5,7 @@
 ```text
 Supplied YAML + governance Markdown (read-only originals)
   → byte-identical copies under data/
-  → scripts/import-registry.mjs (strict YAML / IDs / 17-row checks, hashes)
+  → scripts/import-registry.mjs (lock-pinned SHA-256, strict YAML / IDs / row-count checks)
   → data/snapshot.json (deterministic build artifact)
   → src/model.ts (normalization, provenance, scores, filters, graph, drift)
   → src/main.ts (eight views, accessible native controls)

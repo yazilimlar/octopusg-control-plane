@@ -7,11 +7,12 @@ import {normalize,filterProjects,edgesFor,driftFor,type Raw,type Filters} from '
 import {stages,transition,nextStages,validWorkspace,type Workspace} from '../src/workflow.ts';
 import {connectors} from '../src/connectors.ts';
 const snapshot=JSON.parse(readFileSync('data/snapshot.json','utf8'));
+const lock=JSON.parse(readFileSync('data/registry.lock.json','utf8'));
 const registry=snapshot.registry as Raw;
 const projects=registry.projects.map((p:Raw)=>normalize(p,registry));
 const empty:Filters={query:'',taxonomy:'',risk:'',status:'',evidence:''};
 const fresh=():Workspace=>({version:1,entries:[{id:'A1',title:'Example simulation',stage:'PROPOSED',note:'',updatedAt:'2026-09-15',demo:true}],log:[]});
-test('YAML parses without duplicate keys or errors; snapshot retains all source data',()=>{const d=parseDocument(readFileSync('data/PROJECT_REGISTRY_v1.5.1.yaml','utf8'));assert.equal(d.errors.length,0);assert.deepEqual(d.toJS(),registry);assert.equal(registry.projects.length,registry.project_row_count);assert.equal(registry.project_row_count,18);assert.equal(new Set(projects.map((p:any)=>p.id)).size,18);});
+test('YAML parses without duplicate keys or errors; snapshot retains all source data',()=>{const d=parseDocument(readFileSync('data/'+lock.filename,'utf8'));assert.equal(d.errors.length,0);assert.deepEqual(d.toJS(),registry);assert.equal(registry.projects.length,registry.project_row_count);assert.equal(registry.project_row_count,lock.project_row_count);assert.equal(new Set(projects.map((p:any)=>p.id)).size,lock.project_row_count);});
 test('all three source copies match recorded SHA256 fingerprints',()=>{for(const s of snapshot.sources)assert.equal(createHash('sha256').update(readFileSync('data/'+s.name)).digest('hex'),s.sha256);});
 test('taxonomy preserves peer platforms and explicitly retains non-project artifact',()=>{assert.equal(projects.filter((p:any)=>p.taxonomy==='Artemis').length,4);assert.equal(projects.filter((p:any)=>p.taxonomy==='AgoraXAI Atlas').length,2);assert.equal(projects.filter((p:any)=>p.taxonomy==='AgoraXAI Platforms').length,1);assert.equal(projects.filter((p:any)=>p.category==='NOT_A_PROJECT').length,1);assert.equal(projects.find((p:any)=>p.id==='artemis-atlas-mvp').taxonomy,'Archive');});
 test('search is case insensitive, trims whitespace, and includes deep evidence',()=>{assert.equal(filterProjects(projects,{...empty,query:'  DAYOS  '}).some(p=>p.id==='dayos'),true);assert.deepEqual(filterProjects(projects,{...empty,query:'2731c29f53dcde7d565a84acc1e4f1886da29c6a'}).map(p=>p.id),['financial-command-center']);assert.equal(filterProjects(projects,{...empty,query:'unmatchablexyz'}).length,0);});

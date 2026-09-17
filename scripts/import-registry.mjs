@@ -1,7 +1,19 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {parseDocument} from 'yaml';
-const names=['PROJECT_REGISTRY_v1.5.1.yaml','GATE_2D_REPORT.md','GATE_3_APPROVAL_CHECKLIST.md'];
+// The pinned registry is declared once, in data/registry.lock.json (OG-REG-002). Every
+// expected value below comes from the lock; a mismatch fails the build and names the file.
+const LOCK='data/registry.lock.json';
+const lock=JSON.parse(await readFile(LOCK,'utf8'));
+if(typeof lock.filename!=='string'||!/^PROJECT_REGISTRY_v[0-9][0-9A-Za-z.-]*\.yaml$/.test(lock.filename))throw new Error(`${LOCK}: filename must be a bare PROJECT_REGISTRY_v*.yaml name inside data/`);
+if(typeof lock.registry_version!=='string'||!lock.registry_version)throw new Error(`${LOCK}: registry_version must be a non-empty string`);
+if(typeof lock.sha256!=='string'||!/^[a-f0-9]{64}$/.test(lock.sha256))throw new Error(`${LOCK}: sha256 must be 64 lowercase hex characters`);
+if(!Number.isInteger(lock.project_row_count)||lock.project_row_count<1)throw new Error(`${LOCK}: project_row_count must be a positive integer`);
+const registryPath=`data/${lock.filename}`;
+const registryBytes=await readFile(registryPath).catch(()=>{throw new Error(`${registryPath} is missing; ${LOCK} pins it`);});
+const registrySha=createHash('sha256').update(registryBytes).digest('hex');
+if(registrySha!==lock.sha256)throw new Error(`${registryPath} SHA-256 ${registrySha} does not match ${LOCK} (${lock.sha256})`);
+const names=[lock.filename,'GATE_2D_REPORT.md','GATE_3_APPROVAL_CHECKLIST.md'];
 const sources=await Promise.all(names.map(async name=>{const text=await readFile(`data/${name}`,'utf8');return {name,text,sha256:createHash('sha256').update(text).digest('hex')};}));
 // A source document containing a literal browser network API identifier is inlined into
 // dist/main.js by esbuild and then trips scripts/audit.mjs with an opaque message. Fail
@@ -11,7 +23,7 @@ for(const s of sources)if(bannedClientApi.test(s.text))throw new Error(`${s.name
 const doc=parseDocument(sources[0].text,{uniqueKeys:true});
 if(doc.errors.length)throw new Error(doc.errors.map(x=>x.message).join('\n'));
 const registry=doc.toJS({maxAliasCount:100});
-if(registry.registry_version!=='1.5.1'||registry.project_row_count!==18||!Array.isArray(registry.projects)||registry.projects.length!==18)throw new Error('Expected registry v1.5.1 and exactly 18 rows');
+if(registry.registry_version!==lock.registry_version||registry.project_row_count!==lock.project_row_count||!Array.isArray(registry.projects)||registry.projects.length!==lock.project_row_count)throw new Error(`${registryPath}: expected registry v${lock.registry_version} with exactly ${lock.project_row_count} rows (from ${LOCK}); found v${registry.registry_version}, project_row_count ${registry.project_row_count}, ${Array.isArray(registry.projects)?registry.projects.length:'no'} rows`);
 const ids=new Set();
 const categories=['AGORAXAI_UMBRELLA','AGORAXAI_PLATFORM','ARTEMIS_PLATFORM','PRODUCT','VENTURE','LAB','ARCHIVE','NOT_A_PROJECT'];
 for(const p of registry.projects){

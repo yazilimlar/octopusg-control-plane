@@ -1,0 +1,12 @@
+{
+  "filename": "PROJECT_REGISTRY_v1.6.yaml",
+  "registry_version": "1.6",
+  "sha256": "494bd33e056350c15524a87fe73e9adc02bb6e8bfcd79ea4e801ec58f5b43286",
+  "project_row_count": 18,
+  "locked_at": "2026-09-17",
+  "requirements": ["OG-REG-002", "OG-REG-003"],
+  "provenance": "Byte-identical copy of the Gate 3B registry; SHA-256 matches S1 and GATE_3B_COMPLETION.md. See docs/archive/MANIFEST.md.",
+  "history": [
+    {"filename": "PROJECT_REGISTRY_v1.5.1.yaml", "registry_version": "1.5.1", "sha256": "67e7980339a98f3291ba648fba97611c2d07cf2d4dbe33767508afff612d0071", "role": "pinned input of v0.1 (commit 6a4954f); retained, not ingested"}
+  ]
+}

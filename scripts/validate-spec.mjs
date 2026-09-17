@@ -214,7 +214,7 @@ async function mdFiles(dir) {
 }
 const files = [...await mdFiles('docs'), 'CLAUDE.md', 'SESSION_BRIEF.md', 'README.md'];
 for (const f of files) {
-  const strict = f !== 'README.md'; // README reconciliation is OG-GOV-005 (v0.2)
+  const strict = true; // README reconciled in WP-01 (OG-GOV-005): its links are now checked like every other file
   const body = (await readFile(f, 'utf8')).replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
   const dir = f.includes('/') ? f.slice(0, f.lastIndexOf('/') + 1) : '';
   for (const [, target] of body.matchAll(/\]\(([^)\s]+)\)/g)) {
@@ -226,6 +226,20 @@ for (const f of files) {
   }
   if (!f.startsWith('docs/sources/') && f !== 'docs/requirements/TRACEABILITY.md')
     for (const [id] of body.matchAll(/OG-[A-Z]+-\d{3}/g)) if (!byId.has(id)) err(`${f}: mentions unknown requirement ${id}`);
+}
+
+// ---------- pinned registry statements must match data/registry.lock.json (OG-GOV-005)
+const LOCK = 'data/registry.lock.json';
+if (!(await exists(LOCK))) err(`${LOCK} is missing`);
+else {
+  const lock = JSON.parse(await readFile(LOCK, 'utf8'));
+  for (const f of ['README.md', 'docs/DATA_MODEL.md']) {
+    const t = await readFile(f, 'utf8');
+    if (!t.includes(lock.filename)) err(`${f}: does not name the pinned registry ${lock.filename}`);
+    if (!new RegExp(`\\b${lock.project_row_count}[ -]rows?\\b`).test(t)) err(`${f}: does not state the pinned row count (${lock.project_row_count} rows)`);
+    for (const [, n] of t.matchAll(/\b(\d+)(?:[ -](?:registry|project))?[ -]rows?\b/g))
+      if (Number(n) !== lock.project_row_count) err(`${f}: states ${n} rows; ${LOCK} pins ${lock.project_row_count}`);
+  }
 }
 
 // ---------- report

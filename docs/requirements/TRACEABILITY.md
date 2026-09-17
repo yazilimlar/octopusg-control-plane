@@ -5,7 +5,7 @@
 
 ## Totals
 
-87 requirements · 31 capabilities · 4 sources
+89 requirements · 33 capabilities · 5 sources
 
 | milestone | count |
 |---|---:|
@@ -21,27 +21,27 @@
 | v0.9 | 3 |
 | v0.10 | 5 |
 | v0.11 | 2 |
-| unscheduled | 3 |
+| unscheduled | 5 |
 
 | plane | count |
 |---|---:|
 | MANAGEMENT | 12 |
-| CONTROL | 33 |
+| CONTROL | 34 |
 | INTEGRATION | 21 |
 | EXECUTION | 15 |
-| GOVERNANCE | 6 |
+| GOVERNANCE | 7 |
 
 | status | count |
 |---|---:|
-| PROPOSED | 76 |
-| IMPLEMENTED | 3 |
+| PROPOSED | 74 |
+| IMPLEMENTED | 7 |
 | VERIFIED | 7 |
 | DEFERRED | 1 |
 
 | risk | count |
 |---|---:|
-| LOW | 40 |
-| MEDIUM | 23 |
+| LOW | 41 |
+| MEDIUM | 24 |
 | HIGH | 17 |
 | CRITICAL | 7 |
 
@@ -70,10 +70,10 @@
 | ID | Title | Plane | Status | Risk | WP | Depends on | Sources | Tests |
 |---|---|---|---|---|---|---|---|---|
 | OG-GOV-004 | Work-package evidence records | GOVERNANCE | PROPOSED | LOW | WP-11 | — | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model)<br>[S2#specification-pack-and-requirement-families](../sources/S2-2026-09-17-gpt-planning-thread.md#specification-pack-and-requirement-families) | `scripts/validate-spec.mjs` |
-| OG-GOV-005 | Reconcile README and v0.1 documents with repository state | GOVERNANCE | PROPOSED | LOW | WP-01 | — | [S4#stale-documentation](../sources/S4-2026-09-17-v0.1-repository-inspection.md#stale-documentation) | `scripts/validate-spec.mjs` |
-| OG-GOV-006 | Governance archive of Gate artifacts | GOVERNANCE | PROPOSED | LOW | WP-01 | — | [S1#named-artifacts-and-retention-guidance](../sources/S1-2026-09-17-conversation-export.md#named-artifacts-and-retention-guidance)<br>[S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) | `scripts/validate-spec.mjs` |
-| OG-REG-002 | Single registry lock manifest | CONTROL | PROPOSED | MEDIUM | WP-01 | OG-REG-001 | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/core.test.ts`<br>`tests/registry-lock.test.ts` |
-| OG-REG-003 | Ingest PROJECT_REGISTRY v1.6 | CONTROL | PROPOSED | MEDIUM | WP-01 | OG-REG-002 | [S1#current-position](../sources/S1-2026-09-17-conversation-export.md#current-position)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary)<br>[S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) | `tests/registry-lock.test.ts`<br>`tests/browser.mjs` |
+| OG-GOV-005 | Reconcile README and v0.1 documents with repository state | GOVERNANCE | IMPLEMENTED | LOW | WP-01 | — | [S4#stale-documentation](../sources/S4-2026-09-17-v0.1-repository-inspection.md#stale-documentation) | `scripts/validate-spec.mjs` |
+| OG-GOV-006 | Governance archive of Gate artifacts | GOVERNANCE | IMPLEMENTED | LOW | WP-01 | — | [S1#named-artifacts-and-retention-guidance](../sources/S1-2026-09-17-conversation-export.md#named-artifacts-and-retention-guidance)<br>[S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) | `scripts/validate-spec.mjs` |
+| OG-REG-002 | Single registry lock manifest | CONTROL | IMPLEMENTED | MEDIUM | WP-01 | OG-REG-001 | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/core.test.ts`<br>`tests/registry-lock.test.ts` |
+| OG-REG-003 | Ingest PROJECT_REGISTRY v1.6 | CONTROL | IMPLEMENTED | MEDIUM | WP-01 | OG-REG-002 | [S1#current-position](../sources/S1-2026-09-17-conversation-export.md#current-position)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary)<br>[S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) | `tests/registry-lock.test.ts`<br>`tests/browser.mjs` |
 | OG-REG-004 | Typed resource catalog derived from the registry | CONTROL | PROPOSED | LOW | WP-04 | OG-REG-002, OG-DATA-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#target-planes](../sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) | `tests/resources.test.ts` |
 | OG-REG-005 | Declared legal-entity ownership records | CONTROL | PROPOSED | LOW | WP-04 | OG-REG-004 | [S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/resources.test.ts` |
 | OG-UI-002 | OctopusG naming in the interface | MANAGEMENT | PROPOSED | LOW | WP-06 | — | [S1#octopusg-product-definition](../sources/S1-2026-09-17-conversation-export.md#octopusg-product-definition) | `tests/browser.mjs` |
@@ -194,6 +194,8 @@
 | ID | Title | Plane | Status | Risk | WP | Depends on | Sources | Tests |
 |---|---|---|---|---|---|---|---|---|
 | OG-OBS-006 | External observability integration (logs, incidents) *(provisional)* | INTEGRATION | PROPOSED | LOW | — | OG-OBS-004 | [S2#existing-products-serving-parts-of-the-need](../sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) | `TBD` |
+| OG-REG-006 | One-command registry repoint *(provisional)* | CONTROL | PROPOSED | LOW | — | OG-REG-002 | [S5#next--the-control-plane-earns-its-keep](../archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) | `TBD` |
+| OG-ACT-009 | Approval outcomes written to a governance record *(provisional)* | GOVERNANCE | PROPOSED | MEDIUM | — | OG-ACT-008 | [S5#next--the-control-plane-earns-its-keep](../archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) | `TBD` |
 | OG-CONN-016 | Evaluate third-party social and inbox backends *(provisional)* | INTEGRATION | PROPOSED | LOW | — | OG-CONN-011 | [S2#existing-products-serving-parts-of-the-need](../sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) | `TBD` |
 | OG-SEC-007 | Cloud control plane security design *(provisional)* | CONTROL | PROPOSED | CRITICAL | — | OG-ACT-008 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first)<br>[S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) | `TBD` |
 
@@ -203,7 +205,7 @@
 |---|---|---|---|
 | spec-governance | VALIDATING | B0 | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 |
 | platform-resilience | PLANNED | v0.2 | OG-SEC-001, OG-SEC-008 |
-| portfolio-registry | PLANNED | v0.2 | OG-REG-001, OG-REG-002, OG-REG-003 |
+| portfolio-registry | VALIDATING | v0.2 | OG-REG-001, OG-REG-002, OG-REG-003 |
 | resource-catalog | PLANNED | v0.2 | OG-REG-004, OG-REG-005 |
 | owner-cockpit | PLANNED | v0.2 | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006 |
 | system-maps | PLANNED | v0.2 | OG-MAP-001, OG-MAP-002, OG-MAP-003, OG-MAP-004, OG-MAP-005, OG-MAP-006 |
@@ -232,6 +234,8 @@
 | external-observability | CONCEPT | unscheduled | OG-OBS-006 |
 | third-party-comms-backends | CONCEPT | unscheduled | OG-CONN-016 |
 | cloud-control-plane | CONCEPT | unscheduled | OG-SEC-007 |
+| registry-repoint | CONCEPT | unscheduled | OG-REG-006 |
+| approval-outcome-records | CONCEPT | unscheduled | OG-ACT-009 |
 
 ## Source sections not cited by any requirement
 

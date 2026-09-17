@@ -12,6 +12,7 @@ sources:
   S2: docs/sources/S2-2026-09-17-gpt-planning-thread.md
   S3: docs/sources/S3-2026-09-17-claude-review.md
   S4: docs/sources/S4-2026-09-17-v0.1-repository-inspection.md
+  S5: docs/archive/gate-3b/PRODUCT_BACKLOG.md
 enums:
   plane:
   - MANAGEMENT
@@ -159,7 +160,7 @@ capabilities:
   - S4#registry-discrepancy
 - id: portfolio-registry
   title: Authoritative portfolio registry
-  status: PLANNED
+  status: VALIDATING
   target: v0.2
   requirements:
   - OG-REG-001
@@ -449,6 +450,22 @@ capabilities:
   - OG-SEC-007
   source:
   - S3#change-4--security-containment-first
+- id: registry-repoint
+  title: One-command registry repoint
+  status: CONCEPT
+  target: unscheduled
+  requirements:
+  - OG-REG-006
+  source:
+  - S5#next--the-control-plane-earns-its-keep
+- id: approval-outcome-records
+  title: Approval outcomes written to governance records
+  status: CONCEPT
+  target: unscheduled
+  requirements:
+  - OG-ACT-009
+  source:
+  - S5#next--the-control-plane-earns-its-keep
 requirements:
 - id: OG-GOV-001
   title: Source-cited OctopusG specification pack
@@ -539,7 +556,7 @@ requirements:
   milestone: v0.2
   work_package: WP-01
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S4#stale-documentation
@@ -555,7 +572,7 @@ requirements:
   milestone: v0.2
   work_package: WP-01
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#named-artifacts-and-retention-guidance
@@ -593,7 +610,7 @@ requirements:
   milestone: v0.2
   work_package: WP-01
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S4#registry-discrepancy
@@ -614,7 +631,7 @@ requirements:
   milestone: v0.2
   work_package: WP-01
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S1#current-position
@@ -983,6 +1000,38 @@ requirements:
   - OG-OBS-004
   acceptance:
   - Evaluate Sentry, Better Stack or Grafana as observe-only sources before any build decision.
+  acceptance_provisional: true
+  tests:
+  - TBD
+- id: OG-REG-006
+  title: One-command registry repoint
+  plane: CONTROL
+  milestone: unscheduled
+  priority: LATER
+  status: PROPOSED
+  risk: LOW
+  source:
+  - S5#next--the-control-plane-earns-its-keep
+  dependencies:
+  - OG-REG-002
+  acceptance:
+  - One owner-run command verifies a new registry file, rewrites data/registry.lock.json, runs npm run validate and reports the result without committing.
+  acceptance_provisional: true
+  tests:
+  - TBD
+- id: OG-ACT-009
+  title: Approval outcomes written to a governance record
+  plane: GOVERNANCE
+  milestone: unscheduled
+  priority: LATER
+  status: PROPOSED
+  risk: MEDIUM
+  source:
+  - S5#next--the-control-plane-earns-its-keep
+  dependencies:
+  - OG-ACT-008
+  acceptance:
+  - A completed, authenticated approval appends its outcome to a governance record inside the repository; simulated approvals never do.
   acceptance_provisional: true
   tests:
   - TBD
@@ -1948,7 +1997,7 @@ requirements:
   - docs/evidence/WP-01.md
   owner_decisions:
   - OD-02
-  notes: Owner action. Adding a remote needs an ADR because scripts/audit.mjs asserts zero remotes.
+  notes: Owner action. Adding a remote needs an ADR because scripts/audit.mjs asserts zero remotes. WP-01 found the v0.1 bundle verified but on the same disk, and the reported Block 0 bundle absent (docs/archive/MANIFEST.md); still open.
 - id: OG-AI-001
   title: Read-only registry MCP server for AI sessions
   plane: INTEGRATION

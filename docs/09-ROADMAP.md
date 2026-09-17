@@ -76,8 +76,8 @@ applies unless the owner says otherwise.
 
 | ID | Decision | Recommended default | Blocks |
 |---|---|---|---|
-| OD-01 | Where is `PROJECT_REGISTRY_v1.6.yaml` (SHA-256 `494bd33e…3286`)? It is not in the repo, which pins v1.5.1 ([S4](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)). | Owner copies it into `data/`; WP-01 verifies the hash. Until then WP-01 builds the lock on v1.5.1. | **BLOCKING** OG-REG-003 |
-| OD-02 | The repository has no remote and the registry says no backup; S1 says a verified bundle exists. Where is the recovery copy? Add a private GitHub remote? | Confirm bundle location now; decide the remote separately (it changes the audit's zero-remote rule and needs an ADR). | **BLOCKING** OG-SEC-008 |
+| OD-01 | Where is `PROJECT_REGISTRY_v1.6.yaml` (SHA-256 `494bd33e…3286`)? It is not in the repo, which pins v1.5.1 ([S4](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)). | **Resolved in WP-01:** found at `~/Desktop/artemis-website/`, hash verified, copied to `data/` and pinned by `data/registry.lock.json`. | — |
+| OD-02 | The repository has no remote and the registry says no backup; S1 says a verified bundle exists. Where is the recovery copy? Add a private GitHub remote? | Confirm bundle location now; decide the remote separately (it changes the audit's zero-remote rule and needs an ADR). WP-01 verified the v0.1 bundle but it is on the same disk; the Block 0 bundle was not found ([manifest](archive/MANIFEST.md)). | **BLOCKING** OG-SEC-008 |
 | OD-03 | Finish containment of known plaintext secrets before any connector authorization? | Yes. | **BLOCKING** v0.3 G3 |
 | OD-04 | Credential store for v0.3 collectors | macOS Keychain, referenced by label | v0.3 |
 | OD-05 | Which legal entity owns OctopusG and each product (historical map says "Great Order LLC"; registry umbrella is AgoraXAI)? | Record as declared data; no default owner assumed | OG-REG-005 display only |

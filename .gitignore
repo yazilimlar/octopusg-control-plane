@@ -6,3 +6,6 @@ work/
 *.pem
 *.key
 .DS_Store
+.claude/settings.local.json
+# Cowork session scratch (duplicate of .claude/settings.json; not project content)
+/Claude outputs/

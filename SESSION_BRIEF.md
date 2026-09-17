@@ -4,16 +4,19 @@ Read this first in every AI session. Keep it under one page.
 
 ## Where we are
 
-- Repository `~/Projects/agoraxai/control-plane`, branch `main`, one commit (`6a4954f`,
-  Control Plane v0.1), **no remote**.
-- Block 0 (architecture pack) written 2026-09-17, **awaiting owner approval (Gate G1)**.
-- The app pins registry **v1.5.1** (18 rows). v1.6 is expected but not yet in `data/` (OD-01).
+- Repository `~/Projects/agoraxai/control-plane`, **no remote**. `main` = `6a4954f` (Control
+  Plane v0.1). Block 0 (architecture pack) is `d5f1c6b` on `octopusg/block-0`, **awaiting owner
+  approval (Gate G1)**. WP-01 is on `octopusg/wp-01-registry-lock`, branched from Block 0.
+- The app pins registry **v1.6** (18 rows) through `data/registry.lock.json`; v1.5.1 stays in
+  `data/` as history. Evidence: [WP-01](docs/evidence/WP-01.md).
+- Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
+  Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
 | Current milestone | **v0.2** — 27 requirements (0 verified) |
-| Ledger | 87 requirements · 31 capabilities |
+| Ledger | 89 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |
 <!-- GENERATED:STATUS:END -->

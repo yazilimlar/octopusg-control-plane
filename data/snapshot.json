@@ -6,11 +6,11 @@
     "visibility": "private",
     "codename": "Octopus"
   },
-  "asOf": "2026-09-15",
+  "asOf": "2026-09-16",
   "sources": [
     {
-      "name": "PROJECT_REGISTRY_v1.5.1.yaml",
-      "sha256": "67e7980339a98f3291ba648fba97611c2d07cf2d4dbe33767508afff612d0071"
+      "name": "PROJECT_REGISTRY_v1.6.yaml",
+      "sha256": "494bd33e056350c15524a87fe73e9adc02bb6e8bfcd79ea4e801ec58f5b43286"
     },
     {
       "name": "GATE_2D_REPORT.md",
@@ -23,11 +23,11 @@
   ],
   "registry": {
     "schema_version": 1,
-    "registry_version": "1.5.1",
-    "generated_at": "2026-09-15",
-    "revised_by": "Claude (Opus 5) — records the Gate 3 first tranche: v0.7 relocated, and agoraxai-control-plane added as the 18th row",
+    "registry_version": "1.6",
+    "generated_at": "2026-09-16",
+    "revised_by": "Claude (Opus 5) — records Gate 3B: control plane frozen at v0.1, taxonomy split applied, display counts derived, registry v1.5 withdrawn and superseded by v1.5.1",
     "owner": "George Gokmen",
-    "status": "GATE_1B CLOSED · GATE_2A COMPLETE · GATE_2B SUPERSEDED · GATE_2C COMPLETE · GATE_2D COMPLETE · GATE_3 FIRST TRANCHE COMPLETE (A1 A2 A3 C1) · B2 BLOCKED",
+    "status": "GATE_1B CLOSED · GATE_2A COMPLETE · GATE_2B SUPERSEDED · GATE_2C COMPLETE · GATE_2D COMPLETE · GATE_3 FIRST TRANCHE COMPLETE (A1 A2 A3 C1) · GATE_3B COMPLETE (7/7) · B2 BLOCKED",
     "project_row_count": 18,
     "supersedes": [
       {
@@ -66,6 +66,31 @@
         "version": "1.5",
         "sha256": "50543c9a49830d9e78d77fa6d45e886d9f3a178ee404994dda360af5006f800c",
         "note": "WITHDRAWN before first use. Never committed; never passed validation. One security_posture description string in the agoraxai-control-plane row contained literal browser network API identifiers; esbuild inlines this registry into dist/main.js, so those literals tripped scripts/audit.mjs. v1.5.1 is byte-identical to it except for that reworded line, this entry, and the registry_version field. The v1.5 file itself is unchanged on disk and is retained beside its successor."
+      },
+      {
+        "version": "1.5.1",
+        "sha256": "67e7980339a98f3291ba648fba97611c2d07cf2d4dbe33767508afff612d0071",
+        "note": "Superseded by this file. Accurate as issued and the first registry revision to pass validation and be committed: it is the pinned input of agoraxai-control-plane v0.1 (commit 6a4954fbb5b81bac67c26ee96b0b38231c057845). It stays in that commit unchanged; this file is the portfolio record and is NOT yet the tool's pinned input."
+      }
+    ],
+    "corrections_to_v1_5": [
+      {
+        "id": "v15-withdrawn",
+        "was": "PROJECT_REGISTRY_v1.5.yaml issued as the authoritative registry",
+        "now": "WITHDRAWN before first use; superseded by v1.5.1",
+        "why": "One security_posture description string named browser network APIs literally. esbuild inlines this registry into dist/main.js, so the row describing the audit tripped the audit. Found by running npm run validate, not by reading. The audit was not loosened; the prose was reworded and the importer was tightened to reject such text by name."
+      },
+      {
+        "id": "mobile-nav-defect-retracted",
+        "was": "GATE_3B_PREPARED.md: at 390px the eight main-nav buttons compress to roughly 42px and overflow-x never engages",
+        "now": "RETRACTED — measured 797px scroll width against a 353px client width on the unfixed stylesheet; narrowest button 73px",
+        "why": ".nav-item sets white-space:nowrap, so each flex item's automatic min-width equals its min-content width and flex-shrink cannot crush it. The claim was reasoned, not measured. The regression test written against it passed on the unfixed stylesheet and was therefore vacuous; it now asserts the scroller's block padding, which does fail without the fix."
+      },
+      {
+        "id": "browser-test-locator-defect",
+        "was": "tests/browser.mjs matched the main-nav button by the accessible name 'Approval queue 22'",
+        "now": "matches the stable prefix 'Approval queue'",
+        "why": "The accessible name is computed from element contents and depends on layout: at 1512px the count badge is pushed right and Chromium inserts a space, at 390px it does not. The literal matched nothing at mobile width, so the responsive check timed out. Pre-existing and unrelated to the registry; it would have failed the browser row regardless."
       }
     ],
     "corrections_to_v1_4": [
@@ -1250,8 +1275,18 @@
         "stack": "Node >= 24 · TypeScript 5.9 · esbuild 0.25 · yaml 2.8 · Playwright 1.56 (dev only)",
         "consumes": [
           {
+            "name": "PROJECT_REGISTRY_v1.5.1.yaml",
+            "role": "pinned input — repointed from v1.4 at Gate 3B and committed in v0.1",
+            "location": "data/"
+          },
+          {
+            "name": "PROJECT_REGISTRY_v1.5.yaml",
+            "role": "withdrawn, retained unmodified for provenance; not ingested",
+            "location": "data/"
+          },
+          {
             "name": "PROJECT_REGISTRY_v1.4.yaml",
-            "role": "pinned input — MUST be repointed at v1.5",
+            "role": "superseded, retained; not ingested",
             "location": "data/"
           },
           {
@@ -1268,11 +1303,12 @@
         "ingestion_contract": {
           "note": "The importer is deliberately FAIL-CLOSED — it pins the registry filename, version and row count and throws on any mismatch. That is the property that would have caught the v1.3 row-loss regression, so it is a feature to preserve, not a rigidity to remove.",
           "pinned_in": [
-            "scripts/import-registry.mjs — filename, registry_version, project_row_count (x2), console text",
+            "scripts/import-registry.mjs — filename, registry_version, project_row_count (x2). The console banner is now DERIVED from the parsed registry, not pinned.",
             "tests/core.test.ts — filename, project_row_count, unique-id count",
             "tests/browser.mjs — five rendered-count assertions",
             "data/schema.json — registry_version const, project_row_count const, projects minItems/maxItems"
           ],
+          "added_at_gate_3b": "import-registry.mjs now REFUSES any ingested source whose text contains a literal browser network API identifier, naming the offending file. esbuild inlines data/snapshot.json into dist/main.js, so registry prose becomes bundle text and would otherwise trip scripts/audit.mjs with an opaque assertion. This is a tightening; the audit itself was not relaxed.",
           "also_pinned": "data/schema.json fixes sources at exactly 3 and approvalCandidates at exactly 22. Replacing a source document, or a checklist with a different number of '### X0 · ' headings, breaks validation independently of any row-count change."
         },
         "security_posture": {
@@ -1290,9 +1326,30 @@
           ]
         },
         "self_reference": "From v1.5 onward this tool renders a registry that contains its own row.",
+        "git_state": {
+          "head": "6a4954fbb5b81bac67c26ee96b0b38231c057845",
+          "tag": "v0.1 (freeze recorded in governance evidence, not as a git tag)",
+          "previous": "none — first commit in the repository",
+          "files_committed": 28,
+          "frozen_at": "2026-09-16T15:46:01Z",
+          "remote": "NONE",
+          "worktree": "clean — 0 non-ignored paths left unstaged or untracked"
+        },
+        "archive": {
+          "bundle": "~/Projects/_archives/2026-09-16/agoraxai-control-plane-6a4954fbb5b8-20260916T154601Z.bundle",
+          "sha256": "a0efaf6396e7aa5c96e23daf789e32c5c0813893d47680a3b831dd60e70cd114",
+          "bytes": 98716,
+          "verified": "git bundle verify run twice, plus list-heads matched against the commit"
+        },
+        "validation_at_freeze": {
+          "unit_tests": "15/15",
+          "browser_tests": "15/15",
+          "local_audit": "32 files scanned; 0 credential-pattern matches; no .env/key files; no browser network clients; loopback server; CSP blocks connections; 0 Git remotes",
+          "evidence": "~/Projects/_governance/gate3b/20260916T154601Z (27-entry manifest, self-check PASSED)"
+        },
         "blockers": [
-          "Must be repointed from v1.4 to v1.5 across four files before its next build — see ingestion_contract.pinned_in",
-          "Not covered by any bundle or backup; it has no remote and no archive entry"
+          "Repointing this tool at v1.6 is deferred: it requires four pinned edits plus a full revalidate and a second commit, and nothing in v1.6 changes the 18 rows the tool renders",
+          "No remote and no off-machine copy; the bundle is the only restore point and it lives on the same disk"
         ]
       },
       {

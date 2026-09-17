@@ -2,7 +2,7 @@
 
 ## Source snapshot
 
-`data/schema.json` documents the portable snapshot and observation contract (JSON Schema 2020-12). `src/model.ts`, `src/workflow.ts` and `src/connectors.ts` are the TypeScript contracts. The importer actively validates YAML parse errors/duplicate keys, registry version 1.4, row count 17, required project strings, unique IDs, known categories, and checklist extraction count. The JSON Schema is documentation; there is no runtime dependency on a JSON Schema validator. Tests compare the entire parsed registry with the generated snapshot.
+`data/schema.json` documents the portable snapshot and observation contract (JSON Schema 2020-12). `src/model.ts`, `src/workflow.ts` and `src/connectors.ts` are the TypeScript contracts. The importer first checks the pinned file's SHA-256 against `data/registry.lock.json`, then validates YAML parse errors/duplicate keys, the registry version and row count declared in that lock (currently `PROJECT_REGISTRY_v1.6.yaml`, version 1.6, 18 rows), required project strings, unique IDs, known categories, and checklist extraction count. The JSON Schema is documentation; there is no runtime dependency on a JSON Schema validator. Tests compare the entire parsed registry with the generated snapshot.
 
 Snapshot fields:
 
@@ -13,7 +13,7 @@ Snapshot fields:
 - `registry`: lossless parsed YAML; original per-project optional fields are retained
 - `approvalCandidates[]`: checklist ID, title, source excerpt, and source reference. No imported approval status is inferred.
 
-The registry remains exactly 17 rows. The new Control Plane is classified in snapshot metadata and is not silently inserted as an 18th registry project. `NOT_A_PROJECT` remains visible under Security artifacts.
+The registry has exactly 18 rows. Since registry v1.5.1 the Control Plane itself is a registry row (`agoraxai-control-plane`); it is also classified in snapshot metadata. `NOT_A_PROJECT` remains visible under Security artifacts.
 
 ## Normalized Project
 
