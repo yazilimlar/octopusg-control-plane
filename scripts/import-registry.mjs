@@ -1,6 +1,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {parseDocument} from 'yaml';
+import {loadObservationFile} from '../src/truth.ts';
 // The pinned registry is declared once, in data/registry.lock.json (OG-REG-002). Every
 // expected value below comes from the lock; a mismatch fails the build and names the file.
 const LOCK='data/registry.lock.json';
@@ -33,6 +34,21 @@ for(const p of registry.projects){
 }
 const approvalCandidates=[...sources[2].text.matchAll(/^### ([A-Z]\d+) · (.+)\n([\s\S]*?)(?=^### |^## |$(?![\s\S]))/gm)].map(m=>({id:m[1],title:m[2].replaceAll('**',''),evidence:m[3].trim(),source:`GATE_3_APPROVAL_CHECKLIST.md#${m[1]}`}));
 if(approvalCandidates.length<10)throw new Error('Checklist parsing lost items');
-const snapshot={schemaVersion:1,classification:{umbrella:'AGORAXAI_UMBRELLA',kind:'INTERNAL_PLATFORM',visibility:'private',codename:'Octopus'},asOf:registry.generated_at,sources:sources.map(({name,sha256})=>({name,sha256})),registry,approvalCandidates};
+// Local observation store (OG-DATA-002). The file is written by an owner-run collector
+// (WP-03); the build only reads it when it is there. No network, no clock: freshness is
+// computed at read time from the timestamps each record carries.
+const OBSERVATIONS='work/observations/latest.json';
+let observations={present:false,source:OBSERVATIONS,collector:null,collectedAt:null,records:[],rejected:[]};
+const observationText=await readFile(OBSERVATIONS,'utf8').catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+if(observationText!==null){
+ if(bannedClientApi.test(observationText))throw new Error(`${OBSERVATIONS} contains a literal browser network API identifier; it would be inlined into the bundle and trip scripts/audit.mjs. Fix the collector output instead of loosening the audit.`);
+ let parsed;
+ try{parsed=JSON.parse(observationText);}catch(error){throw new Error(`${OBSERVATIONS} is not valid JSON: ${error.message}`);}
+ const loaded=loadObservationFile(parsed,OBSERVATIONS);
+ observations={present:true,source:OBSERVATIONS,collector:loaded.collector,collectedAt:loaded.collectedAt,records:loaded.records,rejected:loaded.rejected};
+ for(const r of loaded.rejected)console.log(`Rejected observation #${r.index}: ${r.reason} (value not stored, not printed)`);
+ console.log(`Observations: ${loaded.records.length} accepted, ${loaded.rejected.length} rejected from ${OBSERVATIONS} (collector ${loaded.collector}).`);
+}
+const snapshot={schemaVersion:1,classification:{umbrella:'AGORAXAI_UMBRELLA',kind:'INTERNAL_PLATFORM',visibility:'private',codename:'Octopus'},asOf:registry.generated_at,sources:sources.map(({name,sha256})=>({name,sha256})),registry,approvalCandidates,observations};
 await writeFile('data/snapshot.json',JSON.stringify(snapshot,null,2)+'\n');
 console.log(`Parsed registry v${registry.registry_version}: ${ids.size}/${registry.project_row_count} unique rows; ${approvalCandidates.length} proposed checklist items. Source SHA-256: ${sources[0].sha256}`);

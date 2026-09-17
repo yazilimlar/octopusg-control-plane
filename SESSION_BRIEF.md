@@ -5,10 +5,14 @@ Read this first in every AI session. Keep it under one page.
 ## Where we are
 
 - Repository `~/Projects/agoraxai/control-plane`, **no remote**. `main` = `6a4954f` (Control
-  Plane v0.1). Block 0 (architecture pack) is `d5f1c6b` on `octopusg/block-0`, **awaiting owner
-  approval (Gate G1)**. WP-01 is on `octopusg/wp-01-registry-lock`, branched from Block 0.
+  Plane v0.1). Block 0 (architecture pack) is `d5f1c6b` on `octopusg/block-0`, **approved by the
+  owner as the versioned working baseline (Gate G1), amendable through ADRs**. WP-01 is on
+  `octopusg/wp-01-registry-lock`, branched from Block 0.
 - The app pins registry **v1.6** (18 rows) through `data/registry.lock.json`; v1.5.1 stays in
   `data/` as history. Evidence: [WP-01](docs/evidence/WP-01.md).
+- WP-02 added the five-kind truth model and the local observation store (`src/truth.ts`,
+  `snapshot.observations`, `work/observations/latest.json` when a collector has run) on
+  `octopusg/wp-02-truth-model`. Evidence: [WP-02](docs/evidence/WP-02.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 

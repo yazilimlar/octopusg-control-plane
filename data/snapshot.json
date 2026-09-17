@@ -1622,5 +1622,13 @@
       "evidence": "| | |\n|---|---|\n| **Class** | **PRODUCTION-AFFECTING** |\n| **Status** | **BLOCKED.** `/erp` is live (HTTP 200). A cron job runs every 4 hours against a hard-coded path. `launchd` agent present. Any copy or move must take `prime_industrial.db` **with** its `-wal` and `-shm` sidecars, or checkpoint the WAL first |\n| **Note** | The `lsof` observation showing no open handles was an *instant* reading, not evidence of dormancy |\n| **Sequencing** | **Last.** After everything else |\n\n---",
       "source": "GATE_3_APPROVAL_CHECKLIST.md#G4"
     }
-  ]
+  ],
+  "observations": {
+    "present": false,
+    "source": "work/observations/latest.json",
+    "collector": null,
+    "collectedAt": null,
+    "records": [],
+    "rejected": []
+  }
 }

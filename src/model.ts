@@ -1,8 +1,11 @@
 // Raw evidence is retained losslessly; display fields are derived explicitly below.
+import {readObservation,indexObservations,evaluateDrift,truthOfLegacy,type Observation,type TruthState,type Confidence,type Freshness,type Derivation} from './truth.ts';
 export type Raw = Record<string, any>;
+// v0.1 evidence kinds are unchanged. The five-kind truth model (OG-DATA-001) lives in
+// truth.ts; every Fact can carry its truth state alongside the legacy kind it displays with.
 export type EvidenceKind = 'observed'|'inferred'|'unknown'|'blocked';
 export type Taxonomy = 'AgoraXAI'|'AgoraXAI Atlas'|'AgoraXAI Platforms'|'Artemis'|'Products'|'Ventures'|'Labs'|'Archive'|'Security artifacts';
-export interface Fact {value:string;kind:EvidenceKind;source:string;note?:string}
+export interface Fact {value:string;kind:EvidenceKind;source:string;note?:string;truth?:TruthState;confidence?:Confidence;freshness?:Freshness;state?:string}
 export interface RiskReason {points:number;label:string;source:string}
 export interface Project {id:string;name:string;category:string;taxonomy:Taxonomy;lifecycle:string;evidence:EvidenceKind;path:Fact;repo:Fact;url:Fact;deployment:Fact;backend:Fact;blockers:string[];nextAction:Fact;risk:number;health:number;riskBand:string;reasons:RiskReason[];raw:Raw}
 export const categories:Record<string,Taxonomy>={AGORAXAI_UMBRELLA:'AgoraXAI',AGORAXAI_PLATFORM:'AgoraXAI Platforms',ARTEMIS_PLATFORM:'Artemis',PRODUCT:'Products',VENTURE:'Ventures',LAB:'Labs',ARCHIVE:'Archive',NOT_A_PROJECT:'Security artifacts'};
@@ -62,11 +65,46 @@ export function edgesFor(projects:Project[]):Edge[]{
  }
  return edges;
 }
-export interface Drift {id:string;sourceSha:Fact;sourceBranch:Fact;productionSha:Fact;status:string;note:string}
-export function driftFor(p:Project,registry:Raw):Drift{
+export interface Drift {id:string;sourceSha:Fact;sourceBranch:Fact;productionSha:Fact;status:string;note:string;derived?:Derivation;observedSha?:Fact}
+// `observations` and `now` are optional: with none supplied the v0.1 comparison is returned
+// unchanged. With an observation of the checkout's HEAD the comparison becomes a derived
+// value with its own provenance and freshness (OG-DATA-001, OG-DATA-002).
+export function driftFor(p:Project,registry:Raw,observations:Observation[]=[],now?:string):Drift{
  const r=p.raw;const s=`projects[${p.id}]`;const shared=['artemis-omni','dayos','pinarevleri','artemis-workbench','rainbow-botanics','prime-industrial-erp'].includes(p.id);
  const sha=r.git_state?.head||r.git_state?.post||r.manager_branch?.sha||r.current_local_paths?.find((x:Raw)=>x.head)?.head;
  const branch=r.git_state?.branch||r.manager_branch?.ref||r.current_local_paths?.find((x:Raw)=>x.head)?.branch;
  const prod=shared?registry.production_state.serving_deployment.git_commit_sha:null;
- return {id:p.id,sourceSha:fact(sha,s+'.git_state / manager_branch / current_local_paths'),sourceBranch:fact(branch,s),productionSha:fact(prod,shared?'production_state.serving_deployment.git_commit_sha':s),status:sha&&prod?(sha===prod?'Same SHA':'Different SHAs'):'Unknown',note:shared?'Production SHA belongs to the shared Artemis host. Source is a recorded local or feature branch, not a designated release target. Different SHAs do not establish ancestry, lag, or approval to deploy.':'Production mapping unavailable. No live query performed.'};
+ const drift:Drift={id:p.id,sourceSha:fact(sha,s+'.git_state / manager_branch / current_local_paths'),sourceBranch:fact(branch,s),productionSha:fact(prod,shared?'production_state.serving_deployment.git_commit_sha':s),status:sha&&prod?(sha===prod?'Same SHA':'Different SHAs'):'Unknown',note:shared?'Production SHA belongs to the shared Artemis host. Source is a recorded local or feature branch, not a designated release target. Different SHAs do not establish ancestry, lag, or approval to deploy.':'Production mapping unavailable. No live query performed.'};
+ if(!observations.length||!now)return drift;
+ const observed=indexObservations(observations).get(`${p.id}|head_sha`);
+ if(!observed)return drift;
+ const read=observedFact(observed,s+'.git_state',now);
+ return {...drift,observedSha:read,derived:evaluateDrift({value:sha??null,source:drift.sourceSha.source},observed,now)};
 }
+// ---------- observations merged into the read model (OG-DATA-002)
+// Registry facts stay exactly as v0.1 built them until an observation covers the same field.
+const observedFields:Record<string,keyof Project>={path:'path',repo:'repo',url:'url',deployment:'deployment',backend:'backend'};
+const legacyKindOf=(truth:TruthState):EvidenceKind=>truth==='observed'||truth==='executed'?'observed':truth==='unknown'||truth==='blocked'?truth:'inferred';
+export function observedFact(o:Observation,fallbackSource:string,now:string):Fact{
+ const read=readObservation(o,fallbackSource,now);
+ return {value:textValue(read.value),kind:legacyKindOf(read.truth),source:read.source,note:read.reason,truth:read.truth,confidence:read.confidence,freshness:read.freshness,state:read.state};
+}
+export function applyObservations(projects:Project[],observations:Observation[],now:string):Project[]{
+ if(!observations.length)return projects;
+ const index=indexObservations(observations);
+ return projects.map(p=>{
+  let changed=false;const next:Project={...p};
+  for(const [field,key] of Object.entries(observedFields)){
+   const o=index.get(`${p.id}|${field}`);
+   if(!o)continue;
+   const declared=p[key] as Fact;
+   const merged=observedFact(o,declared.source,now);
+   (next[key] as Fact)={...merged,note:merged.note??`Declared: ${declared.value}`};
+   changed=true;
+  }
+  return changed?next:p;
+ });
+}
+// Every Fact can state its truth: registry facts are declared (or observed when the registry
+// itself recorded verification); calculated facts are derived. Nothing is upgraded silently.
+export const truthOfFact=(f:Fact,calculated=false):TruthState=>f.truth??truthOfLegacy(f.kind,calculated);

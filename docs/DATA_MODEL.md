@@ -12,8 +12,64 @@ Snapshot fields:
 - `sources[]`: basename and SHA-256 of each of the three copied source documents
 - `registry`: lossless parsed YAML; original per-project optional fields are retained
 - `approvalCandidates[]`: checklist ID, title, source excerpt, and source reference. No imported approval status is inferred.
+- `observations`: the local observation store (see below). Always present; `present: false` with empty `records` until a collector has run.
 
 The registry has exactly 18 rows. Since registry v1.5.1 the Control Plane itself is a registry row (`agoraxai-control-plane`); it is also classified in snapshot metadata. `NOT_A_PROJECT` remains visible under Security artifacts.
+
+## Truth model (v0.2, OG-DATA-001)
+
+Every value can state how it is known. The five kinds come from
+[S1](sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model); `unknown` and
+`blocked` stay first-class, so absence of evidence is never upgraded to evidence.
+
+| Truth | Meaning | Where it comes from | v0.1 kind it displays with |
+|---|---|---|---|
+| `declared` | Intended configuration in the registry | registry rows | `inferred` |
+| `observed` | Measured from a system or device, with `observed_at` | registry-recorded verification (v0.1) or an observation record (v0.2) | `observed` |
+| `derived` | Calculated from declared and observed values (risk, health, drift) | `src/model.ts`, `evaluateDrift` | `inferred` |
+| `approved` | Action authorized by owner or policy | approval simulation only, until v0.10 | — |
+| `executed` | Action performed, with result and evidence | nothing produces it yet | — |
+| `unknown` / `blocked` | Evidence absent, or collection not permitted | anywhere | unchanged |
+
+v0.1 evidence values keep their meaning: `truthOfLegacy` in `src/truth.ts` maps `observed` →
+`observed`, `inferred` → `declared` (or `derived` when the value is calculated), and leaves
+`unknown` / `blocked` alone. No v0.1 value was renamed and no v0.1 test changed.
+
+**Confidence** is derived, never authored: `observed`/`executed` → high, `approved`/`declared`
+→ medium, `derived` → low, `unknown`/`blocked` → none; a stale observation drops one step, and a
+derived value takes the weakest of its inputs. It is a prioritization aid, not a probability.
+
+## Observation store (v0.2, OG-DATA-002)
+
+An owner-run collector (WP-03) writes `work/observations/latest.json`; `work/` is git-ignored, so
+observations are never committed. The build reads that file **when it exists** and copies the
+accepted records into `snapshot.observations`. Nothing is fetched, at build time or in the browser.
+
+```json
+{"schemaVersion": 1, "collector": "scripts/observe.mjs", "collectedAt": "2026-09-17T11:00:00Z",
+ "observations": [{"projectId": "dayos", "field": "head_sha", "value": "1f9d2346…",
+   "truth": "observed", "source": {"adapter": "local-git", "resource": "~/Projects/dayos"},
+   "observedAt": "2026-09-17T11:00:00Z", "collectedAt": "2026-09-17T11:00:00Z",
+   "expiresAt": "2026-09-18T11:00:00Z", "status": "ok"}]}
+```
+
+- **Provenance** is mandatory: `source.adapter` (`github`, `vercel`, `supabase`, `http-uptime`,
+  `mac-status`, `local-git`) plus a resource identifier, displayed as `adapter:resource`.
+- **Validation is fail-closed.** A file that is not an observation file throws and stops the
+  build; an individual record that is malformed, uses an unknown adapter or claims `approved` or
+  `executed` truth is rejected with a value-free reason and recorded in
+  `snapshot.observations.rejected`. One bad record never poisons the build.
+- **Secret-shaped values are rejected before persistence**, at any depth of the value, using the
+  credential shapes `scripts/audit.mjs` scans for. The audit itself is never loosened.
+- **Freshness is read-time, not build-time.** Records carry `observedAt`, `collectedAt` and
+  `expiresAt`; freshness is computed when the value is read, against a caller-supplied `now`.
+  Absent → `Not collected`; `status: error` → `Error: <reason>`; past `expiresAt` → `Stale · …`
+  with confidence downgraded. The snapshot therefore stays byte-deterministic.
+- **Derivation is deterministic**: `evaluateDrift(declared, observation, now)` is a pure function.
+  An absent or non-ok observation yields `unknown` — never a match and never a drift.
+- **Merging is additive**: a declared registry fact is replaced only where an observation covers
+  that exact project and field, and the declared value is kept in the fact's note. With no
+  observations the read model is identical to v0.1's.
 
 ## Normalized Project
 
