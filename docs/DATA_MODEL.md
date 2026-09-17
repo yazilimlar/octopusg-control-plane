@@ -123,6 +123,22 @@ where the owner declares that exact relationship, and every product without such
 reports `undeclared` with truth `unknown`. An entity is never a graph node and never an edge
 endpoint, and no entity is defaulted, inherited from a platform parent or inferred from a name.
 
+### Declared versus observed drift (OG-OBS-002)
+
+`src/drift.ts` compares three declared fields — checkout path, branch and remote presence — with
+the latest local observation for that product, and reports one of four states:
+
+| Status | When | Meaning shown to the reader |
+|---|---|---|
+| `match` | a fresh, successful observation equals the declared value | Declared and observed agree |
+| `differs` | a fresh, successful observation differs | Declared and observed disagree; neither is assumed correct |
+| `stale` | the observation has passed its `expiresAt` | Agreement cannot be claimed |
+| `unknown` | no observation, a failed or blocked collection, or nothing declared | Not enough evidence to compare |
+
+The checks run in that order, so no failure path can fall through to `match`, and a project's
+summary takes the **weakest** of its rows rather than the best. Every badge carries the same
+information as text in its `aria-label`: truth kind, freshness, observation time and confidence.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.

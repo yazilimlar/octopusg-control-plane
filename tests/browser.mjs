@@ -40,7 +40,37 @@ await check('generated map: lanes, colour-by toggle, presets and non-colour edge
  assert.ok(await page.locator('.edge[data-edge="checked_out_at"]').count()>0);
  await page.getByRole('button',{name:'Reset map'}).click();
  assert.equal(await page.locator('[data-node]').count(),rows,'reset returns to the portfolio preset');});
-await check('drift compares recorded source and production SHAs',async()=>{await nav('Deployment drift');assert.equal(await page.locator('tbody tr').count(),rows);const dayos=page.locator('tbody tr').filter({has:page.getByRole('button',{name:'DayOS',exact:true})});assert.match(await dayos.innerText(),/1f9d2346e8ca/);assert.match(await dayos.innerText(),/dd623e07da24/);assert.match(await dayos.innerText(),/Different SHAs/i);});
+await check('drift compares recorded source and production SHAs',async()=>{await nav('Deployment drift');assert.equal(await page.locator('#results tr').count(),rows);const dayos=page.locator('#results tr').filter({has:page.getByRole('button',{name:'DayOS',exact:true})});assert.match(await dayos.innerText(),/1f9d2346e8ca/);assert.match(await dayos.innerText(),/dd623e07da24/);assert.match(await dayos.innerText(),/Different SHAs/i);});
+await check('declared-versus-observed drift never reports agreement without fresh evidence',async()=>{await nav('Deployment drift');
+ const table=page.locator('#local-drift');
+ assert.equal(await table.locator('tbody tr').count(),rows,'every row is compared');
+ const row=table.locator('[data-drift-row="agoraxai-control-plane"]');
+ for(const field of ['path','branch','remote']){
+  const cell=row.locator(`[data-drift-field="${field}"]`);
+  assert.match(await cell.innerText(),/declared:/);
+  assert.match(await cell.innerText(),/observed: not collected|observed: /);
+  const label=await cell.locator('.badge-row').getAttribute('aria-label');
+  assert.match(label,/(match|differs|stale|unknown) —/,'each cell states its comparison in words');
+  assert.match(label,/confidence (high|medium|low|none)/,'evidence quality is available as text');
+ }
+ const summary=await row.locator('[data-drift-summary]').getAttribute('data-drift-summary');
+ assert.equal(summary,'unknown','with no observation collected the summary is unknown, never a match');
+ assert.match(await table.innerText(),/No observation has been collected/);
+ assert.equal(await page.locator('#local-drift [data-drift-summary="match"]').count(),0,'nothing claims agreement without evidence');});
+await check('visible naming is OctopusG while storage and schema keys are untouched',async()=>{
+ assert.match(await page.title(),/^OctopusG — AgoraXAI Portfolio Operating System$/);
+ assert.match(await page.locator('.brand').innerText(),/OctopusG/);
+ assert.match(await page.locator('.edition').innerText(),/OCTOPUSG/);
+ assert.match(await page.locator('footer').innerText(),/OctopusG — AgoraXAI Portfolio Operating System/);
+ const storage=await page.evaluate(()=>Object.keys(localStorage));
+ assert.ok(storage.every(k=>!k.startsWith('agoraxai.octopusg.')),'no renamed storage key is created');
+ await nav('Approval queue');
+ await page.locator('[data-workflow="A1"]').click();
+ await page.getByRole('dialog').getByRole('textbox').fill('Naming compatibility check');
+ await page.getByRole('button',{name:'Save simulated transition'}).click();
+ assert.ok((await page.evaluate(()=>Object.keys(localStorage))).includes('agoraxai.octopus.workflow.v1'),'the v0.1 storage key still carries saved state');
+ await page.getByRole('button',{name:'Reset simulation',exact:true}).click();
+ await page.getByRole('button',{name:'Reset local simulation',exact:true}).click();});
 await check('simulated approval persists and logs without execution',async()=>{await nav('Approval queue');await page.locator('[data-workflow="A1"]').click();await page.getByRole('dialog').getByRole('textbox').fill('Browser test simulated evidence only');await page.getByRole('button',{name:'Save simulated transition'}).click();assert.match(await page.locator('tbody tr').first().innerText(),/EVIDENCE/);await page.reload();await nav('Approval queue');assert.match(await page.locator('tbody tr').first().innerText(),/EVIDENCE/);await nav('Timeline');assert.match(await page.locator('main').innerText(),/Browser test simulated evidence only/);});
 await check('reset simulation restores source proposals',async()=>{await nav('Approval queue');await page.getByRole('button',{name:'Reset simulation',exact:true}).click();await page.getByRole('button',{name:'Reset local simulation',exact:true}).click();assert.match(await page.locator('tbody tr').first().innerText(),/PROPOSED/);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});

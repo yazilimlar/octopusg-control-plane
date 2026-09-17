@@ -170,7 +170,7 @@ capabilities:
   - S1#core-capabilities-discussed
 - id: resource-catalog
   title: Products and their resources
-  status: VALIDATING
+  status: AVAILABLE
   target: v0.2
   requirements:
   - OG-REG-004
@@ -179,7 +179,7 @@ capabilities:
   - S2#target-planes
 - id: owner-cockpit
   title: Owner cockpit screens
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-UI-001
@@ -653,7 +653,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: LOW
   source:
   - S1#core-capabilities-discussed
@@ -674,7 +674,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: LOW
   source:
   - S3#historical-map-critique
@@ -708,7 +708,7 @@ requirements:
   milestone: v0.2
   work_package: WP-06
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#octopusg-product-definition
@@ -726,7 +726,7 @@ requirements:
   milestone: v0.2
   work_package: WP-06
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#truth-and-evidence-model
@@ -811,7 +811,7 @@ requirements:
   milestone: v0.2
   work_package: WP-04
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: MEDIUM
   source:
   - S2#architecture-map-updates-from-connections
@@ -830,7 +830,7 @@ requirements:
   milestone: v0.2
   work_package: WP-05
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: LOW
   source:
   - S2#architecture-map-updates-from-connections
@@ -850,7 +850,7 @@ requirements:
   milestone: v0.2
   work_package: WP-05
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: LOW
   source:
   - S1#core-capabilities-discussed
@@ -924,7 +924,7 @@ requirements:
   milestone: v0.2
   work_package: WP-06
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#truth-and-evidence-model

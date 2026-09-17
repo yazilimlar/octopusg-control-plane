@@ -21,13 +21,18 @@ Read this first in every AI session. Keep it under one page.
   as owner-confirmed declared data and owns nothing that is not separately declared.
   Evidence: [WP-04](docs/evidence/WP-04.md). WP-05 then generated the lane-layout map with
   colour-by and preset controls (`src/graphview.ts`). Evidence: [WP-05](docs/evidence/WP-05.md).
+  **Batch A is accepted by the owner**; its five requirements are VERIFIED.
+- Batch B is on `octopusg/batch-b-status-devices`: WP-06 adds declared-versus-observed drift,
+  truth and freshness badges and the visible OctopusG naming (OD-08: UI text only — the schema
+  constant and the `agoraxai.octopus.workflow.v1` key are unchanged).
+  Evidence: [WP-06](docs/evidence/WP-06.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 27 requirements (5 verified) |
+| Current milestone | **v0.2** — 27 requirements (10 verified) |
 | Ledger | 89 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |

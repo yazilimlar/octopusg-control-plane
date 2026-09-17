@@ -1,4 +1,4 @@
-# OctopusG · AgoraXAI Control Plane
+# OctopusG — AgoraXAI Portfolio Operating System
 
 **OctopusG** (OctopusGinormous) is the AgoraXAI Portfolio Operating System: a private, local-only,
 read-only cockpit for the portfolio, built in `~/Projects/agoraxai/control-plane`. Its technical
@@ -46,7 +46,7 @@ The package lock fixes dependency resolution. Installation requires npm registry
 - **Portfolio:** all 18 registry rows, including 17 project records and the explicitly classified non-project security artifact. Search includes IDs, names, paths and nested source evidence. Taxonomy, lifecycle, blocker, risk and evidence filters intersect.
 - **Matrix:** lifecycle, intended/canonical path, recorded locations, repository, intended URL, shared host, deployment, backend, blockers and next action. Wide tables scroll horizontally.
 - **Ecosystem:** 18 keyboard-focusable nodes; focus, relation filtering, zoom/reset, and the evidence list. Atlas and Artemis are peers. Declared consumers are inferred runtime relationships; only explicit parent fields yield ownership links. Isolated nodes do not prove absence of dependencies.
-- **Deployment drift:** source branch/SHA versus the shared Artemis production SHA where supported. Different SHAs do not establish ancestry or release lag. Unknown production remains unknown.
+- **Deployment drift:** two tables. The recorded comparison (source branch/SHA versus the shared Artemis production SHA where supported), and **declared versus locally observed** — checkout path, branch and remote presence against the latest local observation, reporting match, differs, stale or unknown. A missing, failed or expired observation is never reported as agreement. Different SHAs do not establish ancestry or release lag. Unknown production remains unknown.
 - **Approval queue:** all 22 Gate 3 proposals, source excerpts, sequential simulation states, evidence notes, local persistence, reset and export.
 - **Timeline:** recorded gate history, completed Gate 2C actions, evidence-integrity caveat, and separately labelled local simulation events.
 - **KPIs:** transparent registry calculations and seven unavailable operational metrics with proposed definitions, owners, windows, and unagreed targets.
