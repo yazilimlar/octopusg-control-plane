@@ -83,6 +83,7 @@ No live facts are collected. Exact canonical paths remain unknown when the regis
 
 - `npm run validate`: lock-checked import, strict TypeScript check, static bundle, unit tests (15 domain tests plus the registry-lock tests), local isolation/credential-pattern audit.
 - `npm run validate:spec`: requirements ledger, sources, Markdown links and generated traceability.
+- `npm run observe`: owner-run, read-only Git observation of the repositories listed in [`config/observe.allowlist.json`](config/observe.allowlist.json). Local only, no network; writes `work/observations/latest.json`, which the next `npm run build` folds into the app.
 - `npm run test:browser`: end-to-end checks with local Google Chrome through Playwright. Start the app first. Browser artifacts are written to ignored `work/`. Chrome is only required for this optional validation command.
 - [Product constitution](docs/00-PRODUCT-CONSTITUTION.md) · [System architecture](docs/01-SYSTEM-ARCHITECTURE.md) · [Requirements](docs/requirements/REQUIREMENTS.yaml) · [Roadmap](docs/09-ROADMAP.md) · [Operating model](docs/10-OPERATING-MODEL.md)
 - [v0.1 architecture](docs/ARCHITECTURE.md)

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "$comment": "OG-SEC-002. Trust zones, action tiers and connection levels as data. Declared policy only: OctopusG v0.2 executes nothing and every approval is a labelled simulation. Source: docs/06-SECURITY-AND-APPROVALS.md.",
+  "trustZones": [
+    {"id": "personal", "label": "Owner's Mac", "enrolled": true, "localAccess": "observe", "maxTier": "T2",
+     "notes": "Enrolled. Read-only Git observation in v0.2; allowlisted local actions are deferred to v0.5."},
+    {"id": "personal-later", "label": "Owner's personal Windows laptop", "enrolled": false, "localAccess": "none", "maxTier": "none",
+     "notes": "Enrolled only after the agent contract is stable (v0.5). Nothing runs on it now."},
+    {"id": "employer", "label": "Company-owned laptop", "enrolled": false, "localAccess": "none", "maxTier": "none",
+     "notes": "BROWSER_ONLY / UNMANAGED / NO_LOCAL_ACCESS. No agent, scan, credential or employer-system change without explicit written employer authorization."},
+    {"id": "cloud", "label": "Provider accounts", "enrolled": false, "localAccess": "none", "maxTier": "none",
+     "notes": "Scoped credentials, level ceilings and action tiers arrive with the first connector in v0.3."}
+  ],
+  "levels": [
+    {"level": 0, "name": "declared", "meaning": "Recorded in the registry; nothing is connected."},
+    {"level": 1, "name": "observe", "meaning": "Read-only observation of state."},
+    {"level": 2, "name": "prepare", "meaning": "Draft or plan a change; nothing is applied."},
+    {"level": 3, "name": "approved action", "meaning": "Apply a change for which an approval is recorded."},
+    {"level": 4, "name": "controlled automation", "meaning": "Named action with a fixed template, T0-T2 only."}
+  ],
+  "tiers": [
+    {"id": "T0", "name": "Observe", "examples": "Git status, deployment health, message arrival", "minLevel": 1, "maxLevel": 4, "approval": "automatic"},
+    {"id": "T1", "name": "Prepare", "examples": "Email draft, migration plan, config diff", "minLevel": 2, "maxLevel": 4, "approval": "automatic"},
+    {"id": "T2", "name": "Reversible", "examples": "Run tests, create branch, restart preview", "minLevel": 3, "maxLevel": 4, "approval": "one-click approval"},
+    {"id": "T3", "name": "Production", "examples": "Database migration, deployment promotion", "minLevel": 3, "maxLevel": 3, "approval": "explicit approval and preview"},
+    {"id": "T4", "name": "Critical", "examples": "DNS, secrets, deletion, money", "minLevel": 3, "maxLevel": 3, "approval": "strong confirmation, verified backup and audit"}
+  ]
+}

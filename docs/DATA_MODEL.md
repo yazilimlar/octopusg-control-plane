@@ -41,8 +41,10 @@ derived value takes the weakest of its inputs. It is a prioritization aid, not a
 
 ## Observation store (v0.2, OG-DATA-002)
 
-An owner-run collector (WP-03) writes `work/observations/latest.json`; `work/` is git-ignored, so
-observations are never committed. The build reads that file **when it exists** and copies the
+An owner-run collector writes `work/observations/latest.json`; `work/` is git-ignored, so
+observations are never committed. Since WP-03 that collector is `npm run observe`
+([07 §1](07-DEVICE-AGENT-SPEC.md#1-v02--local-git-observer-a-cli-not-an-agent--built-in-wp-03)),
+which reads only the repositories listed in `config/observe.allowlist.json`. The build reads that file **when it exists** and copies the
 accepted records into `snapshot.observations`. Nothing is fetched, at build time or in the browser.
 
 ```json

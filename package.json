@@ -4,6 +4,7 @@
   "engines": {"node": ">=24"},
   "scripts": {
     "import:registry": "node scripts/import-registry.mjs",
+    "observe": "node scripts/observe.mjs",
     "typecheck": "tsc --noEmit",
     "build": "npm run import:registry && npm run typecheck && node scripts/build.mjs",
     "start": "node scripts/serve.mjs",

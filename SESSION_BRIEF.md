@@ -11,15 +11,18 @@ Read this first in every AI session. Keep it under one page.
 - The app pins registry **v1.6** (18 rows) through `data/registry.lock.json`; v1.5.1 stays in
   `data/` as history. Evidence: [WP-01](docs/evidence/WP-01.md).
 - WP-02 added the five-kind truth model and the local observation store (`src/truth.ts`,
-  `snapshot.observations`, `work/observations/latest.json` when a collector has run) on
-  `octopusg/wp-02-truth-model`. Evidence: [WP-02](docs/evidence/WP-02.md).
+  `snapshot.observations`) on `octopusg/wp-02-truth-model` and is **accepted by the owner at
+  Gate G2** (`d1b8f8b`). Evidence: [WP-02](docs/evidence/WP-02.md).
+- WP-03 added the owner-run local Git observer (`npm run observe`), the declared device record
+  and the trust-zone / tier / level policy (`config/`, `src/observe.ts`, `src/devices.ts`,
+  `src/policy.ts`) on `octopusg/wp-03-local-observer`. Evidence: [WP-03](docs/evidence/WP-03.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 27 requirements (0 verified) |
+| Current milestone | **v0.2** — 27 requirements (2 verified) |
 | Ledger | 89 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |

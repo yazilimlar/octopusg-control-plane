@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "$comment": "OG-DEV-001. Declared devices only: nothing here is measured from a machine, and no serial number, MAC address, hostname, user name or IP address is ever recorded. Aliases are chosen by the owner.",
+  "devices": [
+    {
+      "id": "personal-mac",
+      "alias": "Owner's Mac",
+      "ownership": "personal",
+      "trustZone": "personal",
+      "enrolled": true,
+      "capabilities": ["read_git_status"],
+      "prohibited": ["read_secrets", "arbitrary_shell", "unattended_deletion", "network_access"],
+      "accessModel": "ENROLLED / OWNER_RUN_ONLY / READ_ONLY",
+      "notes": "Runs npm run observe by hand. No schedule, no background process."
+    },
+    {
+      "id": "personal-windows",
+      "alias": "Personal Windows laptop",
+      "ownership": "personal",
+      "trustZone": "personal-later",
+      "enrolled": false,
+      "capabilities": [],
+      "prohibited": ["read_secrets", "arbitrary_shell", "unattended_deletion", "network_access"],
+      "accessModel": "NOT_ENROLLED / NO_LOCAL_ACCESS",
+      "notes": "Enrolment waits for the agent contract in v0.5."
+    },
+    {
+      "id": "company-laptop",
+      "alias": "Company laptop",
+      "ownership": "employer",
+      "trustZone": "employer",
+      "enrolled": false,
+      "capabilities": [],
+      "prohibited": ["agent_enrolment", "local_scan", "credential_use", "employer_system_change", "read_git_status"],
+      "accessModel": "BROWSER_ONLY / UNMANAGED / NO_LOCAL_ACCESS",
+      "notes": "Out of scope by policy. Nothing may run on it without explicit written employer authorization."
+    }
+  ]
+}

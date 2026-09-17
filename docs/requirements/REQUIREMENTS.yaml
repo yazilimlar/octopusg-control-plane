@@ -204,7 +204,7 @@ capabilities:
   - S1#core-capabilities-discussed
 - id: truth-and-provenance
   title: Declared / observed / derived truth with freshness
-  status: VALIDATING
+  status: AVAILABLE
   target: v0.2
   requirements:
   - OG-DATA-001
@@ -213,7 +213,7 @@ capabilities:
   - S1#truth-and-evidence-model
 - id: local-git-observation
   title: Local repository observation and drift
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-OBS-001
@@ -223,7 +223,7 @@ capabilities:
   - S1#octopusg-v02-boundary
 - id: device-registry
   title: Devices and trust zones
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-DEV-001
@@ -901,7 +901,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S1#octopusg-v02-boundary
@@ -1041,7 +1041,7 @@ requirements:
   milestone: v0.2
   work_package: WP-02
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: MEDIUM
   source:
   - S1#truth-and-evidence-model
@@ -1058,7 +1058,7 @@ requirements:
   milestone: v0.2
   work_package: WP-02
   priority: MVP
-  status: IMPLEMENTED
+  status: VERIFIED
   risk: LOW
   source:
   - S1#truth-and-evidence-model
@@ -1493,7 +1493,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S2#multi-device-control
@@ -1876,7 +1876,7 @@ requirements:
   milestone: v0.2
   work_package: WP-03
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: HIGH
   source:
   - S2#database-and-configuration-changes
