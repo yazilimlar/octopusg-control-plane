@@ -11,7 +11,9 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "test:browser": "node tests/browser.mjs",
     "audit:local": "node scripts/audit.mjs",
-    "validate": "npm run build && npm test && npm run audit:local"
+    "validate": "npm run build && npm test && npm run audit:local",
+    "validate:spec": "node scripts/validate-spec.mjs",
+    "spec:write": "node scripts/validate-spec.mjs --write"
   },
   "devDependencies": {"typescript": "~5.9.3", "esbuild": "~0.25.12", "yaml": "~2.8.2", "@types/node": "^24.10.0", "@playwright/test": "~1.56.1"}
 }

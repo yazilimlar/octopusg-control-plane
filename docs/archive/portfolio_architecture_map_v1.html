@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio Architecture Map v1</title>
+<style>
+:root {
+  --bg:#08111b; --panel:#0d1a27; --panel2:#102131; --line:#294257; --text:#e9f1f7;
+  --muted:#8fa5b8; --green:#56d364; --amber:#f0b429; --red:#ff5d5d; --blue:#4ea1ff;
+  --purple:#b580ff; --cyan:#35d0ba; --gray:#7c8a96;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#071019,#0b1622);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(8,17,27,.94);backdrop-filter:blur(12px);z-index:10}
+h1{font-size:19px;margin:0} .sub{color:var(--muted);font-size:12px;margin-top:4px}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid var(--line);background:#102131;color:var(--text);border-radius:9px;padding:8px 10px;cursor:pointer}
+button.active{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+main{display:grid;grid-template-columns:minmax(0,1fr) 330px;min-height:calc(100vh - 76px)}
+#canvasWrap{overflow:auto;padding:18px}
+svg{min-width:1800px;width:100%;height:980px;background:
+radial-gradient(circle at 30% 20%,rgba(78,161,255,.08),transparent 28%),
+radial-gradient(circle at 70% 75%,rgba(181,128,255,.06),transparent 25%),
+#09131e;border:1px solid var(--line);border-radius:16px}
+aside{border-left:1px solid var(--line);padding:18px;background:rgba(13,26,39,.92);overflow:auto}
+.panel{border:1px solid var(--line);background:var(--panel2);border-radius:14px;padding:14px;margin-bottom:14px}
+.panel h2{font-size:14px;margin:0 0 10px} .panel p,.panel li{font-size:12px;line-height:1.55;color:#c5d2dc}
+.kv{display:grid;grid-template-columns:88px 1fr;gap:7px;font-size:12px;margin:6px 0}
+.kv span:first-child{color:var(--muted)}
+.node{cursor:pointer;transition:.2s} .node:hover .node-box{filter:brightness(1.18)}
+.node-box{fill:#102131;stroke:#35526a;stroke-width:1.4}
+.node-title{fill:var(--text);font-size:13px;font-weight:700}
+.node-type{fill:var(--muted);font-size:10px}
+.edge{stroke:#42657f;stroke-width:1.5;fill:none;opacity:.78;marker-end:url(#arrow)}
+.edge-label{fill:#8fa5b8;font-size:9px}
+.status-critical .node-box{stroke:var(--red)} .status-high .node-box{stroke:var(--amber)}
+.status-medium .node-box{stroke:var(--blue)} .status-active .node-box{stroke:var(--green)}
+.status-target .node-box{stroke:var(--cyan)} .status-planned .node-box{stroke:var(--purple)}
+.status-unresolved .node-box{stroke:#c7a8ff;stroke-dasharray:5 4} .status-low .node-box{stroke:var(--gray)}
+.group-label{fill:#6f8ca3;font-size:11px;font-weight:700;letter-spacing:.12em}
+.legend{display:flex;flex-wrap:wrap;gap:10px} .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:5px}
+.pipeline-step{padding:7px 9px;border-left:2px solid var(--blue);margin:6px 0;background:#0c1925;border-radius:0 7px 7px 0}
+.hidden{display:none}
+@media(max-width:900px){main{grid-template-columns:1fr} aside{border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Portfolio Architecture Map</h1><div class="sub">Interactive baseline · HTML + SVG + embedded JSON</div></div>
+  <div class="controls">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="critical">Critical</button>
+    <button data-filter="projects">Projects</button>
+    <button data-filter="ai">AI</button>
+    <button data-filter="cloud">Cloud</button>
+    <button data-filter="local">Local</button>
+  </div>
+</header>
+<main>
+<section id="canvasWrap">
+<svg id="map" viewBox="0 0 1840 980" role="img" aria-label="Portfolio architecture system map">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#42657f"></path>
+  </marker>
+</defs>
+<text x="70" y="42" class="group-label">LOCAL SYSTEM</text>
+<text x="310" y="42" class="group-label">AI & KNOWLEDGE</text>
+<text x="800" y="42" class="group-label">CLOUD & SERVICES</text>
+<text x="1170" y="42" class="group-label">PROJECTS & PRODUCTS</text>
+<text x="1640" y="42" class="group-label">DOMAINS</text>
+<g id="edges"></g><g id="nodes"></g>
+</svg>
+</section>
+<aside>
+  <div class="panel">
+    <h2>Selected node</h2>
+    <div id="selected"><p>Click any node to inspect its role, status and dependencies.</p></div>
+  </div>
+  <div class="panel">
+    <h2>Priority pipelines</h2>
+    <div id="pipelines"></div>
+  </div>
+  <div class="panel">
+    <h2>Legend</h2>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--red)"></i>Critical</span>
+      <span><i class="dot" style="background:var(--amber)"></i>High</span>
+      <span><i class="dot" style="background:var(--blue)"></i>Medium</span>
+      <span><i class="dot" style="background:var(--green)"></i>Active</span>
+      <span><i class="dot" style="background:var(--purple)"></i>Planned</span>
+      <span><i class="dot" style="background:var(--cyan)"></i>Target</span>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Architecture rule</h2>
+    <p><strong>JSON is the source of truth.</strong> The SVG is rendered from node and edge data. Claude can update facts later without redesigning the visual.</p>
+  </div>
+</aside>
+</main>
+<script>
+const meta = {"title": "Portfolio Architecture Map", "version": "1.0", "status": "Initial architecture baseline", "generated_from": ["Claude portfolio audit", "Claude containment assessment", "Current conversation architecture decisions"], "remote_state_note": "Repository ahead/behind claims remain based on local remote-tracking state until refreshed."};
+const nodes = [{"id": "owner", "label": "George / Great Order LLC", "type": "owner", "status": "control", "group": "governance", "x": 620, "y": 420, "details": "Portfolio owner, decision authority, risk approval, product vision."}, {"id": "mac", "label": "Mac Workspace", "type": "device", "status": "critical", "group": "local", "x": 120, "y": 110, "details": "Desktop, Documents, Library scripts, LaunchAgents, local databases, worktrees and media pipelines."}, {"id": "keychain", "label": "macOS Keychain", "type": "security", "status": "target", "group": "local", "x": 120, "y": 310, "details": "Target secret store for Plaid, Gmail, Squarespace and ERP session credentials."}, {"id": "backup", "label": "Verified Backups", "type": "storage", "status": "target", "group": "local", "x": 120, "y": 520, "details": "SQLite-consistent backups, off-machine copies, restore procedures."}, {"id": "claude", "label": "Claude", "type": "ai", "status": "active", "group": "ai", "x": 360, "y": 100, "details": "Planning, repository intelligence, local audits and controlled execution."}, {"id": "claudecode", "label": "Claude Code", "type": "ai_tool", "status": "active", "group": "ai", "x": 360, "y": 220, "details": "Local operator with skills: repo-intelligence, environment-security, deployment-intelligence, portfolio-registry, workspace-governance, obsidian-project-os."}, {"id": "chatgpt", "label": "ChatGPT", "type": "ai", "status": "active", "group": "ai", "x": 360, "y": 340, "details": "Architecture design, prompt governance, artifact design and decision support."}, {"id": "opencode", "label": "OpenCode", "type": "ai_tool", "status": "planned", "group": "ai", "x": 360, "y": 460, "details": "Potential lower-cost implementation operator sharing ~/.claude/skills."}, {"id": "obsidian", "label": "Obsidian Project OS", "type": "knowledge", "status": "planned", "group": "ai", "x": 360, "y": 590, "details": "Future portfolio registry, MOCs, decision logs, runbooks and risk registers."}, {"id": "github", "label": "GitHub / yazilimlar", "type": "platform", "status": "active", "group": "cloud", "x": 860, "y": 90, "details": "Remote source control for Adonis and Artemis; future remotes for local-only projects."}, {"id": "vercel", "label": "Vercel", "type": "platform", "status": "active", "group": "cloud", "x": 860, "y": 230, "details": "Deployment provider for Artemis and Adonis; environment scopes and project linkage require verification."}, {"id": "supabase", "label": "Supabase / Postgres", "type": "database", "status": "critical", "group": "cloud", "x": 860, "y": 370, "details": "Potential Artemis data/auth infrastructure. Key architecture must be identified before rotation."}, {"id": "squarespace", "label": "Squarespace", "type": "platform", "status": "active", "group": "cloud", "x": 860, "y": 510, "details": "agoraxai.com business hub and local ERP integration via API key."}, {"id": "gmail", "label": "Gmail / SMTP", "type": "platform", "status": "critical", "group": "cloud", "x": 860, "y": 650, "details": "Invoice email transport; current app password is duplicated in plaintext."}, {"id": "plaid", "label": "Plaid", "type": "platform", "status": "critical", "group": "cloud", "x": 860, "y": 770, "details": "Financial data integration for Prime Industrial ERP; staged secret rotation required."}, {"id": "artemis", "label": "Artemis Omni", "type": "project", "status": "critical", "group": "projects", "x": 1230, "y": 100, "details": "Flagship platform with disputed local authority, two parent clones, 16 worktrees, dirty trees and local-only branches."}, {"id": "bidroom", "label": "BidRoomLive", "type": "module", "status": "high", "group": "projects", "x": 1460, "y": 40, "details": "Active product line within Artemis branches and worktrees."}, {"id": "civicbid", "label": "CivicBid", "type": "module", "status": "medium", "group": "projects", "x": 1460, "y": 120, "details": "Active Artemis product line with public-release branch."}, {"id": "atlasiq", "label": "AtlasIQ / Labs", "type": "module", "status": "medium", "group": "projects", "x": 1460, "y": 200, "details": "Atlas and experimental intelligence modules within Artemis."}, {"id": "adonis", "label": "Adonis Architectural Metal", "type": "project", "status": "medium", "group": "projects", "x": 1230, "y": 320, "details": "Production Next.js site. Authoritative local clone identified; synchronization and build verification remain."}, {"id": "agoraxai", "label": "AgoraXAI Atlas", "type": "project", "status": "high", "group": "projects", "x": 1230, "y": 470, "details": "Local-only repository with no remote; deployment source remains unresolved."}, {"id": "alev", "label": "AlevStudio", "type": "project", "status": "high", "group": "projects", "x": 1230, "y": 600, "details": "Local-only media studio repository with no off-machine copy."}, {"id": "erp", "label": "Prime Industrial ERP", "type": "project", "status": "critical", "group": "projects", "x": 1230, "y": 730, "details": "Local Flask/SQLite system launched at login. Hard-coded Plaid, Gmail, Squarespace and session secrets discovered."}, {"id": "invoice", "label": "Invoice Automation", "type": "automation", "status": "critical", "group": "projects", "x": 1460, "y": 730, "details": "Cron-configured every four hours but likely never executed successfully; migration to launchd planned."}, {"id": "media", "label": "Media Pipelines", "type": "project_group", "status": "low", "group": "projects", "x": 1230, "y": 850, "details": "Gew, OctopusOrchestra, Olympus, Alev labs and other image/video pipelines."}, {"id": "domain_agora", "label": "agoraxai.com", "type": "domain", "status": "active", "group": "domains", "x": 1700, "y": 250, "details": "Squarespace hub domain."}, {"id": "domain_artemis", "label": "artemis.agoraxai.com", "type": "domain", "status": "active", "group": "domains", "x": 1700, "y": 100, "details": "Artemis production domain, deployment linkage to verify."}, {"id": "domain_atlas", "label": "atlas.agoraxai.com", "type": "domain", "status": "unresolved", "group": "domains", "x": 1700, "y": 470, "details": "Claimed AgoraXAI Atlas domain; source linkage unresolved."}, {"id": "domain_adonis", "label": "Adonis production domain", "type": "domain", "status": "unresolved", "group": "domains", "x": 1700, "y": 340, "details": "Domain not yet confirmed in local audit."}];
+const edges = [{"from": "owner", "to": "claude", "label": "strategy & approval"}, {"from": "owner", "to": "chatgpt", "label": "architecture & governance"}, {"from": "claude", "to": "claudecode", "label": "local execution"}, {"from": "claudecode", "to": "mac", "label": "read / controlled changes"}, {"from": "chatgpt", "to": "obsidian", "label": "designs knowledge model"}, {"from": "claudecode", "to": "obsidian", "label": "future registry updates"}, {"from": "opencode", "to": "mac", "label": "future implementation"}, {"from": "mac", "to": "github", "label": "git push / fetch"}, {"from": "github", "to": "vercel", "label": "deploy pipeline"}, {"from": "vercel", "to": "domain_artemis", "label": "serves"}, {"from": "vercel", "to": "domain_adonis", "label": "serves"}, {"from": "squarespace", "to": "domain_agora", "label": "hosts"}, {"from": "domain_agora", "to": "domain_artemis", "label": "subdomain"}, {"from": "domain_agora", "to": "domain_atlas", "label": "subdomain"}, {"from": "artemis", "to": "github", "label": "repo"}, {"from": "artemis", "to": "vercel", "label": "deploy"}, {"from": "artemis", "to": "supabase", "label": "env-linked / verify"}, {"from": "artemis", "to": "domain_artemis", "label": "public site"}, {"from": "artemis", "to": "bidroom", "label": "contains"}, {"from": "artemis", "to": "civicbid", "label": "contains"}, {"from": "artemis", "to": "atlasiq", "label": "contains"}, {"from": "adonis", "to": "github", "label": "repo"}, {"from": "adonis", "to": "vercel", "label": "deploy"}, {"from": "adonis", "to": "domain_adonis", "label": "public site"}, {"from": "agoraxai", "to": "domain_atlas", "label": "claimed deploy"}, {"from": "erp", "to": "plaid", "label": "financial API"}, {"from": "erp", "to": "squarespace", "label": "commerce API"}, {"from": "erp", "to": "gmail", "label": "mail capability"}, {"from": "erp", "to": "invoice", "label": "generates PDFs"}, {"from": "invoice", "to": "gmail", "label": "SMTP send"}, {"from": "keychain", "to": "erp", "label": "target secret delivery"}, {"from": "keychain", "to": "invoice", "label": "target secret delivery"}, {"from": "backup", "to": "erp", "label": "SQLite recovery"}, {"from": "mac", "to": "artemis", "label": "clones + worktrees"}, {"from": "mac", "to": "adonis", "label": "working + legacy clones"}, {"from": "mac", "to": "agoraxai", "label": "local-only"}, {"from": "mac", "to": "alev", "label": "local-only"}, {"from": "mac", "to": "erp", "label": "local service"}, {"from": "mac", "to": "media", "label": "local pipelines"}];
+const pipelines = [{"id": "security", "title": "Immediate security containment", "steps": ["Back up ERP databases", "Prepare Keychain wrappers", "Rotate Plaid / Gmail / Squarespace", "Identify Supabase key architecture", "Rotate Supabase/Postgres safely", "Remove plaintext stores"]}, {"id": "artemis_stabilization", "title": "Artemis stabilization", "steps": ["Refresh both parent clones", "Inventory 16 worktrees", "Preserve dirty files and stash", "Push local-only branches", "Resolve canonical clone", "Verify build and deployment"]}, {"id": "portfolio", "title": "Portfolio governance", "steps": ["Stabilize Adonis", "Create remotes for local-only repos", "Create Obsidian registry", "Prepare Desktop move manifest", "Execute approved migration", "Verify and archive"]}];
+const nodeById = Object.fromEntries(nodes.map(n=>[n.id,n]));
+const NS="http://www.w3.org/2000/svg";
+const nodesG=document.getElementById("nodes");
+const edgesG=document.getElementById("edges");
+
+function curve(a,b){
+  const dx=Math.max(60,Math.abs(b.x-a.x)*.45);
+  return `M ${a.x} ${a.y} C ${a.x+dx} ${a.y}, ${b.x-dx} ${b.y}, ${b.x} ${b.y}`;
+}
+edges.forEach(e=>{
+  const a=nodeById[e.from], b=nodeById[e.to]; if(!a||!b)return;
+  const g=document.createElementNS(NS,"g"); g.dataset.from=e.from; g.dataset.to=e.to; g.classList.add("edge-group");
+  const p=document.createElementNS(NS,"path"); p.setAttribute("d",curve(a,b)); p.setAttribute("class","edge"); g.appendChild(p);
+  const t=document.createElementNS(NS,"text"); t.setAttribute("x",(a.x+b.x)/2); t.setAttribute("y",(a.y+b.y)/2-5); t.setAttribute("class","edge-label"); t.textContent=e.label||""; g.appendChild(t);
+  edgesG.appendChild(g);
+});
+nodes.forEach(n=>{
+  const g=document.createElementNS(NS,"g"); g.setAttribute("transform",`translate(${n.x-82},${n.y-28})`); g.classList.add("node",`status-${n.status}`); g.dataset.id=n.id; g.dataset.group=n.group; g.dataset.status=n.status;
+  const r=document.createElementNS(NS,"rect"); r.setAttribute("width","164"); r.setAttribute("height","56"); r.setAttribute("rx","11"); r.setAttribute("class","node-box"); g.appendChild(r);
+  const title=document.createElementNS(NS,"text"); title.setAttribute("x","12"); title.setAttribute("y","23"); title.setAttribute("class","node-title"); title.textContent=n.label; g.appendChild(title);
+  const type=document.createElementNS(NS,"text"); type.setAttribute("x","12"); type.setAttribute("y","41"); type.setAttribute("class","node-type"); type.textContent=`${n.type} · ${n.status}`; g.appendChild(type);
+  g.addEventListener("click",()=>selectNode(n)); nodesG.appendChild(g);
+});
+function selectNode(n){
+  const incoming=edges.filter(e=>e.to===n.id).map(e=>nodeById[e.from]?.label).filter(Boolean);
+  const outgoing=edges.filter(e=>e.from===n.id).map(e=>nodeById[e.to]?.label).filter(Boolean);
+  document.getElementById("selected").innerHTML=`
+    <h3 style="margin:0 0 8px;font-size:15px">${n.label}</h3>
+    <div class="kv"><span>Type</span><strong>${n.type}</strong></div>
+    <div class="kv"><span>Status</span><strong>${n.status}</strong></div>
+    <div class="kv"><span>Group</span><strong>${n.group}</strong></div>
+    <p>${n.details||""}</p>
+    <div class="kv"><span>Inputs</span><span>${incoming.join(", ")||"—"}</span></div>
+    <div class="kv"><span>Outputs</span><span>${outgoing.join(", ")||"—"}</span></div>`;
+}
+document.getElementById("pipelines").innerHTML=pipelines.map(p=>`
+  <div style="margin-bottom:14px"><strong style="font-size:12px">${p.title}</strong>
+  ${p.steps.map((s,i)=>`<div class="pipeline-step">${i+1}. ${s}</div>`).join("")}</div>`).join("");
+
+document.querySelectorAll("button[data-filter]").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll("button[data-filter]").forEach(b=>b.classList.remove("active")); btn.classList.add("active");
+  const f=btn.dataset.filter;
+  document.querySelectorAll(".node").forEach(g=>{
+    const show=f==="all" || g.dataset.group===f || g.dataset.status===f;
+    g.style.display=show?"":"none";
+  });
+  document.querySelectorAll(".edge-group").forEach(g=>{
+    const a=document.querySelector(`.node[data-id="${g.dataset.from}"]`);
+    const b=document.querySelector(`.node[data-id="${g.dataset.to}"]`);
+    g.style.display=(a&&b&&a.style.display!=="none"&&b.style.display!=="none")?"":"none";
+  });
+}));
+</script>
+</body>
+</html>
