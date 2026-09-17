@@ -5,6 +5,7 @@ import {readFileSync} from 'node:fs';
 import {buildCatalog,loadEntities,danglingEdges,nodeIds,edgeTypes,ownershipEdgeTypes,type Catalog} from '../src/resources.ts';
 import {edgesFor,normalize,type Raw} from '../src/model.ts';
 import {truthStates} from '../src/truth.ts';
+import {selectGraph,layout,colourClass,colourValue,colourDimensions,edgeDash,edgeStyleLabel,edgeLegend} from '../src/graphview.ts';
 
 const snapshot=JSON.parse(readFileSync('data/snapshot.json','utf8'));
 const registry=snapshot.registry as Raw;
@@ -75,4 +76,61 @@ test('generation is deterministic: same input, same graph, same order',()=>{
  assert.deepEqual(c.resources.map(r=>r.id),a.resources.map(r=>r.id),'resource order does not depend on row order');
  assert.deepEqual(c.edges.map(e=>`${e.type}|${e.from}|${e.to}`),a.edges.map(e=>`${e.type}|${e.from}|${e.to}`));
  assert.deepEqual([...a.resources].sort((x,y)=>x.id.localeCompare(y.id)).map(r=>r.id),a.resources.map(r=>r.id),'resources are sorted by id');
+});
+
+// ---------- OG-MAP-003 / OG-MAP-004: generated layout, encodings and presets
+test('lane positions are computed, never stored, and are stable',()=>{
+ const portfolio=selectGraph(projects,catalog,'portfolio');
+ const first=layout(portfolio.nodes),second=layout(portfolio.nodes);
+ assert.deepEqual(first,second,'layout is deterministic');
+ assert.equal(first.nodes.length,portfolio.nodes.length);
+ for(const n of first.nodes){
+  assert.ok(Number.isFinite(n.x)&&Number.isFinite(n.y));
+  assert.ok(n.x>0&&n.x<=first.width&&n.y>0&&n.y<=first.height);
+ }
+ // no coordinate exists in the data the layout was computed from
+ assert.ok(!JSON.stringify(portfolio.nodes).match(/"x"|"y"/));
+ assert.ok(!JSON.stringify(catalog).match(/"x"|"y"/));
+ const byLane=new Map(first.lanes.map(l=>[l.lane,l.y]));
+ assert.ok(byLane.get('AgoraXAI')! < byLane.get('Products')!,'lanes are ordered top to bottom');
+ for(const n of first.nodes)assert.equal(n.y>=byLane.get(n.lane)!,true,'a node sits in its own lane');
+ assert.equal(new Set(first.nodes.map(n=>`${n.x}|${n.y}`)).size,first.nodes.length,'no two nodes share a position');
+});
+test('exactly one colour dimension applies at a time, and the value is also text',()=>{
+ const {nodes}=selectGraph(projects,catalog,'portfolio');
+ const node=nodes.find(n=>n.id==='dayos')!;
+ assert.deepEqual([...colourDimensions],['lifecycle','risk','truth']);
+ assert.equal(colourValue(node,'lifecycle'),node.lifecycle);
+ assert.equal(colourValue(node,'risk'),node.riskBand);
+ assert.equal(colourValue(node,'truth'),node.truth);
+ for(const dimension of colourDimensions){
+  const classes=nodes.map(n=>colourClass(n,dimension));
+  for(const c of classes)assert.match(c,new RegExp(`^c-${dimension}-[a-z0-9-]+$`));
+  const others=colourDimensions.filter(d=>d!==dimension);
+  for(const c of classes)for(const other of others)assert.ok(!c.startsWith(`c-${other}-`),'one dimension at a time');
+ }
+});
+test('declared, observed and derived edges differ without relying on colour',()=>{
+ assert.notEqual(edgeDash.declared,edgeDash.observed);
+ assert.notEqual(edgeDash.declared,edgeDash.derived);
+ assert.notEqual(edgeDash.observed,edgeDash.derived);
+ assert.deepEqual([edgeStyleLabel.declared,edgeStyleLabel.observed,edgeStyleLabel.derived],['dashed','solid','dotted']);
+ assert.deepEqual(edgeLegend(['declared','observed','declared']),['declared: dashed','observed: solid']);
+});
+test('presets filter the same graph: portfolio is products, repository adds repositories and checkouts',()=>{
+ const portfolio=selectGraph(projects,catalog,'portfolio');
+ const repository=selectGraph(projects,catalog,'repository');
+ assert.equal(portfolio.nodes.length,projects.length);
+ assert.ok(portfolio.nodes.every(n=>n.kind==='product'));
+ assert.ok(portfolio.edges.every(e=>['platform_parent','consumed_by','depends_on','successor_of'].includes(e.type)));
+ assert.ok(repository.nodes.length>portfolio.nodes.length);
+ assert.deepEqual([...new Set(repository.nodes.map(n=>n.kind))].sort(),['checkout','product','repository']);
+ assert.ok(repository.edges.some(e=>e.type==='source_repository')&&repository.edges.some(e=>e.type==='checked_out_at'));
+ assert.ok(repository.edges.length>portfolio.edges.length);
+ for(const e of [...portfolio.edges,...repository.edges])assert.ok(catalog.edges.includes(e),'presets filter, never invent');
+ // the relationship filter keeps the v0.1 vocabulary
+ assert.equal(selectGraph(projects,catalog,'portfolio','ownership').edges.length,
+  catalog.edges.filter(e=>e.type==='platform_parent').length);
+ assert.equal(selectGraph(projects,catalog,'portfolio','historical').edges.every(e=>e.type==='successor_of'),true);
+ assert.equal(selectGraph(projects,catalog,'portfolio','resource').edges.length,0,'resource edges are absent from the portfolio preset');
 });

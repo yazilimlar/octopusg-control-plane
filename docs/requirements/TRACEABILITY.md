@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 66 |
-| IMPLEMENTED | 10 |
+| PROPOSED | 64 |
+| IMPLEMENTED | 12 |
 | VERIFIED | 12 |
 | DEFERRED | 1 |
 
@@ -81,8 +81,8 @@
 | OG-UI-004 | Devices screen (declared) | MANAGEMENT | PROPOSED | LOW | WP-10 | OG-DEV-001 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/browser.mjs` |
 | OG-UI-005 | Requirements and capability status view | MANAGEMENT | PROPOSED | LOW | WP-10 | OG-GOV-002 | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) | `tests/browser.mjs` |
 | OG-MAP-002 | Typed relationship graph including resources | CONTROL | IMPLEMENTED | MEDIUM | WP-04 | OG-REG-004, OG-DATA-001 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/graph.test.ts` |
-| OG-MAP-003 | Generated lane-layout map | MANAGEMENT | PROPOSED | LOW | WP-05 | OG-MAP-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/graph.test.ts`<br>`tests/browser.mjs` |
-| OG-MAP-004 | Map presets: portfolio and repository views | MANAGEMENT | PROPOSED | LOW | WP-05 | OG-MAP-003 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
+| OG-MAP-003 | Generated lane-layout map | MANAGEMENT | IMPLEMENTED | LOW | WP-05 | OG-MAP-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/graph.test.ts`<br>`tests/browser.mjs` |
+| OG-MAP-004 | Map presets: portfolio and repository views | MANAGEMENT | IMPLEMENTED | LOW | WP-05 | OG-MAP-003 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
 | OG-OBS-001 | Owner-run local Git observer | INTEGRATION | VERIFIED | MEDIUM | WP-03 | OG-DATA-002, OG-DEV-001 | [S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary)<br>[S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) | `tests/observe.test.ts` |
 | OG-OBS-002 | Declared-versus-observed drift | CONTROL | PROPOSED | LOW | WP-06 | OG-OBS-001, OG-REG-004 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#per-service-management](../sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management) | `tests/drift.test.ts`<br>`tests/browser.mjs` |
 | OG-DATA-001 | Five-kind truth model | CONTROL | VERIFIED | MEDIUM | WP-02 | — | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model) | `tests/core.test.ts`<br>`tests/truth.test.ts` |
@@ -208,7 +208,7 @@
 | portfolio-registry | VALIDATING | v0.2 | OG-REG-001, OG-REG-002, OG-REG-003 |
 | resource-catalog | VALIDATING | v0.2 | OG-REG-004, OG-REG-005 |
 | owner-cockpit | PLANNED | v0.2 | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006 |
-| system-maps | PLANNED | v0.2 | OG-MAP-001, OG-MAP-002, OG-MAP-003, OG-MAP-004, OG-MAP-005, OG-MAP-006 |
+| system-maps | BUILDING | v0.2 | OG-MAP-001, OG-MAP-002, OG-MAP-003, OG-MAP-004, OG-MAP-005, OG-MAP-006 |
 | truth-and-provenance | AVAILABLE | v0.2 | OG-DATA-001, OG-DATA-002 |
 | local-git-observation | BUILDING | v0.2 | OG-OBS-001, OG-OBS-002, OG-OBS-003 |
 | device-registry | BUILDING | v0.2 | OG-DEV-001, OG-UI-004 |

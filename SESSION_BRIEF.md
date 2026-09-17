@@ -19,7 +19,8 @@ Read this first in every AI session. Keep it under one page.
 - Batch A is on `octopusg/batch-a-catalog-graph`: WP-04 adds the typed resource catalog and
   graph (`src/resources.ts`, `config/entities.json`). OD-05 is resolved — Great Order LLC exists
   as owner-confirmed declared data and owns nothing that is not separately declared.
-  Evidence: [WP-04](docs/evidence/WP-04.md).
+  Evidence: [WP-04](docs/evidence/WP-04.md). WP-05 then generated the lane-layout map with
+  colour-by and preset controls (`src/graphview.ts`). Evidence: [WP-05](docs/evidence/WP-05.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 

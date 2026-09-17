@@ -100,6 +100,19 @@ repository or a shared production host is flagged as shared, never turned into o
 Artemis never owns an AgoraXAI Atlas row. The eight declared v0.1 edges are preserved inside the
 typed graph.
 
+### Generated map (OG-MAP-003, OG-MAP-004)
+
+`src/graphview.ts` turns the catalog into a picture without storing any coordinate. Nodes are
+assigned to lanes — AgoraXAI, Platforms, Artemis, Products, Ventures, Labs and archive, then
+Repositories and Checkouts — and positions are computed from the lane and the position within it
+at render time, so no number in the data can be mistaken for evidence. One colour dimension
+applies at a time (lifecycle, risk band or truth kind) and the same value is printed under each
+node, so colour is never the only channel. Edge truth is encoded as a dash pattern as well —
+declared dashed, observed solid, derived dotted — and the legend spells the pattern out in words.
+Two presets filter the same graph: **portfolio** (products and their relationships) and
+**repositories** (products plus repository and checkout resources). Presets filter; they never
+invent an edge the catalog does not hold.
+
 ### Legal entities (OG-REG-005, OD-05)
 
 A legal entity is declared data about **existence**, kept in `config/entities.json` rather than in

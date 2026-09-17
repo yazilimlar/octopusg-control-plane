@@ -191,7 +191,7 @@ capabilities:
   - S2#target-planes
 - id: system-maps
   title: Generated system maps
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-MAP-001
@@ -830,7 +830,7 @@ requirements:
   milestone: v0.2
   work_package: WP-05
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S2#architecture-map-updates-from-connections
@@ -850,7 +850,7 @@ requirements:
   milestone: v0.2
   work_package: WP-05
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#core-capabilities-discussed
