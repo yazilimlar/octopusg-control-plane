@@ -104,6 +104,10 @@
     {
       "id": "WP-12",
       "title": "Brand asset and tagline"
+    },
+    {
+      "id": "WP-13",
+      "title": "v0.3 platform foundation design (approved origin, CI, protected preview)"
     }
   ],
   "capabilities": [
@@ -129,6 +133,16 @@
       "requirements": [
         "OG-SEC-001",
         "OG-SEC-008"
+      ]
+    },
+    {
+      "id": "platform-foundation",
+      "title": "Approved-origin remote, CI and protected preview",
+      "status": "CONCEPT",
+      "target": "v0.3",
+      "requirements": [
+        "OG-GOV-007",
+        "OG-SEC-009"
       ]
     },
     {
@@ -1957,7 +1971,9 @@
         "S1#connector-and-automation-strategy"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-13.md"
+      ]
     },
     {
       "id": "OG-CONN-016",
@@ -2901,15 +2917,79 @@
       ],
       "sources": [
         "S4#registry-discrepancy",
-        "S3#pre-development-checklist"
+        "S3#pre-development-checklist",
+        "S7#owner-authorization"
       ],
       "ownerDecisions": [
-        "OD-02"
+        "OD-02",
+        "OD-11"
       ],
       "evidence": [
         "WP-01.md",
         "WP-11.md",
-        "WP-12.md"
+        "WP-12.md",
+        "WP-13.md"
+      ]
+    },
+    {
+      "id": "OG-GOV-007",
+      "title": "Continuous integration runs validation and specification checks",
+      "plane": "GOVERNANCE",
+      "milestone": "v0.3",
+      "workPackage": "WP-13",
+      "priority": "NEXT",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-SEC-008"
+      ],
+      "acceptance": [
+        "A GitHub Actions workflow runs npm ci --ignore-scripts, npm run validate and npm run validate:spec on every pull request and every push to the default branch, using only the committed package and lock files.",
+        "The workflow is added to .github/workflows/ as a design artifact under ADR-0007 and takes effect only once the repository exists at the one approved origin; it is never enabled against a public or unverified repository."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        ".github/workflows/validate.yml"
+      ],
+      "sources": [
+        "S7#owner-authorization"
+      ],
+      "ownerDecisions": [
+        "OD-11"
+      ],
+      "evidence": [
+        "WP-13.md"
+      ]
+    },
+    {
+      "id": "OG-SEC-009",
+      "title": "Protected, non-production preview deployment only",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": "WP-13",
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "MEDIUM",
+      "dependencies": [
+        "OG-SEC-008"
+      ],
+      "acceptance": [
+        "A single Vercel project on the $0 tier is linked to the approved-origin private repository and deploys previews only; no production deployment or custom domain is ever created by this requirement.",
+        "The strongest protection available on the $0 plan is enabled and independently verified before any preview URL is shared or used.",
+        "If protected preview at $0 is not achievable, no deployment is made and the blocker is recorded instead of a workaround."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "docs/evidence/WP-13.md"
+      ],
+      "sources": [
+        "S7#owner-authorization"
+      ],
+      "ownerDecisions": [
+        "OD-11"
+      ],
+      "evidence": [
+        "WP-13.md"
       ]
     },
     {

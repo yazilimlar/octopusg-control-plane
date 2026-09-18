@@ -14,6 +14,7 @@ sources:
   S4: docs/sources/S4-2026-09-17-v0.1-repository-inspection.md
   S5: docs/archive/gate-3b/PRODUCT_BACKLOG.md
   S6: docs/sources/S6-2026-09-18-owner-brand-decisions.md
+  S7: docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md
 enums:
   plane:
   - MANAGEMENT
@@ -127,6 +128,8 @@ work_packages:
   title: v0.2 acceptance
 - id: WP-12
   title: Brand asset and tagline
+- id: WP-13
+  title: v0.3 platform foundation design (approved origin, CI, protected preview)
 owner_decisions:
 - OD-01
 - OD-02
@@ -138,6 +141,7 @@ owner_decisions:
 - OD-08
 - OD-09
 - OD-10
+- OD-11
 capabilities:
 - id: spec-governance
   title: Specification, traceability and AI session guardrails
@@ -161,6 +165,15 @@ capabilities:
   - OG-SEC-008
   source:
   - S4#registry-discrepancy
+- id: platform-foundation
+  title: Approved-origin remote, CI and protected preview
+  status: CONCEPT
+  target: v0.3
+  requirements:
+  - OG-GOV-007
+  - OG-SEC-009
+  source:
+  - S7#owner-authorization
 - id: portfolio-registry
   title: Authoritative portfolio registry
   status: VALIDATING
@@ -2020,6 +2033,7 @@ requirements:
   source:
   - S4#registry-discrepancy
   - S3#pre-development-checklist
+  - S7#owner-authorization
   dependencies: []
   acceptance:
   - The owner confirms the location and hash of a current off-machine recovery copy (bundle or private remote) and
@@ -2028,7 +2042,54 @@ requirements:
   - docs/evidence/WP-01.md
   owner_decisions:
   - OD-02
-  notes: Owner action. Adding a remote needs an ADR because scripts/audit.mjs asserts zero remotes. WP-01 found the v0.1 bundle verified but on the same disk, and the reported Block 0 bundle absent (docs/archive/MANIFEST.md); still open.
+  - OD-11
+  notes: Owner action. Adding a remote needs an ADR because scripts/audit.mjs asserts zero remotes. WP-01 found the v0.1 bundle verified but on the same disk, and the reported Block 0 bundle absent (docs/archive/MANIFEST.md); still open. ADR-0007 (WP-13) now records the exact design — one allowlisted private GitHub remote — but the audit script, the remote and the push are all still unactioned; this stays PROPOSED until the deferred-execution checklist in ADR-0007 runs and the remote/tag SHAs are independently verified.
+- id: OG-GOV-007
+  title: Continuous integration runs validation and specification checks
+  plane: GOVERNANCE
+  milestone: v0.3
+  work_package: WP-13
+  priority: NEXT
+  status: IMPLEMENTED
+  risk: LOW
+  source:
+  - S7#owner-authorization
+  dependencies:
+  - OG-SEC-008
+  acceptance:
+  - A GitHub Actions workflow runs npm ci --ignore-scripts, npm run validate and npm run validate:spec on every
+    pull request and every push to the default branch, using only the committed package and lock files.
+  - The workflow is added to .github/workflows/ as a design artifact under ADR-0007 and takes effect only once the
+    repository exists at the one approved origin; it is never enabled against a public or unverified repository.
+  tests:
+  - .github/workflows/validate.yml
+  owner_decisions:
+  - OD-11
+  notes: The workflow file is committed and inert (no remote exists yet to trigger it). Moves to VERIFIED only after an actual push produces a green Actions run, recorded with its run URL in evidence.
+- id: OG-SEC-009
+  title: Protected, non-production preview deployment only
+  plane: CONTROL
+  milestone: v0.3
+  work_package: WP-13
+  priority: NEXT
+  status: PROPOSED
+  risk: MEDIUM
+  source:
+  - S7#owner-authorization
+  dependencies:
+  - OG-SEC-008
+  acceptance:
+  - A single Vercel project on the $0 tier is linked to the approved-origin private repository and deploys previews
+    only; no production deployment or custom domain is ever created by this requirement.
+  - The strongest protection available on the $0 plan is enabled and independently verified before any preview URL
+    is shared or used.
+  - If protected preview at $0 is not achievable, no deployment is made and the blocker is recorded instead of a
+    workaround.
+  tests:
+  - docs/evidence/WP-13.md
+  owner_decisions:
+  - OD-11
+  notes: Design only in this session — no Vercel action was performed. See ADR-0007's deferred-execution checklist.
 - id: OG-AI-001
   title: Read-only registry MCP server for AI sessions
   plane: INTEGRATION

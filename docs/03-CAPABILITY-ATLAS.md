@@ -18,6 +18,7 @@ forgotten. **Listing a capability does not authorize building it.**
 |---|---|---|---|---|---|
 | **spec-governance** — Specification, traceability and AI session guardrails | VALIDATING | B0 | — | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 | [S1#requirements-and-completeness-model](sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) |
 | **platform-resilience** — Local isolation boundary and recovery copy | PLANNED | v0.2 | — | OG-SEC-001, OG-SEC-008 | [S4#registry-discrepancy](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) |
+| **platform-foundation** — Approved-origin remote, CI and protected preview | CONCEPT | v0.3 | — | OG-GOV-007, OG-SEC-009 | [S7#owner-authorization](sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) |
 | **portfolio-registry** — Authoritative portfolio registry | VALIDATING | v0.2 | — | OG-REG-001, OG-REG-002, OG-REG-003 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
 | **resource-catalog** — Products and their resources | AVAILABLE | v0.2 | — | OG-REG-004, OG-REG-005 | [S2#target-planes](sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) |
 | **owner-cockpit** — Owner cockpit screens | BUILDING | v0.2 | — | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006, OG-UI-007 | [S2#target-planes](sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) |
@@ -50,5 +51,5 @@ forgotten. **Listing a capability does not authorize building it.**
 | **registry-repoint** — One-command registry repoint | CONCEPT | unscheduled | — | OG-REG-006 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 | **approval-outcome-records** — Approval outcomes written to governance records | CONCEPT | unscheduled | — | OG-ACT-009 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 
-33 capabilities · generated from REQUIREMENTS.yaml
+34 capabilities · generated from REQUIREMENTS.yaml
 <!-- GENERATED:CAPABILITIES:END -->

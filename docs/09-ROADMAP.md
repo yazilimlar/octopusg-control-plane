@@ -70,6 +70,18 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 
 **If OD-06 is accepted** (narrower v0.2), WP-07, WP-08 and WP-09's policy half move to v0.3.
 
+## v0.3 work packages
+
+| WP | Title | Requirements | Depends on |
+|---|---|---|---|
+| WP-13 | v0.3 platform foundation design (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-009 | WP-11 |
+
+WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
+it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the
+DayOS monitoring vertical-slice specification ([docs/NEXT-SLICE-DAYOS-MONITORING.md](NEXT-SLICE-DAYOS-MONITORING.md)).
+It does not add a remote, push, or deploy anything — those steps are the deferred-execution
+checklist in ADR-0007, run by the owner or an explicitly re-permissioned session.
+
 ## Owner decisions
 
 `BLOCKING` items stop the named work package. Everything else has a recommended default that
@@ -87,6 +99,7 @@ applies unless the owner says otherwise.
 | OD-08 | Rename code identifiers from `Octopus` to `OctopusG`? | UI text only; keep schema const and localStorage key so saved simulation state survives. **Extended 2026-09-18:** the brand mark and the tagline "Architect-Engineer of Complex Systems" are owner-authorized for the interface ([ADR-0006](decisions/ADR-0006-brand-asset-and-tagline.md), [S6](sources/S6-2026-09-18-owner-brand-decisions.md#owner-brand-decisions)); identifiers are still untouched. | — |
 | OD-09 | Is Pınar Evleri retained in the portfolio? | Retained as registered; no extraction work in OctopusG | — |
 | OD-10 | Runbooks (add connector/product/device, move repository, revoke) | Write each at the start of the block that first needs it | — |
+| OD-11 | Approved-origin remote, CI and protected Vercel preview ([S7](sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md)) | **Owner decision 2026-09-18:** replace the zero-remote rule with an exact allowlist for `https://github.com/yazilimlar/octopusg-control-plane.git` (private only); add GitHub Actions CI running the existing validate/validate:spec commands; add a protected, non-production-only Vercel preview. Designed in [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md) (WP-13); the remote/push/deploy steps themselves are deferred — CLAUDE.md's Never list is a session-level control this ADR does not itself lift. | Unblocks OG-SEC-008 once executed |
 
 **Other v0.2 gate positions recorded by the owner on 2026-09-18**
 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):

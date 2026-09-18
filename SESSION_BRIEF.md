@@ -68,13 +68,27 @@ Read this first in every AI session. Keep it under one page.
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)). **OG-SEC-008 stays
   pending until the owner places the final complete-history bundle off-device, and v0.2 is not
   frozen until that copy is confirmed.**
+- WP-13 (`octopusg/v0.3-platform-foundation`, branched from `165397c`) designed the v0.3 platform
+  foundation the owner authorized on 2026-09-18
+  ([S7](docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md),
+  [ADR-0007](docs/decisions/ADR-0007-approved-origin-allowlist.md), OD-11): an exact-allowlist
+  exception to the zero-remote rule for exactly one private GitHub remote, GitHub Actions CI
+  running the existing `validate`/`validate:spec` commands, and a protected, preview-only Vercel
+  deployment. **OG-GOV-007 is v0.3 and IMPLEMENTED** — `.github/workflows/validate.yml` is
+  committed and inert until a remote exists. **OG-SEC-009 stays PROPOSED** — no Vercel action was
+  taken. Nothing was pushed, no remote was added, `scripts/audit.mjs` is unchanged (CLAUDE.md rule
+  7), and OG-SEC-008 stays exactly where it was: ADR-0007 gives it an exact path to closing, not a
+  shortcut to it. The next vertical slice after this foundation — read-only Artemis DayOS Supabase
+  monitoring — is specified, not built, in
+  [docs/NEXT-SLICE-DAYOS-MONITORING.md](docs/NEXT-SLICE-DAYOS-MONITORING.md). Evidence:
+  [WP-13](docs/evidence/WP-13.md).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
 | Current milestone | **v0.2** — 28 requirements (10 verified) |
-| Ledger | 90 requirements · 33 capabilities |
-| Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
+| Ledger | 92 requirements · 34 capabilities |
+| Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-11 |
 | Next work package | WP-01 |
 <!-- GENERATED:STATUS:END -->
 

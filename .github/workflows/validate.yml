@@ -1,0 +1,33 @@
+name: validate
+
+# Prepared under ADR-0007 (docs/decisions/ADR-0007-approved-origin-allowlist.md). Inert until the
+# repository exists at the one approved origin (https://github.com/yazilimlar/octopusg-control-plane.git)
+# and this file is pushed there — GitHub Actions runs nothing from a repository with no remote.
+# Runs only what CLAUDE.md already names as this project's own validation commands: no new
+# scripts, no external calls beyond checking out the pushed commit and installing from the
+# committed lockfile.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - run: npm run validate
+
+      - run: npm run validate:spec
