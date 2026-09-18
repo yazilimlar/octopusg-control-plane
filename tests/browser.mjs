@@ -104,6 +104,39 @@ await check('requirements view exposes the ledger and its traceability',async()=
  for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/ghp_[A-Za-z0-9]{20,}/])
   assert.ok(!pattern.test(all),`requirements view must not show ${pattern}`);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});
+await check('Connection Center shows every connector at level 0 with disabled owner actions',async()=>{await nav('Connectors');
+ const cards=page.locator('[data-connector-card]');
+ assert.equal(await cards.count(),5,'one card per connector definition');
+ const first=cards.first();
+ const text=await first.innerText();
+ for(const label of ['Account','Products','Level','State','Granted scopes','Last successful sync','Webhook health','Credential','Data freshness','Approved actions'])
+  assert.ok(text.includes(label),`card anatomy must show ${label}`);
+ assert.match(text,/0 — Registered/);
+ assert.match(text,/REGISTERED/);
+ assert.match(text,/no credential/);
+ assert.match(text,/never/);
+ // every lifecycle state is shown, and only the first is marked current
+ assert.equal(await page.locator('.lifecycle li').count(),7);
+ assert.equal(await page.locator('.lifecycle li.current').count(),1);
+ assert.match(await page.locator('.lifecycle li.current').innerText(),/REGISTERED/);
+ // owner actions exist, are all disabled, and each carries its reason
+ const actions=page.locator('[data-owner-action]');
+ assert.equal(await actions.count(),20,'four owner actions on each of five cards');
+ for(const b of await actions.all())assert.equal(await b.isDisabled(),true,'no owner action is ever enabled in v0.2');
+ assert.equal(await page.locator('.disabled-reasons li').count(),20);
+ // no authorization flow and no credential input exists anywhere on the screen
+ assert.equal(await page.locator('input,form,[type="password"]').count(),0,'no credential or authorization form');
+ const all=await page.locator('main').innerText();
+ for(const pattern of [/ghp_[A-Za-z0-9]{20,}/,/\/Users\//,/Connect now/i,/Sign in/i])
+  assert.ok(!pattern.test(all),`Connection Center must not show ${pattern}`);
+ // "authorization" appears as explanation, never as an affordance: the only enabled controls on
+ // the screen are the five v0.1 inspect buttons, and no link leaves the loopback origin.
+ const enabled=await page.locator('main button:not([disabled])').all();
+ for(const b of enabled)assert.match((await b.innerText()).trim(),/^Inspect disabled response$/,'the only enabled control is the v0.1 inspect button');
+ assert.equal(enabled.length,5);
+ for(const href of await page.locator('main a').evaluateAll(as=>as.map(a=>a.href)))
+  assert.match(href,/^http:\/\/127\.0\.0\.1|^$/,'no provider sign-in link');
+ assert.match(all,/requires an owner authorization recorded at the gate/);});
 await check('disabled connector probes return blocked',async()=>{await nav('Connectors');assert.equal(await page.locator('[data-connector]').count(),5);for(const button of await page.locator('[data-connector]').all())await button.click();assert.equal(await page.locator('.connector-result:not([hidden])').count(),5);assert.match(await page.locator('#result-github').innerText(),/"status": "blocked"/);});
 await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Devices','Requirements','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
 await check('mobile main nav scrolls horizontally and does not clip item focus outlines',async()=>{const n=page.getByRole('navigation',{name:'Main navigation'});const m=await n.evaluate(el=>{const s=getComputedStyle(el);return{scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,overflowX:s.overflowX,padTop:parseFloat(s.paddingTop),padBottom:parseFloat(s.paddingBottom)};});assert.equal(m.overflowX,'auto','mobile nav must be a horizontal scroller');assert.ok(m.scrollWidth>m.clientWidth,`nav must overflow and scroll at 390px, got scrollWidth ${m.scrollWidth} <= clientWidth ${m.clientWidth}`);assert.ok(m.padTop>=4&&m.padBottom>=4,`the scroller needs block padding or it clips the 4px focus outline; got ${m.padTop}/${m.padBottom}`);const widths=await n.getByRole('button').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().width));assert.ok(Math.min(...widths)>=56,`nav items must keep intrinsic width, narrowest was ${Math.min(...widths)}`);});

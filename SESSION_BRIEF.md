@@ -28,6 +28,14 @@ Read this first in every AI session. Keep it under one page.
   Evidence: [WP-06](docs/evidence/WP-06.md). WP-10 then added the Devices and Requirements views
   (declared records only; the ledger projected into `data/requirements.json` at build time).
   Evidence: [WP-10](docs/evidence/WP-10.md).
+- The WP-03 macOS path repair is `b86a0ff` on `octopusg/fix-observer-macos-paths`, **imported and
+  validated by the owner on the Mac** (94/94, audit PASS). Evidence:
+  [WP-03-REPAIR-01](docs/evidence/WP-03-REPAIR-01.md).
+- Batch C is on `octopusg/batch-c-connections-events`: WP-07 adds the connector contract
+  (`src/connections.ts`, `config/connectors.json`) and the Connection Center — every connector
+  defined, every connection at **level 0 (Registered)**, every owner action visible but disabled
+  with its reason, and the `maxLevel` ceiling enforced by the loader, by `canRaiseLevel` and by
+  the committed file. Evidence: [WP-07](docs/evidence/WP-07.md).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 

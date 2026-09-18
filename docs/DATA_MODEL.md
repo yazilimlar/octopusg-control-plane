@@ -149,6 +149,24 @@ written by `npm run spec:write`; `npm run validate:spec` fails if it is stale an
 it ever contains a machine-specific path. Both views are read-only: they approve nothing, change
 nothing and collect nothing.
 
+### Connector definitions and connections (OG-CONN-002, OG-CONN-003)
+
+`config/connectors.json` holds two declared lists, validated by `loadConnectors` in
+`src/connections.ts` before anything renders. A **definition** records what a connector would be
+allowed to do — `auth`, the resource kinds it could discover, the observations and events it
+could report, its actions, its `maxLevel` ceiling and the minimum scopes each level would need,
+with a sentence saying why. A **connection** records a provider account's standing: level,
+lifecycle state, granted scopes, last successful sync, webhook health, credential status (never a
+credential value), data freshness and approved actions.
+
+The file fails to load if a connection exceeds its connector's `maxLevel`, if a level-0
+connection claims a scope, a sync or a state other than `REGISTERED`, if a granted scope or an
+approved action is not one the connector declares, if an action appears below level 3, or if any
+value is shaped like a token, key, password-bearing URL or e-mail address. `canRaiseLevel` is the
+pure decision behind the same ceiling: it refuses a raise above `maxLevel` even when an owner
+authorization is supplied, and refuses any raise that has none. In v0.2 every connection is level
+0 and no connector declares an action, so nothing above **Registered** is reachable.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.

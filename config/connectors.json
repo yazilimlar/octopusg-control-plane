@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "_comment": "Declared connector definitions and connection records (OG-CONN-002, OG-CONN-003). Nothing here authorizes anything: every connection is level 0 (Registered), holds no credential and has never synced. maxLevel is the ceiling the owner set in docs/04 section 5; a connection may never exceed it. Scope lists are the MINIMUM a level would need, recorded before any authorization so the owner can read them first.",
+  "connectors": [
+    {
+      "id": "github",
+      "provider": "GitHub",
+      "auth": "token",
+      "resources": ["repository"],
+      "observations": ["repository visibility", "default branch", "branch head SHA", "check conclusion"],
+      "events": ["observation.changed", "observation.stale"],
+      "actions": [],
+      "maxLevel": 1,
+      "scopes": [
+        {"level": 1, "scopes": ["repo:read", "checks:read"], "why": "Read allowlisted repository metadata and check conclusions. No contents, no workflows, no writes."}
+      ],
+      "docs": "GitHub REST API reference, to be read and pinned at the start of v0.3 (OD-07).",
+      "adapter": "github",
+      "notes": "Level 1 is the ceiling: OctopusG never writes to a repository through a connector."
+    },
+    {
+      "id": "vercel",
+      "provider": "Vercel",
+      "auth": "token",
+      "resources": ["deployment", "domain"],
+      "observations": ["project", "deployment state", "source SHA", "alias", "domain assignment"],
+      "events": ["deployment.created", "deployment.succeeded", "deployment.failed"],
+      "actions": [],
+      "maxLevel": 1,
+      "scopes": [
+        {"level": 1, "scopes": ["projects:read", "deployments:read", "domains:read"], "why": "List projects, deployments and domains to compare declared with served state. Environment variable values are never read."}
+      ],
+      "docs": "Vercel REST API reference, to be read and pinned at the start of v0.3.",
+      "adapter": "vercel",
+      "notes": "Promotion and rollback are v0.10 execution work and are not actions of this connector."
+    },
+    {
+      "id": "supabase",
+      "provider": "Supabase",
+      "auth": "token",
+      "resources": [],
+      "observations": ["sanitized schema inventory", "migration presence"],
+      "events": [],
+      "actions": [],
+      "maxLevel": 1,
+      "scopes": [
+        {"level": 1, "scopes": ["metadata:read"], "why": "Owner-reviewed schema and migration inventory only. No rows, no function bodies, no queries, no credentials."}
+      ],
+      "docs": "Supabase management API reference, to be read and pinned at the start of v0.9.",
+      "adapter": "supabase",
+      "notes": "Migrations are tier Production in docs/06 and are never reachable from this connector."
+    },
+    {
+      "id": "http-uptime",
+      "provider": "HTTP route probe",
+      "auth": "none",
+      "resources": ["domain"],
+      "observations": ["status code", "response latency", "soft-404 control"],
+      "events": ["observation.changed"],
+      "actions": [],
+      "maxLevel": 1,
+      "scopes": [
+        {"level": 1, "scopes": ["approved-routes:get"], "why": "Issue a bounded GET to an explicitly approved HTTPS route. No arbitrary URL input and no response body is stored."}
+      ],
+      "docs": "docs/CONNECTOR_PLAN_v0.2.md, section on approved HTTP route probes.",
+      "adapter": "http-uptime",
+      "notes": "Authentication is none because the probe is anonymous; that does not make it enabled."
+    },
+    {
+      "id": "mac-status",
+      "provider": "Owner's Mac (local)",
+      "auth": "local",
+      "resources": ["repository", "checkout"],
+      "observations": ["allowlisted path existence", "branch", "head SHA", "dirty count", "remote names"],
+      "events": ["observation.stale", "observation.changed"],
+      "actions": [],
+      "maxLevel": 1,
+      "scopes": [
+        {"level": 1, "scopes": ["local:read-allowlisted-paths"], "why": "Read-only Git status for the paths in config/observe.allowlist.json on an enrolled, personally owned device."}
+      ],
+      "docs": "docs/07-DEVICE-AGENT-SPEC.md.",
+      "adapter": "mac-status",
+      "notes": "The owner-run observer (npm run observe, WP-03) is the implementation of these observations. It is started by the owner from the command line and is not driven by the Connection Center; this definition records its contract, ceiling and scope."
+    }
+  ],
+  "connections": [
+    {
+      "id": "github-owner",
+      "connectorId": "github",
+      "accountLabel": "Owner account (not authorized)",
+      "productIds": ["agoraxai-control-plane", "artemis-omni", "dayos"],
+      "level": 0,
+      "state": "REGISTERED",
+      "grantedScopes": [],
+      "lastSuccessfulSync": null,
+      "webhookHealth": "no webhook registered",
+      "credentialStatus": "no credential stored",
+      "dataFreshness": "not collected",
+      "approvedActions": [],
+      "note": "Registered only. Authorizing GitHub is an owner action scheduled for v0.3 under OD-07."
+    },
+    {
+      "id": "vercel-owner",
+      "connectorId": "vercel",
+      "accountLabel": "Owner account (not authorized)",
+      "productIds": ["agoraxai-web", "artemis-omni", "artemis-workbench", "bidroomlive"],
+      "level": 0,
+      "state": "REGISTERED",
+      "grantedScopes": [],
+      "lastSuccessfulSync": null,
+      "webhookHealth": "no webhook registered",
+      "credentialStatus": "no credential stored",
+      "dataFreshness": "not collected",
+      "approvedActions": [],
+      "note": "Registered only. The deployment drift view compares recorded evidence, never live Vercel state."
+    },
+    {
+      "id": "supabase-owner",
+      "connectorId": "supabase",
+      "accountLabel": "Owner account (not authorized)",
+      "productIds": ["financial-command-center", "prime-industrial-erp"],
+      "level": 0,
+      "state": "REGISTERED",
+      "grantedScopes": [],
+      "lastSuccessfulSync": null,
+      "webhookHealth": "no webhook registered",
+      "credentialStatus": "no credential stored",
+      "dataFreshness": "not collected",
+      "approvedActions": [],
+      "note": "Registered only. OD-03 (containment of known plaintext secrets) blocks connector authorization until it is resolved."
+    },
+    {
+      "id": "http-uptime-routes",
+      "connectorId": "http-uptime",
+      "accountLabel": "Approved routes (none approved)",
+      "productIds": [],
+      "level": 0,
+      "state": "REGISTERED",
+      "grantedScopes": [],
+      "lastSuccessfulSync": null,
+      "webhookHealth": "not applicable",
+      "credentialStatus": "no credential required",
+      "dataFreshness": "not collected",
+      "approvedActions": [],
+      "note": "Registered only. No route has been approved, so there is nothing this connector could probe even if it were enabled."
+    },
+    {
+      "id": "mac-status-local",
+      "connectorId": "mac-status",
+      "accountLabel": "Owner's Mac (declared device record)",
+      "productIds": ["agoraxai-control-plane"],
+      "level": 0,
+      "state": "REGISTERED",
+      "grantedScopes": [],
+      "lastSuccessfulSync": null,
+      "webhookHealth": "not applicable",
+      "credentialStatus": "no credential required",
+      "dataFreshness": "see Deployment drift for observation freshness",
+      "approvedActions": [],
+      "note": "Registered only in the Connection Center. Observations come from the owner-run npm run observe, not from this record."
+    }
+  ]
+}

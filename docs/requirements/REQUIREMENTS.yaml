@@ -1139,7 +1139,7 @@ requirements:
   milestone: v0.2
   work_package: WP-07
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#connector-and-automation-strategy
@@ -1161,7 +1161,7 @@ requirements:
   milestone: v0.2
   work_package: WP-07
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S2#connection-center

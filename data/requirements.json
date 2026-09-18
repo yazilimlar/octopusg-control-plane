@@ -1517,7 +1517,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-07",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-DATA-002",
@@ -1539,7 +1539,9 @@
         "S2#integration-levels"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-07.md"
+      ]
     },
     {
       "id": "OG-CONN-003",
@@ -1548,7 +1550,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-07",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-CONN-002"
@@ -1566,7 +1568,9 @@
         "S1#connection-center-lifecycle"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-07.md"
+      ]
     },
     {
       "id": "OG-CONN-004",

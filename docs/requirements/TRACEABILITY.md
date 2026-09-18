@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 59 |
-| IMPLEMENTED | 12 |
+| PROPOSED | 57 |
+| IMPLEMENTED | 14 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
@@ -87,8 +87,8 @@
 | OG-OBS-002 | Declared-versus-observed drift | CONTROL | IMPLEMENTED | LOW | WP-06 | OG-OBS-001, OG-REG-004 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#per-service-management](../sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management) | `tests/drift.test.ts`<br>`tests/browser.mjs` |
 | OG-DATA-001 | Five-kind truth model | CONTROL | VERIFIED | MEDIUM | WP-02 | — | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model) | `tests/core.test.ts`<br>`tests/truth.test.ts` |
 | OG-DATA-002 | Observation store with freshness | CONTROL | VERIFIED | LOW | WP-02 | OG-DATA-001 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center) | `tests/truth.test.ts` |
-| OG-CONN-002 | Connector contract and definitions | INTEGRATION | PROPOSED | LOW | WP-07 | OG-DATA-002, OG-SEC-002 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels) | `tests/connections.test.ts`<br>`tests/core.test.ts` |
-| OG-CONN-003 | Connection Center at Level 0 | MANAGEMENT | PROPOSED | LOW | WP-07 | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/browser.mjs` |
+| OG-CONN-002 | Connector contract and definitions | INTEGRATION | IMPLEMENTED | LOW | WP-07 | OG-DATA-002, OG-SEC-002 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels) | `tests/connections.test.ts`<br>`tests/core.test.ts` |
+| OG-CONN-003 | Connection Center at Level 0 | MANAGEMENT | IMPLEMENTED | LOW | WP-07 | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/browser.mjs` |
 | OG-EVT-001 | Normalized event envelope | CONTROL | PROPOSED | LOW | WP-08 | OG-DATA-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#build-versus-buy](../sources/S2-2026-09-17-gpt-planning-thread.md#build-versus-buy) | `tests/events.test.ts` |
 | OG-EVT-002 | Simulated inbox from fixtures | MANAGEMENT | PROPOSED | LOW | WP-08 | OG-EVT-001 | [S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/events.test.ts`<br>`tests/browser.mjs` |
 | OG-DEV-001 | Declared device registry and trust zones | CONTROL | VERIFIED | MEDIUM | WP-03 | OG-SEC-002 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone)<br>[S1#device-and-trust-zone-model](../sources/S1-2026-09-17-conversation-export.md#device-and-trust-zone-model) | `tests/devices.test.ts` |
