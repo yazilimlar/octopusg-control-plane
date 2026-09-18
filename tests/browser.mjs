@@ -104,6 +104,42 @@ await check('requirements view exposes the ledger and its traceability',async()=
  for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/ghp_[A-Za-z0-9]{20,}/])
   assert.ok(!pattern.test(all),`requirements view must not show ${pattern}`);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});
+await check('the brand is present, accessible, local-only and never semantic',async()=>{await nav('Portfolio');
+ // the compact symbol sits beside real, selectable "OctopusG" text — never inside an image
+ const mark=page.locator('.brand img');
+ assert.equal(await mark.getAttribute('src'),'/brand/octopusg-symbol.png');
+ assert.equal(await mark.getAttribute('alt'),'','the symbol is decorative beside real text');
+ assert.equal((await page.locator('.brand span').first().innerText()).split('\n')[0].trim(),'OctopusG');
+ // the full lockup carries the tagline in its alternative text, on a light plate
+ const lockup=page.locator('.brand-plate img');
+ assert.equal(await lockup.count(),1);
+ assert.equal(await lockup.getAttribute('src'),'/brand/octopusg-logo.png');
+ assert.equal(await lockup.getAttribute('alt'),'OctopusG — Architect-Engineer of Complex Systems');
+ const plate=await page.locator('.brand-plate').evaluate(el=>getComputedStyle(el).backgroundColor);
+ assert.match(plate,/rgb\(2\d\d, 2\d\d, 2\d\d\)/,'the dark-navy wordmark sits on a light plate');
+ // every brand image actually loaded from this origin at its natural size
+ for(const img of await page.locator('img').all()){
+  const {src,w,h}=await img.evaluate(el=>({src:el.getAttribute('src'),w:el.naturalWidth,h:el.naturalHeight}));
+  assert.match(src,/^\/(brand\/|favicon\.svg)/,`${src} must be a local path`);
+  assert.ok(w>0&&h>0,`${src} failed to load`);
+ }
+ // the tagline is real text in the footer, and absent from the compact header
+ assert.equal((await page.locator('footer .tagline').innerText()).trim(),'Architect-Engineer of Complex Systems');
+ assert.doesNotMatch(await page.locator('.sidebar').innerText(),/Architect-Engineer/);
+ // the lockup is not shown where it would be illegible, and nothing overflows at phone width
+ await page.setViewportSize({width:390,height:844});
+ assert.equal(await page.locator('.brand-plate').isVisible(),false,'the lockup is hidden in compact contexts');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);
+ assert.equal(await page.locator('.brand img').isVisible(),true,'the compact symbol still carries the brand');
+ await page.setViewportSize({width:1512,height:982});
+ // the lockup appears only on Portfolio; no other screen was redesigned
+ await nav('Project matrix');
+ assert.equal(await page.locator('.brand-plate').count(),0);
+ await nav('Portfolio');
+ // and the brand changed nothing stored
+ assert.equal(await page.evaluate(()=>document.title),'OctopusG — AgoraXAI Portfolio Operating System');
+ await page.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>null))));
+ await page.screenshot({path:'work/brand-portfolio.png',fullPage:false});});
 await check('safe open actions are links or text, never a request from the app',async()=>{await nav('Portfolio');
  await page.locator('.project-card[data-project="agoraxai-web"]').click();
  const d=page.getByRole('dialog');

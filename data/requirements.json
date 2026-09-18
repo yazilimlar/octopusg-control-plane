@@ -100,6 +100,10 @@
     {
       "id": "WP-11",
       "title": "v0.2 acceptance"
+    },
+    {
+      "id": "WP-12",
+      "title": "Brand asset and tagline"
     }
   ],
   "capabilities": [
@@ -978,31 +982,38 @@
       "id": "OG-UI-007",
       "title": "OctopusG brand mark and visual identity",
       "plane": "MANAGEMENT",
-      "milestone": "v0.3",
-      "workPackage": null,
-      "priority": "NEXT",
-      "status": "PROPOSED",
+      "milestone": "v0.2",
+      "workPackage": "WP-12",
+      "priority": "MVP",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-UI-002"
       ],
       "acceptance": [
-        "The owner-supplied OctopusG mark replaces the placeholder favicon and the sidebar brand image, committed as a repository asset with its provenance recorded.",
-        "The mark is supplied at the sizes the app needs, keeps a text alternative, and remains legible in the dark theme and at 390px.",
-        "No brand asset is fetched at runtime and no font or icon is loaded from a third party."
+        "The owner-supplied mark is preserved byte for byte as the master in assets/brand/, and its hash, dimensions, format, byte size, transparency and provenance are recorded and checked by a test.",
+        "Served derivatives are crops and resizes of the master only, carry no metadata, and are smaller than it.",
+        "The compact symbol and the favicon carry no wordmark; the full lockup is shown only where its wordmark and the approved tagline remain legible.",
+        "The visible word OctopusG stays real text, every brand image is local and every decorative image has empty alternative text.",
+        "No semantic colour, stored key, schema constant or export shape changes."
       ],
-      "acceptanceProvisional": true,
+      "acceptanceProvisional": false,
       "tests": [
+        "tests/brand.test.ts",
         "tests/browser.mjs"
       ],
       "sources": [
-        "UNSOURCED"
+        "S6#owner-brand-decisions",
+        "S6#scope-of-the-brand-work"
       ],
-      "ownerDecisions": [],
+      "ownerDecisions": [
+        "OD-08"
+      ],
       "evidence": [
         "WP-08.md",
         "WP-09.md",
-        "WP-11.md"
+        "WP-11.md",
+        "WP-12.md"
       ]
     },
     {
@@ -2897,7 +2908,8 @@
       ],
       "evidence": [
         "WP-01.md",
-        "WP-11.md"
+        "WP-11.md",
+        "WP-12.md"
       ]
     },
     {

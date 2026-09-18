@@ -53,16 +53,26 @@ Read this first in every AI session. Keep it under one page.
 - **At the gate:** 16 v0.2 requirements are IMPLEMENTED and awaiting the owner. `OG-SEC-008`
   (OD-02, off-machine recovery copy) is the one v0.2 requirement that cannot close without an
   owner decision, and `platform-resilience` stays PLANNED because of it.
-- The OctopusG brand mark the owner supplied is recorded as **OG-UI-007 (PROPOSED, v0.3)** and was
-  deliberately **not built**; it needs an owner source, a licence position and a decision on the
-  wordmark tagline.
+- WP-12 implemented the brand (`octopusg/wp-brand-og-ui-007`). The owner resolved the authoritative
+  file, the provenance and use authorization, and the tagline
+  ([S6](docs/sources/S6-2026-09-18-owner-brand-decisions.md),
+  [ADR-0006](docs/decisions/ADR-0006-brand-asset-and-tagline.md)), so **OG-UI-007 is v0.2 and
+  IMPLEMENTED**. The owner's PNG is the master in `assets/brand/`, byte for byte; three
+  metadata-free derivatives are served from `public/brand/`; the tagline is
+  *Architect-Engineer of Complex Systems*. `validate:spec` now finishes with **zero warnings**.
+  Evidence: [WP-12](docs/evidence/WP-12.md).
+- v0.2 gate positions recorded by the owner: OD-03 (connectors stay Level 0), OD-04 (no credential
+  store yet), the one-entry observer allowlist, the T3/T4 prohibition, Great Order LLC existence
+  only — see [09-ROADMAP](docs/09-ROADMAP.md#owner-decisions).
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
-  Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
+  Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)). **OG-SEC-008 stays
+  pending until the owner places the final complete-history bundle off-device, and v0.2 is not
+  frozen until that copy is confirmed.**
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 27 requirements (10 verified) |
+| Current milestone | **v0.2** — 28 requirements (10 verified) |
 | Ledger | 90 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |

@@ -5,14 +5,14 @@
 
 ## Totals
 
-90 requirements · 33 capabilities · 5 sources
+90 requirements · 33 capabilities · 6 sources
 
 | milestone | count |
 |---|---:|
 | v0.1 | 7 |
 | B0 | 3 |
-| v0.2 | 27 |
-| v0.3 | 13 |
+| v0.2 | 28 |
+| v0.3 | 12 |
 | v0.4 | 2 |
 | v0.5 | 5 |
 | v0.6 | 7 |
@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 53 |
-| IMPLEMENTED | 19 |
+| PROPOSED | 52 |
+| IMPLEMENTED | 20 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
@@ -80,6 +80,7 @@
 | OG-UI-003 | Truth and freshness badges | MANAGEMENT | IMPLEMENTED | LOW | WP-06 | OG-DATA-002 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center) | `tests/browser.mjs` |
 | OG-UI-004 | Devices screen (declared) | MANAGEMENT | IMPLEMENTED | LOW | WP-10 | OG-DEV-001 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/browser.mjs` |
 | OG-UI-005 | Requirements and capability status view | MANAGEMENT | IMPLEMENTED | LOW | WP-10 | OG-GOV-002 | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) | `tests/browser.mjs` |
+| OG-UI-007 | OctopusG brand mark and visual identity | MANAGEMENT | IMPLEMENTED | LOW | WP-12 | OG-UI-002 | [S6#owner-brand-decisions](../sources/S6-2026-09-18-owner-brand-decisions.md#owner-brand-decisions)<br>[S6#scope-of-the-brand-work](../sources/S6-2026-09-18-owner-brand-decisions.md#scope-of-the-brand-work) | `tests/brand.test.ts`<br>`tests/browser.mjs` |
 | OG-MAP-002 | Typed relationship graph including resources | CONTROL | VERIFIED | MEDIUM | WP-04 | OG-REG-004, OG-DATA-001 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/graph.test.ts` |
 | OG-MAP-003 | Generated lane-layout map | MANAGEMENT | VERIFIED | LOW | WP-05 | OG-MAP-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S3#historical-map-critique](../sources/S3-2026-09-17-claude-review.md#historical-map-critique) | `tests/graph.test.ts`<br>`tests/browser.mjs` |
 | OG-MAP-004 | Map presets: portfolio and repository views | MANAGEMENT | VERIFIED | LOW | WP-05 | OG-MAP-003 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
@@ -101,7 +102,6 @@
 
 | ID | Title | Plane | Status | Risk | WP | Depends on | Sources | Tests |
 |---|---|---|---|---|---|---|---|---|
-| OG-UI-007 | OctopusG brand mark and visual identity *(provisional)* | MANAGEMENT | PROPOSED | LOW | — | OG-UI-002 | **UNSOURCED** | `tests/browser.mjs` |
 | OG-MAP-005 | Deployment, domain, device, account and risk views | MANAGEMENT | PROPOSED | LOW | — | OG-MAP-004, OG-CONN-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
 | OG-MAP-006 | Map regenerates after connection changes | CONTROL | PROPOSED | LOW | — | OG-MAP-003, OG-CONN-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/graph.test.ts` |
 | OG-OBS-004 | Connector health and data freshness monitoring | CONTROL | PROPOSED | LOW | — | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/connections.test.ts` |

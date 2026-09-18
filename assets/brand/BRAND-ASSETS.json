@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "requirement": "OG-UI-007",
+  "tagline": "Architect-Engineer of Complex Systems",
+  "provenance": {
+    "supplied_by": "owner",
+    "authorization": "Owner-supplied and owner-authorized for use in OctopusG.",
+    "origin": "Produced through owner-directed ChatGPT image-generation iterations.",
+    "classification": "Proprietary project brand asset supplied and authorized by the owner.",
+    "not_claimed": [
+      "third-party authorship",
+      "third-party licensing",
+      "copyright registration",
+      "legal exclusivity"
+    ],
+    "original_attachment_filename": "not recoverable \u2014 the attachment reached this session under the generated name 3b5576cc-image.png; the owner did not state an original filename",
+    "recorded_on": "2026-09-18",
+    "decision_record": "docs/decisions/ADR-0006-brand-asset-and-tagline.md",
+    "source": "S6#owner-brand-decisions"
+  },
+  "master": {
+    "path": "assets/brand/octopusg-logo-master.png",
+    "role": "master",
+    "format": "PNG",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 856653,
+    "sha256": "8e0873094575f48970645b849d776a0b37e7eee299991b0ea098d7f13e5b1dab",
+    "transparency": true,
+    "metadata": [
+      "exif",
+      "srgb"
+    ],
+    "derivation": "The owner's file, byte for byte. Never served, never re-encoded, metadata untouched.",
+    "use": "System of record. Every derivative is produced from it."
+  },
+  "derivatives": [
+    {
+      "path": "public/brand/octopusg-logo.png",
+      "role": "full lockup",
+      "format": "PNG",
+      "width": 600,
+      "height": 570,
+      "bytes": 247898,
+      "sha256": "1c90df39010feb1115001a96a1d484ca496e076126963c40dbdbe0d8c483ef64",
+      "transparency": true,
+      "metadata": [],
+      "derivation": "Crop to the artwork's own bounds (84,154)-(1170,1186) then Lanczos resize to 600x570. No recolour, no re-layout, no redrawing.",
+      "use": "Shown on the Portfolio view on a light plate, where the wordmark and tagline are legible. Hidden below 900px, where the compact symbol carries the brand instead."
+    },
+    {
+      "path": "public/brand/octopusg-symbol.png",
+      "role": "compact symbol",
+      "format": "PNG",
+      "width": 256,
+      "height": 256,
+      "bytes": 44960,
+      "sha256": "0867b0c0663132d550479de1ad1641481b08628372dfe0b7778d5b14b07fdc52",
+      "transparency": true,
+      "metadata": [],
+      "derivation": "Crop the symbol band (84,154)-(1170,860), centre it on a square transparent canvas so the aspect ratio is preserved by padding rather than stretching, then Lanczos resize to 256.",
+      "use": "Sidebar brand and every compact context. Carries no wordmark, so no tagline is implied."
+    },
+    {
+      "path": "public/brand/favicon.png",
+      "role": "favicon",
+      "format": "PNG",
+      "width": 64,
+      "height": 64,
+      "bytes": 6185,
+      "sha256": "8b017c1a51d438c30819c796b0e7ffebb056293f4d0dd6dd25282dc1488feb9a",
+      "transparency": true,
+      "metadata": [],
+      "derivation": "The same square symbol canvas at 64x64.",
+      "use": "Browser tab icon. A faithful reduction of the existing symbol; nothing was redrawn for it."
+    }
+  ]
+}

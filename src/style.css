@@ -9,3 +9,11 @@
 .owner-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 8px}.owner-actions button[disabled]{opacity:.55;cursor:not-allowed;background:none;border:1px dashed var(--line);border-radius:6px;padding:7px 11px}.disabled-reasons{list-style:none;padding:0;margin:0 0 12px;font-size:12px;color:var(--muted)}.disabled-reasons li{margin-bottom:4px}.disabled-reasons b{color:#c3d1d8}
 #open-actions code{background:#16242d;border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:12px;overflow-wrap:anywhere}#open-actions li{margin-bottom:10px}#open-actions a{overflow-wrap:anywhere}#open-actions button{margin-left:6px;border:1px dashed var(--line);background:none;border-radius:5px;padding:3px 9px;font-size:12px}
 #action-requests td{vertical-align:top}#action-requests small{display:block;color:var(--muted);margin-top:4px}.dossier{margin:10px 0 0;padding-left:22px;color:#c3d1d8}.dossier li{margin-bottom:4px}
+/* OG-UI-007. The mark is decorative: no semantic colour is defined here, and the asset is never
+   recoloured or inverted. The wordmark is dark navy, so the lockup sits on a light plate rather
+   than being altered to suit the dark interface (ADR-0006). */
+.brand{flex-direction:column;align-items:flex-start;gap:9px}.brand img{width:46px;height:46px;object-fit:contain;flex:0 0 auto}.brand small{letter-spacing:1.6px;line-height:1.5}
+.brand-plate{flex:0 0 auto;background:#f4f8fa;border:1px solid #d8e3e8;border-radius:12px;padding:14px;line-height:0;align-self:flex-start}
+.brand-plate img{display:block;width:100%;max-width:272px;height:auto}
+footer .tagline{color:#8fb9b0;letter-spacing:.4px}
+@media (max-width:900px){.brand-plate{display:none}}

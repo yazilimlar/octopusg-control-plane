@@ -13,6 +13,7 @@ sources:
   S3: docs/sources/S3-2026-09-17-claude-review.md
   S4: docs/sources/S4-2026-09-17-v0.1-repository-inspection.md
   S5: docs/archive/gate-3b/PRODUCT_BACKLOG.md
+  S6: docs/sources/S6-2026-09-18-owner-brand-decisions.md
 enums:
   plane:
   - MANAGEMENT
@@ -124,6 +125,8 @@ work_packages:
   title: Devices and requirements views
 - id: WP-11
   title: v0.2 acceptance
+- id: WP-12
+  title: Brand asset and tagline
 owner_decisions:
 - OD-01
 - OD-02
@@ -794,25 +797,30 @@ requirements:
 - id: OG-UI-007
   title: OctopusG brand mark and visual identity
   plane: MANAGEMENT
-  milestone: v0.3
-  priority: NEXT
-  status: PROPOSED
+  milestone: v0.2
+  work_package: WP-12
+  priority: MVP
+  status: IMPLEMENTED
   risk: LOW
   source:
-  - UNSOURCED
+  - S6#owner-brand-decisions
+  - S6#scope-of-the-brand-work
   dependencies:
   - OG-UI-002
   acceptance:
-  - 'The owner-supplied OctopusG mark replaces the placeholder favicon and the sidebar brand image, committed as a
-    repository asset with its provenance recorded.'
-  - The mark is supplied at the sizes the app needs, keeps a text alternative, and remains legible in the dark theme
-    and at 390px.
-  - No brand asset is fetched at runtime and no font or icon is loaded from a third party.
-  acceptance_provisional: true
+  - The owner-supplied mark is preserved byte for byte as the master in assets/brand/, and its hash, dimensions,
+    format, byte size, transparency and provenance are recorded and checked by a test.
+  - Served derivatives are crops and resizes of the master only, carry no metadata, and are smaller than it.
+  - The compact symbol and the favicon carry no wordmark; the full lockup is shown only where its wordmark and the
+    approved tagline remain legible.
+  - The visible word OctopusG stays real text, every brand image is local and every decorative image has empty
+    alternative text.
+  - No semantic colour, stored key, schema constant or export shape changes.
   tests:
+  - tests/brand.test.ts
   - tests/browser.mjs
-  notes: Proposed in WP-08 because the owner supplied the mark but no requirement covered it. Not built. Needs the
-    owner to confirm the source file, the licence position and whether the wordmark tagline belongs in the interface.
+  owner_decisions:
+  - OD-08
 - id: OG-MAP-001
   title: Declared ecosystem graph (v0.1 baseline)
   plane: CONTROL
