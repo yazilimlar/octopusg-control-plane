@@ -988,7 +988,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-08.md"
+        "WP-08.md",
+        "WP-09.md"
       ]
     },
     {
@@ -2441,7 +2442,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-09",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-REG-004"
@@ -2461,7 +2462,9 @@
         "S1#octopusg-v02-boundary"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-09.md"
+      ]
     },
     {
       "id": "OG-ACT-002",
@@ -2470,7 +2473,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-09",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "MEDIUM",
       "dependencies": [
         "OG-SEC-002"
@@ -2489,7 +2492,9 @@
         "S1#action-authority-levels"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-09.md"
+      ]
     },
     {
       "id": "OG-ACT-003",

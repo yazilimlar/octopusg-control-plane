@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 56 |
-| IMPLEMENTED | 16 |
+| PROPOSED | 54 |
+| IMPLEMENTED | 18 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
@@ -92,8 +92,8 @@
 | OG-EVT-001 | Normalized event envelope | CONTROL | IMPLEMENTED | LOW | WP-08 | OG-DATA-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#build-versus-buy](../sources/S2-2026-09-17-gpt-planning-thread.md#build-versus-buy) | `tests/events.test.ts` |
 | OG-EVT-002 | Simulated inbox from fixtures | MANAGEMENT | IMPLEMENTED | LOW | WP-08 | OG-EVT-001 | [S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/events.test.ts`<br>`tests/browser.mjs` |
 | OG-DEV-001 | Declared device registry and trust zones | CONTROL | VERIFIED | MEDIUM | WP-03 | OG-SEC-002 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone)<br>[S1#device-and-trust-zone-model](../sources/S1-2026-09-17-conversation-export.md#device-and-trust-zone-model) | `tests/devices.test.ts` |
-| OG-ACT-001 | Safe open actions | MANAGEMENT | PROPOSED | LOW | WP-09 | OG-REG-004 | [S2#mvp-boundary](../sources/S2-2026-09-17-gpt-planning-thread.md#mvp-boundary)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/open.test.ts`<br>`tests/browser.mjs` |
-| OG-ACT-002 | Action requests with tier and level policy (simulated) | CONTROL | PROPOSED | MEDIUM | WP-09 | OG-SEC-002 | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S1#action-authority-levels](../sources/S1-2026-09-17-conversation-export.md#action-authority-levels) | `tests/policy.test.ts` |
+| OG-ACT-001 | Safe open actions | MANAGEMENT | IMPLEMENTED | LOW | WP-09 | OG-REG-004 | [S2#mvp-boundary](../sources/S2-2026-09-17-gpt-planning-thread.md#mvp-boundary)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/open.test.ts`<br>`tests/browser.mjs` |
+| OG-ACT-002 | Action requests with tier and level policy (simulated) | CONTROL | IMPLEMENTED | MEDIUM | WP-09 | OG-SEC-002 | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S1#action-authority-levels](../sources/S1-2026-09-17-conversation-export.md#action-authority-levels) | `tests/policy.test.ts` |
 | OG-SEC-002 | Trust zones, tiers and levels as data | CONTROL | VERIFIED | HIGH | WP-03 | — | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/policy.test.ts` |
 | OG-SEC-008 | Verified recovery copy of the control-plane repository | CONTROL | PROPOSED | HIGH | WP-01 | — | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S3#pre-development-checklist](../sources/S3-2026-09-17-claude-review.md#pre-development-checklist) | `docs/evidence/WP-01.md` |
 

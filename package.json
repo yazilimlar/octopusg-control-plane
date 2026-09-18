@@ -5,6 +5,7 @@
   "scripts": {
     "import:registry": "node scripts/import-registry.mjs",
     "observe": "node scripts/observe.mjs",
+    "open": "node scripts/open.mjs",
     "typecheck": "tsc --noEmit",
     "build": "npm run import:registry && npm run typecheck && node scripts/build.mjs",
     "start": "node scripts/serve.mjs",

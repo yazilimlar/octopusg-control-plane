@@ -49,5 +49,6 @@ npm run validate        # build + unit tests + local audit (v0.1 contract)
 npm run validate:spec   # requirements, sources, links, traceability
 npm run spec:write      # regenerate generated sections after editing REQUIREMENTS.yaml
 npm run observe         # owner-run read-only Git observation of allowlisted repositories
+npm run open -- <id>    # owner-run: open one allowlisted repository in the file manager
 npm start               # http://127.0.0.1:4317
 ```

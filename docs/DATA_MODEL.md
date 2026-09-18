@@ -184,6 +184,23 @@ is never edited. **Duplicate deliveries**: `dedupe` drops a repeat of the same
 `(connector, provider_event_id)` and keeps the first; an event with no provider id has no provider
 identity and is never merged with another.
 
+### Safe open actions and action requests (OG-ACT-001, OG-ACT-002)
+
+`src/open.ts` derives at most three actions per product from registry facts: a website link from
+`intended_url` (declared), a repository link derived from `canonical_repo`, a serving-alias link
+from the recorded `production_state` (observed), and the local path as **text**. Every link passes
+`safeHttpsUrl`, which refuses anything that is not `https:`, any URL with credentials, a non-default
+port, a query string or fragment, or a bare IP address. A folder action has `href: null` by
+construction; `npm run open -- <product-id>` is the only thing that opens one, and it takes a
+product id, looks it up in `config/observe.allowlist.json`, applies the observer's device gate,
+resolves the path canonically and hands it to a fixed opener with no shell.
+
+`src/actions.ts` adds the docs/06 §3 record to the WP-03 policy. `decide()` checks, in an order no
+failure can fall through: the connection's ceiling and current level (WP-07), then tier, level,
+zone, approval and preconditions, then — for T3 and T4 — that all seven fields are present. Every
+request is `simulated` and the loader refuses one that is not; nothing in the repository executes
+an action.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.

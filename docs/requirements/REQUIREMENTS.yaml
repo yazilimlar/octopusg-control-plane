@@ -1743,7 +1743,7 @@ requirements:
   milestone: v0.2
   work_package: WP-09
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S2#mvp-boundary
@@ -1763,7 +1763,7 @@ requirements:
   milestone: v0.2
   work_package: WP-09
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: MEDIUM
   source:
   - S2#database-and-configuration-changes

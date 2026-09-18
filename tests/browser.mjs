@@ -104,6 +104,58 @@ await check('requirements view exposes the ledger and its traceability',async()=
  for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/ghp_[A-Za-z0-9]{20,}/])
   assert.ok(!pattern.test(all),`requirements view must not show ${pattern}`);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});
+await check('safe open actions are links or text, never a request from the app',async()=>{await nav('Portfolio');
+ await page.locator('.project-card[data-project="agoraxai-web"]').click();
+ const d=page.getByRole('dialog');
+ const list=d.locator('#open-actions li');
+ assert.ok(await list.count()>0,'the drawer offers open actions');
+ // every link is https, opens in a new tab, and carries both rel tokens
+ const links=await d.locator('#open-actions a').all();
+ assert.ok(links.length>0);
+ for(const a of links){
+  assert.match(await a.getAttribute('href'),/^https:\/\//,'only https is linkable');
+  assert.equal(await a.getAttribute('target'),'_blank');
+  const rel=await a.getAttribute('rel');
+  assert.ok(rel.includes('noopener')&&rel.includes('noreferrer'),'rel must carry both tokens');
+ }
+ // every action says what kind of evidence it is, in words
+ for(const label of await d.locator('#open-actions li').evaluateAll(ls=>ls.map(l=>l.getAttribute('aria-label'))))
+  assert.match(label,/\((declared|observed|derived)(, not a link)?\)/);
+ await page.keyboard.press('Escape');
+ // a folder is text plus Copy, never a link, and it names the owner-run command
+ await page.locator('.project-card[data-project="agoraxai-control-plane"]').click();
+ const folder=page.getByRole('dialog').locator('#open-actions li[data-open="folder"]');
+ assert.equal(await folder.count(),1);
+ assert.equal(await folder.locator('a').count(),0,'a folder is never a link');
+ assert.equal(await folder.locator('[data-copy]').count(),1,'a folder offers Copy');
+ assert.match(await folder.innerText(),/npm run open -- agoraxai-control-plane/);
+ assert.equal(await page.getByRole('dialog').locator('a[href^="file:"]').count(),0,'no file:// link anywhere');
+ await page.keyboard.press('Escape');});
+await check('action requests are evaluated against tier and level, and never executed',async()=>{await nav('Approval queue');
+ const rows=page.locator('#action-requests tbody tr');
+ assert.ok(await rows.count()>=6);
+ // every row is labelled SIMULATED and states its verdict in words
+ assert.equal(await page.locator('#action-requests .badge.inferred').count(),await rows.count());
+ for(const label of await page.locator('#action-requests .badge-row').evaluateAll(gs=>gs.map(g=>g.getAttribute('aria-label'))))
+  assert.match(label,/would be (permitted|refused) — .+ \(simulated\)/);
+ // the two rules that must be visible as outcomes
+ const critical=page.locator('[data-request="rotate-dns-record"]');
+ assert.equal(await critical.getAttribute('data-allowed'),'false');
+ assert.match(await critical.innerText(),/level 4 is never available for T4/);
+ const incomplete=page.locator('[data-request="promote-deployment"]');
+ assert.equal(await incomplete.getAttribute('data-allowed'),'false');
+ assert.match(await incomplete.innerText(),/all seven fields in docs\/06/);
+ assert.match(await incomplete.innerText(),/missing: /);
+ const employer=page.locator('[data-request="observe-from-company-laptop"]');
+ assert.equal(await employer.getAttribute('data-allowed'),'false');
+ assert.match(await employer.innerText(),/permits no OctopusG action/);
+ // the seven fields are listed in the documented order
+ assert.deepEqual(await page.locator('.dossier li').evaluateAll(ls=>ls.map(l=>l.getAttribute('data-field'))),
+  ['proposedChange','affectedObjects','backup','dryRun','rollback','ownerApproval','executionEvidence']);
+ // nothing on the screen offers to run anything
+ const text=await page.locator('main').innerText();
+ for(const pattern of [/\bExecute\b/,/\bRun now\b/,/\bApprove and run\b/])
+  assert.ok(!pattern.test(text),`the approval queue must not offer ${pattern}`);});
 await check('inbox renders the simulated fixtures, filters them, and counts none of them',async()=>{await nav('Inbox');
  const rows=page.locator('#inbox tbody tr');
  const all=await rows.count();

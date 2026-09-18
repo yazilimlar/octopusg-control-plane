@@ -40,6 +40,12 @@ Read this first in every AI session. Keep it under one page.
   `fixtures/events/*.json`): every row labelled SIMULATED, none countable, status changes
   appended rather than edited, duplicate deliveries removed on `(connector, provider_event_id)`.
   Evidence: [WP-08](docs/evidence/WP-08.md).
+- Batch C is accepted by the owner (`bc5665a`, validated on the Mac); OG-CONN-002, OG-CONN-003,
+  OG-EVT-001 and OG-EVT-002 are IMPLEMENTED and await the gate.
+- The final v0.2 batch is on `octopusg/batch-d-actions-acceptance`: WP-09 adds the safe open
+  actions (`src/open.ts`, `npm run open -- <product-id>`) and the tier/level action request with
+  the seven-field docs/06 §3 record (`src/actions.ts`). No declared trust zone permits T3 or T4,
+  and nothing in the repository can execute an action. Evidence: [WP-09](docs/evidence/WP-09.md).
 - The OctopusG brand mark the owner supplied is recorded as **OG-UI-007 (PROPOSED, v0.3)** and was
   deliberately **not built**; it needs an owner source, a licence position and a decision on the
   wordmark tagline.

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "_comment": "Example action requests (OG-ACT-002). Every one is a SIMULATION: the loader refuses a record that does not say so, and no code path in this repository executes an action. They exist so the tier/level policy and the seven-field docs/06 section 3 record can be read as outcomes rather than as prose.",
+  "requests": [
+    {
+      "id": "observe-control-plane",
+      "title": "Read Git status of an allowlisted repository",
+      "tier": "T0",
+      "level": 1,
+      "zone": "personal",
+      "simulated": true
+    },
+    {
+      "id": "draft-migration-plan",
+      "title": "Prepare a migration plan for review (no change applied)",
+      "tier": "T1",
+      "level": 2,
+      "zone": "personal",
+      "simulated": true
+    },
+    {
+      "id": "restart-preview-build",
+      "title": "Re-run a preview build",
+      "tier": "T2",
+      "level": 1,
+      "zone": "personal",
+      "connectionId": "vercel-owner",
+      "simulated": true
+    },
+    {
+      "id": "promote-deployment",
+      "title": "Promote a verified preview to production",
+      "tier": "T3",
+      "level": 3,
+      "approvalRecorded": true,
+      "preconditionsMet": true,
+      "dossier": {
+        "proposedChange": "Promote deployment dpl_… (preview) to the production alias.",
+        "affectedObjects": "One production alias and the deployment it points at.",
+        "backup": "Previous production deployment retained and reachable for rollback."
+      },
+      "simulated": true
+    },
+    {
+      "id": "run-database-migration",
+      "title": "Apply a database migration",
+      "tier": "T3",
+      "level": 3,
+      "approvalRecorded": true,
+      "preconditionsMet": true,
+      "dossier": {
+        "proposedChange": "Apply migration 0042_add_index.sql.",
+        "affectedObjects": "One table and one index.",
+        "backup": "Verified snapshot taken immediately before, location recorded by the owner.",
+        "dryRun": "Executed against a copy; plan and row counts recorded.",
+        "rollback": "Reverse migration 0042_down.sql, tested on the same copy.",
+        "ownerApproval": "Recorded by the owner with a note, at the gate.",
+        "executionEvidence": "Command output plus before/after observation, to be attached at execution."
+      },
+      "simulated": true
+    },
+    {
+      "id": "rotate-dns-record",
+      "title": "Change a DNS record",
+      "tier": "T4",
+      "level": 4,
+      "approvalRecorded": true,
+      "preconditionsMet": true,
+      "templated": true,
+      "simulated": true
+    },
+    {
+      "id": "observe-from-company-laptop",
+      "title": "Read Git status from the company laptop",
+      "tier": "T0",
+      "level": 1,
+      "zone": "employer",
+      "simulated": true
+    }
+  ]
+}
