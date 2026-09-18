@@ -7,8 +7,10 @@ Keep it short. Detail lives in the files it points to.
 
 - Product: **OctopusG** (OctopusGinormous) — the AgoraXAI Portfolio Operating System.
 - Technical subsystem: AgoraXAI Control Plane. Codename in code: `Octopus`.
-- Repository: `~/Projects/agoraxai/control-plane` (branch `main`, no remote). Do not rename,
-  move, or create a second repository.
+- Repository: `~/Projects/agoraxai/control-plane`. Exactly one remote is permitted, named
+  `origin`, with the URL `https://github.com/yazilimlar/octopusg-control-plane.git`, and that
+  repository must be **private** (ADR-0007). Do not rename, move, or create a second repository,
+  and do not add any other remote.
 - Owner and final authority: George Oktem.
 
 ## Read before doing anything
@@ -31,15 +33,36 @@ Chat history, reflogs, filenames and memory are **not** authoritative.
 6. Done means: `npm run validate` and `npm run validate:spec` pass, the requirement's tests exist
    and pass, and evidence is written to `docs/evidence/WP-xx.md`.
 7. Preserve v0.1 behavior unless a requirement says otherwise. The registry importer stays
-   fail-closed. Never loosen `scripts/audit.mjs`.
+   fail-closed. `scripts/audit.mjs` may be changed **only** to implement ADR-0007 Decision §1
+   exactly — asserting that the remote set is either empty or exactly one `origin` at the approved
+   URL. Never loosen it further.
+
+## Owner-approved exception — ADR-0007 (accepted 2026-09-18)
+
+Status: **ACCEPTED** by George Oktem. This exception is deliberately narrow.
+
+Permitted, and only in this exact shape:
+
+- `git remote add origin https://github.com/yazilimlar/octopusg-control-plane.git`
+- `git push origin …` to that remote (never `--force`, never `--delete`)
+- `gh repo create yazilimlar/octopusg-control-plane --private`, `gh repo view` and read-only
+  `gh api repos/yazilimlar/octopusg-control-plane/…` calls against it
+- `gh run list` / `view` / `watch` to confirm CI
+- Verify visibility is **private** before the first push and again after it. If it is ever public,
+  stop and report.
 
 ## Never (also enforced in `.claude/settings.json`)
 
-- Push, add remotes, deploy, or call Vercel/GitHub/Supabase/Google/Meta/Tailscale/n8n.
-- Read `.env*`, keys, Keychain items, or any secret value.
+- Add any remote other than the one approved `origin` above; force-push; delete remote branches;
+  rewrite history; make the repository public.
+- Deploy to production, attach a production domain, or change DNS.
+- Call Vercel from this machine. Vercel is operated by the owner from a separate authorized
+  session; `vercel:*` stays denied here.
+- Call Supabase/Google/Meta/Tailscale/n8n, or connect any other external account. That is always
+  an owner action.
+- Read `.env*`, keys, Keychain items, or any secret value. Never print or commit a token.
 - Install or add dependencies (`npm ci` from the lockfile is fine).
 - Delete files outside `work/` or `dist/`.
-- Connect external accounts. That is always an owner action.
 
 ## Commands
 
