@@ -108,6 +108,32 @@ for (const r of reqs)
   if (['IMPLEMENTED', 'VERIFIED'].includes(r.status) && r.milestone !== 'v0.1' && !evidenceText.includes(r.id))
     err(`${r.id}: ${r.status} but no docs/evidence/*.md mentions it`);
 
+// OG-GOV-004: a finished work package must have its own record, and that record must say what
+// was run, what came back, which requirement statuses moved, and what is still open. The check
+// is on the shape of the record, not on its prose: it cannot judge whether the answers are good,
+// only that the four questions were answered somewhere.
+const evidenceFileFor = async (wp) => {
+  const path = `${evidenceDir}/${wp}.md`;
+  return (await exists(path)) ? readFile(path, 'utf8') : null;
+};
+for (const wp of L.work_packages) {
+  const finished = reqs.filter((r) => r.work_package === wp.id && ['IMPLEMENTED', 'VERIFIED'].includes(r.status));
+  if (!finished.length) continue;
+  const text = await evidenceFileFor(wp.id);
+  if (text === null) { err(`${wp.id}: ${finished.length} finished requirement(s) but no ${evidenceDir}/${wp.id}.md`); continue; }
+  const who = `${evidenceDir}/${wp.id}.md`;
+  for (const r of finished) if (!text.includes(r.id)) err(`${who}: does not name ${r.id}`);
+  // requirement status changes
+  if (!/^##+\s+Requirements/m.test(text)) err(`${who}: needs a "## Requirements" section listing the status changes`);
+  // commands run, and their results
+  const validation = /^##+\s+(Validation|Commands and results)/m.test(text);
+  if (!validation) err(`${who}: needs a validation section naming the commands that were run`);
+  if (!/npm run validate/.test(text)) err(`${who}: does not record that npm run validate was run`);
+  if (!/PASS|passed|fail 0|\d+\/\d+/.test(text)) err(`${who}: records commands but no result`);
+  // open questions
+  if (!/^##+\s+Open questions/m.test(text)) err(`${who}: needs an "## Open questions" section (write "None." if there are none)`);
+}
+
 // ---------- capabilities
 const inCap = new Set();
 const capIds = new Set();

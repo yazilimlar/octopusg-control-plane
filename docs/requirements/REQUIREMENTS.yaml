@@ -233,7 +233,7 @@ capabilities:
   - S1#device-and-trust-zone-model
 - id: connection-center
   title: Connection Center
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-CONN-002
@@ -246,7 +246,7 @@ capabilities:
   - S2#connection-center
 - id: event-inbox
   title: Unified event inbox
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-EVT-001
@@ -257,7 +257,7 @@ capabilities:
   - S1#core-capabilities-discussed
 - id: approvals-and-policy
   title: Action tiers, levels and approvals
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-ACT-002
@@ -268,7 +268,7 @@ capabilities:
   - S2#database-and-configuration-changes
 - id: safe-open-actions
   title: Open website, provider and folder
-  status: PLANNED
+  status: BUILDING
   target: v0.2
   requirements:
   - OG-ACT-001
@@ -539,7 +539,7 @@ requirements:
   milestone: v0.2
   work_package: WP-11
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#requirements-and-completeness-model

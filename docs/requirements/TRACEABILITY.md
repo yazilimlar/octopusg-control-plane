@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 54 |
-| IMPLEMENTED | 18 |
+| PROPOSED | 53 |
+| IMPLEMENTED | 19 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
@@ -69,7 +69,7 @@
 
 | ID | Title | Plane | Status | Risk | WP | Depends on | Sources | Tests |
 |---|---|---|---|---|---|---|---|---|
-| OG-GOV-004 | Work-package evidence records | GOVERNANCE | PROPOSED | LOW | WP-11 | — | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model)<br>[S2#specification-pack-and-requirement-families](../sources/S2-2026-09-17-gpt-planning-thread.md#specification-pack-and-requirement-families) | `scripts/validate-spec.mjs` |
+| OG-GOV-004 | Work-package evidence records | GOVERNANCE | IMPLEMENTED | LOW | WP-11 | — | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model)<br>[S2#specification-pack-and-requirement-families](../sources/S2-2026-09-17-gpt-planning-thread.md#specification-pack-and-requirement-families) | `scripts/validate-spec.mjs` |
 | OG-GOV-005 | Reconcile README and v0.1 documents with repository state | GOVERNANCE | IMPLEMENTED | LOW | WP-01 | — | [S4#stale-documentation](../sources/S4-2026-09-17-v0.1-repository-inspection.md#stale-documentation) | `scripts/validate-spec.mjs` |
 | OG-GOV-006 | Governance archive of Gate artifacts | GOVERNANCE | IMPLEMENTED | LOW | WP-01 | — | [S1#named-artifacts-and-retention-guidance](../sources/S1-2026-09-17-conversation-export.md#named-artifacts-and-retention-guidance)<br>[S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) | `scripts/validate-spec.mjs` |
 | OG-REG-002 | Single registry lock manifest | CONTROL | IMPLEMENTED | MEDIUM | WP-01 | OG-REG-001 | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/core.test.ts`<br>`tests/registry-lock.test.ts` |
@@ -213,10 +213,10 @@
 | truth-and-provenance | AVAILABLE | v0.2 | OG-DATA-001, OG-DATA-002 |
 | local-git-observation | BUILDING | v0.2 | OG-OBS-001, OG-OBS-002, OG-OBS-003 |
 | device-registry | BUILDING | v0.2 | OG-DEV-001, OG-UI-004 |
-| connection-center | PLANNED | v0.2 | OG-CONN-002, OG-CONN-003, OG-CONN-004, OG-CONN-007, OG-OBS-004, OG-SEC-005 |
-| event-inbox | PLANNED | v0.2 | OG-EVT-001, OG-EVT-002, OG-EVT-004, OG-DATA-004 |
-| approvals-and-policy | PLANNED | v0.2 | OG-ACT-002, OG-ACT-003, OG-SEC-002, OG-ACT-008 |
-| safe-open-actions | PLANNED | v0.2 | OG-ACT-001 |
+| connection-center | BUILDING | v0.2 | OG-CONN-002, OG-CONN-003, OG-CONN-004, OG-CONN-007, OG-OBS-004, OG-SEC-005 |
+| event-inbox | BUILDING | v0.2 | OG-EVT-001, OG-EVT-002, OG-EVT-004, OG-DATA-004 |
+| approvals-and-policy | BUILDING | v0.2 | OG-ACT-002, OG-ACT-003, OG-SEC-002, OG-ACT-008 |
+| safe-open-actions | BUILDING | v0.2 | OG-ACT-001 |
 | credential-management | PLANNED | v0.3 | OG-SEC-003, OG-SEC-004 |
 | vercel-readonly | PLANNED | v0.3 | OG-CONN-001, OG-EVT-003 |
 | github-readonly | PLANNED | v0.3 | OG-CONN-005 |

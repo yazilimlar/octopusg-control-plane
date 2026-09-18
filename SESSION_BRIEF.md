@@ -46,6 +46,13 @@ Read this first in every AI session. Keep it under one page.
   actions (`src/open.ts`, `npm run open -- <product-id>`) and the tier/level action request with
   the seven-field docs/06 §3 record (`src/actions.ts`). No declared trust zone permits T3 or T4,
   and nothing in the repository can execute an action. Evidence: [WP-09](docs/evidence/WP-09.md).
+  WP-11 then closed the batch with the v0.2 acceptance record: `npm run validate:spec` now
+  enforces that every finished work package has a record naming its requirements, the commands
+  run, their results and its **open questions**, and all eleven records meet it.
+  Evidence: [WP-11](docs/evidence/WP-11.md).
+- **At the gate:** 16 v0.2 requirements are IMPLEMENTED and awaiting the owner. `OG-SEC-008`
+  (OD-02, off-machine recovery copy) is the one v0.2 requirement that cannot close without an
+  owner decision, and `platform-resilience` stays PLANNED because of it.
 - The OctopusG brand mark the owner supplied is recorded as **OG-UI-007 (PROPOSED, v0.3)** and was
   deliberately **not built**; it needs an owner source, a licence position and a decision on the
   wordmark tagline.

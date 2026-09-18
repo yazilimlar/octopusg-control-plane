@@ -210,7 +210,7 @@
     {
       "id": "connection-center",
       "title": "Connection Center",
-      "status": "PLANNED",
+      "status": "BUILDING",
       "target": "v0.2",
       "requirements": [
         "OG-CONN-002",
@@ -224,7 +224,7 @@
     {
       "id": "event-inbox",
       "title": "Unified event inbox",
-      "status": "PLANNED",
+      "status": "BUILDING",
       "target": "v0.2",
       "requirements": [
         "OG-EVT-001",
@@ -236,7 +236,7 @@
     {
       "id": "approvals-and-policy",
       "title": "Action tiers, levels and approvals",
-      "status": "PLANNED",
+      "status": "BUILDING",
       "target": "v0.2",
       "requirements": [
         "OG-ACT-002",
@@ -248,7 +248,7 @@
     {
       "id": "safe-open-actions",
       "title": "Open website, provider and folder",
-      "status": "PLANNED",
+      "status": "BUILDING",
       "target": "v0.2",
       "requirements": [
         "OG-ACT-001"
@@ -563,7 +563,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-11",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [],
       "acceptance": [
@@ -579,7 +579,9 @@
         "S2#specification-pack-and-requirement-families"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-11.md"
+      ]
     },
     {
       "id": "OG-GOV-005",
@@ -605,7 +607,8 @@
       "ownerDecisions": [],
       "evidence": [
         "B0.md",
-        "WP-01.md"
+        "WP-01.md",
+        "WP-11.md"
       ]
     },
     {
@@ -637,7 +640,8 @@
       ],
       "evidence": [
         "B0.md",
-        "WP-01.md"
+        "WP-01.md",
+        "WP-11.md"
       ]
     },
     {
@@ -693,7 +697,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-01.md"
+        "WP-01.md",
+        "WP-11.md"
       ]
     },
     {
@@ -726,7 +731,8 @@
         "OD-01"
       ],
       "evidence": [
-        "WP-01.md"
+        "WP-01.md",
+        "WP-11.md"
       ]
     },
     {
@@ -759,7 +765,8 @@
       "evidence": [
         "WP-03.md",
         "WP-04.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -790,7 +797,8 @@
       "evidence": [
         "WP-03.md",
         "WP-04.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -842,7 +850,8 @@
         "OD-08"
       ],
       "evidence": [
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -873,7 +882,8 @@
       "evidence": [
         "WP-02.md",
         "WP-03.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -903,7 +913,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-04.md",
-        "WP-10.md"
+        "WP-10.md",
+        "WP-11.md"
       ]
     },
     {
@@ -931,7 +942,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-06.md",
-        "WP-10.md"
+        "WP-10.md",
+        "WP-11.md"
       ]
     },
     {
@@ -989,7 +1001,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-08.md",
-        "WP-09.md"
+        "WP-09.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1046,7 +1059,8 @@
         "WP-03.md",
         "WP-04.md",
         "WP-05.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1078,7 +1092,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-05.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1106,7 +1121,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-05.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1200,7 +1216,8 @@
         "WP-02.md",
         "WP-03-REPAIR-01.md",
         "WP-03.md",
-        "WP-04.md"
+        "WP-04.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1234,7 +1251,8 @@
         "WP-02.md",
         "WP-03.md",
         "WP-04.md",
-        "WP-06.md"
+        "WP-06.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1419,7 +1437,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-02.md",
-        "WP-03.md"
+        "WP-03.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1450,7 +1469,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-02.md",
-        "WP-03.md"
+        "WP-03.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1503,7 +1523,9 @@
         "S2#target-planes"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-02.md"
+      ]
     },
     {
       "id": "OG-CONN-001",
@@ -1538,7 +1560,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "B0.md"
+        "B0.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1571,7 +1594,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-07.md"
+        "WP-07.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1600,7 +1624,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-07.md"
+        "WP-07.md",
+        "WP-11.md"
       ]
     },
     {
@@ -1655,7 +1680,9 @@
       "ownerDecisions": [
         "OD-07"
       ],
-      "evidence": []
+      "evidence": [
+        "WP-11.md"
+      ]
     },
     {
       "id": "OG-CONN-006",
@@ -1972,7 +1999,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-08.md"
+        "WP-08.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2001,7 +2029,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-08.md"
+        "WP-08.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2029,7 +2058,9 @@
         "S2#first-communications-pilot"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-11.md"
+      ]
     },
     {
       "id": "OG-EVT-004",
@@ -2114,7 +2145,8 @@
       "evidence": [
         "WP-02.md",
         "WP-03.md",
-        "WP-04.md"
+        "WP-04.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2463,7 +2495,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-09.md"
+        "WP-09.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2493,7 +2526,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-09.md"
+        "WP-09.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2700,7 +2734,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-03.md",
-        "WP-04.md"
+        "WP-04.md",
+        "WP-11.md"
       ]
     },
     {
@@ -2861,7 +2896,8 @@
         "OD-02"
       ],
       "evidence": [
-        "WP-01.md"
+        "WP-01.md",
+        "WP-11.md"
       ]
     },
     {
