@@ -1,0 +1,13 @@
+{
+  "id": "evt-20260918-008",
+  "type": "observation.changed",
+  "occurred_at": "2026-09-17T18:30:00.000Z",
+  "received_at": "2026-09-17T18:30:00.000Z",
+  "source": {"connector": "mac-status", "resource": "allowlisted checkout", "provider_event_id": "local-0003"},
+  "subject": {"product_id": "artemis-workbench"},
+  "summary": "Dirty file count changed in an allowlisted checkout. Counts only; no file name or content is recorded.",
+  "severity": "info",
+  "truth": "simulated",
+  "requires_decision": false,
+  "status": "dismissed"
+}

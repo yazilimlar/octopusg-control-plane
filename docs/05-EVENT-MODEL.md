@@ -13,7 +13,8 @@ interface OctoEvent {
   type: string;               // 'deployment.failed', 'inquiry.received', 'comment.keyword_matched'
   occurred_at: string;        // provider time (ISO 8601)
   received_at: string;        // OctopusG time
-  source: {connector: string; account?: string; resource?: string};
+  source: {connector: string; account?: string; resource?: string;
+           provider_event_id?: string};  // the provider's own id; the de-duplication key in §3
   subject: {product_id?: string; resource_id?: string};
   summary: string;            // short, human-readable, no secrets or message bodies in v0.2
   severity: 'info'|'notice'|'warning'|'critical';
@@ -37,7 +38,11 @@ the map change. Filters: product, connector, severity, requires-decision, status
 - `simulated` events are visibly labelled and never feed KPIs (same rule as v0.1's simulation).
 - Personal data (names, emails, message text) is not stored until the communications block
   defines retention and redaction (OG-DATA-003).
-- Duplicate provider deliveries are de-duplicated by `(connector, provider_event_id)`.
+- Duplicate provider deliveries are de-duplicated by `(connector, provider_event_id)`. An event
+  that carries no `provider_event_id` has no provider identity and is never merged with another;
+  de-duplication keeps the first delivery and drops the later ones.
+- A status change is a new record of type `event.status_changed` carrying `correlation_id`; the
+  original record is never edited, and the current status is the fold over those records.
 
 ## 4. Initial event types
 

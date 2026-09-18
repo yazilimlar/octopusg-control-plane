@@ -36,6 +36,13 @@ Read this first in every AI session. Keep it under one page.
   defined, every connection at **level 0 (Registered)**, every owner action visible but disabled
   with its reason, and the `maxLevel` ceiling enforced by the loader, by `canRaiseLevel` and by
   the committed file. Evidence: [WP-07](docs/evidence/WP-07.md).
+  WP-08 then added the docs/05 event envelope and the simulated inbox (`src/events.ts`,
+  `fixtures/events/*.json`): every row labelled SIMULATED, none countable, status changes
+  appended rather than edited, duplicate deliveries removed on `(connector, provider_event_id)`.
+  Evidence: [WP-08](docs/evidence/WP-08.md).
+- The OctopusG brand mark the owner supplied is recorded as **OG-UI-007 (PROPOSED, v0.3)** and was
+  deliberately **not built**; it needs an owner source, a licence position and a decision on the
+  wordmark tagline.
 - Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
   Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)).
 
@@ -43,7 +50,7 @@ Read this first in every AI session. Keep it under one page.
 | | |
 |---|---|
 | Current milestone | **v0.2** — 27 requirements (10 verified) |
-| Ledger | 89 requirements · 33 capabilities |
+| Ledger | 90 requirements · 33 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08 |
 | Next work package | WP-01 |
 <!-- GENERATED:STATUS:END -->

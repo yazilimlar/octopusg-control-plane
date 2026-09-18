@@ -1,0 +1,13 @@
+{
+  "id": "evt-20260918-006",
+  "type": "connection.state_changed",
+  "occurred_at": "2026-09-18T07:21:00.000Z",
+  "received_at": "2026-09-18T07:21:00.000Z",
+  "source": {"connector": "control-plane", "resource": "connection vercel-owner"},
+  "subject": {},
+  "summary": "Connection vercel-owner was recorded at level 0 (Registered). No credential was stored.",
+  "severity": "info",
+  "truth": "simulated",
+  "requires_decision": false,
+  "status": "new"
+}

@@ -5,14 +5,14 @@
 
 ## Totals
 
-89 requirements · 33 capabilities · 5 sources
+90 requirements · 33 capabilities · 5 sources
 
 | milestone | count |
 |---|---:|
 | v0.1 | 7 |
 | B0 | 3 |
 | v0.2 | 27 |
-| v0.3 | 12 |
+| v0.3 | 13 |
 | v0.4 | 2 |
 | v0.5 | 5 |
 | v0.6 | 7 |
@@ -25,7 +25,7 @@
 
 | plane | count |
 |---|---:|
-| MANAGEMENT | 12 |
+| MANAGEMENT | 13 |
 | CONTROL | 34 |
 | INTEGRATION | 21 |
 | EXECUTION | 15 |
@@ -33,14 +33,14 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 57 |
-| IMPLEMENTED | 14 |
+| PROPOSED | 56 |
+| IMPLEMENTED | 16 |
 | VERIFIED | 17 |
 | DEFERRED | 1 |
 
 | risk | count |
 |---|---:|
-| LOW | 41 |
+| LOW | 42 |
 | MEDIUM | 24 |
 | HIGH | 17 |
 | CRITICAL | 7 |
@@ -89,8 +89,8 @@
 | OG-DATA-002 | Observation store with freshness | CONTROL | VERIFIED | LOW | WP-02 | OG-DATA-001 | [S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center) | `tests/truth.test.ts` |
 | OG-CONN-002 | Connector contract and definitions | INTEGRATION | IMPLEMENTED | LOW | WP-07 | OG-DATA-002, OG-SEC-002 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels) | `tests/connections.test.ts`<br>`tests/core.test.ts` |
 | OG-CONN-003 | Connection Center at Level 0 | MANAGEMENT | IMPLEMENTED | LOW | WP-07 | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/browser.mjs` |
-| OG-EVT-001 | Normalized event envelope | CONTROL | PROPOSED | LOW | WP-08 | OG-DATA-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#build-versus-buy](../sources/S2-2026-09-17-gpt-planning-thread.md#build-versus-buy) | `tests/events.test.ts` |
-| OG-EVT-002 | Simulated inbox from fixtures | MANAGEMENT | PROPOSED | LOW | WP-08 | OG-EVT-001 | [S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/events.test.ts`<br>`tests/browser.mjs` |
+| OG-EVT-001 | Normalized event envelope | CONTROL | IMPLEMENTED | LOW | WP-08 | OG-DATA-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#build-versus-buy](../sources/S2-2026-09-17-gpt-planning-thread.md#build-versus-buy) | `tests/events.test.ts` |
+| OG-EVT-002 | Simulated inbox from fixtures | MANAGEMENT | IMPLEMENTED | LOW | WP-08 | OG-EVT-001 | [S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/events.test.ts`<br>`tests/browser.mjs` |
 | OG-DEV-001 | Declared device registry and trust zones | CONTROL | VERIFIED | MEDIUM | WP-03 | OG-SEC-002 | [S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone)<br>[S1#device-and-trust-zone-model](../sources/S1-2026-09-17-conversation-export.md#device-and-trust-zone-model) | `tests/devices.test.ts` |
 | OG-ACT-001 | Safe open actions | MANAGEMENT | PROPOSED | LOW | WP-09 | OG-REG-004 | [S2#mvp-boundary](../sources/S2-2026-09-17-gpt-planning-thread.md#mvp-boundary)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/open.test.ts`<br>`tests/browser.mjs` |
 | OG-ACT-002 | Action requests with tier and level policy (simulated) | CONTROL | PROPOSED | MEDIUM | WP-09 | OG-SEC-002 | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S1#action-authority-levels](../sources/S1-2026-09-17-conversation-export.md#action-authority-levels) | `tests/policy.test.ts` |
@@ -101,6 +101,7 @@
 
 | ID | Title | Plane | Status | Risk | WP | Depends on | Sources | Tests |
 |---|---|---|---|---|---|---|---|---|
+| OG-UI-007 | OctopusG brand mark and visual identity *(provisional)* | MANAGEMENT | PROPOSED | LOW | — | OG-UI-002 | **UNSOURCED** | `tests/browser.mjs` |
 | OG-MAP-005 | Deployment, domain, device, account and risk views | MANAGEMENT | PROPOSED | LOW | — | OG-MAP-004, OG-CONN-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
 | OG-MAP-006 | Map regenerates after connection changes | CONTROL | PROPOSED | LOW | — | OG-MAP-003, OG-CONN-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/graph.test.ts` |
 | OG-OBS-004 | Connector health and data freshness monitoring | CONTROL | PROPOSED | LOW | — | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/connections.test.ts` |
@@ -207,7 +208,7 @@
 | platform-resilience | PLANNED | v0.2 | OG-SEC-001, OG-SEC-008 |
 | portfolio-registry | VALIDATING | v0.2 | OG-REG-001, OG-REG-002, OG-REG-003 |
 | resource-catalog | AVAILABLE | v0.2 | OG-REG-004, OG-REG-005 |
-| owner-cockpit | BUILDING | v0.2 | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006 |
+| owner-cockpit | BUILDING | v0.2 | OG-UI-001, OG-UI-002, OG-UI-003, OG-UI-005, OG-UI-006, OG-UI-007 |
 | system-maps | BUILDING | v0.2 | OG-MAP-001, OG-MAP-002, OG-MAP-003, OG-MAP-004, OG-MAP-005, OG-MAP-006 |
 | truth-and-provenance | AVAILABLE | v0.2 | OG-DATA-001, OG-DATA-002 |
 | local-git-observation | BUILDING | v0.2 | OG-OBS-001, OG-OBS-002, OG-OBS-003 |

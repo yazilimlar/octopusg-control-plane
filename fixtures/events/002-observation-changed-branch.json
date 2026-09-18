@@ -1,0 +1,13 @@
+{
+  "id": "evt-20260918-002",
+  "type": "observation.changed",
+  "occurred_at": "2026-09-18T06:40:00.000Z",
+  "received_at": "2026-09-18T06:40:05.000Z",
+  "source": {"connector": "mac-status", "resource": "allowlisted checkout", "provider_event_id": "local-0002"},
+  "subject": {"product_id": "agoraxai-control-plane"},
+  "summary": "Observed branch changed between two local observation runs. Neither value is assumed correct.",
+  "severity": "info",
+  "truth": "simulated",
+  "requires_decision": false,
+  "status": "new"
+}

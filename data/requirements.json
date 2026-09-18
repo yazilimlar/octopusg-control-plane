@@ -158,7 +158,8 @@
         "OG-UI-002",
         "OG-UI-003",
         "OG-UI-005",
-        "OG-UI-006"
+        "OG-UI-006",
+        "OG-UI-007"
       ]
     },
     {
@@ -959,6 +960,35 @@
       "evidence": [
         "WP-06.md",
         "WP-10.md"
+      ]
+    },
+    {
+      "id": "OG-UI-007",
+      "title": "OctopusG brand mark and visual identity",
+      "plane": "MANAGEMENT",
+      "milestone": "v0.3",
+      "workPackage": null,
+      "priority": "NEXT",
+      "status": "PROPOSED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-UI-002"
+      ],
+      "acceptance": [
+        "The owner-supplied OctopusG mark replaces the placeholder favicon and the sidebar brand image, committed as a repository asset with its provenance recorded.",
+        "The mark is supplied at the sizes the app needs, keeps a text alternative, and remains legible in the dark theme and at 390px.",
+        "No brand asset is fetched at runtime and no font or icon is loaded from a third party."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "UNSOURCED"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-08.md"
       ]
     },
     {
@@ -1922,7 +1952,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-08",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-DATA-001"
@@ -1940,7 +1970,9 @@
         "S2#build-versus-buy"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-08.md"
+      ]
     },
     {
       "id": "OG-EVT-002",
@@ -1949,7 +1981,7 @@
       "milestone": "v0.2",
       "workPackage": "WP-08",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "LOW",
       "dependencies": [
         "OG-EVT-001"
@@ -1967,7 +1999,9 @@
         "S1#octopusg-v02-boundary"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-08.md"
+      ]
     },
     {
       "id": "OG-EVT-003",
@@ -2020,7 +2054,9 @@
         "S2#per-service-management"
       ],
       "ownerDecisions": [],
-      "evidence": []
+      "evidence": [
+        "WP-08.md"
+      ]
     },
     {
       "id": "OG-EVT-005",

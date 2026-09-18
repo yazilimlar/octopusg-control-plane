@@ -139,7 +139,9 @@ for (const od of odIds) if (!roadmap.includes(`| ${od} |`)) err(`09-ROADMAP: own
 // ---------- generated sections
 const count = (key) => reqs.reduce((a, r) => (a[r[key]] = (a[r[key]] ?? 0) + 1, a), {});
 const esc = (s) => String(s).replaceAll('|', '\\|');
-const srcLink = (s, prefix) => { const [k, a] = s.split('#'); return `[${k}#${a}](${prefix}${L.sources[k].replace('docs/', '')}#${a})`; };
+// `UNSOURCED` is a permitted placeholder (CLAUDE.md rule 4): the requirement exists but the
+// owner has not yet supplied a source. It has no file to link to, so it renders as plain text.
+const srcLink = (s, prefix) => { if (s === 'UNSOURCED') return '**UNSOURCED**'; const [k, a] = s.split('#'); return `[${k}#${a}](${prefix}${L.sources[k].replace('docs/', '')}#${a})`; };
 const countTable = (key, order) => {
   const c = count(key);
   return `| ${key} | count |\n|---|---:|\n` + order.filter((k) => c[k]).map((k) => `| ${k} | ${c[k]} |`).join('\n');

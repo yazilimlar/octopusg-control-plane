@@ -187,6 +187,7 @@ capabilities:
   - OG-UI-003
   - OG-UI-005
   - OG-UI-006
+  - OG-UI-007
   source:
   - S2#target-planes
 - id: system-maps
@@ -790,6 +791,28 @@ requirements:
   acceptance_provisional: true
   tests:
   - tests/browser.mjs
+- id: OG-UI-007
+  title: OctopusG brand mark and visual identity
+  plane: MANAGEMENT
+  milestone: v0.3
+  priority: NEXT
+  status: PROPOSED
+  risk: LOW
+  source:
+  - UNSOURCED
+  dependencies:
+  - OG-UI-002
+  acceptance:
+  - 'The owner-supplied OctopusG mark replaces the placeholder favicon and the sidebar brand image, committed as a
+    repository asset with its provenance recorded.'
+  - The mark is supplied at the sizes the app needs, keeps a text alternative, and remains legible in the dark theme
+    and at 390px.
+  - No brand asset is fetched at runtime and no font or icon is loaded from a third party.
+  acceptance_provisional: true
+  tests:
+  - tests/browser.mjs
+  notes: Proposed in WP-08 because the owner supplied the mark but no requirement covered it. Not built. Needs the
+    owner to confirm the source file, the licence position and whether the wordmark tagline belongs in the interface.
 - id: OG-MAP-001
   title: Declared ecosystem graph (v0.1 baseline)
   plane: CONTROL
@@ -1406,7 +1429,7 @@ requirements:
   milestone: v0.2
   work_package: WP-08
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#core-capabilities-discussed
@@ -1424,7 +1447,7 @@ requirements:
   milestone: v0.2
   work_package: WP-08
   priority: MVP
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: LOW
   source:
   - S1#octopusg-v02-boundary

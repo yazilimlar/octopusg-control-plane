@@ -1,0 +1,13 @@
+{
+  "id": "evt-20260918-004",
+  "type": "drift.detected",
+  "occurred_at": "2026-09-18T07:03:00.000Z",
+  "received_at": "2026-09-18T07:03:00.000Z",
+  "source": {"connector": "control-plane", "resource": "declared versus observed comparison"},
+  "subject": {"product_id": "artemis-omni"},
+  "summary": "A deployment recorded outside the Git integration remains unexplained in the registry evidence.",
+  "severity": "critical",
+  "truth": "simulated",
+  "requires_decision": true,
+  "status": "new"
+}

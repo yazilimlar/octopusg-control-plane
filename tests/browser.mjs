@@ -104,6 +104,40 @@ await check('requirements view exposes the ledger and its traceability',async()=
  for(const pattern of [/\/Users\//,/\/home\//,/C:\\Users/,/ghp_[A-Za-z0-9]{20,}/])
   assert.ok(!pattern.test(all),`requirements view must not show ${pattern}`);});
 await check('KPI placeholders remain unavailable',async()=>{await nav('KPI framework');assert.equal(await page.locator('tbody tr').count(),7);assert.equal(await page.locator('tbody .badge.unknown').count(),7);assert.match(await page.locator('main').innerText(),/Simulation events are excluded/);});
+await check('inbox renders the simulated fixtures, filters them, and counts none of them',async()=>{await nav('Inbox');
+ const rows=page.locator('#inbox tbody tr');
+ const all=await rows.count();
+ assert.ok(all>=6,'the fixtures are rendered');
+ assert.equal(await page.locator('#inbox tbody tr .badge.inferred').count(),all,'every row is visibly SIMULATED');
+ assert.match(await page.locator('main').innerText(),/0 countable/,'no simulated event is countable');
+ assert.match(await page.locator('main').innerText(),/duplicate provider delivery/i);
+ // severity first, then most recent
+ assert.equal(await rows.first().getAttribute('data-severity'),'critical');
+ // each of the five documented filters narrows the table, and they intersect
+ const count=async()=>Number(await page.locator('#event-count').innerText());
+ await page.locator('#event-severity').selectOption('critical');
+ assert.equal(await count(),1);
+ await page.locator('#event-connector').selectOption('mac-status');
+ assert.equal(await count(),0,'filters intersect rather than union');
+ await page.getByRole('button',{name:'Reset',exact:true}).click();
+ assert.equal(await count(),all);
+ await page.locator('#event-decision').selectOption('true');
+ assert.equal(await count(),2);
+ for(const row of await rows.all())assert.match(await row.innerText(),/requires a decision/);
+ await page.getByRole('button',{name:'Reset',exact:true}).click();
+ await page.locator('#event-status').selectOption('dismissed');
+ assert.equal(await count(),1);
+ await page.getByRole('button',{name:'Reset',exact:true}).click();
+ await page.locator('#event-product').selectOption('dayos');
+ assert.equal(await count(),1);
+ await page.getByRole('button',{name:'Reset',exact:true}).click();
+ // no personal data, no machine identifier, no credential anywhere on the screen
+ const text=await page.locator('main').innerText();
+ for(const pattern of [/@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/,/\/Users\//,/\/home\//,/\b(?:\d{1,3}\.){3}\d{1,3}\b/,/ghp_[A-Za-z0-9]{20,}/])
+  assert.ok(!pattern.test(text),`inbox must not show ${pattern}`);
+ // every row states its meaning in words for a screen reader
+ for(const label of await page.locator('#inbox .badge-row').evaluateAll(gs=>gs.map(g=>g.getAttribute('aria-label'))))
+  assert.match(label,/simulated/,'the row is described as simulated in text, not by colour');});
 await check('Connection Center shows every connector at level 0 with disabled owner actions',async()=>{await nav('Connectors');
  const cards=page.locator('[data-connector-card]');
  assert.equal(await cards.count(),5,'one card per connector definition');
@@ -138,7 +172,7 @@ await check('Connection Center shows every connector at level 0 with disabled ow
   assert.match(href,/^http:\/\/127\.0\.0\.1|^$/,'no provider sign-in link');
  assert.match(all,/requires an owner authorization recorded at the gate/);});
 await check('disabled connector probes return blocked',async()=>{await nav('Connectors');assert.equal(await page.locator('[data-connector]').count(),5);for(const button of await page.locator('[data-connector]').all())await button.click();assert.equal(await page.locator('.connector-result:not([hidden])').count(),5);assert.match(await page.locator('#result-github').innerText(),/"status": "blocked"/);});
-await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Devices','Requirements','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
+await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Devices','Requirements','Inbox','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
 await check('mobile main nav scrolls horizontally and does not clip item focus outlines',async()=>{const n=page.getByRole('navigation',{name:'Main navigation'});const m=await n.evaluate(el=>{const s=getComputedStyle(el);return{scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,overflowX:s.overflowX,padTop:parseFloat(s.paddingTop),padBottom:parseFloat(s.paddingBottom)};});assert.equal(m.overflowX,'auto','mobile nav must be a horizontal scroller');assert.ok(m.scrollWidth>m.clientWidth,`nav must overflow and scroll at 390px, got scrollWidth ${m.scrollWidth} <= clientWidth ${m.clientWidth}`);assert.ok(m.padTop>=4&&m.padBottom>=4,`the scroller needs block padding or it clips the 4px focus outline; got ${m.padTop}/${m.padBottom}`);const widths=await n.getByRole('button').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().width));assert.ok(Math.min(...widths)>=56,`nav items must keep intrinsic width, narrowest was ${Math.min(...widths)}`);});
 await check('all views contain meaningful content, no browser errors or external requests',async()=>{assert.deepEqual(errors,[]);assert.deepEqual(external,[]);});
 await writeFile('work/browser-results.json',JSON.stringify({passed:checks.length,checks,errors,externalRequests:external},null,2));

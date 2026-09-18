@@ -167,6 +167,23 @@ pure decision behind the same ceiling: it refuses a raise above `maxLevel` even 
 authorization is supplied, and refuses any raise that has none. In v0.2 every connection is level
 0 and no connector declares an action, so nothing above **Registered** is reachable.
 
+### Event envelope and the simulated inbox (OG-EVT-001, OG-EVT-002)
+
+`fixtures/events/*.json` is the inbox's only input. `loadEvents` in `src/events.ts` validates each
+record against the docs/05 envelope before it exists as an event: documented type only, and a type
+its own connector declares (or `control-plane` for events the control plane emits itself); ISO
+timestamps with `received_at` never before `occurred_at`; a `subject.product_id` the registry
+declares; a summary capped at 200 characters; a `payload_ref` that can only be a pointer; and no
+value shaped like a credential, an e-mail address, an IP or serial, or a path carrying a user name.
+
+Three semantics matter more than the shape. **Simulated is not evidence**: `kpiEligible` filters on
+`truth`, so the eight simulated fixtures produce zero countable events and the figure on screen is
+derived rather than asserted. **Append-only**: a status change is a new `event.status_changed`
+record carrying `correlation_id`, and `currentStatus` is the fold over those records — the original
+is never edited. **Duplicate deliveries**: `dedupe` drops a repeat of the same
+`(connector, provider_event_id)` and keeps the first; an event with no provider id has no provider
+identity and is never merged with another.
+
 ## Normalized Project
 
 `Project` contains ID, name, source category, taxonomy, lifecycle, evidence class, path/repository/URL/deployment/backend Facts, blocker strings, inferred next action, risk, health, risk band, score reasons, and the untouched raw row.
