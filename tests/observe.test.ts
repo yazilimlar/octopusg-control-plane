@@ -4,18 +4,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {mkdtempSync,mkdirSync,writeFileSync,symlinkSync,rmSync,readdirSync,readFileSync,statSync,existsSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,symlinkSync,rmSync,readdirSync,readFileSync,realpathSync,statSync,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,relative} from 'node:path';
 import {loadAllowlist,resolveTarget,runGit,observeTarget,observeAll,writeObservations,summarizeStatus,
- remoteNames,gitCommands,gitHardening,gitEnv,forbiddenGitVerbs,OUTPUT_DIR,OUTPUT_FILE,
- type Allowlist,type Target} from '../src/observe.ts';
+ remoteNames,gitCommands,gitHardening,gitEnv,forbiddenGitVerbs,applyAliases,aliasesFor,platformAliases,
+ OUTPUT_DIR,OUTPUT_FILE,type Allowlist,type Target} from '../src/observe.ts';
 import {validateObservation,readObservation,evaluateDrift,type Observation} from '../src/truth.ts';
 
 const NOW='2026-09-17T12:00:00Z';
 const clock={now:NOW};
 const roots:string[]=[];
-const scratch=(name:string)=>{const d=mkdtempSync(join(tmpdir(),`octopusg-${name}-`));roots.push(d);return d;};
+// The temp root is canonicalised before any fixture path is built: on macOS mkdtemp returns a
+// path under /var, which is a symlink to /private/var, and a fixture must not be mistaken for a
+// symlink escape. The production rule is exercised separately, below.
+const scratch=(name:string)=>{const d=realpathSync(mkdtempSync(join(tmpdir(),`octopusg-${name}-`)));roots.push(d);return d;};
 const git=(dir:string,args:string[])=>execFileSync('git',['-c','user.name=fixture','-c','user.email=fixture@example.invalid','-C',dir,...args],
  {encoding:'utf8',env:{PATH:process.env.PATH??'/usr/bin:/bin',HOME:dir,GIT_CONFIG_NOSYSTEM:'1',GIT_TERMINAL_PROMPT:'0'}});
 function fixtureRepo(name:string,{dirty=false,remote=false}={}):string{
@@ -206,6 +209,57 @@ test('an observed HEAD flows into the WP-02 truth model and its drift derivation
  // a day later the same record is stale, and staleness is never hidden
  assert.equal(readObservation(head,'projects[dayos]',NOW.replace('-17T','-19T')).freshness,'stale');
  assert.match(evaluateDrift({value:String(head.value),source:'s'},head,NOW.replace('-17T','-19T')).state,/stale/);
+});
+test('a documented platform alias is not a symlink escape (macOS /var → /private/var)',()=>{
+ // Reproduces the macOS layout on any platform: an aliased prefix in front of the real directory.
+ const root=scratch('alias');
+ mkdirSync(join(root,'private/var'),{recursive:true});
+ symlinkSync(join(root,'private/var'),join(root,'var'));
+ const real=join(root,'private/var','repo');
+ mkdirSync(real);
+ git(real,['init','-q','-b','main']);
+ writeFileSync(join(real,'kept.txt'),'tracked\n');
+ git(real,['add','kept.txt']);
+ git(real,['commit','-q','-m','alias fixture']);
+ const viaAlias:Target={productId:'aliased',path:join(root,'var','repo')};
+ const aliases:[string,string][]=[[join(root,'var'),join(root,'private/var')]];
+ // Without the alias table the difference is indistinguishable from a redirect, so it is refused.
+ const refused=resolveTarget(viaAlias,'/nonexistent',{aliases:[]});
+ assert.equal(refused.ok,false);
+ if(!refused.ok)assert.match(refused.reason,/symlink escape/);
+ // With the documented prefix it resolves, and observation proceeds normally.
+ const accepted=resolveTarget(viaAlias,'/nonexistent',{aliases});
+ assert.equal(accepted.ok,true);
+ if(accepted.ok)assert.equal(accepted.dir,real);
+ const records=observeTarget(viaAlias,'/nonexistent',clock,24,{aliases});
+ assert.deepEqual(records.map(r=>r.field),['head_sha','branch','working_tree','remote_names']);
+ assert.equal(records.every(r=>r.status==='ok'),true);
+ assert.equal(records[0].source.resource,viaAlias.path,'the declared path is still what gets stored');
+ // The alias table is a closed list of whole-prefix rewrites.
+ assert.deepEqual(platformAliases.darwin,[['/var','/private/var'],['/tmp','/private/tmp'],['/etc','/private/etc']]);
+ assert.deepEqual(aliasesFor('linux'),[],'no rewrite applies where the platform has no alias');
+ assert.equal(applyAliases('/var/folders/ab/T/x',aliasesFor('darwin')),'/private/var/folders/ab/T/x');
+ assert.equal(applyAliases('/variant/x',aliasesFor('darwin')),'/variant/x','a prefix must end on a separator');
+ assert.equal(applyAliases('/Users/someone/Projects/x',aliasesFor('darwin')),'/Users/someone/Projects/x');
+});
+test('an alias table never lets a real symlink through',()=>{
+ const root=scratch('aliasguard');
+ mkdirSync(join(root,'private/var'),{recursive:true});
+ symlinkSync(join(root,'private/var'),join(root,'var'));
+ const aliases:[string,string][]=[[join(root,'var'),join(root,'private/var')]];
+ const elsewhere=fixtureRepo('aliasguard-real');           // a repository outside the aliased area
+ symlinkSync(elsewhere,join(root,'private/var','listed')); // the owner lists a symlink to it
+ const refused=resolveTarget({productId:'x',path:join(root,'var','listed')},'/nonexistent',{aliases});
+ assert.equal(refused.ok,false,'a symlink inside the aliased area is still a redirect');
+ if(!refused.ok)assert.match(refused.reason,/symlink escape/);
+ const records=observeTarget({productId:'x',path:join(root,'var','listed')},'/nonexistent',clock,24,{aliases});
+ assert.equal(records[0].status,'error');
+ assert.equal(records[0].value,null);
+ // and the classic case: a symlink with no alias involved at all
+ const plain=scratch('aliasguard-plain');
+ symlinkSync(elsewhere,join(plain,'link'));
+ const classic=resolveTarget({productId:'x',path:join(plain,'link')},'/nonexistent',{aliases});
+ assert.equal(classic.ok,false);
 });
 test('the shipped allowlist lists only an explicitly marked example and no user name',()=>{
  const raw=readFileSync('config/observe.allowlist.json','utf8');

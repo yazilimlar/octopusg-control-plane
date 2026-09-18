@@ -49,6 +49,13 @@ or one record with status `unknown`/`error` and a reason for `missing`, `not_a_r
 escape, a path inside another repository, or a timeout. Freshness, confidence and drift come
 from the WP-02 truth model.
 
+**Canonical paths and documented platform aliases.** A declared path must denote the repository
+itself: its canonical form must equal the path as written. The one tolerated difference is a
+closed, platform-scoped table of whole-prefix aliases the operating system publishes — on macOS
+`/var`, `/tmp` and `/etc`, which are symlinks to `/private/...`. Any other difference, including
+a symlink the owner listed themselves and a symlink anywhere inside an aliased area, is still
+refused as an escape.
+
 **Only an enrolled, personally owned device may run it.** `canObserve` refuses an
 employer-owned device, a device that is not enrolled, a trust zone without local access, and a
 device that does not declare `read_git_status`.

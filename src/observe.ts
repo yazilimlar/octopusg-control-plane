@@ -66,14 +66,33 @@ export function loadAllowlist(raw:unknown,label='allowlist'):Allowlist{
  return {schemaVersion:1,deviceId:a.deviceId,defaultTtlHours:ttl,timeoutMs:timeout,targets};
 }
 
+// ---------- platform canonical aliases
+// Some operating systems expose a fixed, documented alias in front of real directories: on
+// macOS /var, /tmp and /etc are symlinks to /private/var, /private/tmp and /private/etc. A path
+// under one of those prefixes canonicalises to a different string without anything having been
+// redirected. That is the ONLY difference tolerated below: the alias table is a closed list of
+// whole-prefix rewrites, so a symlink anywhere else in the path — including one the owner listed
+// themselves — still fails the comparison and is refused.
+export const platformAliases:Record<string,[string,string][]>={
+ darwin:[['/var','/private/var'],['/tmp','/private/tmp'],['/etc','/private/etc']],
+};
+export const aliasesFor=(platform:string=process.platform):[string,string][]=>platformAliases[platform]??[];
+export function applyAliases(path:string,aliases:[string,string][]):string{
+ for(const [from,to] of aliases)if(path===from||path.startsWith(from+sep))return to+path.slice(from.length);
+ return path;
+}
+
 // ---------- canonical resolution: the declared path must BE the repository, not a route to it
 export type Resolution={ok:true;dir:string}|{ok:false;status:'missing'|'not_a_repo'|'error';reason:string};
-export function resolveTarget(target:Target,home:string):Resolution{
+export interface ResolveOptions {aliases?:[string,string][]}
+export function resolveTarget(target:Target,home:string,options:ResolveOptions={}):Resolution{
  const declared=resolve(target.path.startsWith('~/')?join(home,target.path.slice(2)):target.path);
  let canonical:string;
  try{canonical=realpathSync(declared);}
  catch{return {ok:false,status:'missing',reason:'path does not exist'};}
- if(canonical!==declared)return {ok:false,status:'error',reason:'path resolves elsewhere (symlink escape); list the real path instead'};
+ // Equal outright, or equal after rewriting one documented platform prefix. Nothing else.
+ if(canonical!==declared&&canonical!==applyAliases(declared,options.aliases??aliasesFor()))
+  return {ok:false,status:'error',reason:'path resolves elsewhere (symlink escape); list the real path instead'};
  let dir=false;
  try{dir=statSync(canonical).isDirectory();}catch{return {ok:false,status:'error',reason:'path is not readable'};}
  if(!dir)return {ok:false,status:'not_a_repo',reason:'path is not a directory'};
@@ -83,7 +102,7 @@ export function resolveTarget(target:Target,home:string):Resolution{
 }
 
 // ---------- running one permitted command
-export interface RunOptions {gitBin?:string;timeoutMs?:number;home?:string;path?:string}
+export interface RunOptions extends ResolveOptions {gitBin?:string;timeoutMs?:number;home?:string;path?:string}
 export type RunResult={ok:true;stdout:string}|{ok:false;reason:string};
 export function runGit(command:GitCommand,dir:string,options:RunOptions={}):RunResult{
  const args=[...gitHardening,'-C',dir,...gitCommands[command]];
@@ -127,7 +146,7 @@ const record=(t:Target,field:string,value:unknown,clock:Clock,ttlHours:number,ex
 });
 export function observeTarget(target:Target,home:string,clock:Clock,ttlHours:number,options:RunOptions={}):Observation[]{
  const fail=(status:'error'|'unknown',reason:string)=>[record(target,'repository',null,clock,ttlHours,{truth:status==='error'?'unknown':'unknown',status,reason})];
- const resolved=resolveTarget(target,home);
+ const resolved=resolveTarget(target,home,options);
  if(!resolved.ok)return fail(resolved.status==='missing'||resolved.status==='not_a_repo'?'unknown':'error',resolved.reason);
  const root=runGit('root',resolved.dir,options);
  if(!root.ok)return fail('error',root.reason);
