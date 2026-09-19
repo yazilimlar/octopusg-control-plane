@@ -20,9 +20,14 @@ a specific, bounded resolution: not "any remote," but one exact private reposito
 
 1. **The zero-remote rule becomes an exact-allowlist rule.** `scripts/audit.mjs` will assert that
    `git remote` output is either empty or contains only one remote, named `origin`, whose URL is
-   exactly `https://github.com/yazilimlar/octopusg-control-plane.git`. Any other remote, any
-   additional remote, or that URL under a different name still fails the audit — the check gets
-   narrower in what it forbids, not broader in what it permits.
+   exactly one of two approved forms of the same repository:
+   `https://github.com/yazilimlar/octopusg-control-plane.git` (default/preferred) or
+   `git@github.com:yazilimlar/octopusg-control-plane.git` (approved fallback, added
+   2026-09-18 during execution — HTTPS pushes proved unreliable on the owner's network,
+   confirmed by an empty `git ls-remote` after repeated HTTPS push attempts; the SSH push then
+   succeeded, verified by `git ls-remote` showing matching branch and `v0.2.0` tag SHAs). Any
+   other remote, any additional remote, or either URL under a different name still fails the
+   audit — the check gets narrower in what it forbids, not broader in what it permits.
 2. **The repository must be private before any push.** Visibility is verified private *before* the
    first push, and re-verified after — never assumed.
 3. **The remote is the recovery copy, once verified.** OG-SEC-008 closes only after (a) the push

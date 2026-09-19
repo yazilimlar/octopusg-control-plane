@@ -8,9 +8,12 @@ Keep it short. Detail lives in the files it points to.
 - Product: **OctopusG** (OctopusGinormous) — the AgoraXAI Portfolio Operating System.
 - Technical subsystem: AgoraXAI Control Plane. Codename in code: `Octopus`.
 - Repository: `~/Projects/agoraxai/control-plane`. Exactly one remote is permitted, named
-  `origin`, with the URL `https://github.com/yazilimlar/octopusg-control-plane.git`, and that
-  repository must be **private** (ADR-0007). Do not rename, move, or create a second repository,
-  and do not add any other remote.
+  `origin`, at either the HTTPS form `https://github.com/yazilimlar/octopusg-control-plane.git`
+  or the SSH form `git@github.com:yazilimlar/octopusg-control-plane.git` — both name the same
+  repository, and that repository must be **private** (ADR-0007). HTTPS is the default and
+  preferred form; SSH is approved because HTTPS pushes proved unreliable on the owner's network
+  (confirmed empty `git ls-remote` after repeated HTTPS push attempts; SSH then succeeded). Do not
+  rename, move, or create a second repository, and do not add any other remote.
 - Owner and final authority: George Oktem.
 
 ## Read before doing anything
@@ -43,7 +46,10 @@ Status: **ACCEPTED** by George Oktem. This exception is deliberately narrow.
 
 Permitted, and only in this exact shape:
 
-- `git remote add origin https://github.com/yazilimlar/octopusg-control-plane.git`
+- `git remote add origin` at either
+  `https://github.com/yazilimlar/octopusg-control-plane.git` (default/preferred) or
+  `git@github.com:yazilimlar/octopusg-control-plane.git` (approved fallback — HTTPS pushes were
+  unreliable on the owner's network; SSH is the currently configured origin)
 - `git push origin …` to that remote (never `--force`, never `--delete`)
 - `gh repo create yazilimlar/octopusg-control-plane --private`, `gh repo view` and read-only
   `gh api repos/yazilimlar/octopusg-control-plane/…` calls against it
