@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Normalize repository remote for local audit
+        run: |
+          git remote set-url origin https://github.com/yazilimlar/octopusg-control-plane.git
+
 
       - uses: actions/setup-node@v4
         with:
