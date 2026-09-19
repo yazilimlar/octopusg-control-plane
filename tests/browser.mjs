@@ -57,6 +57,59 @@ await check('declared-versus-observed drift never reports agreement without fres
  assert.equal(summary,'unknown','with no observation collected the summary is unknown, never a match');
  assert.match(await table.innerText(),/No observation has been collected/);
  assert.equal(await page.locator('#local-drift [data-drift-summary="match"]').count(),0,'nothing claims agreement without evidence');});
+await check('DayOS monitor: declared source, explicit states and no health claim when nothing is collected',async()=>{
+ await nav('DayOS monitor');
+ assert.equal(await page.locator('h1').innerText(),'DayOS monitor');
+ const banner=page.locator('[data-collection]');
+ assert.equal(await banner.getAttribute('data-collection'),'not-collected');
+ assert.match(await banner.innerText(),/No observation collected/);
+ assert.match(await banner.innerText(),/Observed at\s+never/);
+ const row=id=>page.locator(`[data-monitor-row="${id}"]`);
+ const expect=async(id,state,pattern)=>{assert.equal(await row(id).getAttribute('data-state'),state,`${id} state`);if(pattern)assert.match(await row(id).innerText(),pattern,`${id} text`);};
+ await expect('repository','derived',/github\.com\/yazilimlar\/artemis-omni/);
+ await expect('checkout','declared',/~\/Projects\/artemis-omni/);
+ await expect('branch','declared',/feature\/dayos-next-integration-preview/);
+ await expect('head','declared',/1f9d2346e8ca/);
+ await expect('working_tree','not-collected',/not collected/);
+ await expect('production_status','declared',/404/);
+ await expect('source_vs_serving','derived',/Different SHAs/);
+ await expect('live_deployment','blocked',/level 0/);
+ await expect('migrations','declared',/5 migration files/);
+ await expect('live_backend','blocked',/OG-CONN-015/);
+ assert.equal(await page.locator('[data-monitor-row][data-state="observed"]').count(),0,'nothing is observed when nothing was collected');
+ assert.ok(await page.locator('[data-monitor-row]').count()>=12);
+ for(const tr of await page.locator('[data-monitor-row]').all()){
+  assert.match(await tr.locator('.badge-row').getAttribute('aria-label'),/: (declared|derived|blocked|unknown|not-collected|stale|error|observed) — .+; truth /,'each row states its state in words');
+  assert.ok((await tr.locator('.source').innerText()).length>3,'each row cites its source');
+ }
+ assert.equal(await page.locator('#monitor-legend li').count(),8,'all eight states are explained');
+ assert.doesNotMatch(await page.locator('main').innerText(),/\bhealthy\b/i,'no health claim');
+ assert.equal(await page.locator('[data-drift="match"]').count(),0,'no agreement without evidence');});
+await check('DayOS monitor: open actions are a plain repository link and a copy-only folder path',async()=>{
+ await nav('DayOS monitor');
+ const list=page.locator('#monitor-actions');
+ assert.equal(await list.locator('a').count(),1);
+ const a=list.locator('a');
+ assert.equal(await a.getAttribute('href'),'https://github.com/yazilimlar/artemis-omni');
+ assert.equal(await a.getAttribute('rel'),'noopener noreferrer');
+ assert.equal(await list.locator('[data-open="folder"] a').count(),0,'a folder is never a link');
+ assert.match(await list.locator('[data-open="folder"]').innerText(),/npm run open -- dayos/);
+ assert.equal(await page.locator('[data-open="website"]').count(),0,'no website is declared, so none is offered');
+ assert.equal(await page.locator('main button:not([disabled]):not([data-copy])').count(),0,'the only controls on this view are Copy buttons');});
+await check('DayOS monitor: resources and simulated signals are shown and labelled',async()=>{
+ await nav('DayOS monitor');
+ assert.equal(await page.locator('#monitor-resources li').count(),2,'the source repository and the checkout');
+ assert.match(await page.locator('#monitor-resources').innerText(),/repository:github\.com:yazilimlar\/artemis-omni/);
+ assert.equal(await page.locator('#monitor-events li').count(),1);
+ assert.match(await page.locator('#monitor-events').innerText(),/SIMULATED/);
+ assert.match(await page.locator('#monitor-events').innerText(),/not counted/);});
+await check('DayOS opens from its evidence drawer, and the map draws its derived source edge',async()=>{
+ await nav('Portfolio');await page.locator('.project-card[data-project="dayos"]').click();
+ await page.getByRole('dialog').locator('[data-open-monitor]').click();
+ assert.equal(await page.locator('h1').innerText(),'DayOS monitor');
+ await nav('Ecosystem');await page.locator('#map-preset').selectOption('repository');
+ assert.ok(await page.locator('.edge[data-edge="source_repository"][data-truth="derived"]').count()>=1,'the derived DayOS → repository edge is drawn and marked derived');
+ await page.locator('#map-reset').click();});
 await check('visible naming is OctopusG while storage and schema keys are untouched',async()=>{
  assert.match(await page.title(),/^OctopusG — AgoraXAI Portfolio Operating System$/);
  assert.match(await page.locator('.brand').innerText(),/OctopusG/);
@@ -260,7 +313,7 @@ await check('Connection Center shows every connector at level 0 with disabled ow
   assert.match(href,/^http:\/\/127\.0\.0\.1|^$/,'no provider sign-in link');
  assert.match(all,/requires an owner authorization recorded at the gate/);});
 await check('disabled connector probes return blocked',async()=>{await nav('Connectors');assert.equal(await page.locator('[data-connector]').count(),5);for(const button of await page.locator('[data-connector]').all())await button.click();assert.equal(await page.locator('.connector-result:not([hidden])').count(),5);assert.match(await page.locator('#result-github').innerText(),/"status": "blocked"/);});
-await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','Devices','Requirements','Inbox','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
+await check('responsive views have no page-level horizontal overflow',async()=>{await page.setViewportSize({width:390,height:844});for(const name of ['Portfolio','Project matrix','Ecosystem','Deployment drift','DayOS monitor','Devices','Requirements','Inbox','Approval queue','Timeline','KPI framework','Connectors']){await nav(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true,`${name} overflow`);}await nav('Portfolio');await page.screenshot({path:'work/portfolio-mobile.png',fullPage:true});});
 await check('mobile main nav scrolls horizontally and does not clip item focus outlines',async()=>{const n=page.getByRole('navigation',{name:'Main navigation'});const m=await n.evaluate(el=>{const s=getComputedStyle(el);return{scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,overflowX:s.overflowX,padTop:parseFloat(s.paddingTop),padBottom:parseFloat(s.paddingBottom)};});assert.equal(m.overflowX,'auto','mobile nav must be a horizontal scroller');assert.ok(m.scrollWidth>m.clientWidth,`nav must overflow and scroll at 390px, got scrollWidth ${m.scrollWidth} <= clientWidth ${m.clientWidth}`);assert.ok(m.padTop>=4&&m.padBottom>=4,`the scroller needs block padding or it clips the 4px focus outline; got ${m.padTop}/${m.padBottom}`);const widths=await n.getByRole('button').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().width));assert.ok(Math.min(...widths)>=56,`nav items must keep intrinsic width, narrowest was ${Math.min(...widths)}`);});
 await check('all views contain meaningful content, no browser errors or external requests',async()=>{assert.deepEqual(errors,[]);assert.deepEqual(external,[]);});
 await writeFile('work/browser-results.json',JSON.stringify({passed:checks.length,checks,errors,externalRequests:external},null,2));

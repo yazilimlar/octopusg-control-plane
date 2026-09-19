@@ -5,14 +5,14 @@
 
 ## Totals
 
-92 requirements · 34 capabilities · 7 sources
+93 requirements · 35 capabilities · 8 sources
 
 | milestone | count |
 |---|---:|
 | v0.1 | 7 |
 | B0 | 3 |
 | v0.2 | 28 |
-| v0.3 | 14 |
+| v0.3 | 15 |
 | v0.4 | 2 |
 | v0.5 | 5 |
 | v0.6 | 7 |
@@ -26,7 +26,7 @@
 | plane | count |
 |---|---:|
 | MANAGEMENT | 13 |
-| CONTROL | 35 |
+| CONTROL | 36 |
 | INTEGRATION | 21 |
 | EXECUTION | 15 |
 | GOVERNANCE | 8 |
@@ -34,13 +34,13 @@
 | status | count |
 |---|---:|
 | PROPOSED | 52 |
-| IMPLEMENTED | 21 |
+| IMPLEMENTED | 22 |
 | VERIFIED | 18 |
 | DEFERRED | 1 |
 
 | risk | count |
 |---|---:|
-| LOW | 43 |
+| LOW | 44 |
 | MEDIUM | 25 |
 | HIGH | 17 |
 | CRITICAL | 7 |
@@ -105,6 +105,7 @@
 | OG-MAP-005 | Deployment, domain, device, account and risk views | MANAGEMENT | PROPOSED | LOW | — | OG-MAP-004, OG-CONN-001 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/browser.mjs` |
 | OG-MAP-006 | Map regenerates after connection changes | CONTROL | PROPOSED | LOW | — | OG-MAP-003, OG-CONN-002 | [S2#architecture-map-updates-from-connections](../sources/S2-2026-09-17-gpt-planning-thread.md#architecture-map-updates-from-connections)<br>[S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle) | `tests/graph.test.ts` |
 | OG-OBS-004 | Connector health and data freshness monitoring | CONTROL | PROPOSED | LOW | — | OG-CONN-002 | [S2#connection-center](../sources/S2-2026-09-17-gpt-planning-thread.md#connection-center)<br>[S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) | `tests/connections.test.ts` |
+| OG-OBS-007 | Read-only DayOS monitor (source, checkout, deployment reference) | CONTROL | IMPLEMENTED | LOW | WP-14 | OG-OBS-001, OG-OBS-002, OG-REG-004, OG-UI-003, OG-ACT-001 | [S8#owner-directive](../sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#owner-directive)<br>[S8#scope](../sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#scope)<br>[S8#owner-decisions-on-pr-2](../sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#owner-decisions-on-pr-2)<br>[S1#truth-and-evidence-model](../sources/S1-2026-09-17-conversation-export.md#truth-and-evidence-model) | `tests/monitor.test.ts`<br>`tests/browser.mjs` |
 | OG-CONN-001 | Vercel read-only connection | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003, OG-EVT-001, OG-CONN-002, OG-SEC-004 | [S1#requirements-and-completeness-model](../sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model)<br>[S2#per-service-management](../sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management)<br>[S2#connector-implementation-order](../sources/S2-2026-09-17-gpt-planning-thread.md#connector-implementation-order) | `tests/connectors/vercel-readonly.test.ts` |
 | OG-CONN-005 | GitHub read-only connection | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003, OG-CONN-002, OG-SEC-004 | [S3#change-3--narrower-v02](../sources/S3-2026-09-17-claude-review.md#change-3--narrower-v02)<br>[S2#target-planes](../sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) | `tests/connectors/github-readonly.test.ts` |
 | OG-CONN-006 | Approved HTTP route probes | INTEGRATION | PROPOSED | LOW | — | OG-CONN-002 | [S4#architecture-as-built](../sources/S4-2026-09-17-v0.1-repository-inspection.md#architecture-as-built) | `tests/connectors/http-probe.test.ts` |
@@ -233,6 +234,7 @@
 | instagram-comment-to-dm | DEFERRED | v0.8 | OG-CONN-011, OG-CONN-012, OG-WF-004, OG-EVT-005, OG-SEC-006 |
 | whatsapp-business | DEFERRED | v0.8 | OG-CONN-013, OG-WF-005 |
 | commerce-and-kpis | CONCEPT | v0.9 | OG-CONN-014, OG-OBS-005 |
+| dayos-monitoring | BUILDING | v0.3 | OG-OBS-007 |
 | supabase-observation | CONCEPT | v0.9 | OG-CONN-015 |
 | guarded-changes | CONCEPT | v0.10 | OG-ACT-005, OG-ACT-006, OG-ACT-007 |
 | external-observability | CONCEPT | unscheduled | OG-OBS-006 |

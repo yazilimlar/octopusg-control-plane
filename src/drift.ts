@@ -3,6 +3,7 @@
 // Absence of evidence is never health: a missing, failed or stale observation yields `unknown`
 // or `stale`, never `match`. `now` is supplied by the caller, so results are deterministic.
 import type {Project,Raw} from './model.ts';
+import type {HostedSource} from './resources.ts';
 import {indexObservations,readObservation,type Observation,type TruthState,type Confidence,type Freshness} from './truth.ts';
 
 export type DriftStatus='match'|'differs'|'stale'|'unknown';
@@ -23,26 +24,33 @@ export interface DriftRow {
 }
 
 const text=(v:unknown):string=>v==null?'':typeof v==='string'?v:JSON.stringify(v);
-// The three comparisons the registry can actually support today.
+// The three comparisons the registry can actually support today. A product that is a branch of
+// another product's repository (OG-OBS-007) compares against the derived hosted source where it
+// declares nothing itself; the source string then cites both registry rows it came from.
 export const comparisons=[
  {field:'path',label:'Checkout path',observationField:'head_sha',
-  declaredOf:(p:Project)=>({value:p.raw.current_local_paths?.[0]?.path??p.raw.intended_local_path??p.raw.git_state?.path??null,
-   source:p.raw.current_local_paths?.[0]?.path?`projects[${p.id}].current_local_paths[0].path`:p.raw.intended_local_path?`projects[${p.id}].intended_local_path`:`projects[${p.id}].git_state.path`}),
+  declaredOf:(p:Project,h:HostedSource|null=null)=>{
+   const own=p.raw.current_local_paths?.[0]?.path??p.raw.intended_local_path??p.raw.git_state?.path??null;
+   if(own==null&&h)return {value:h.path,source:h.pathSource};
+   return {value:own,
+    source:p.raw.current_local_paths?.[0]?.path?`projects[${p.id}].current_local_paths[0].path`:p.raw.intended_local_path?`projects[${p.id}].intended_local_path`:`projects[${p.id}].git_state.path`};},
   observedOf:(o:Observation)=>o.source.resource},
  {field:'branch',label:'Branch',observationField:'branch',
-  declaredOf:(p:Project)=>({value:p.raw.git_state?.branch??p.raw.current_local_paths?.[0]?.branch??p.raw.manager_branch?.ref??null,
+  declaredOf:(p:Project,_h:HostedSource|null=null)=>({value:p.raw.git_state?.branch??p.raw.current_local_paths?.[0]?.branch??p.raw.manager_branch?.ref??null,
    source:p.raw.git_state?.branch?`projects[${p.id}].git_state.branch`:p.raw.current_local_paths?.[0]?.branch?`projects[${p.id}].current_local_paths[0].branch`:`projects[${p.id}].manager_branch.ref`}),
   observedOf:(o:Observation)=>text(o.value)},
  {field:'remote','label':'Remote configured',observationField:'remote_names',
-  declaredOf:(p:Project)=>({value:typeof p.raw.canonical_repo==='string'?'yes':p.raw.git_state?.remotes===0||/^NONE/.test(text(p.raw.current_local_paths?.[0]?.remote))?'no':null,
-   source:typeof p.raw.canonical_repo==='string'?`projects[${p.id}].canonical_repo`:`projects[${p.id}].git_state.remotes`}),
+  declaredOf:(p:Project,h:HostedSource|null=null)=>{
+   if(typeof p.raw.canonical_repo!=='string'&&h?.remote)return {value:'yes',source:h.remoteSource!};
+   return {value:typeof p.raw.canonical_repo==='string'?'yes':p.raw.git_state?.remotes===0||/^NONE/.test(text(p.raw.current_local_paths?.[0]?.remote))?'no':null,
+    source:typeof p.raw.canonical_repo==='string'?`projects[${p.id}].canonical_repo`:`projects[${p.id}].git_state.remotes`};},
   observedOf:(o:Observation)=>Array.isArray(o.value)?(o.value.length?'yes':'no'):''},
 ] as const;
 
-export function driftRows(project:Project,observations:Observation[],now:string):DriftRow[]{
+export function driftRows(project:Project,observations:Observation[],now:string,hosted:HostedSource|null=null):DriftRow[]{
  const index=indexObservations(observations);
  return comparisons.map(c=>{
-  const declared=c.declaredOf(project);
+  const declared=c.declaredOf(project,hosted);
   const observation=index.get(`${project.id}|${c.observationField}`);
   const read=readObservation(observation,declared.source,now);
   const observedValue=observation&&read.status==='ok'?c.observedOf(observation):'';
@@ -60,7 +68,7 @@ export function driftRows(project:Project,observations:Observation[],now:string)
  });
 }
 // One status per project for a table cell: the weakest of its rows, never the best.
-export const worstStatus=(rows:DriftRow[]):DriftStatus=>
+export const worstStatus=(rows:readonly {status:DriftStatus}[]):DriftStatus=>
  rows.some(r=>r.status==='differs')?'differs'
  :rows.some(r=>r.status==='stale')?'stale'
  :rows.every(r=>r.status==='match')&&rows.length>0?'match':'unknown';

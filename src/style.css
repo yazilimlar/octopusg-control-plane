@@ -17,3 +17,9 @@
 .brand-plate img{display:block;width:100%;max-width:272px;height:auto}
 footer .tagline{color:#8fb9b0;letter-spacing:.4px}
 @media (max-width:900px){.brand-plate{display:none}}
+/* DayOS monitor (OG-OBS-007). Two states the existing badges did not cover. Neither is carried by
+   colour alone: the label text and the row's aria-label always name the state. */
+.badge.error{color:#f0a5a3;background:#392329;border-color:#a04a55;border-style:dashed}
+.badge.not-collected{color:#92a8b5;background:#1b2731;border-color:#3d4c5e;border-style:dotted}
+table.monitor th[scope=row]{width:22%;vertical-align:top}
+table.monitor .fact code{overflow-wrap:anywhere}

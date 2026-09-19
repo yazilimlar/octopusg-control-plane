@@ -43,6 +43,7 @@ forgotten. **Listing a capability does not authorize building it.**
 | **instagram-comment-to-dm** — Instagram comment-to-DM campaigns | DEFERRED | v0.8 | ManyChat | OG-CONN-011, OG-CONN-012, OG-WF-004, OG-EVT-005, OG-SEC-006 | [S2#instagram-comment-to-dm-automation](sources/S2-2026-09-17-gpt-planning-thread.md#instagram-comment-to-dm-automation)<br>[S2#specification-pack-and-requirement-families](sources/S2-2026-09-17-gpt-planning-thread.md#specification-pack-and-requirement-families) |
 | **whatsapp-business** — WhatsApp Business messaging | DEFERRED | v0.8 | WhatsApp Business Platform | OG-CONN-013, OG-WF-005 | [S2#whatsapp-automation](sources/S2-2026-09-17-gpt-planning-thread.md#whatsapp-automation) |
 | **commerce-and-kpis** — Sales events and business KPIs | CONCEPT | v0.9 | Squarespace | OG-CONN-014, OG-OBS-005 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
+| **dayos-monitoring** — Read-only DayOS source and deployment-reference monitor | BUILDING | v0.3 | — | OG-OBS-007 | [S8#owner-directive](sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#owner-directive) |
 | **supabase-observation** — Supabase metadata | CONCEPT | v0.9 | Supabase | OG-CONN-015 | [S1#connector-and-automation-strategy](sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy) |
 | **guarded-changes** — Guarded deployments, migrations and critical changes | CONCEPT | v0.10 | — | OG-ACT-005, OG-ACT-006, OG-ACT-007 | [S2#database-and-configuration-changes](sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes) |
 | **external-observability** — Logs and incident tooling | CONCEPT | unscheduled | — | OG-OBS-006 | [S2#existing-products-serving-parts-of-the-need](sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) |
@@ -51,5 +52,5 @@ forgotten. **Listing a capability does not authorize building it.**
 | **registry-repoint** — One-command registry repoint | CONCEPT | unscheduled | — | OG-REG-006 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 | **approval-outcome-records** — Approval outcomes written to governance records | CONCEPT | unscheduled | — | OG-ACT-009 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 
-34 capabilities · generated from REQUIREMENTS.yaml
+35 capabilities · generated from REQUIREMENTS.yaml
 <!-- GENERATED:CAPABILITIES:END -->

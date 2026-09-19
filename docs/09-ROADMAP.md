@@ -75,6 +75,7 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 | WP | Title | Requirements | Depends on |
 |---|---|---|---|
 | WP-13 | v0.3 platform foundation design, then execution (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-008, OG-SEC-009 | WP-11 |
+| WP-14 | Read-only DayOS monitor (source, checkout, deployment reference; Supabase stays blocked) | OG-OBS-007 | WP-13 |
 
 WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
 it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the
@@ -106,6 +107,9 @@ applies unless the owner says otherwise.
 
 - **Observer allowlist** — the current one-entry allowlist is sufficient for v0.2. Expanding it is
   an explicit later configuration action.
+- **Observer allowlist, expanded 2026-09-19** ([S8](sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#owner-decisions-on-pr-2)) —
+  one entry added, `dayos` → `~/Projects/artemis-omni`, for read-only Git observation only. DayOS is
+  observed within the Artemis Omni repository; this implies no ownership, deployment or production status.
 - **Trust zones** — the prohibition on T3/T4 and on production actions is retained. No production
   execution is authorized in v0.2.
 - **Great Order LLC** — existence stays owner-confirmed declared data; no ownership relationship is

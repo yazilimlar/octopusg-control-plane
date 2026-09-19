@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/validate-spec.mjs",
-  "updated": "2026-09-17",
+  "updated": "2026-09-19",
   "milestones": [
     {
       "id": "v0.1",
@@ -108,6 +108,10 @@
     {
       "id": "WP-13",
       "title": "v0.3 platform foundation design (approved origin, CI, protected preview)"
+    },
+    {
+      "id": "WP-14",
+      "title": "Read-only DayOS monitor"
     }
   ],
   "capabilities": [
@@ -408,6 +412,15 @@
       "requirements": [
         "OG-CONN-014",
         "OG-OBS-005"
+      ]
+    },
+    {
+      "id": "dayos-monitoring",
+      "title": "Read-only DayOS source and deployment-reference monitor",
+      "status": "BUILDING",
+      "target": "v0.3",
+      "requirements": [
+        "OG-OBS-007"
       ]
     },
     {
@@ -784,7 +797,8 @@
         "WP-03.md",
         "WP-04.md",
         "WP-06.md",
-        "WP-11.md"
+        "WP-11.md",
+        "WP-14.md"
       ]
     },
     {
@@ -1242,7 +1256,8 @@
         "WP-03-REPAIR-01.md",
         "WP-03.md",
         "WP-04.md",
-        "WP-11.md"
+        "WP-11.md",
+        "WP-14.md"
       ]
     },
     {
@@ -1277,7 +1292,8 @@
         "WP-03.md",
         "WP-04.md",
         "WP-06.md",
-        "WP-11.md"
+        "WP-11.md",
+        "WP-14.md"
       ]
     },
     {
@@ -1382,6 +1398,48 @@
       ],
       "ownerDecisions": [],
       "evidence": []
+    },
+    {
+      "id": "OG-OBS-007",
+      "title": "Read-only DayOS monitor (source, checkout, deployment reference)",
+      "plane": "CONTROL",
+      "milestone": "v0.3",
+      "workPackage": "WP-14",
+      "priority": "NEXT",
+      "status": "IMPLEMENTED",
+      "risk": "LOW",
+      "dependencies": [
+        "OG-OBS-001",
+        "OG-OBS-002",
+        "OG-REG-004",
+        "OG-UI-003",
+        "OG-ACT-001"
+      ],
+      "acceptance": [
+        "The DayOS source repository, checkout and branch are derived from two named registry rows (the DayOS git_state and the one other product that checks out the same branch), never assumed; with no unique match the monitor shows unknown.",
+        "DayOS is added to config/observe.allowlist.json as the only change to it, for read-only Git observation only; the allowlist content is pinned by a test and the observer's five read-only Git commands are unchanged. DayOS is observed within the Artemis Omni repository; this establishes no ownership, no dedicated DayOS repository, no deployment or production status and no authority to modify Artemis Omni.",
+        "The DayOS monitor shows repository, checkout, branch, HEAD, working tree, remote, deployment reference and the declared Supabase inventory, each with a state (observed, declared, derived, unknown, not-collected, stale, error or blocked), its truth kind, its provenance and, where observed, its timestamp and expiry.",
+        "No row claims health. No observation reads not-collected, a failed one error, an expired one stale; live deployment and live Supabase state are blocked while their connections are at level 0. No Supabase or provider access exists.",
+        "Open actions are the existing safe set — a derived repository link and a copy-only folder path; no website is offered because none is declared.",
+        "DayOS appears in the resource graph as a derived source-repository edge and in the drift table against the hosted checkout; a derived edge exists only between existing named registry rows with explicit source evidence, and simulated inbox events are labelled and never affect a state.",
+        "This requirement does not authorize any connector, credential, deployment or mutation.",
+        "The monitor module is pure (no network, filesystem, process or clock) and writes nothing; the inspected checkout is byte-for-byte unchanged after an observer run."
+      ],
+      "acceptanceProvisional": false,
+      "tests": [
+        "tests/monitor.test.ts",
+        "tests/browser.mjs"
+      ],
+      "sources": [
+        "S8#owner-directive",
+        "S8#scope",
+        "S8#owner-decisions-on-pr-2",
+        "S1#truth-and-evidence-model"
+      ],
+      "ownerDecisions": [],
+      "evidence": [
+        "WP-14.md"
+      ]
     },
     {
       "id": "OG-REG-006",
@@ -1972,7 +2030,8 @@
       ],
       "ownerDecisions": [],
       "evidence": [
-        "WP-13.md"
+        "WP-13.md",
+        "WP-14.md"
       ]
     },
     {
@@ -2793,7 +2852,9 @@
       "ownerDecisions": [
         "OD-04"
       ],
-      "evidence": []
+      "evidence": [
+        "WP-14.md"
+      ]
     },
     {
       "id": "OG-SEC-004",
