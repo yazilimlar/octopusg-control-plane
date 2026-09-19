@@ -128,7 +128,7 @@
     {
       "id": "platform-resilience",
       "title": "Local isolation boundary and recovery copy",
-      "status": "PLANNED",
+      "status": "AVAILABLE",
       "target": "v0.2",
       "requirements": [
         "OG-SEC-001",
@@ -2903,17 +2903,18 @@
       "title": "Verified recovery copy of the control-plane repository",
       "plane": "CONTROL",
       "milestone": "v0.2",
-      "workPackage": "WP-01",
+      "workPackage": "WP-13",
       "priority": "MVP",
-      "status": "PROPOSED",
+      "status": "VERIFIED",
       "risk": "HIGH",
       "dependencies": [],
       "acceptance": [
-        "The owner confirms the location and hash of a current off-machine recovery copy (bundle or private remote) and it is recorded in docs/evidence/WP-01.md."
+        "The owner confirms the location and hash of a current off-machine recovery copy (bundle or private remote) and it is recorded in docs/evidence/WP-13.md."
       ],
       "acceptanceProvisional": false,
       "tests": [
-        "docs/evidence/WP-01.md"
+        "docs/evidence/WP-01.md",
+        "docs/evidence/WP-13.md"
       ],
       "sources": [
         "S4#registry-discrepancy",

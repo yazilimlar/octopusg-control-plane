@@ -33,9 +33,9 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 53 |
+| PROPOSED | 52 |
 | IMPLEMENTED | 21 |
-| VERIFIED | 17 |
+| VERIFIED | 18 |
 | DEFERRED | 1 |
 
 | risk | count |
@@ -96,7 +96,7 @@
 | OG-ACT-001 | Safe open actions | MANAGEMENT | IMPLEMENTED | LOW | WP-09 | OG-REG-004 | [S2#mvp-boundary](../sources/S2-2026-09-17-gpt-planning-thread.md#mvp-boundary)<br>[S1#octopusg-v02-boundary](../sources/S1-2026-09-17-conversation-export.md#octopusg-v02-boundary) | `tests/open.test.ts`<br>`tests/browser.mjs` |
 | OG-ACT-002 | Action requests with tier and level policy (simulated) | CONTROL | IMPLEMENTED | MEDIUM | WP-09 | OG-SEC-002 | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S1#action-authority-levels](../sources/S1-2026-09-17-conversation-export.md#action-authority-levels) | `tests/policy.test.ts` |
 | OG-SEC-002 | Trust zones, tiers and levels as data | CONTROL | VERIFIED | HIGH | WP-03 | — | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/policy.test.ts` |
-| OG-SEC-008 | Verified recovery copy of the control-plane repository | CONTROL | PROPOSED | HIGH | WP-01 | — | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S3#pre-development-checklist](../sources/S3-2026-09-17-claude-review.md#pre-development-checklist)<br>[S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `docs/evidence/WP-01.md` |
+| OG-SEC-008 | Verified recovery copy of the control-plane repository | CONTROL | VERIFIED | HIGH | WP-13 | — | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S3#pre-development-checklist](../sources/S3-2026-09-17-claude-review.md#pre-development-checklist)<br>[S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `docs/evidence/WP-01.md`<br>`docs/evidence/WP-13.md` |
 
 ## v0.3 — First read-only connectors
 
@@ -207,7 +207,7 @@
 | Capability | Status | Target | Requirements |
 |---|---|---|---|
 | spec-governance | VALIDATING | B0 | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 |
-| platform-resilience | PLANNED | v0.2 | OG-SEC-001, OG-SEC-008 |
+| platform-resilience | AVAILABLE | v0.2 | OG-SEC-001, OG-SEC-008 |
 | platform-foundation | CONCEPT | v0.3 | OG-GOV-007, OG-SEC-009 |
 | portfolio-registry | VALIDATING | v0.2 | OG-REG-001, OG-REG-002, OG-REG-003 |
 | resource-catalog | AVAILABLE | v0.2 | OG-REG-004, OG-REG-005 |

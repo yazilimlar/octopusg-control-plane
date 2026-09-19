@@ -55,7 +55,7 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 
 | WP | Title | Requirements | Depends on |
 |---|---|---|---|
-| WP-01 | Baseline reconciliation, archive and registry lock | OG-GOV-005, OG-GOV-006, OG-REG-002, OG-REG-003, OG-SEC-008 | OD-01, OD-02 |
+| WP-01 | Baseline reconciliation, archive and registry lock | OG-GOV-005, OG-GOV-006, OG-REG-002, OG-REG-003 | OD-01, OD-02 |
 | WP-02 | Truth model and observation store | OG-DATA-001, OG-DATA-002 | WP-01 |
 | WP-03 | Local Git observer and device record | OG-OBS-001, OG-DEV-001, OG-SEC-002 | WP-02 |
 | WP-04 | Resource catalog and typed graph | OG-REG-004, OG-REG-005, OG-MAP-002 | WP-02 |
@@ -74,7 +74,7 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 
 | WP | Title | Requirements | Depends on |
 |---|---|---|---|
-| WP-13 | v0.3 platform foundation design (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-009 | WP-11 |
+| WP-13 | v0.3 platform foundation design, then execution (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-008, OG-SEC-009 | WP-11 |
 
 WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
 it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the

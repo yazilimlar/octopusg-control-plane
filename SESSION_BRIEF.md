@@ -64,32 +64,41 @@ Read this first in every AI session. Keep it under one page.
 - v0.2 gate positions recorded by the owner: OD-03 (connectors stay Level 0), OD-04 (no credential
   store yet), the one-entry observer allowlist, the T3/T4 prohibition, Great Order LLC existence
   only — see [09-ROADMAP](docs/09-ROADMAP.md#owner-decisions).
-- Still open for the owner: OD-02 / OG-SEC-008 — no off-machine recovery copy, and the reported
-  Block 0 bundle was not found ([archive manifest](docs/archive/MANIFEST.md)). **OG-SEC-008 stays
-  pending until the owner places the final complete-history bundle off-device, and v0.2 is not
-  frozen until that copy is confirmed.**
+- **OD-02 / OG-SEC-008 resolved 2026-09-18.** The off-machine recovery copy is now the private
+  GitHub remote `yazilimlar/octopusg-control-plane` (both `https://github.com/yazilimlar/octopusg-control-plane.git`
+  and `git@github.com:yazilimlar/octopusg-control-plane.git` are the approved forms of the one
+  allowed `origin`, ADR-0007). All local branches and the annotated `v0.2.0` tag are pushed;
+  remote SHAs independently verified byte-equal to local via `git ls-remote` and `gh api`;
+  visibility confirmed `PRIVATE` before and after the push. **OG-SEC-008 is v0.2 and VERIFIED.**
+  Full SHA table: [WP-13 evidence, Execution](docs/evidence/WP-13.md#execution--deferred-execution-checklist-run-2026-09-18).
 - WP-13 (`octopusg/v0.3-platform-foundation`, branched from `165397c`) designed the v0.3 platform
   foundation the owner authorized on 2026-09-18
   ([S7](docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md),
-  [ADR-0007](docs/decisions/ADR-0007-approved-origin-allowlist.md), OD-11): an exact-allowlist
-  exception to the zero-remote rule for exactly one private GitHub remote, GitHub Actions CI
-  running the existing `validate`/`validate:spec` commands, and a protected, preview-only Vercel
-  deployment. **OG-GOV-007 is v0.3 and IMPLEMENTED** — `.github/workflows/validate.yml` is
-  committed and inert until a remote exists. **OG-SEC-009 stays PROPOSED** — no Vercel action was
-  taken. Nothing was pushed, no remote was added, `scripts/audit.mjs` is unchanged (CLAUDE.md rule
-  7), and OG-SEC-008 stays exactly where it was: ADR-0007 gives it an exact path to closing, not a
-  shortcut to it. The next vertical slice after this foundation — read-only Artemis DayOS Supabase
-  monitoring — is specified, not built, in
+  [ADR-0007](docs/decisions/ADR-0007-approved-origin-allowlist.md), OD-11) — an exact-allowlist
+  exception to the zero-remote rule for exactly one private GitHub remote (HTTPS or SSH form),
+  GitHub Actions CI running the existing `validate`/`validate:spec` commands, and a protected,
+  preview-only Vercel deployment — then, in a later owner-re-permissioned session the same day, ran
+  the deferred-execution checklist steps 2–8: audit script updated to the exact-allowlist rule
+  (`scripts/audit-remotes.mjs`, unit tested), private repository created and verified private,
+  origin remote added, all branches and `v0.2.0` pushed, SHAs independently verified,
+  **OG-SEC-008 moved to VERIFIED**, and `platform-resilience` moved to `AVAILABLE`.
+  **ADR-0007 is ACCEPTED.** **OG-GOV-007 is v0.3 and IMPLEMENTED** —
+  `.github/workflows/validate.yml` is pushed but CI has not actually run yet: the workflow only
+  exists on this branch, not on `main`, so the `push: branches: [main]` trigger never fired and no
+  PR exists to fire `pull_request:`; opening one needs `gh pr create` permission this session
+  didn't have. **OG-SEC-009 stays PROPOSED** — no Vercel action was taken; step 9 is owner-run
+  elsewhere, unstarted. The next vertical slice after this foundation — read-only Artemis DayOS
+  Supabase monitoring — is specified, not built, in
   [docs/NEXT-SLICE-DAYOS-MONITORING.md](docs/NEXT-SLICE-DAYOS-MONITORING.md). Evidence:
   [WP-13](docs/evidence/WP-13.md).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 28 requirements (10 verified) |
+| Current milestone | **v0.2** — 28 requirements (11 verified) |
 | Ledger | 92 requirements · 34 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-11 |
-| Next work package | WP-01 |
+| Next work package | none |
 <!-- GENERATED:STATUS:END -->
 
 ## Start-of-session checklist
