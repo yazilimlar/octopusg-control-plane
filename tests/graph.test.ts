@@ -66,6 +66,14 @@ test('unknown stays unknown: no edge or resource is promoted without evidence',(
  // rows, and its source must name both. Nothing else may be derived.
  const derivedFrom=/^projects\[[^\]]+\]\.\S+ \+ projects\[[^\]]+\]\.\S+$/;
  for(const e of catalog.edges)assert.ok(e.truth==='declared'||e.truth==='observed'||(e.truth==='derived'&&derivedFrom.test(e.source)),`${e.type} edge may only be declared, observed, or derived from two named registry rows`);
+ // Owner boundary (S8#owner-decisions-on-pr-2): a derived edge needs existing endpoints and every
+ // registry row its source names must exist. Nothing is derived toward a node that is not there.
+ const rowIds=new Set((registry.projects as Raw[]).map(p=>p.id));
+ const endpoints=nodeIds(catalog,registry);
+ for(const e of catalog.edges.filter(e=>e.truth==='derived')){
+  assert.ok(endpoints.has(e.from)&&endpoints.has(e.to),`derived edge ${e.from} → ${e.to} has a missing endpoint`);
+  for(const [,id] of e.source.matchAll(/projects\[([^\]]+)\]/g))assert.ok(rowIds.has(id),`derived edge names ${id}, which is not a registry row`);
+ }
  for(const e of catalog.edges.filter(e=>e.truth==='observed'))
   assert.match(e.source,/^production_state\.|^local-git:/,'only recorded measurements may claim observed');
  const noProduction=buildCatalog({...registry,production_state:{}},snapshot.sources,[],entityFile);

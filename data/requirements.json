@@ -1417,11 +1417,12 @@
       ],
       "acceptance": [
         "The DayOS source repository, checkout and branch are derived from two named registry rows (the DayOS git_state and the one other product that checks out the same branch), never assumed; with no unique match the monitor shows unknown.",
-        "DayOS is added to config/observe.allowlist.json as the only change to it; the allowlist content is pinned by a test and the observer's five read-only Git commands are unchanged.",
+        "DayOS is added to config/observe.allowlist.json as the only change to it, for read-only Git observation only; the allowlist content is pinned by a test and the observer's five read-only Git commands are unchanged. DayOS is observed within the Artemis Omni repository; this establishes no ownership, no dedicated DayOS repository, no deployment or production status and no authority to modify Artemis Omni.",
         "The DayOS monitor shows repository, checkout, branch, HEAD, working tree, remote, deployment reference and the declared Supabase inventory, each with a state (observed, declared, derived, unknown, not-collected, stale, error or blocked), its truth kind, its provenance and, where observed, its timestamp and expiry.",
         "No row claims health. No observation reads not-collected, a failed one error, an expired one stale; live deployment and live Supabase state are blocked while their connections are at level 0. No Supabase or provider access exists.",
         "Open actions are the existing safe set — a derived repository link and a copy-only folder path; no website is offered because none is declared.",
-        "DayOS appears in the resource graph as a derived source-repository edge and in the drift table against the hosted checkout; simulated inbox events are labelled and never affect a state.",
+        "DayOS appears in the resource graph as a derived source-repository edge and in the drift table against the hosted checkout; a derived edge exists only between existing named registry rows with explicit source evidence, and simulated inbox events are labelled and never affect a state.",
+        "This requirement does not authorize any connector, credential, deployment or mutation.",
         "The monitor module is pure (no network, filesystem, process or clock) and writes nothing; the inspected checkout is byte-for-byte unchanged after an observer run."
       ],
       "acceptanceProvisional": false,
@@ -1432,6 +1433,7 @@
       "sources": [
         "S8#owner-directive",
         "S8#scope",
+        "S8#owner-decisions-on-pr-2",
         "S1#truth-and-evidence-model"
       ],
       "ownerDecisions": [],

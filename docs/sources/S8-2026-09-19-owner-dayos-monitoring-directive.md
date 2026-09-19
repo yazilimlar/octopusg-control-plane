@@ -57,6 +57,23 @@ The owner's gate position of 2026-09-18 ([S6](S6-2026-09-18-owner-brand-decision
 was that the one-entry observer allowlist was sufficient for v0.2 and that "expanding it is an
 explicit later configuration action". Observing the DayOS checkout with the existing observer, as
 the scope requires, cannot be done without listing it. The session added exactly one entry
-(`dayos` → `~/Projects/artemis-omni`) and pinned the allowlist's full content in a test. Whether the
-directive is the owner's explicit configuration action is recorded as an open question for the owner
-in [WP-14](../evidence/WP-14.md#open-questions).
+(`dayos` → `~/Projects/artemis-omni`) and pinned the allowlist's full content in a test. The owner
+resolved whether that was authorized in the decisions below.
+
+## Owner decisions on PR #2
+
+The owner decided the four open points of pull request #2 on 2026-09-19:
+
+1. **Allowlist — approved.** The mapping `dayos` → `~/Projects/artemis-omni` is approved strictly for
+   read-only Git observation. **DayOS is currently observed within the Artemis Omni repository.** The
+   mapping does not establish repository ownership, a dedicated DayOS repository, deployment status,
+   production status, or any authority to modify Artemis Omni.
+2. **OG-OBS-007 — ratified** as the v0.3 requirement for the product-specific read-only monitoring
+   view. Its acceptance criteria are limited to the implemented DayOS monitoring slice, and it does not
+   authorize connectors, credentials, deployments or mutations.
+3. **Guard changes — approved with narrow boundaries.** Derived graph edges are permitted only when
+   both endpoints are existing named registry rows and the derivation has explicit source evidence. The
+   observer allowlist test may pin exactly the two owner-approved entries. No other graph, provenance,
+   observer, path, device, trust-zone or execution guard is weakened.
+4. **Old local server — handled.** Process 52557 was verified as this repository's `scripts/serve.mjs`
+   and stopped cleanly; nothing else was touched.

@@ -107,6 +107,9 @@ applies unless the owner says otherwise.
 
 - **Observer allowlist** — the current one-entry allowlist is sufficient for v0.2. Expanding it is
   an explicit later configuration action.
+- **Observer allowlist, expanded 2026-09-19** ([S8](sources/S8-2026-09-19-owner-dayos-monitoring-directive.md#owner-decisions-on-pr-2)) —
+  one entry added, `dayos` → `~/Projects/artemis-omni`, for read-only Git observation only. DayOS is
+  observed within the Artemis Omni repository; this implies no ownership, deployment or production status.
 - **Trust zones** — the prohibition on T3/T4 and on production actions is retained. No production
   execution is authorized in v0.2.
 - **Great Order LLC** — existence stays owner-confirmed declared data; no ownership relationship is
