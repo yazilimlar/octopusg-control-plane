@@ -6,7 +6,7 @@
 spec_version: 0.2-draft
 product: OctopusG
 generated_by: hand-maintained; tables derived by scripts/validate-spec.mjs
-updated: '2026-09-17'
+updated: '2026-09-19'
 sources:
   S1: docs/sources/S1-2026-09-17-conversation-export.md
   S2: docs/sources/S2-2026-09-17-gpt-planning-thread.md
@@ -15,6 +15,7 @@ sources:
   S5: docs/archive/gate-3b/PRODUCT_BACKLOG.md
   S6: docs/sources/S6-2026-09-18-owner-brand-decisions.md
   S7: docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md
+  S8: docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md
 enums:
   plane:
   - MANAGEMENT
@@ -130,6 +131,8 @@ work_packages:
   title: Brand asset and tagline
 - id: WP-13
   title: v0.3 platform foundation design (approved origin, CI, protected preview)
+- id: WP-14
+  title: Read-only DayOS monitor
 owner_decisions:
 - OD-01
 - OD-02
@@ -424,6 +427,14 @@ capabilities:
   - OG-OBS-005
   source:
   - S1#core-capabilities-discussed
+- id: dayos-monitoring
+  title: Read-only DayOS source and deployment-reference monitor
+  status: BUILDING
+  target: v0.3
+  requirements:
+  - OG-OBS-007
+  source:
+  - S8#owner-directive
 - id: supabase-observation
   title: Supabase metadata
   status: CONCEPT
@@ -1047,6 +1058,43 @@ requirements:
   acceptance_provisional: true
   tests:
   - TBD
+- id: OG-OBS-007
+  title: Read-only DayOS monitor (source, checkout, deployment reference)
+  plane: CONTROL
+  milestone: v0.3
+  work_package: WP-14
+  priority: NEXT
+  status: IMPLEMENTED
+  risk: LOW
+  source:
+  - S8#owner-directive
+  - S8#scope
+  - S1#truth-and-evidence-model
+  dependencies:
+  - OG-OBS-001
+  - OG-OBS-002
+  - OG-REG-004
+  - OG-UI-003
+  - OG-ACT-001
+  acceptance:
+  - The DayOS source repository, checkout and branch are derived from two named registry rows (the DayOS git_state and
+    the one other product that checks out the same branch), never assumed; with no unique match the monitor shows unknown.
+  - DayOS is added to config/observe.allowlist.json as the only change to it; the allowlist content is pinned by a test
+    and the observer's five read-only Git commands are unchanged.
+  - The DayOS monitor shows repository, checkout, branch, HEAD, working tree, remote, deployment reference and the
+    declared Supabase inventory, each with a state (observed, declared, derived, unknown, not-collected, stale, error
+    or blocked), its truth kind, its provenance and, where observed, its timestamp and expiry.
+  - No row claims health. No observation reads not-collected, a failed one error, an expired one stale; live deployment
+    and live Supabase state are blocked while their connections are at level 0. No Supabase or provider access exists.
+  - Open actions are the existing safe set — a derived repository link and a copy-only folder path; no website is
+    offered because none is declared.
+  - DayOS appears in the resource graph as a derived source-repository edge and in the drift table against the hosted
+    checkout; simulated inbox events are labelled and never affect a state.
+  - The monitor module is pure (no network, filesystem, process or clock) and writes nothing; the inspected checkout is
+    byte-for-byte unchanged after an observer run.
+  tests:
+  - tests/monitor.test.ts
+  - tests/browser.mjs
 - id: OG-REG-006
   title: One-command registry repoint
   plane: CONTROL

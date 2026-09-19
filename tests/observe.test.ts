@@ -261,12 +261,17 @@ test('an alias table never lets a real symlink through',()=>{
  const classic=resolveTarget({productId:'x',path:join(plain,'link')},'/nonexistent',{aliases});
  assert.equal(classic.ok,false);
 });
-test('the shipped allowlist lists only an explicitly marked example and no user name',()=>{
+test('the shipped allowlist is exactly the two approved targets, marks the example, and holds no user name',()=>{
  const raw=readFileSync('config/observe.allowlist.json','utf8');
  const shipped=loadAllowlist(JSON.parse(raw),'config/observe.allowlist.json');
  assert.equal(shipped.deviceId,'personal-mac');
- assert.equal(shipped.targets.length,1);
- assert.equal(shipped.targets[0].path,'~/Projects/agoraxai/control-plane');
+ // The set is pinned exactly: widening it is a deliberate, owner-directed configuration change
+ // (OG-OBS-007 added DayOS on 2026-09-19, S8) and must be made here in the same commit.
+ assert.deepEqual(shipped.targets.map(t=>[t.productId,t.path]),[
+  ['agoraxai-control-plane','~/Projects/agoraxai/control-plane'],
+  ['dayos','~/Projects/artemis-omni'],
+ ]);
  assert.match(shipped.targets[0].note!,/EXAMPLE/);
+ assert.match(shipped.targets[1].note!,/S8/);
  assert.ok(!/\/Users\/|\/home\/|C:\\Users/.test(raw),'no machine-specific path may be committed');
 });

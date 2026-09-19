@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "$comment": "OG-OBS-001. EXAMPLE CONFIGURATION. Every repository OctopusG may observe is listed here explicitly: no discovery, no recursive scan, no globs, nothing outside this list. Paths are stored as written (use ~/ so no user name is committed). Add only repositories you own on the enrolled device.",
+  "$comment": "OG-OBS-001, OG-OBS-007. Every repository OctopusG may observe is listed here explicitly: no discovery, no recursive scan, no globs, nothing outside this list. Paths are stored as written (use ~/ so no user name is committed). Add only repositories you own on the enrolled device.",
   "deviceId": "personal-mac",
   "defaultTtlHours": 24,
   "timeoutMs": 5000,
@@ -9,6 +9,11 @@
       "productId": "agoraxai-control-plane",
       "path": "~/Projects/agoraxai/control-plane",
       "note": "EXAMPLE — this repository, used as the shipped fixture. Replace or extend with repositories you own."
+    },
+    {
+      "productId": "dayos",
+      "path": "~/Projects/artemis-omni",
+      "note": "DayOS is the feature/dayos-next-integration-preview branch of the Artemis Omni repository (registry: projects[artemis-omni].current_local_paths[0], projects[dayos].git_state). Read-only observation; added 2026-09-19 by owner directive (S8)."
     }
   ]
 }

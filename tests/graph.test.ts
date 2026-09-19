@@ -62,7 +62,10 @@ test('the v0.1 declared graph is preserved inside the typed graph',()=>{
  }
 });
 test('unknown stays unknown: no edge or resource is promoted without evidence',()=>{
- for(const e of catalog.edges)assert.ok(e.truth==='declared'||e.truth==='observed',`${e.type} edge may only be declared or observed`);
+ // OG-OBS-007: a derived edge is allowed only where it is computed from two declared registry
+ // rows, and its source must name both. Nothing else may be derived.
+ const derivedFrom=/^projects\[[^\]]+\]\.\S+ \+ projects\[[^\]]+\]\.\S+$/;
+ for(const e of catalog.edges)assert.ok(e.truth==='declared'||e.truth==='observed'||(e.truth==='derived'&&derivedFrom.test(e.source)),`${e.type} edge may only be declared, observed, or derived from two named registry rows`);
  for(const e of catalog.edges.filter(e=>e.truth==='observed'))
   assert.match(e.source,/^production_state\.|^local-git:/,'only recorded measurements may claim observed');
  const noProduction=buildCatalog({...registry,production_state:{}},snapshot.sources,[],entityFile);

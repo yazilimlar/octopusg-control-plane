@@ -91,12 +91,19 @@ Read this first in every AI session. Keep it under one page.
   Supabase monitoring — is specified, not built, in
   [docs/NEXT-SLICE-DAYOS-MONITORING.md](docs/NEXT-SLICE-DAYOS-MONITORING.md). Evidence:
   [WP-13](docs/evidence/WP-13.md).
+- WP-14 (`octopusg/wp-14-dayos-monitor`, PR to `main`, owner-directed 2026-09-19,
+  [S8](docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md)) added the read-only DayOS
+  monitor (`src/monitor.ts`, view "DayOS monitor"): DayOS is the `feature/dayos-next-integration-preview`
+  branch of the Artemis Omni repository (link derived from two registry rows), observed through the
+  existing observer (allowlist +1 entry, pinned by a test). Live deployment and live Supabase stay
+  **blocked**; OG-CONN-015 is untouched. **OG-OBS-007 is v0.3 and IMPLEMENTED**, awaiting the owner.
+  Evidence: [WP-14](docs/evidence/WP-14.md).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
 | Current milestone | **v0.2** — 28 requirements (11 verified) |
-| Ledger | 92 requirements · 34 capabilities |
+| Ledger | 93 requirements · 35 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-11 |
 | Next work package | none |
 <!-- GENERATED:STATUS:END -->

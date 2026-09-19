@@ -75,6 +75,7 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 | WP | Title | Requirements | Depends on |
 |---|---|---|---|
 | WP-13 | v0.3 platform foundation design, then execution (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-008, OG-SEC-009 | WP-11 |
+| WP-14 | Read-only DayOS monitor (source, checkout, deployment reference; Supabase stays blocked) | OG-OBS-007 | WP-13 |
 
 WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
 it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the

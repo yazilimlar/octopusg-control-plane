@@ -92,6 +92,35 @@ export function ownershipOf(registry:Raw,entities?:EntityFile):OwnershipRecord[]
  });
 }
 
+// ---------- hosted source (OG-OBS-007)
+// Some products are a BRANCH of another product's repository: DayOS is a feature branch of the
+// Artemis Omni repository, and the registry declares the checkout and the remote on the host
+// row, not on the DayOS row. The link is derived, never declared: exactly one other product must
+// list a checkout on the same branch, or nothing is linked at all (no guess between candidates).
+export interface HostedSource {
+ hostId:string;branch:string;branchSource:string;
+ path:string;pathSource:string;
+ remote:string|null;remoteSource:string|null;
+}
+export function hostedSource(p:Raw,registry:Raw):HostedSource|null{
+ const branch=p.git_state?.branch;
+ if(typeof branch!=='string'||!branch)return null;
+ // A product that declares its own repository or checkout has nothing to derive.
+ if(typeof p.canonical_repo==='string'||typeof p.intended_local_path==='string'||typeof p.git_state?.path==='string'||(p.current_local_paths??[]).length)return null;
+ const hits:{host:Raw;index:number}[]=[];
+ for(const host of registry.projects as Raw[]){
+  if(host.id===p.id)continue;
+  for(const [index,entry] of ((host.current_local_paths??[]) as Raw[]).entries())
+   if(entry?.branch===branch&&typeof entry.path==='string')hits.push({host,index});
+ }
+ if(hits.length!==1)return null;
+ const {host,index}=hits[0];
+ const remote=typeof host.canonical_repo==='string'?host.canonical_repo:null;
+ return {hostId:host.id,branch,branchSource:`projects[${p.id}].git_state.branch`,
+  path:host.current_local_paths[index].path,pathSource:`projects[${host.id}].current_local_paths[${index}].path`,
+  remote,remoteSource:remote?`projects[${host.id}].canonical_repo`:null};
+}
+
 // ---------- catalog
 type Draft={resource:Resource;productId:string};
 export function buildCatalog(registry:Raw,sources:{name:string}[]=[],observations:Observation[]=[],entities?:EntityFile):Catalog{
@@ -132,6 +161,26 @@ export function buildCatalog(registry:Raw,sources:{name:string}[]=[],observation
     void id;
    }
   }
+ }
+
+ // hosted products (OG-OBS-007): a branch of a host product's repository. The repository and
+ // checkout resources already exist from the host row; this only attaches the hosted product to
+ // them, as derived, and upgrades the checkout to observed where this product itself was observed.
+ for(const p of registry.projects as Raw[]){
+  const hosted=hostedSource(p,registry);
+  if(!hosted)continue;
+  const sources=`${hosted.branchSource} + ${hosted.pathSource}`;
+  const repo=hosted.remote?repositoryId(hosted.remote):null;
+  const sighting=observed.get(`${p.id}|head_sha`);
+  const isObserved=!!sighting&&sighting.status==='ok'&&sighting.source.resource===hosted.path;
+  const checkout=add(p.id,{id:checkoutId(hosted.path),kind:'checkout',label:hosted.path,productIds:[p.id],
+   truth:isObserved?'observed':'declared',source:isObserved?`${sighting!.source.adapter}:${sighting!.source.resource}`:hosted.pathSource,
+   note:`Checkout of the ${hosted.hostId} repository on branch ${hosted.branch}; derived link`});
+  if(repo){
+   add(p.id,{id:repo.id,kind:'repository',label:repo.label,productIds:[p.id],truth:'declared',source:hosted.remoteSource!});
+   edge(p.id,repo.id,'source_repository','derived',sources,`Derived source repository: a branch of the ${hosted.hostId} repository`);
+  }
+  edge(repo?.id??p.id,checkout,'checked_out_at','derived',sources,'Checkout of this product’s branch; the resource is observed only where an observation covers it');
  }
 
  // portfolio-level production record: one deployment, its aliases, and the product that declares it
