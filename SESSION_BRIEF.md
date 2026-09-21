@@ -17,8 +17,8 @@ Read this first in every AI session. Keep it under one page.
   and the trust-zone / tier / level policy and is **accepted by the owner at Gate G4**
   (`e26d4ad`). Evidence: [WP-03](docs/evidence/WP-03.md).
 - Batch A is on `octopusg/batch-a-catalog-graph`: WP-04 adds the typed resource catalog and
-  graph (`src/resources.ts`, `config/entities.json`). OD-05 is resolved — Great Order LLC exists
-  as owner-confirmed declared data and owns nothing that is not separately declared.
+  graph (`src/resources.ts`, `config/entities.json`). OD-05 initially recorded Great Order LLC existence only; S9 / WP-15 below adds explicit
+  business ownership/control while keeping asset ownership separately declared.
   Evidence: [WP-04](docs/evidence/WP-04.md). WP-05 then generated the lane-layout map with
   colour-by and preset controls (`src/graphview.ts`). Evidence: [WP-05](docs/evidence/WP-05.md).
   **Batch A is accepted by the owner**; its five requirements are VERIFIED.
@@ -63,7 +63,7 @@ Read this first in every AI session. Keep it under one page.
   Evidence: [WP-12](docs/evidence/WP-12.md).
 - v0.2 gate positions recorded by the owner: OD-03 (connectors stay Level 0), OD-04 (no credential
   store yet), the one-entry observer allowlist, the T3/T4 prohibition, Great Order LLC existence
-  only — see [09-ROADMAP](docs/09-ROADMAP.md#owner-decisions).
+  only at that gate (subsequently clarified by S9 / WP-15) — see [09-ROADMAP](docs/09-ROADMAP.md#owner-decisions).
 - **OD-02 / OG-SEC-008 resolved 2026-09-18.** The off-machine recovery copy is now the private
   GitHub remote `yazilimlar/octopusg-control-plane` (both `https://github.com/yazilimlar/octopusg-control-plane.git`
   and `git@github.com:yazilimlar/octopusg-control-plane.git` are the approved forms of the one
@@ -99,12 +99,20 @@ Read this first in every AI session. Keep it under one page.
   **blocked**; OG-CONN-015 is untouched. **OG-OBS-007 is v0.3 and IMPLEMENTED**, awaiting the owner.
   Evidence: [WP-14](docs/evidence/WP-14.md).
 
+- WP-15 (`octopusg/wp-15-ownership-tenancy`) implements OG-REG-007/008: S9 records the owner's
+  corrected declarations; George owns/controls Great Order LLC, which owns/controls the AgoraXAI
+  business and Artemis division. Specific asset/IP ownership and partner interests remain undeclared.
+  Pınar Evleri is the independent external client `client:pinar-evleri`; explicit service/client/funding
+  edges grant neither ownership nor access. Cross-tenancy ownership is rejected. OG-OBS-008 and
+  OG-DATA-005/006 are proposals only, unscheduled. See [WP-15](docs/evidence/WP-15.md).
+  Owner review is pending; no commit, push, deployment or WP-16 is authorized by this package.
+
 <!-- GENERATED:STATUS:BEGIN -->
 | | |
 |---|---|
-| Current milestone | **v0.2** — 28 requirements (11 verified) |
-| Ledger | 93 requirements · 35 capabilities |
-| Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-11 |
+| Current milestone | **v0.2** — 30 requirements (11 verified) |
+| Ledger | 98 requirements · 38 capabilities |
+| Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-09, OD-11 |
 | Next work package | none |
 <!-- GENERATED:STATUS:END -->
 

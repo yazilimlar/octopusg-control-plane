@@ -19,7 +19,7 @@ function importIn(mutate:(dir:string)=>void){
   mkdirSync(join(dir,'data'));
   for(const f of [...inputs,'registry.lock.json'])copyFileSync(join('data',f),join(dir,'data',f));
   mutate(dir);
-  try{execFileSync(process.execPath,[importer],{cwd:dir,stdio:'pipe'});return {ok:true,message:''};}
+  try{execFileSync(process.execPath,[importer],{cwd:dir,env:{...process.env,OCTOPUSG_SNAPSHOT_MODE:'write'},stdio:'pipe'});return {ok:true,message:''};}
   catch(e:any){return {ok:false,message:String(e.stderr)};}
  }finally{rmSync(dir,{recursive:true,force:true});}
 }

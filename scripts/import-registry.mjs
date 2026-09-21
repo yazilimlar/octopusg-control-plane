@@ -50,5 +50,13 @@ if(observationText!==null){
  console.log(`Observations: ${loaded.records.length} accepted, ${loaded.rejected.length} rejected from ${OBSERVATIONS} (collector ${loaded.collector}).`);
 }
 const snapshot={schemaVersion:1,classification:{umbrella:'AGORAXAI_UMBRELLA',kind:'INTERNAL_PLATFORM',visibility:'private',codename:'Octopus'},asOf:registry.generated_at,sources:sources.map(({name,sha256})=>({name,sha256})),registry,approvalCandidates,observations};
-await writeFile('data/snapshot.json',JSON.stringify(snapshot,null,2)+'\n');
+// OG-REG-007 / WP-15: validate a preserved working snapshot without writing it.
+// This mode still performs every ingestion check above and rejects any byte mismatch.
+const snapshotText=JSON.stringify(snapshot,null,2)+'\n';
+const snapshotMode=process.env.OCTOPUSG_SNAPSHOT_MODE??'write';
+if(!['write','check'].includes(snapshotMode))throw new Error('Invalid OCTOPUSG_SNAPSHOT_MODE; expected write or check');
+if(snapshotMode==='check'){
+ if(await readFile('data/snapshot.json','utf8')!==snapshotText)throw new Error('data/snapshot.json differs from validated inputs; check mode leaves it untouched');
+ console.log('Snapshot check PASS; data/snapshot.json was not written.');
+}else await writeFile('data/snapshot.json',snapshotText);
 console.log(`Parsed registry v${registry.registry_version}: ${ids.size}/${registry.project_row_count} unique rows; ${approvalCandidates.length} proposed checklist items. Source SHA-256: ${sources[0].sha256}`);

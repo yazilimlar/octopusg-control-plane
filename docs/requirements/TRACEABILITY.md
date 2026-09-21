@@ -5,13 +5,13 @@
 
 ## Totals
 
-93 requirements · 35 capabilities · 8 sources
+98 requirements · 38 capabilities · 9 sources
 
 | milestone | count |
 |---|---:|
 | v0.1 | 7 |
 | B0 | 3 |
-| v0.2 | 28 |
+| v0.2 | 30 |
 | v0.3 | 15 |
 | v0.4 | 2 |
 | v0.5 | 5 |
@@ -21,28 +21,28 @@
 | v0.9 | 3 |
 | v0.10 | 5 |
 | v0.11 | 2 |
-| unscheduled | 5 |
+| unscheduled | 8 |
 
 | plane | count |
 |---|---:|
 | MANAGEMENT | 13 |
-| CONTROL | 36 |
+| CONTROL | 41 |
 | INTEGRATION | 21 |
 | EXECUTION | 15 |
 | GOVERNANCE | 8 |
 
 | status | count |
 |---|---:|
-| PROPOSED | 52 |
-| IMPLEMENTED | 22 |
+| PROPOSED | 55 |
+| IMPLEMENTED | 24 |
 | VERIFIED | 18 |
 | DEFERRED | 1 |
 
 | risk | count |
 |---|---:|
-| LOW | 44 |
-| MEDIUM | 25 |
-| HIGH | 17 |
+| LOW | 45 |
+| MEDIUM | 27 |
+| HIGH | 19 |
 | CRITICAL | 7 |
 
 ## v0.1 — Control Plane v0.1 (frozen baseline)
@@ -97,6 +97,8 @@
 | OG-ACT-002 | Action requests with tier and level policy (simulated) | CONTROL | IMPLEMENTED | MEDIUM | WP-09 | OG-SEC-002 | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S1#action-authority-levels](../sources/S1-2026-09-17-conversation-export.md#action-authority-levels) | `tests/policy.test.ts` |
 | OG-SEC-002 | Trust zones, tiers and levels as data | CONTROL | VERIFIED | HIGH | WP-03 | — | [S2#database-and-configuration-changes](../sources/S2-2026-09-17-gpt-planning-thread.md#database-and-configuration-changes)<br>[S2#integration-levels](../sources/S2-2026-09-17-gpt-planning-thread.md#integration-levels)<br>[S2#work-laptop-trust-zone](../sources/S2-2026-09-17-gpt-planning-thread.md#work-laptop-trust-zone) | `tests/policy.test.ts` |
 | OG-SEC-008 | Verified recovery copy of the control-plane repository | CONTROL | VERIFIED | HIGH | WP-13 | — | [S4#registry-discrepancy](../sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)<br>[S3#pre-development-checklist](../sources/S3-2026-09-17-claude-review.md#pre-development-checklist)<br>[S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `docs/evidence/WP-01.md`<br>`docs/evidence/WP-13.md` |
+| OG-REG-007 | Tenancy boundary between the internal group and clients | CONTROL | IMPLEMENTED | MEDIUM | WP-15 | OG-REG-005 | [S9#owner-declarations](../sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations) | `tests/resources.test.ts`<br>`tests/graph.test.ts` |
+| OG-REG-008 | Scoped partner shares with undeclared values | CONTROL | IMPLEMENTED | LOW | WP-15 | OG-REG-005 | [S9#owner-declarations](../sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations) | `tests/resources.test.ts` |
 
 ## v0.3 — First read-only connectors
 
@@ -202,11 +204,17 @@
 | OG-ACT-009 | Approval outcomes written to a governance record *(provisional)* | GOVERNANCE | PROPOSED | MEDIUM | — | OG-ACT-008 | [S5#next--the-control-plane-earns-its-keep](../archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) | `TBD` |
 | OG-CONN-016 | Evaluate third-party social and inbox backends *(provisional)* | INTEGRATION | PROPOSED | LOW | — | OG-CONN-011 | [S2#existing-products-serving-parts-of-the-need](../sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) | `TBD` |
 | OG-SEC-007 | Cloud control plane security design *(provisional)* | CONTROL | PROPOSED | CRITICAL | — | OG-ACT-008 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first)<br>[S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) | `TBD` |
+| OG-OBS-008 | Explained variance *(provisional)* | CONTROL | PROPOSED | MEDIUM | — | OG-OBS-002 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
+| OG-DATA-005 | Cost basis and depreciation register *(provisional)* | CONTROL | PROPOSED | HIGH | — | OG-DATA-001, OG-REG-007 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
+| OG-DATA-006 | Dated compliance obligations with verbatim citations *(provisional)* | CONTROL | PROPOSED | HIGH | — | OG-DATA-001, OG-REG-007 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
 
 ## Capability → requirements
 
 | Capability | Status | Target | Requirements |
 |---|---|---|---|
+| org-tenancy | VALIDATING | v0.2 | OG-REG-007, OG-REG-008 |
+| explained-variance | CONCEPT | unscheduled | OG-OBS-008 |
+| finance-and-compliance | CONCEPT | unscheduled | OG-DATA-005, OG-DATA-006 |
 | spec-governance | VALIDATING | B0 | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 |
 | platform-resilience | AVAILABLE | v0.2 | OG-SEC-001, OG-SEC-008 |
 | platform-foundation | CONCEPT | v0.3 | OG-GOV-007, OG-SEC-009 |
