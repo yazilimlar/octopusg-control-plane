@@ -5,7 +5,7 @@
 
 ## Totals
 
-98 requirements · 38 capabilities · 9 sources
+98 requirements · 38 capabilities · 10 sources
 
 | milestone | count |
 |---|---:|
@@ -33,8 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 55 |
-| IMPLEMENTED | 24 |
+| PROPOSED | 53 |
+| IMPLEMENTED | 26 |
 | VERIFIED | 18 |
 | DEFERRED | 1 |
 
@@ -113,8 +113,8 @@
 | OG-CONN-006 | Approved HTTP route probes | INTEGRATION | PROPOSED | LOW | — | OG-CONN-002 | [S4#architecture-as-built](../sources/S4-2026-09-17-v0.1-repository-inspection.md#architecture-as-built) | `tests/connectors/http-probe.test.ts` |
 | OG-CONN-007 | Safe revoke and disconnect lifecycle | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003 | [S2#disconnecting-safely](../sources/S2-2026-09-17-gpt-planning-thread.md#disconnecting-safely) | `tests/connections.test.ts` |
 | OG-EVT-003 | Real deployment events in the inbox | INTEGRATION | PROPOSED | LOW | — | OG-CONN-001, OG-EVT-002 | [S2#per-service-management](../sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/connectors/vercel-readonly.test.ts` |
-| OG-SEC-003 | Credential references in macOS Keychain | CONTROL | PROPOSED | HIGH | — | OG-CONN-002 | [S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle)<br>[S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/credentials.test.ts`<br>`scripts/audit.mjs` |
-| OG-SEC-004 | Secret containment precondition for connector authorization | CONTROL | PROPOSED | CRITICAL | — | — | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/connections.test.ts` |
+| OG-SEC-003 | Credential references in macOS Keychain | CONTROL | IMPLEMENTED | HIGH | WP-16 | OG-CONN-002 | [S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle)<br>[S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/credentials.test.ts`<br>`scripts/audit.mjs` |
+| OG-SEC-004 | Secret containment precondition for connector authorization | CONTROL | IMPLEMENTED | CRITICAL | WP-16 | — | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/connections.test.ts` |
 | OG-SEC-005 | Kill switch | CONTROL | PROPOSED | HIGH | — | OG-CONN-002 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/connections.test.ts` |
 | OG-GOV-007 | Continuous integration runs validation and specification checks | GOVERNANCE | IMPLEMENTED | LOW | WP-13 | OG-SEC-008 | [S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `.github/workflows/validate.yml` |
 | OG-SEC-009 | Protected, non-production preview deployment only | CONTROL | PROPOSED | MEDIUM | WP-13 | OG-SEC-008 | [S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `docs/evidence/WP-13.md` |
@@ -229,7 +229,7 @@
 | event-inbox | BUILDING | v0.2 | OG-EVT-001, OG-EVT-002, OG-EVT-004, OG-DATA-004 |
 | approvals-and-policy | BUILDING | v0.2 | OG-ACT-002, OG-ACT-003, OG-SEC-002, OG-ACT-008 |
 | safe-open-actions | BUILDING | v0.2 | OG-ACT-001 |
-| credential-management | PLANNED | v0.3 | OG-SEC-003, OG-SEC-004 |
+| credential-management | BUILDING | v0.3 | OG-SEC-003, OG-SEC-004 |
 | vercel-readonly | PLANNED | v0.3 | OG-CONN-001, OG-EVT-003 |
 | github-readonly | PLANNED | v0.3 | OG-CONN-005 |
 | http-probes | PLANNED | v0.3 | OG-CONN-006 |

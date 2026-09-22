@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {loadConnectors,canRaiseLevel,connectorById,connectionsOf,connectorSummary,carriesSecret,
+import {loadConnectors,canRaiseLevel,connectorAuthorizationPrecondition,connectorById,connectionsOf,connectorSummary,carriesSecret,
  lifecycleStates,levelNames,ownerActions,ownerActionReason,authKinds,type ConnectorFile,type Level} from '../src/connections.ts';
 import {connectors as adapters} from '../src/connectors.ts';
 import {resourceKinds} from '../src/resources.ts';
@@ -61,6 +61,13 @@ test('raising a level needs a declared scope set and a recorded owner authorizat
  assert.match(canRaiseLevel(noScopes,0,2,true).reason,/declares no scopes/);
 });
 
+test('connector authorization fails closed on unresolved secret exposure',()=>{
+ assert.equal(connectorAuthorizationPrecondition(true).allowed,false);
+ assert.match(connectorAuthorizationPrecondition(true).reason,/unresolved plaintext-secret exposure/);
+ assert.equal(connectorAuthorizationPrecondition(true,true).allowed,true,'only an explicit owner exception can override the precondition');
+ assert.equal(connectorAuthorizationPrecondition(false).allowed,true);
+});
+
 test('every connection in this build is Registered at level 0, with no credential and no sync',()=>{
  assert.ok(file.connections.length>0);
  for(const c of file.connections){
@@ -104,6 +111,15 @@ test('a connector record never carries a credential, token, key or address',()=>
   assert.equal(carriesSecret({note:value}),true,`${value.slice(0,12)} is refused`);
  const bad=clone();bad.connections[0].note='token ghp_'+'a'.repeat(30);
  assert.throws(()=>loadConnectors(bad),/looks like a credential/);
+});
+
+test('a connection may carry only a validated non-secret credential reference',()=>{
+ const good=clone();
+ good.connections[0].credentialRef={provider:'macos-keychain',itemLabel:'owner-readonly-test'};
+ assert.doesNotThrow(()=>loadConnectors(good));
+ const bad=clone();
+ bad.connections[0].credentialRef={provider:'macos-keychain',itemLabel:'password'+'='+'abcdefghijklmnop'};
+ assert.throws(()=>loadConnectors(bad),/secret material/);
 });
 
 test('the five v0.1 stubs are expressed as definitions and still return blocked',async()=>{

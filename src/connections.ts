@@ -6,6 +6,7 @@
 // S2#connection-center, S2#integration-levels, S2#disconnecting-safely.
 import {resourceKinds,type ResourceKind} from './resources.ts';
 import {levels,type Level} from './policy.ts';
+import {validateCredentialRef,type CredentialRef} from './credentials.ts';
 export type {Level};
 
 export const authKinds=['none','oauth','token','webhook-secret','local'] as const;
@@ -29,12 +30,12 @@ export interface Connection {
  id:string;connectorId:string;accountLabel:string;productIds:string[];
  level:Level;state:LifecycleState;grantedScopes:string[];
  lastSuccessfulSync:string|null;webhookHealth:string;credentialStatus:string;dataFreshness:string;
- approvedActions:string[];note?:string;
+ approvedActions:string[];credentialRef?:CredentialRef;note?:string;
 }
 export interface ConnectorFile {schemaVersion:1;connectors:ConnectorDefinition[];connections:Connection[]}
 
 const definitionKeys=['id','provider','auth','resources','observations','events','actions','maxLevel','scopes','docs','adapter','notes'];
-const connectionKeys=['id','connectorId','accountLabel','productIds','level','state','grantedScopes','lastSuccessfulSync','webhookHealth','credentialStatus','dataFreshness','approvedActions','note'];
+const connectionKeys=['id','connectorId','accountLabel','productIds','level','state','grantedScopes','lastSuccessfulSync','webhookHealth','credentialStatus','dataFreshness','approvedActions','credentialRef','note'];
 // A credential must never be described by value. These are the shapes a connector file must not
 // contain, checked before anything is rendered or persisted — the same rule the observer uses.
 export const secretShapes:RegExp[]=[
@@ -118,6 +119,7 @@ export function loadConnectors(raw:unknown,label='connectors'):ConnectorFile{
   for(const k of ['webhookHealth','credentialStatus','dataFreshness'])
    if(typeof c[k]!=='string'||!c[k])throw new Error(`${where}: ${k} must state the position in words`);
   if(!stringList(c.approvedActions))throw new Error(`${where}: approvedActions must be a list of strings`);
+  if('credentialRef' in c)c.credentialRef=validateCredentialRef(c.credentialRef,`${where}.credentialRef`);
   if(c.approvedActions.length&&c.level<3)throw new Error(`${where}: an approved action needs level 3`);
   for(const a of c.approvedActions)
    if(!definition.actions.includes(a))throw new Error(`${where}: action ${a} is not declared by connector ${definition.id}`);
@@ -126,6 +128,12 @@ export function loadConnectors(raw:unknown,label='connectors'):ConnectorFile{
 }
 
 export interface LevelDecision {allowed:boolean;reason:string}
+// OG-SEC-004: unresolved plaintext-secret exposure blocks connector authorization unless the
+// owner has recorded an explicit, separately auditable exception.
+export function connectorAuthorizationPrecondition(secretExposure:boolean,ownerException=false):LevelDecision{
+ if(secretExposure&&!ownerException)return {allowed:false,reason:'connector authorization is blocked by unresolved plaintext-secret exposure'};
+ return {allowed:true,reason:ownerException?'connector authorization has an explicit owner exception':'no unresolved plaintext-secret exposure is recorded'};
+}
 // Raising a level is an owner decision that v0.2 cannot make. This function exists so the
 // ceiling is a tested rule rather than a sentence in a document.
 export function canRaiseLevel(definition:ConnectorDefinition,from:Level,to:Level,ownerAuthorized=false):LevelDecision{

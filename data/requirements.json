@@ -116,6 +116,14 @@
     {
       "id": "WP-15",
       "title": "Owner ownership declarations and client tenancy"
+    },
+    {
+      "id": "WP-16",
+      "title": "Credential Reference and Connector Security Foundation"
+    },
+    {
+      "id": "WP-17",
+      "title": "Artemis DayOS Supabase Read-Only Observation Connector"
     }
   ],
   "capabilities": [
@@ -312,7 +320,7 @@
     {
       "id": "credential-management",
       "title": "Credential store and containment gate",
-      "status": "PLANNED",
+      "status": "BUILDING",
       "target": "v0.3",
       "requirements": [
         "OG-SEC-003",
@@ -2066,7 +2074,8 @@
       "ownerDecisions": [],
       "evidence": [
         "WP-13.md",
-        "WP-14.md"
+        "WP-14.md",
+        "WP-16.md"
       ]
     },
     {
@@ -2864,16 +2873,17 @@
       "title": "Credential references in macOS Keychain",
       "plane": "CONTROL",
       "milestone": "v0.3",
-      "workPackage": null,
+      "workPackage": "WP-16",
       "priority": "NEXT",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "HIGH",
       "dependencies": [
         "OG-CONN-002"
       ],
       "acceptance": [
-        "Only collector/executor processes read credentials by reference; values never reach the bundle, logs, events or registry.",
-        "Audit extended to prove no credential value is present in dist/ or work/observations."
+        "Only collector/executor processes may resolve a credential by a provider reference; values never reach source, configuration, the bundle, UI, logs, events, observations, snapshots, evidence, generated artifacts or canonical records.",
+        "CredentialRef and CredentialProvider remain provider-neutral; connectors and business logic do not depend directly on macOS Keychain.",
+        "Audit proves no credential value is present in tracked output or work/observations."
       ],
       "acceptanceProvisional": false,
       "tests": [
@@ -2888,7 +2898,8 @@
         "OD-04"
       ],
       "evidence": [
-        "WP-14.md"
+        "WP-14.md",
+        "WP-16.md"
       ]
     },
     {
@@ -2896,13 +2907,13 @@
       "title": "Secret containment precondition for connector authorization",
       "plane": "CONTROL",
       "milestone": "v0.3",
-      "workPackage": null,
+      "workPackage": "WP-16",
       "priority": "NEXT",
-      "status": "PROPOSED",
+      "status": "IMPLEMENTED",
       "risk": "CRITICAL",
       "dependencies": [],
       "acceptance": [
-        "Connector authorization is refused while the registry records unresolved plaintext-secret exposure, unless the owner records an explicit exception."
+        "Connector authorization is refused while unresolved plaintext-secret exposure is recorded, unless the owner records an explicit exception."
       ],
       "acceptanceProvisional": false,
       "tests": [
@@ -2914,7 +2925,9 @@
       "ownerDecisions": [
         "OD-03"
       ],
-      "evidence": []
+      "evidence": [
+        "WP-16.md"
+      ]
     },
     {
       "id": "OG-SEC-005",
