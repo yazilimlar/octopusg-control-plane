@@ -5,7 +5,7 @@
 
 ## Totals
 
-98 requirements · 38 capabilities · 12 sources
+99 requirements · 39 capabilities · 13 sources
 
 | milestone | count |
 |---|---:|
@@ -21,7 +21,7 @@
 | v0.9 | 3 |
 | v0.10 | 5 |
 | v0.11 | 2 |
-| unscheduled | 8 |
+| unscheduled | 9 |
 
 | plane | count |
 |---|---:|
@@ -29,11 +29,11 @@
 | CONTROL | 41 |
 | INTEGRATION | 21 |
 | EXECUTION | 15 |
-| GOVERNANCE | 8 |
+| GOVERNANCE | 9 |
 
 | status | count |
 |---|---:|
-| PROPOSED | 53 |
+| PROPOSED | 54 |
 | IMPLEMENTED | 26 |
 | VERIFIED | 18 |
 | DEFERRED | 1 |
@@ -42,7 +42,7 @@
 |---|---:|
 | LOW | 45 |
 | MEDIUM | 27 |
-| HIGH | 19 |
+| HIGH | 20 |
 | CRITICAL | 7 |
 
 ## v0.1 — Control Plane v0.1 (frozen baseline)
@@ -204,6 +204,7 @@
 | OG-ACT-009 | Approval outcomes written to a governance record *(provisional)* | GOVERNANCE | PROPOSED | MEDIUM | — | OG-ACT-008 | [S5#next--the-control-plane-earns-its-keep](../archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) | `TBD` |
 | OG-CONN-016 | Evaluate third-party social and inbox backends *(provisional)* | INTEGRATION | PROPOSED | LOW | — | OG-CONN-011 | [S2#existing-products-serving-parts-of-the-need](../sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) | `TBD` |
 | OG-SEC-007 | Cloud control plane security design *(provisional)* | CONTROL | PROPOSED | CRITICAL | — | OG-ACT-008 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first)<br>[S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) | `TBD` |
+| OG-AI-005 | Evidence-governed multi-model engineering claims *(provisional)* | GOVERNANCE | PROPOSED | HIGH | — | OG-DATA-001, OG-DATA-002 | [S13#adopted-architectural-and-governance-principles](../sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md#adopted-architectural-and-governance-principles) | `TBD` |
 | OG-OBS-008 | Explained variance *(provisional)* | CONTROL | PROPOSED | MEDIUM | — | OG-OBS-002 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
 | OG-DATA-005 | Cost basis and depreciation register *(provisional)* | CONTROL | PROPOSED | HIGH | — | OG-DATA-001, OG-REG-007 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
 | OG-DATA-006 | Dated compliance obligations with verbatim citations *(provisional)* | CONTROL | PROPOSED | HIGH | — | OG-DATA-001, OG-REG-007 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
@@ -238,6 +239,7 @@
 | local-device-agent | CONCEPT | v0.5 | OG-DEV-003, OG-DEV-004, OG-DEV-005, OG-DEV-006, OG-ACT-004 |
 | n8n-workflow-bridge | CONCEPT | v0.6 | OG-CONN-009, OG-WF-001, OG-WF-002 |
 | ai-assistance | CONCEPT | v0.6 | OG-AI-002, OG-AI-003, OG-AI-004, OG-WF-006 |
+| multi-ai-engineering-core | CONCEPT | unscheduled | OG-AI-005 |
 | gmail-inquiry-drafts | CONCEPT | v0.7 | OG-CONN-010, OG-WF-003, OG-DATA-003, OG-WF-007 |
 | instagram-comment-to-dm | DEFERRED | v0.8 | OG-CONN-011, OG-CONN-012, OG-WF-004, OG-EVT-005, OG-SEC-006 |
 | whatsapp-business | DEFERRED | v0.8 | OG-CONN-013, OG-WF-005 |

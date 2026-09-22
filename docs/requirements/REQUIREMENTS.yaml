@@ -6,7 +6,7 @@
 spec_version: 0.2-draft
 product: OctopusG
 generated_by: hand-maintained; tables derived by scripts/validate-spec.mjs
-updated: '2026-09-21'
+updated: '2026-09-22'
 sources:
   S1: docs/sources/S1-2026-09-17-conversation-export.md
   S2: docs/sources/S2-2026-09-17-gpt-planning-thread.md
@@ -20,6 +20,7 @@ sources:
   S10: docs/sources/S10-2026-09-21-owner-wp16-authorization.md
   S11: docs/sources/S11-2026-09-22-owner-wp18-authorization.md
   S12: docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md
+  S13: docs/sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md
 enums:
   plane:
   - MANAGEMENT
@@ -413,6 +414,12 @@ capabilities:
   - OG-WF-006
   source:
   - S1#core-capabilities-discussed
+- id: multi-ai-engineering-core
+  title: Multi-AI engineering evidence and challenge governance
+  status: CONCEPT
+  target: unscheduled
+  requirements: [OG-AI-005]
+  source: [S13#adopted-architectural-and-governance-principles]
 - id: gmail-inquiry-drafts
   title: Inquiry to Gmail draft pilot
   status: CONCEPT
@@ -2254,6 +2261,26 @@ requirements:
   acceptance_provisional: true
   tests:
   - tests/ai.test.ts
+
+- id: OG-AI-005
+  title: Evidence-governed multi-model engineering claims
+  plane: GOVERNANCE
+  milestone: unscheduled
+  priority: VISION
+  status: PROPOSED
+  risk: HIGH
+  source: [S13#adopted-architectural-and-governance-principles]
+  dependencies: [OG-DATA-001, OG-DATA-002]
+  acceptance:
+  - Structured claims retain claim identity, object/entity identity, model/provider/version identity, evidence, provenance, assumptions, confidence, uncertainty, disagreement, dissent, counterevidence, verification state, deterministic solver results where applicable, temporal state, human review state and approval state.
+  - No individual AI model, provider or agent is engineering truth or final engineering authority; evidence quality and authoritative observations outrank model consensus, and no majority vote establishes engineering truth.
+  - Material disagreement is explicit and retained without silent averaging, overwriting, hiding or collapse into false certainty; any synthesis preserves original claims, dissent and a traceable resolution rationale and authority.
+  - Validated deterministic engineering solvers remain authoritative for numerical calculations within their validated scope; LLM numerical assertions cannot silently become validated professional engineering results.
+  - Evidence and authority gates preserve AI proposal, independent challenge/cross-check, evidence support, solver verification where applicable, engineer review where required, owner/authorized-party approval, issuance, construction and physical observation/validation, reconciled with canonical state models; simulated approvals confer no real authority.
+  - Temporal/scenario lineage preserves earlier observations and alternatives; model-reported confidence does not replace canonical derived confidence, and missing evidence or authorization remains unknown or blocked.
+  acceptance_provisional: true
+  tests: [TBD]
+  notes: Architecture/history proposal only; see ADR-0011 and docs/EVOLUTION-HISTORY.md. One umbrella capability, no work package or implementation authorization, no Alpha scope change. Future implementation tests and detailed schemas require separately governed work.
 
 - id: OG-REG-007
   title: Tenancy boundary between the internal group and clients

@@ -98,6 +98,13 @@ Future ideas remain unnumbered here until they are sufficiently defined and auth
 backlog does not reserve WP identifiers. Evolution History UI surfacing is deferred to a later
 governed package.
 
+- **Multi-AI Engineering / evidence-governed engineering** — `multi-ai-engineering-core` is
+  CONCEPT, target `unscheduled`; OG-AI-005 is PROPOSED. See
+  [S13](sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md),
+  [ADR-0011](decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md) and the
+  canonical [Evolution History](EVOLUTION-HISTORY.md) records EXP-001 / EXP-002. This theme
+  authorizes no implementation, registry products, numbered work packages or Alpha scope change.
+
 ## Owner decisions
 
 `BLOCKING` items stop the named work package. Everything else has a recommended default that
