@@ -193,7 +193,7 @@ test('the build reads work/observations/latest.json when present, deterministica
  try{
   mkdirSync(join(dir,'data'));mkdirSync(join(dir,'work/observations'),{recursive:true});
   for(const f of [lock.filename,'GATE_2D_REPORT.md','GATE_3_APPROVAL_CHECKLIST.md','registry.lock.json'])copyFileSync(join('data',f),join(dir,'data',f));
-  const run=()=>{execFileSync(process.execPath,[resolve('scripts/import-registry.mjs')],{cwd:dir,stdio:'pipe'});return readFileSync(join(dir,'data/snapshot.json'),'utf8');};
+  const run=()=>{execFileSync(process.execPath,[resolve('scripts/import-registry.mjs')],{cwd:dir,env:{...process.env,OCTOPUSG_SNAPSHOT_MODE:'write'},stdio:'pipe'});return readFileSync(join(dir,'data/snapshot.json'),'utf8');};
   const absent=JSON.parse(run());
   assert.equal(absent.observations.present,false);
   assert.deepEqual(absent.observations.records,[]);

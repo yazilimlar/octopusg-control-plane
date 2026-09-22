@@ -16,6 +16,9 @@ forgotten. **Listing a capability does not authorize building it.**
 <!-- GENERATED:CAPABILITIES:BEGIN -->
 | Capability | Status | Target | Provider | Requirements | Source |
 |---|---|---|---|---|---|
+| **org-tenancy** — Declared ownership, partner shares and client tenancy | VALIDATING | v0.2 | — | OG-REG-007, OG-REG-008 | [S9#owner-declarations](sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations) |
+| **explained-variance** — Drift explained by declared components | CONCEPT | unscheduled | — | OG-OBS-008 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) |
+| **finance-and-compliance** — Cost basis register and dated compliance obligations | CONCEPT | unscheduled | — | OG-DATA-005, OG-DATA-006 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) |
 | **spec-governance** — Specification, traceability and AI session guardrails | VALIDATING | B0 | — | OG-GOV-001, OG-GOV-002, OG-GOV-003, OG-GOV-004, OG-GOV-005, OG-GOV-006 | [S1#requirements-and-completeness-model](sources/S1-2026-09-17-conversation-export.md#requirements-and-completeness-model) |
 | **platform-resilience** — Local isolation boundary and recovery copy | AVAILABLE | v0.2 | — | OG-SEC-001, OG-SEC-008 | [S4#registry-discrepancy](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy) |
 | **platform-foundation** — Approved-origin remote, CI and protected preview | CONCEPT | v0.3 | — | OG-GOV-007, OG-SEC-009 | [S7#owner-authorization](sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) |
@@ -52,5 +55,5 @@ forgotten. **Listing a capability does not authorize building it.**
 | **registry-repoint** — One-command registry repoint | CONCEPT | unscheduled | — | OG-REG-006 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 | **approval-outcome-records** — Approval outcomes written to governance records | CONCEPT | unscheduled | — | OG-ACT-009 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 
-35 capabilities · generated from REQUIREMENTS.yaml
+38 capabilities · generated from REQUIREMENTS.yaml
 <!-- GENERATED:CAPABILITIES:END -->

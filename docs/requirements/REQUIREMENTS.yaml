@@ -6,7 +6,7 @@
 spec_version: 0.2-draft
 product: OctopusG
 generated_by: hand-maintained; tables derived by scripts/validate-spec.mjs
-updated: '2026-09-19'
+updated: '2026-09-21'
 sources:
   S1: docs/sources/S1-2026-09-17-conversation-export.md
   S2: docs/sources/S2-2026-09-17-gpt-planning-thread.md
@@ -16,6 +16,7 @@ sources:
   S6: docs/sources/S6-2026-09-18-owner-brand-decisions.md
   S7: docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md
   S8: docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md
+  S9: docs/sources/S9-2026-09-20-owner-ownership-declarations.md
 enums:
   plane:
   - MANAGEMENT
@@ -133,6 +134,8 @@ work_packages:
   title: v0.3 platform foundation design (approved origin, CI, protected preview)
 - id: WP-14
   title: Read-only DayOS monitor
+- id: WP-15
+  title: Owner ownership declarations and client tenancy
 owner_decisions:
 - OD-01
 - OD-02
@@ -146,6 +149,25 @@ owner_decisions:
 - OD-10
 - OD-11
 capabilities:
+- id: org-tenancy
+  title: Declared ownership, partner shares and client tenancy
+  status: VALIDATING
+  target: v0.2
+  requirements: [OG-REG-007, OG-REG-008]
+  source: [S9#owner-declarations]
+- id: explained-variance
+  title: Drift explained by declared components
+  status: CONCEPT
+  target: unscheduled
+  requirements: [OG-OBS-008]
+  source: [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas]
+- id: finance-and-compliance
+  title: Cost basis register and dated compliance obligations
+  status: CONCEPT
+  target: unscheduled
+  requirements: [OG-DATA-005, OG-DATA-006]
+  source: [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas]
+
 - id: spec-governance
   title: Specification, traceability and AI session guardrails
   status: VALIDATING
@@ -2212,3 +2234,84 @@ requirements:
   acceptance_provisional: true
   tests:
   - tests/ai.test.ts
+
+- id: OG-REG-007
+  title: Tenancy boundary between the internal group and clients
+  plane: CONTROL
+  milestone: v0.2
+  work_package: WP-15
+  priority: MVP
+  status: IMPLEMENTED
+  risk: MEDIUM
+  source: [S9#owner-declarations]
+  dependencies: [OG-REG-005]
+  acceptance:
+  - Every legal entity and product carries a tenancy, `internal`, `organization:<id>` or `client:<id>`; missing tenancy shows "undeclared".
+  - An ownership edge whose ends are in different tenancies is rejected at load with the edge and both tenancies named.
+  - Explicit service, client and funding edges (provides_services_to, pays_for_services, client_of, funds) may cross tenancy and never imply ownership or resource access.
+  - Any internal organization roll-up across entities refuses client-tenancy or undeclared-tenancy rows and says why; all-registry inventory counts are labelled as inventory, not ownership totals.
+  - Business ownership and control are distinct from product and asset ownership; S9 declarations are represented without inferring domain, repository, IP, partner equity, payment, nonprofit, tax or accounting facts.
+  - Pınar Evleri is client:pinar-evleri, owned independently by the collectively described cousins; its registry row keeps that client tenancy.
+  - Missing tenancy is undeclared; known-to-unknown ownership fails closed, including legacy platform_parent edges.
+  - Validation can check the pinned importer output without writing a pre-existing snapshot; mismatches still fail closed.
+  tests: [tests/resources.test.ts, tests/graph.test.ts]
+  owner_decisions: [OD-05, OD-09]
+- id: OG-REG-008
+  title: Scoped partner shares with undeclared values
+  plane: CONTROL
+  milestone: v0.2
+  work_package: WP-15
+  priority: MVP
+  status: IMPLEMENTED
+  risk: LOW
+  source: [S9#owner-declarations]
+  dependencies: [OG-REG-005]
+  acceptance:
+  - A share is scoped to an entity, project or product and names a holder and interest kind with declared provenance; its percentage may be `undeclared`. No unknown partner is invented and contractual/economic interests create no equity edge.
+  - An undeclared percentage is shown as "undeclared" and blocks any attribution that needs it; nothing defaults to 0 or 100.
+  - Declared percentages within one scope that exceed 100 are rejected at load.
+  tests: [tests/resources.test.ts]
+  owner_decisions: [OD-05]
+- id: OG-OBS-008
+  title: Explained variance
+  plane: CONTROL
+  milestone: unscheduled
+  priority: LATER
+  status: PROPOSED
+  risk: MEDIUM
+  source: [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas]
+  dependencies: [OG-OBS-002]
+  acceptance:
+  - A field may declare which declared components explain its observed value and a tolerance.
+  - A difference fully explained within tolerance is reported as explained, with each component and its truth state; the weakest component sets confidence.
+  - Any unexplained remainder stays `differs`; stale or missing components yield `unknown`, never explained.
+  tests: [TBD]
+  acceptance_provisional: true
+- id: OG-DATA-005
+  title: Cost basis and depreciation register
+  plane: CONTROL
+  milestone: unscheduled
+  priority: LATER
+  status: PROPOSED
+  risk: HIGH
+  source: [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas]
+  dependencies: [OG-DATA-001, OG-REG-007]
+  acceptance:
+  - A schedule is computed only when every judgement it needs (allocation, life, method, convention, FX policy) is declared; otherwise it is blocked with the missing parameter named.
+  - Output truth is `derived`; no computed figure is ever `observed`.
+  tests: [TBD]
+  acceptance_provisional: true
+- id: OG-DATA-006
+  title: Dated compliance obligations with verbatim citations
+  plane: CONTROL
+  milestone: unscheduled
+  priority: LATER
+  status: PROPOSED
+  risk: HIGH
+  source: [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas]
+  dependencies: [OG-DATA-001, OG-REG-007]
+  acceptance:
+  - Every obligation cites a primary source with a verbatim excerpt and retrieval date; an uncited obligation is rejected.
+  - Computed due dates are `derived`, carry a legal-holiday caveat, and are never shown as verified.
+  tests: [TBD]
+  acceptance_provisional: true

@@ -1,15 +1,191 @@
 {
   "schemaVersion": 1,
-  "$comment": "OG-REG-005 / OD-05. Legal entities whose EXISTENCE the owner has confirmed. An entry here never implies that the entity owns any product, platform, domain, repository, venture, intellectual property or contract. Ownership appears only in `ownership`, only where the owner declares that specific relationship, and is empty until then.",
+  "$comment": "OG-REG-005/007/008; S9 and OD-05/09. Tenancy is not ownership or resource access. Business ownership never cascades to products, domains, repositories or IP. Unnamed partners/providers are not invented. Percentages remain undeclared.",
   "entities": [
     {
       "id": "legal_entity:great-order-llc",
       "label": "Great Order LLC",
+      "tenancy": "internal",
       "truth": "declared",
-      "source": "owner-confirmed",
-      "confirmedOn": "2026-09-17",
-      "note": "Existence confirmed by the owner on 2026-09-17. No ownership of AgoraXAI, Artemis, OctopusG, any domain, repository, product, venture, intellectual property or contract is declared."
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "George owns and controls this entity. Project/product partners do not imply LLC equity. At-cost sales through GreatOrder.org involve Prime Industrial; its role, domain ownership, amounts, terms, accounting and tax treatment remain undeclared. Pricing is not nonprofit or tax-exempt status. Possible nonprofit reorganization is outside WP-15."
     }
   ],
-  "ownership": []
+  "subjects": [
+    {
+      "id": "person:george",
+      "label": "George",
+      "tenancy": "internal",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "Owner/controller; numeric ownership percentage undeclared."
+    },
+    {
+      "id": "organization:agoraxai",
+      "label": "AgoraXAI (business/platform)",
+      "tenancy": "internal",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "Great Order LLC owns and controls the business. Specific domains, repositories, trademarks, software and other IP ownership remain undeclared. May engage multiple vendors, contractors and suppliers; none individually declared."
+    },
+    {
+      "id": "organization:artemis",
+      "label": "Artemis (business/division)",
+      "tenancy": "internal",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "Great Order LLC owns and controls the division. Specific repositories, applications and other IP ownership remain undeclared."
+    },
+    {
+      "id": "client:pinar-evleri",
+      "label": "Pınar Evleri",
+      "tenancy": "client:pinar-evleri",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "External client independently owned by George's cousins; no internal group ownership."
+    },
+    {
+      "id": "party:georges-cousins",
+      "label": "George's cousins (collective owner description)",
+      "tenancy": "client:pinar-evleri",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "confirmedOn": "2026-09-21",
+      "note": "Individual identities and percentages undeclared; no invented people or legal form."
+    }
+  ],
+  "products": [
+    {
+      "id": "agoraxai-control-plane",
+      "tenancy": "internal",
+      "source": "S9#owner-declarations"
+    },
+    {
+      "id": "pinarevleri",
+      "tenancy": "client:pinar-evleri",
+      "source": "S9#owner-declarations"
+    }
+  ],
+  "ownership": [],
+  "relationships": [
+    {
+      "to": "legal_entity:great-order-llc",
+      "type": "owns",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared ownership; percentage undeclared; no asset ownership inferred",
+      "from": "person:george"
+    },
+    {
+      "to": "legal_entity:great-order-llc",
+      "type": "controls",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared control; no access authority conferred",
+      "from": "person:george"
+    },
+    {
+      "to": "organization:agoraxai",
+      "type": "owns",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared ownership; percentage undeclared; no asset ownership inferred",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "organization:agoraxai",
+      "type": "controls",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared control; no access authority conferred",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "organization:artemis",
+      "type": "owns",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared ownership; percentage undeclared; no asset ownership inferred",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "organization:artemis",
+      "type": "controls",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-declared control; no access authority conferred",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "client:pinar-evleri",
+      "type": "owns",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Independent external client ownership; individual identities and percentages undeclared",
+      "from": "party:georges-cousins"
+    },
+    {
+      "to": "organization:agoraxai",
+      "type": "provides_services_to",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Engineering and software services through or for AgoraXAI; no payment declared",
+      "from": "organization:artemis"
+    },
+    {
+      "to": "legal_entity:great-order-llc",
+      "type": "provides_services_to",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Services to Great Order LLC as an internal client; terms undeclared",
+      "from": "organization:agoraxai"
+    },
+    {
+      "to": "organization:agoraxai",
+      "type": "client_of",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Great Order LLC receives AgoraXAI services as an internal client",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "organization:agoraxai",
+      "type": "funds",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Owner-described donations; amounts, terms, accounting and tax treatment undeclared; no deductibility or tax-status conclusion",
+      "from": "legal_entity:great-order-llc"
+    },
+    {
+      "to": "client:pinar-evleri",
+      "type": "provides_services_to",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "Artemis provides software/services to Pınar Evleri; no ownership or resource access implied",
+      "from": "organization:artemis"
+    },
+    {
+      "to": "organization:artemis",
+      "type": "client_of",
+      "truth": "declared",
+      "source": "S9#owner-declarations",
+      "label": "External software/services client of Artemis; independently owned",
+      "from": "client:pinar-evleri"
+    }
+  ],
+  "shares": [
+    {
+      "scopeType": "entity",
+      "scopeId": "legal_entity:great-order-llc",
+      "holderId": "person:george",
+      "interest": "undeclared",
+      "percentage": "undeclared",
+      "source": "S9#owner-declarations"
+    }
+  ]
 }

@@ -66,6 +66,7 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 | WP-09 | Action model and safe open actions | OG-ACT-001, OG-ACT-002 | WP-03, WP-04 |
 | WP-10 | Devices and requirements views | OG-UI-004, OG-UI-005 | WP-03 |
 | WP-12 | Brand asset and tagline | OG-UI-007 | WP-06 |
+| WP-15 | Owner ownership declarations and client tenancy (local model extension) | OG-REG-007, OG-REG-008 | WP-04, OD-05, OD-09 |
 | WP-11 | v0.2 acceptance | OG-GOV-004 + every v0.2 requirement | WP-01…WP-10, WP-12 |
 
 **If OD-06 is accepted** (narrower v0.2), WP-07, WP-08 and WP-09's policy half move to v0.3.
@@ -94,11 +95,11 @@ applies unless the owner says otherwise.
 | OD-02 | The repository has no remote and the registry says no backup; S1 says a verified bundle exists. Where is the recovery copy? Add a private GitHub remote? | Confirm bundle location now; decide the remote separately (it changes the audit's zero-remote rule and needs an ADR). WP-01 verified the v0.1 bundle but it is on the same disk; the Block 0 bundle was not found ([manifest](archive/MANIFEST.md)). | **BLOCKING** OG-SEC-008 |
 | OD-03 | Finish containment of known plaintext secrets before any connector authorization? | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** yes. All connectors stay at Level 0 and unauthorized. Any real connector needs its own v0.3 connector-specific ADR and owner approval. | **BLOCKING** v0.3 G3 |
 | OD-04 | Credential store for v0.3 collectors | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** no credential store is selected in v0.2. Credential handling stays blocked until immediately before the first approved real connector. macOS Keychain by label remains the candidate, not the choice. | v0.3 |
-| OD-05 | Which legal entity owns OctopusG and each product (historical map says "Great Order LLC"; registry umbrella is AgoraXAI)? | **Owner clarification 2026-09-17:** Great Order LLC exists and is owner-confirmed (`legal_entity:great-order-llc`, truth `declared`, source `owner-confirmed`). It is **not** declared to own AgoraXAI, Artemis, OctopusG or any domain, repository, product, venture, IP or contract; every such ownership stays absent or `undeclared` until the owner declares it specifically. Recorded in `config/entities.json` (WP-04). | Resolved for v0.2 |
+| OD-05 | Declared ownership and control; asset ownership separately documented | **Owner clarification 2026-09-21 ([S9](sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations)):** George owns/controls Great Order LLC; Great Order LLC owns/controls AgoraXAI as a business/platform and Artemis as a business/division. Project/product contractual or economic partners are not inferred LLC equity holders; holders and percentages stay undeclared. OctopusG and specific domains, repositories, trademarks, applications and other IP ownership remain undeclared. Service/client/funding declarations are separate edges. No nonprofit, tax, deductibility or accounting conclusion is declared. | Resolved for WP-15; specific assets/interests remain open |
 | OD-06 | Narrow v0.2 (move Connection Center, inbox, policy to v0.3) per [S3 Change 3](sources/S3-2026-09-17-claude-review.md#change-3--narrower-v02) | Keep the S1 boundary (owner-carried decision); revisit at G1 | Scope only |
 | OD-07 | Add GitHub read-only alongside Vercel in v0.3 | Yes | v0.3 |
 | OD-08 | Rename code identifiers from `Octopus` to `OctopusG`? | UI text only; keep schema const and localStorage key so saved simulation state survives. **Extended 2026-09-18:** the brand mark and the tagline "Architect-Engineer of Complex Systems" are owner-authorized for the interface ([ADR-0006](decisions/ADR-0006-brand-asset-and-tagline.md), [S6](sources/S6-2026-09-18-owner-brand-decisions.md#owner-brand-decisions)); identifiers are still untouched. | — |
-| OD-09 | Is Pınar Evleri retained in the portfolio? | Retained as registered; no extraction work in OctopusG | — |
+| OD-09 | Is Pınar Evleri retained in the portfolio? | **Owner clarification 2026-09-21 ([S9](sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations)):** retained as external client `client:pinar-evleri`, independently owned by George's cousins. Registry row `pinarevleri` carries client tenancy; Artemis provides software/services. Internal ownership cannot cross into this client; tenancy grants no access. No extraction work. | — |
 | OD-10 | Runbooks (add connector/product/device, move repository, revoke) | Write each at the start of the block that first needs it | — |
 | OD-11 | Approved-origin remote, CI and protected Vercel preview ([S7](sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md)) | **Owner decision 2026-09-18:** replace the zero-remote rule with an exact allowlist for `https://github.com/yazilimlar/octopusg-control-plane.git` (private only); add GitHub Actions CI running the existing validate/validate:spec commands; add a protected, non-production-only Vercel preview. Designed in [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md) (WP-13); the remote/push/deploy steps themselves are deferred — CLAUDE.md's Never list is a session-level control this ADR does not itself lift. | Unblocks OG-SEC-008 once executed |
 
@@ -112,7 +113,22 @@ applies unless the owner says otherwise.
   observed within the Artemis Omni repository; this implies no ownership, deployment or production status.
 - **Trust zones** — the prohibition on T3/T4 and on production actions is retained. No production
   execution is authorized in v0.2.
-- **Great Order LLC** — existence stays owner-confirmed declared data; no ownership relationship is
-  inferred.
+- **Great Order LLC** — the 2026-09-18 existence-only position was superseded for explicitly
+  declared business ownership/control by S9 and OD-05 above; asset ownership is still not inferred.
 - **OG-SEC-008** — stays pending until the owner has placed the final complete-history bundle in an
   off-device location. Recovery is not to be marked verified before that.
+
+## WP-15 scope and later proposals
+
+OG-REG-007/008 extend the local catalog, not tenant authentication or provider access. Artemis
+provides engineering/software services through or for AgoraXAI and services to Pınar Evleri;
+Great Order LLC is AgoraXAI's internal client and supplies owner-described donation funding.
+Amounts, terms, other payments and accounting/tax treatment remain undeclared. AgoraXAI may engage
+multiple providers; none are named. Great Order LLC conducts at-cost sales through GreatOrder.org
+with Prime Industrial involved, but its role and domain ownership remain undeclared. Pricing does
+not establish nonprofit or tax-exempt status. Possible nonprofit reorganization is a separate,
+future governed work package, not WP-15. Source: [S9](sources/S9-2026-09-20-owner-ownership-declarations.md).
+
+OG-OBS-008, OG-DATA-005 and OG-DATA-006 are PROPOSED, unscheduled candidate requirements only.
+No explained-variance, financial basis, compliance calendar or legal-compliance implementation is
+included. WP-15 stops for owner review; no WP-16 is started.

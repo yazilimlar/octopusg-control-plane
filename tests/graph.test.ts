@@ -26,17 +26,18 @@ test('every edge has a documented type, a truth kind, a source and endpoints tha
  }
  assert.deepEqual(danglingEdges(catalog,registry),[]);
 });
-test('nodes are products and derived resources, and there are no duplicate edges',()=>{
+test('nodes are products, declared organization subjects and derived resources, without duplicate edges',()=>{
  const ids=nodeIds(catalog,registry);
- assert.equal(ids.size,(registry.projects as Raw[]).length+catalog.resources.length);
+ assert.equal(ids.size,(registry.projects as Raw[]).length+catalog.resources.length+catalog.subjects.length);
  const keys=catalog.edges.map(e=>`${e.type}|${e.from}|${e.to}`);
  assert.equal(new Set(keys).size,keys.length,'no duplicate edge');
  assert.ok(catalog.edges.some(e=>catalog.resources.some(r=>r.id===e.to)),'resources take part in the graph');
 });
-test('ownership comes only from declared platform_parent, and Artemis never owns AgoraXAI Atlas',()=>{
- assert.deepEqual(ownershipEdgeTypes,['platform_parent']);
+test('ownership comes only from explicit declarations, and Artemis never owns AgoraXAI Atlas',()=>{
+ assert.deepEqual(ownershipEdgeTypes,['platform_parent','owns','controls']);
  for(const e of catalog.edges.filter(e=>ownershipEdgeTypes.includes(e.type))){
   assert.equal(e.truth,'declared');
+  if(e.type!=='platform_parent'){assert.equal(e.source,'S9#owner-declarations');assert.ok(entityFile.relationships.some(r=>r.from===e.from&&r.to===e.to&&r.type===e.type));continue;}
   assert.match(e.source,/\.platform_parent$/);
   assert.equal(registry.projects.find((p:Raw)=>p.id===e.to)?.platform_parent,e.from);
  }
