@@ -16,6 +16,9 @@ Hand-maintained traceability drifts.
   staleness (`npm run validate:spec`).
 - Detailed acceptance criteria are required for the next milestone only; later milestones carry
   provisional criteria marked as such.
+- Human approval identifies the governed object and intent. Machine-resolvable immutable
+  identifiers are obtained from the authoritative system and cross-validated rather than manually
+  retranscribed through chat; unresolved identity remains blocked.
 
 ## Consequences
 + Completeness can be checked mechanically and by a second model reading `docs/sources/`.

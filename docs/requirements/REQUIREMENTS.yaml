@@ -18,6 +18,7 @@ sources:
   S8: docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md
   S9: docs/sources/S9-2026-09-20-owner-ownership-declarations.md
   S10: docs/sources/S10-2026-09-21-owner-wp16-authorization.md
+  S11: docs/sources/S11-2026-09-22-owner-wp18-authorization.md
   S12: docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md
 enums:
   plane:
@@ -140,6 +141,8 @@ work_packages:
   title: Owner ownership declarations and client tenancy
 - id: WP-16
   title: Credential Reference and Connector Security Foundation
+- id: WP-18
+  title: DayOS Supabase Connector Design and Authorization Boundary
 - id: WP-17
   title: Artemis DayOS Supabase Read-Only Observation Connector
 owner_decisions:
@@ -1502,13 +1505,20 @@ requirements:
   risk: HIGH
   source:
   - S1#connector-and-automation-strategy
+  - S11#decisions
   dependencies:
   - OG-SEC-003
+  - OG-SEC-004
   acceptance:
   - Owner-reviewed, sanitized schema/migration inventory only; no rows, credentials, function bodies or queries.
+  - Before implementation, project identity resolves from authoritative canonical configuration and cross-validates to dayos; otherwise state is blocked.
+  - The initial design allowlist excludes object counts and caps the connector at Level 1 with metadata:read.
+  - G3 remains a separate owner authorization and is not granted by the design package.
   acceptance_provisional: true
   tests:
+  - tests/supabase-boundary.test.ts
   - tests/connectors/supabase-readonly.test.ts
+  work_package: WP-18
 - id: OG-CONN-016
   title: Evaluate third-party social and inbox backends
   plane: INTEGRATION
