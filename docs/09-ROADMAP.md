@@ -86,6 +86,17 @@ DayOS monitoring vertical-slice specification ([docs/NEXT-SLICE-DAYOS-MONITORING
 It does not add a remote, push, or deploy anything — those steps are the deferred-execution
 checklist in ADR-0007, run by the owner or an explicitly re-permissioned session.
 
+## Candidate backlog (unnumbered)
+
+OctopusG follows the progressive-delivery principle in [ADR-0010](decisions/ADR-0010-progressive-delivery-and-evolution.md):
+after the minimum safe foundation and first controlled integration, prioritize a privately deployed
+usable Alpha. Continue governed work packages through Alpha, Beta, production and later evolution,
+driven increasingly by usage, testing, operational evidence and newly authorized capabilities.
+
+Future ideas remain unnumbered here until they are sufficiently defined and authorized. This
+backlog does not reserve WP identifiers. Evolution History UI surfacing is deferred to a later
+governed package.
+
 ## Owner decisions
 
 `BLOCKING` items stop the named work package. Everything else has a recommended default that
