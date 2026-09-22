@@ -5,7 +5,7 @@ import {assertApprovedRemoteSet} from './audit-remotes.mjs';
 const files=[];
 async function walk(dir){for(const item of await readdir(dir,{withFileTypes:true})){if(['.git','node_modules','work'].includes(item.name))continue;const path=dir+'/'+item.name;if(/^\.env(?:\.|$)|\.(?:pem|key)$/.test(item.name))throw Error('Forbidden secret-bearing filename: '+path);if(item.isDirectory())await walk(path);else files.push(path);}}
 await walk('.');
-const patterns=[/gh[pousr]_[A-Za-z0-9]{30,}/g,/sk_(?:live|test)_[A-Za-z0-9]{20,}/g,/AKIA[A-Z0-9]{16}/g,/eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}/g,/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/g,/https?:\/\/[^\s/:]+:[^\s/@]+@/g];
+const patterns=[/gh[pousr]_[A-Za-z0-9]{30,}/g,/sk_(?:live|test)_[A-Za-z0-9]{20,}/g,/AKIA[A-Z0-9]{16}/g,/eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}/g,/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/g,/https?:\/\/[^\s/:]+:[^\s/@]+@/g,/\b(?:bearer|basic)\s+[A-Za-z0-9._~+/=-]{20,}/gi];
 let matches=0;
 for(const file of files){const content=await readFile(file,'utf8');let count=0;for(const re of patterns)count+=[...content.matchAll(re)].length;if(count){console.log(`Secret-shaped content: ${file} (${count} matches; values suppressed)`);matches+=count;}}
 assert.equal(matches,0,'Secret-shaped content must be reviewed');

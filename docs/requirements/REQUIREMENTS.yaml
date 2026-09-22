@@ -17,6 +17,7 @@ sources:
   S7: docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md
   S8: docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md
   S9: docs/sources/S9-2026-09-20-owner-ownership-declarations.md
+  S10: docs/sources/S10-2026-09-21-owner-wp16-authorization.md
 enums:
   plane:
   - MANAGEMENT
@@ -136,6 +137,10 @@ work_packages:
   title: Read-only DayOS monitor
 - id: WP-15
   title: Owner ownership declarations and client tenancy
+- id: WP-16
+  title: Credential Reference and Connector Security Foundation
+- id: WP-17
+  title: Artemis DayOS Supabase Read-Only Observation Connector
 owner_decisions:
 - OD-01
 - OD-02
@@ -317,13 +322,14 @@ capabilities:
   - S2#mvp-boundary
 - id: credential-management
   title: Credential store and containment gate
-  status: PLANNED
+  status: BUILDING
   target: v0.3
   requirements:
   - OG-SEC-003
   - OG-SEC-004
   source:
   - S1#connection-center-lifecycle
+  - S10#decisions
 - id: vercel-readonly
   title: Vercel projects, deployments, domains
   status: PLANNED
@@ -2013,7 +2019,7 @@ requirements:
   plane: CONTROL
   milestone: v0.3
   priority: NEXT
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: HIGH
   source:
   - S1#connection-center-lifecycle
@@ -2021,31 +2027,34 @@ requirements:
   dependencies:
   - OG-CONN-002
   acceptance:
-  - Only collector/executor processes read credentials by reference; values never reach the bundle, logs, events
-    or registry.
-  - Audit extended to prove no credential value is present in dist/ or work/observations.
+  - Only collector/executor processes may resolve a credential by a provider reference; values never reach source,
+    configuration, the bundle, UI, logs, events, observations, snapshots, evidence, generated artifacts or canonical records.
+  - CredentialRef and CredentialProvider remain provider-neutral; connectors and business logic do not depend directly on macOS Keychain.
+  - Audit proves no credential value is present in tracked output or work/observations.
   tests:
   - tests/credentials.test.ts
   - scripts/audit.mjs
   owner_decisions:
   - OD-04
+  work_package: WP-16
 - id: OG-SEC-004
   title: Secret containment precondition for connector authorization
   plane: CONTROL
   milestone: v0.3
   priority: NEXT
-  status: PROPOSED
+  status: IMPLEMENTED
   risk: CRITICAL
   source:
   - S3#change-4--security-containment-first
   dependencies: []
   acceptance:
-  - Connector authorization is refused while the registry records unresolved plaintext-secret exposure, unless the
-    owner records an explicit exception.
+  - Connector authorization is refused while unresolved plaintext-secret exposure is recorded, unless the owner
+    records an explicit exception.
   tests:
   - tests/connections.test.ts
   owner_decisions:
   - OD-03
+  work_package: WP-16
 - id: OG-SEC-005
   title: Kill switch
   plane: CONTROL
