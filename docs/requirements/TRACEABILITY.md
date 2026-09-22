@@ -5,7 +5,7 @@
 
 ## Totals
 
-98 requirements · 38 capabilities · 11 sources
+98 requirements · 38 capabilities · 12 sources
 
 | milestone | count |
 |---|---:|
@@ -176,7 +176,7 @@
 |---|---|---|---|---|---|---|---|---|
 | OG-OBS-005 | Business KPIs from sales and leads *(provisional)* | CONTROL | PROPOSED | LOW | — | OG-CONN-014, OG-EVT-005 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/kpi.test.ts` |
 | OG-CONN-014 | Squarespace read-only commerce and site events *(provisional)* | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003, OG-EVT-004 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/connectors/squarespace.test.ts` |
-| OG-CONN-015 | Supabase read-only metadata *(provisional)* | INTEGRATION | PROPOSED | HIGH | — | OG-SEC-003 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy) | `tests/connectors/supabase-readonly.test.ts` |
+| OG-CONN-015 | Supabase read-only metadata *(provisional)* | INTEGRATION | PROPOSED | HIGH | WP-18 | OG-SEC-003, OG-SEC-004 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S11#decisions](../sources/S11-2026-09-22-owner-wp18-authorization.md#decisions) | `tests/supabase-boundary.test.ts`<br>`tests/connectors/supabase-readonly.test.ts` |
 
 ## v0.10 — Real approvals and guarded changes
 

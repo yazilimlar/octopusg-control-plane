@@ -78,7 +78,8 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 | WP-13 | v0.3 platform foundation design, then execution (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-008, OG-SEC-009 | WP-11 |
 | WP-14 | Read-only DayOS monitor (source, checkout, deployment reference; Supabase stays blocked) | OG-OBS-007 | WP-13 |
 | WP-16 | Credential Reference and Connector Security Foundation | OG-SEC-003, OG-SEC-004 | WP-15, OD-03, OD-04 |
-| WP-17 (reserved) | Artemis DayOS Supabase Read-Only Observation Connector | OG-CONN-015 | WP-16, Supabase ADR, G3 |
+| WP-18 | DayOS Supabase Connector Design and Authorization Boundary | OG-CONN-015 | WP-16 |
+| WP-17 (reserved) | Artemis DayOS Supabase Read-Only Observation Connector | OG-CONN-015 | WP-18, Supabase ADR, G3 |
 
 WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
 it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the

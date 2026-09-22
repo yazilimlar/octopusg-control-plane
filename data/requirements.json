@@ -122,6 +122,10 @@
       "title": "Credential Reference and Connector Security Foundation"
     },
     {
+      "id": "WP-18",
+      "title": "DayOS Supabase Connector Design and Authorization Boundary"
+    },
+    {
       "id": "WP-17",
       "title": "Artemis DayOS Supabase Read-Only Observation Connector"
     }
@@ -2054,28 +2058,35 @@
       "title": "Supabase read-only metadata",
       "plane": "INTEGRATION",
       "milestone": "v0.9",
-      "workPackage": null,
+      "workPackage": "WP-18",
       "priority": "LATER",
       "status": "PROPOSED",
       "risk": "HIGH",
       "dependencies": [
-        "OG-SEC-003"
+        "OG-SEC-003",
+        "OG-SEC-004"
       ],
       "acceptance": [
-        "Owner-reviewed, sanitized schema/migration inventory only; no rows, credentials, function bodies or queries."
+        "Owner-reviewed, sanitized schema/migration inventory only; no rows, credentials, function bodies or queries.",
+        "Before implementation, project identity resolves from authoritative canonical configuration and cross-validates to dayos; otherwise state is blocked.",
+        "The initial design allowlist excludes object counts and caps the connector at Level 1 with metadata:read.",
+        "G3 remains a separate owner authorization and is not granted by the design package."
       ],
       "acceptanceProvisional": true,
       "tests": [
+        "tests/supabase-boundary.test.ts",
         "tests/connectors/supabase-readonly.test.ts"
       ],
       "sources": [
-        "S1#connector-and-automation-strategy"
+        "S1#connector-and-automation-strategy",
+        "S11#decisions"
       ],
       "ownerDecisions": [],
       "evidence": [
         "WP-13.md",
         "WP-14.md",
-        "WP-16.md"
+        "WP-16.md",
+        "WP-18.md"
       ]
     },
     {
