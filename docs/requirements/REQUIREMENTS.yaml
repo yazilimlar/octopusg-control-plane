@@ -18,6 +18,7 @@ sources:
   S8: docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md
   S9: docs/sources/S9-2026-09-20-owner-ownership-declarations.md
   S10: docs/sources/S10-2026-09-21-owner-wp16-authorization.md
+  S12: docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md
 enums:
   plane:
   - MANAGEMENT
