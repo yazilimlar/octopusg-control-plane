@@ -67,6 +67,17 @@ Status: **experiment / reference implementation concept**\
 Recorded: **2026-09-22**; exploration date not independently established.\
 Source: [S13](sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md#experiments-and-reference-implementations).
 
+**EXP-001 is an experiment/evolution record, not an approved roadmap.** Its strategies, layers,
+spatial candidates, consensus/challenge concepts, neural representations, BIM/GIS/LiDAR/NeRF/
+Gaussian-splatting/CFD/FEA/XR/IoT and solver concepts remain preserved candidate architecture
+unless separately promoted through governance. Ordering, lettering and conceptual flows below
+establish neither implementation priority nor sequence. Presence in this history does not
+authorize implementation, create or imply a work package, or create an Alpha dependency.
+[ADR-0010](decisions/ADR-0010-progressive-delivery-and-evolution.md) controls implementation
+sequencing: after the minimum safe foundation and first controlled integration, a privately
+deployed usable Alpha remains the near-term delivery priority. Future implementation should
+increasingly follow actual usage, evidence, testing and explicit owner authorization.
+
 The Panorama Room is the prototype spatial cell in the owner's exploration. This record
 preserves the concept; it does not assert that a Spatial Reality Kernel or any candidate below
 has been implemented. Its conceptual progression is:
@@ -288,9 +299,12 @@ depend on sourced geometry, observations and explicit growth assumptions; no for
 Multi-user XR/spatial collaboration remains a future candidate only, with no implementation
 implied.
 
-### Engineering Consensus Graph
+### Engineering Evidence & Challenge Graph
 
-Category: **CANDIDATE**. Conceptual flow, not an existing pipeline:
+Category: **CANDIDATE**. Historical name in S13: “Engineering Consensus Graph.” The preferred name
+clarifies that agreement grants no authority; the original concept and history are preserved.
+See [ADR-0011 reconciliation](decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md#context).
+Conceptual flow, not an existing pipeline or implementation sequence:
 
 ```text
 PHYSICAL REALITY
@@ -299,7 +313,7 @@ REALITY EVIDENCE BUS
       ↓
 multiple independent models / agents
       ↓
-ENGINEERING CONSENSUS GRAPH
+ENGINEERING EVIDENCE & CHALLENGE GRAPH
       ↓
 explicit disagreement / uncertainty
       ↓
@@ -321,6 +335,9 @@ validated calculation, standards, professional engineering review and authorized
 may outweigh model agreement. OctopusG governance applies across the flow, including evidence,
 permissions and approvals; its final position in this conceptual diagram does not postpone
 governance until after engineering. The human gates in ADR-0011 apply throughout.
+AI synthesis may propose resolutions; approval belongs to the owner and/or appropriately
+authorized human professional within their role and domain, preserving required licensed
+professional judgment. OctopusG records that authority; model agreement cannot manufacture it.
 
 ### Multi-AI red team and challenge model
 
@@ -394,6 +411,11 @@ qualification, depreciation schedules, recapture treatment and sale tax treatmen
 authoritative merely because an AI prototype calculated them. No rates, eligibility findings
 or legal conclusions are adopted here.
 
+Simulations are scenario/decision-support artifacts, not authoritative tax determinations,
+filings, legal advice, accounting approval or professional certification. Explicit human/
+professional authority gates must be defined before operational use; no simulated result
+constitutes approval or authorization to act.
+
 Future canonical tax/finance logic must support authoritative citations; tax-year versioning;
 jurisdiction; entity type; tax/filing status where relevant; effective dates; explicit assumptions;
 independent testing; an audit trail; and CPA/tax-professional review or handoff where appropriate.
@@ -410,3 +432,5 @@ Before future design/implementation authorization, locate the authoritative Spat
 evidence definitions and original experiment artifacts where available; reconcile the candidate
 evidence scale and domain gates with canonical models; define solver validation scopes and
 independent challenge criteria. These are open architecture questions, not assigned work.
+The [ADR-0011 review considerations](decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md#open-design-considerations-from-the-review)
+retain I2–I7 and deferred findings without defining schemas or implementation commitments.
