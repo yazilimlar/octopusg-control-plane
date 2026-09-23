@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/validate-spec.mjs",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "milestones": [
     {
       "id": "v0.1",
@@ -412,6 +412,15 @@
         "OG-AI-003",
         "OG-AI-004",
         "OG-WF-006"
+      ]
+    },
+    {
+      "id": "multi-ai-engineering-core",
+      "title": "Multi-AI engineering evidence and challenge governance",
+      "status": "CONCEPT",
+      "target": "unscheduled",
+      "requirements": [
+        "OG-AI-005"
       ]
     },
     {
@@ -3213,6 +3222,37 @@
       "sources": [
         "S1#core-capabilities-discussed",
         "S2#development-roadmap-blocks"
+      ],
+      "ownerDecisions": [],
+      "evidence": []
+    },
+    {
+      "id": "OG-AI-005",
+      "title": "Evidence-governed multi-model engineering claims",
+      "plane": "GOVERNANCE",
+      "milestone": "unscheduled",
+      "workPackage": null,
+      "priority": "VISION",
+      "status": "PROPOSED",
+      "risk": "HIGH",
+      "dependencies": [
+        "OG-DATA-001",
+        "OG-DATA-002"
+      ],
+      "acceptance": [
+        "Structured claims retain claim identity, object/entity identity, model/provider/version identity, evidence, provenance, assumptions, confidence, uncertainty, disagreement, dissent, counterevidence, verification state, deterministic solver results where applicable, temporal state, human review state and approval state.",
+        "No individual AI model, provider or agent is engineering truth or final engineering authority; evidence quality and authoritative observations outrank model consensus, and no majority vote establishes engineering truth.",
+        "Material disagreement is explicit and retained without silent averaging, overwriting, hiding or collapse into false certainty; AI synthesis may propose a resolution but has no independent engineering approval authority. Resolution approval requires the owner and/or appropriately authorized human professional according to role, domain and applicable professional responsibility, preserving required licensed professional judgment, original claims, dissent, counterevidence, a traceable rationale and explicit human identity and authority.",
+        "Validated deterministic engineering solvers remain authoritative for numerical calculations within their validated scope; LLM numerical assertions cannot silently become validated professional engineering results.",
+        "Evidence and authority gates preserve AI proposal, independent challenge/cross-check, evidence support, solver verification where applicable, engineer review where required, owner/authorized-party approval, issuance, construction and physical observation/validation, reconciled with canonical state models; simulated approvals confer no real authority.",
+        "Temporal/scenario lineage preserves earlier observations and alternatives; model-reported confidence does not replace canonical derived confidence, and missing evidence or authorization remains unknown or blocked."
+      ],
+      "acceptanceProvisional": true,
+      "tests": [
+        "TBD"
+      ],
+      "sources": [
+        "S13#adopted-architectural-and-governance-principles"
       ],
       "ownerDecisions": [],
       "evidence": []

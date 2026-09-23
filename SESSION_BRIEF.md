@@ -111,7 +111,7 @@ Read this first in every AI session. Keep it under one page.
 | | |
 |---|---|
 | Current milestone | **v0.2** — 30 requirements (11 verified) |
-| Ledger | 98 requirements · 38 capabilities |
+| Ledger | 99 requirements · 39 capabilities |
 | Owner decisions referenced by v0.2 (see 09) | OD-01, OD-02, OD-05, OD-08, OD-09, OD-11 |
 | Next work package | none |
 <!-- GENERATED:STATUS:END -->

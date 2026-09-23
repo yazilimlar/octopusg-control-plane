@@ -42,6 +42,7 @@ forgotten. **Listing a capability does not authorize building it.**
 | **local-device-agent** — Mac and Windows local agent | CONCEPT | v0.5 | — | OG-DEV-003, OG-DEV-004, OG-DEV-005, OG-DEV-006, OG-ACT-004 | [S2#multi-device-control](sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) |
 | **n8n-workflow-bridge** — Workflow engine bridge | CONCEPT | v0.6 | n8n | OG-CONN-009, OG-WF-001, OG-WF-002 | [S2#per-service-management](sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management) |
 | **ai-assistance** — Summaries, diagnostics and bounded agents | CONCEPT | v0.6 | — | OG-AI-002, OG-AI-003, OG-AI-004, OG-WF-006 | [S1#core-capabilities-discussed](sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed) |
+| **multi-ai-engineering-core** — Multi-AI engineering evidence and challenge governance | CONCEPT | unscheduled | — | OG-AI-005 | [S13#adopted-architectural-and-governance-principles](sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md#adopted-architectural-and-governance-principles) |
 | **gmail-inquiry-drafts** — Inquiry to Gmail draft pilot | CONCEPT | v0.7 | Gmail | OG-CONN-010, OG-WF-003, OG-DATA-003, OG-WF-007 | [S2#first-communications-pilot](sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) |
 | **instagram-comment-to-dm** — Instagram comment-to-DM campaigns | DEFERRED | v0.8 | ManyChat | OG-CONN-011, OG-CONN-012, OG-WF-004, OG-EVT-005, OG-SEC-006 | [S2#instagram-comment-to-dm-automation](sources/S2-2026-09-17-gpt-planning-thread.md#instagram-comment-to-dm-automation)<br>[S2#specification-pack-and-requirement-families](sources/S2-2026-09-17-gpt-planning-thread.md#specification-pack-and-requirement-families) |
 | **whatsapp-business** — WhatsApp Business messaging | DEFERRED | v0.8 | WhatsApp Business Platform | OG-CONN-013, OG-WF-005 | [S2#whatsapp-automation](sources/S2-2026-09-17-gpt-planning-thread.md#whatsapp-automation) |
@@ -55,5 +56,5 @@ forgotten. **Listing a capability does not authorize building it.**
 | **registry-repoint** — One-command registry repoint | CONCEPT | unscheduled | — | OG-REG-006 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 | **approval-outcome-records** — Approval outcomes written to governance records | CONCEPT | unscheduled | — | OG-ACT-009 | [S5#next--the-control-plane-earns-its-keep](archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) |
 
-38 capabilities · generated from REQUIREMENTS.yaml
+39 capabilities · generated from REQUIREMENTS.yaml
 <!-- GENERATED:CAPABILITIES:END -->
