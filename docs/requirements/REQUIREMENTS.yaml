@@ -21,6 +21,7 @@ sources:
   S11: docs/sources/S11-2026-09-22-owner-wp18-authorization.md
   S12: docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md
   S13: docs/sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md
+  S14: docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md
 enums:
   plane:
   - MANAGEMENT
@@ -365,11 +366,12 @@ capabilities:
 - id: ai-registry-mcp
   title: Registry MCP server for AI sessions
   status: CONCEPT
-  target: v0.3
+  target: unscheduled
   requirements:
   - OG-AI-001
   source:
   - S3#session-setup-guidance
+  - S14#decisions
 - id: tailscale-inventory
   title: Private device network inventory
   status: PLANNED
@@ -476,13 +478,14 @@ capabilities:
   - S8#owner-directive
 - id: supabase-observation
   title: Supabase metadata
-  status: CONCEPT
-  target: v0.9
+  status: PLANNED
+  target: v0.3
   provider: Supabase
   requirements:
   - OG-CONN-015
   source:
   - S1#connector-and-automation-strategy
+  - S14#decisions
 - id: guarded-changes
   title: Guarded deployments, migrations and critical changes
   status: CONCEPT
@@ -1506,13 +1509,14 @@ requirements:
 - id: OG-CONN-015
   title: Supabase read-only metadata
   plane: INTEGRATION
-  milestone: v0.9
-  priority: LATER
-  status: PROPOSED
+  milestone: v0.3
+  priority: NEXT
+  status: APPROVED
   risk: HIGH
   source:
   - S1#connector-and-automation-strategy
   - S11#decisions
+  - S14#decisions
   dependencies:
   - OG-SEC-003
   - OG-SEC-004
@@ -1525,7 +1529,8 @@ requirements:
   tests:
   - tests/supabase-boundary.test.ts
   - tests/connectors/supabase-readonly.test.ts
-  work_package: WP-18
+  work_package: WP-17
+  notes: APPROVED implementation target (S14, ADR-0009 accepted 2026-09-25). Design boundary provenance is WP-18 (S11, ADR-0009, docs/evidence/WP-18.md); implementation belongs to WP-17. Approval grants no G3, provider, credential or Supabase access; OD-03 containment (docs/security/OD-03-CONTAINMENT.md) must be complete before any G3.
 - id: OG-CONN-016
   title: Evaluate third-party social and inbox backends
   plane: INTEGRATION
@@ -2073,6 +2078,7 @@ requirements:
   owner_decisions:
   - OD-03
   work_package: WP-16
+  notes: Scope clarified by S14 decision 6 (2026-09-25, not an exception) — the precondition's input is whether an unresolved exposure relevant to the proposed connector is recorded (one that can compromise the connector, its credential/provider boundary, its target system, its execution host or another relevant shared trust domain). See docs/security/OD-03-CONTAINMENT.md.
 - id: OG-SEC-005
   title: Kill switch
   plane: CONTROL
@@ -2196,12 +2202,13 @@ requirements:
 - id: OG-AI-001
   title: Read-only registry MCP server for AI sessions
   plane: INTEGRATION
-  milestone: v0.3
-  priority: NEXT
+  milestone: unscheduled
+  priority: LATER
   status: PROPOSED
   risk: LOW
   source:
   - S3#session-setup-guidance
+  - S14#decisions
   dependencies:
   - OG-REG-004
   acceptance:
@@ -2209,6 +2216,7 @@ requirements:
     no write tools; no network.
   tests:
   - tests/mcp.test.ts
+  notes: Unnumbered post-Alpha candidate (S14 decision 4). Outside the active pre-Alpha sequence; no work package, no registration or activation. A candidate implementation prepared outside this repository on 2026-09-24 is not adopted.
 - id: OG-AI-002
   title: Event summaries and suggested reply drafts
   plane: EXECUTION

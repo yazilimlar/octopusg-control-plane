@@ -5,7 +5,7 @@
 
 ## Totals
 
-99 requirements · 39 capabilities · 13 sources
+99 requirements · 39 capabilities · 14 sources
 
 | milestone | count |
 |---|---:|
@@ -18,10 +18,10 @@
 | v0.6 | 7 |
 | v0.7 | 4 |
 | v0.8 | 7 |
-| v0.9 | 3 |
+| v0.9 | 2 |
 | v0.10 | 5 |
 | v0.11 | 2 |
-| unscheduled | 9 |
+| unscheduled | 10 |
 
 | plane | count |
 |---|---:|
@@ -33,7 +33,8 @@
 
 | status | count |
 |---|---:|
-| PROPOSED | 54 |
+| PROPOSED | 53 |
+| APPROVED | 1 |
 | IMPLEMENTED | 26 |
 | VERIFIED | 18 |
 | DEFERRED | 1 |
@@ -112,13 +113,13 @@
 | OG-CONN-005 | GitHub read-only connection | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003, OG-CONN-002, OG-SEC-004 | [S3#change-3--narrower-v02](../sources/S3-2026-09-17-claude-review.md#change-3--narrower-v02)<br>[S2#target-planes](../sources/S2-2026-09-17-gpt-planning-thread.md#target-planes) | `tests/connectors/github-readonly.test.ts` |
 | OG-CONN-006 | Approved HTTP route probes | INTEGRATION | PROPOSED | LOW | — | OG-CONN-002 | [S4#architecture-as-built](../sources/S4-2026-09-17-v0.1-repository-inspection.md#architecture-as-built) | `tests/connectors/http-probe.test.ts` |
 | OG-CONN-007 | Safe revoke and disconnect lifecycle | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003 | [S2#disconnecting-safely](../sources/S2-2026-09-17-gpt-planning-thread.md#disconnecting-safely) | `tests/connections.test.ts` |
+| OG-CONN-015 | Supabase read-only metadata *(provisional)* | INTEGRATION | APPROVED | HIGH | WP-17 | OG-SEC-003, OG-SEC-004 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S11#decisions](../sources/S11-2026-09-22-owner-wp18-authorization.md#decisions)<br>[S14#decisions](../sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions) | `tests/supabase-boundary.test.ts`<br>`tests/connectors/supabase-readonly.test.ts` |
 | OG-EVT-003 | Real deployment events in the inbox | INTEGRATION | PROPOSED | LOW | — | OG-CONN-001, OG-EVT-002 | [S2#per-service-management](../sources/S2-2026-09-17-gpt-planning-thread.md#per-service-management)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/connectors/vercel-readonly.test.ts` |
 | OG-SEC-003 | Credential references in macOS Keychain | CONTROL | IMPLEMENTED | HIGH | WP-16 | OG-CONN-002 | [S1#connection-center-lifecycle](../sources/S1-2026-09-17-conversation-export.md#connection-center-lifecycle)<br>[S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/credentials.test.ts`<br>`scripts/audit.mjs` |
 | OG-SEC-004 | Secret containment precondition for connector authorization | CONTROL | IMPLEMENTED | CRITICAL | WP-16 | — | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/connections.test.ts` |
 | OG-SEC-005 | Kill switch | CONTROL | PROPOSED | HIGH | — | OG-CONN-002 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first) | `tests/connections.test.ts` |
 | OG-GOV-007 | Continuous integration runs validation and specification checks | GOVERNANCE | IMPLEMENTED | LOW | WP-13 | OG-SEC-008 | [S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `.github/workflows/validate.yml` |
 | OG-SEC-009 | Protected, non-production preview deployment only | CONTROL | PROPOSED | MEDIUM | WP-13 | OG-SEC-008 | [S7#owner-authorization](../sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md#owner-authorization) | `docs/evidence/WP-13.md` |
-| OG-AI-001 | Read-only registry MCP server for AI sessions | INTEGRATION | PROPOSED | LOW | — | OG-REG-004 | [S3#session-setup-guidance](../sources/S3-2026-09-17-claude-review.md#session-setup-guidance) | `tests/mcp.test.ts` |
 
 ## v0.4 — Device network inventory
 
@@ -176,7 +177,6 @@
 |---|---|---|---|---|---|---|---|---|
 | OG-OBS-005 | Business KPIs from sales and leads *(provisional)* | CONTROL | PROPOSED | LOW | — | OG-CONN-014, OG-EVT-005 | [S1#core-capabilities-discussed](../sources/S1-2026-09-17-conversation-export.md#core-capabilities-discussed)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/kpi.test.ts` |
 | OG-CONN-014 | Squarespace read-only commerce and site events *(provisional)* | INTEGRATION | PROPOSED | MEDIUM | — | OG-SEC-003, OG-EVT-004 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S2#first-communications-pilot](../sources/S2-2026-09-17-gpt-planning-thread.md#first-communications-pilot) | `tests/connectors/squarespace.test.ts` |
-| OG-CONN-015 | Supabase read-only metadata *(provisional)* | INTEGRATION | PROPOSED | HIGH | WP-18 | OG-SEC-003, OG-SEC-004 | [S1#connector-and-automation-strategy](../sources/S1-2026-09-17-conversation-export.md#connector-and-automation-strategy)<br>[S11#decisions](../sources/S11-2026-09-22-owner-wp18-authorization.md#decisions) | `tests/supabase-boundary.test.ts`<br>`tests/connectors/supabase-readonly.test.ts` |
 
 ## v0.10 — Real approvals and guarded changes
 
@@ -204,6 +204,7 @@
 | OG-ACT-009 | Approval outcomes written to a governance record *(provisional)* | GOVERNANCE | PROPOSED | MEDIUM | — | OG-ACT-008 | [S5#next--the-control-plane-earns-its-keep](../archive/gate-3b/PRODUCT_BACKLOG.md#next--the-control-plane-earns-its-keep) | `TBD` |
 | OG-CONN-016 | Evaluate third-party social and inbox backends *(provisional)* | INTEGRATION | PROPOSED | LOW | — | OG-CONN-011 | [S2#existing-products-serving-parts-of-the-need](../sources/S2-2026-09-17-gpt-planning-thread.md#existing-products-serving-parts-of-the-need) | `TBD` |
 | OG-SEC-007 | Cloud control plane security design *(provisional)* | CONTROL | PROPOSED | CRITICAL | — | OG-ACT-008 | [S3#change-4--security-containment-first](../sources/S3-2026-09-17-claude-review.md#change-4--security-containment-first)<br>[S2#multi-device-control](../sources/S2-2026-09-17-gpt-planning-thread.md#multi-device-control) | `TBD` |
+| OG-AI-001 | Read-only registry MCP server for AI sessions | INTEGRATION | PROPOSED | LOW | — | OG-REG-004 | [S3#session-setup-guidance](../sources/S3-2026-09-17-claude-review.md#session-setup-guidance)<br>[S14#decisions](../sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions) | `tests/mcp.test.ts` |
 | OG-AI-005 | Evidence-governed multi-model engineering claims *(provisional)* | GOVERNANCE | PROPOSED | HIGH | — | OG-DATA-001, OG-DATA-002 | [S13#adopted-architectural-and-governance-principles](../sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md#adopted-architectural-and-governance-principles) | `TBD` |
 | OG-OBS-008 | Explained variance *(provisional)* | CONTROL | PROPOSED | MEDIUM | — | OG-OBS-002 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
 | OG-DATA-005 | Cost basis and depreciation register *(provisional)* | CONTROL | PROPOSED | HIGH | — | OG-DATA-001, OG-REG-007 | [S9#prior-art-not-a-source-of-requirements-only-of-design-ideas](../sources/S9-2026-09-20-owner-ownership-declarations.md#prior-art-not-a-source-of-requirements-only-of-design-ideas) | `TBD` |
@@ -234,7 +235,7 @@
 | vercel-readonly | PLANNED | v0.3 | OG-CONN-001, OG-EVT-003 |
 | github-readonly | PLANNED | v0.3 | OG-CONN-005 |
 | http-probes | PLANNED | v0.3 | OG-CONN-006 |
-| ai-registry-mcp | CONCEPT | v0.3 | OG-AI-001 |
+| ai-registry-mcp | CONCEPT | unscheduled | OG-AI-001 |
 | tailscale-inventory | PLANNED | v0.4 | OG-CONN-008, OG-DEV-002 |
 | local-device-agent | CONCEPT | v0.5 | OG-DEV-003, OG-DEV-004, OG-DEV-005, OG-DEV-006, OG-ACT-004 |
 | n8n-workflow-bridge | CONCEPT | v0.6 | OG-CONN-009, OG-WF-001, OG-WF-002 |
@@ -245,7 +246,7 @@
 | whatsapp-business | DEFERRED | v0.8 | OG-CONN-013, OG-WF-005 |
 | commerce-and-kpis | CONCEPT | v0.9 | OG-CONN-014, OG-OBS-005 |
 | dayos-monitoring | BUILDING | v0.3 | OG-OBS-007 |
-| supabase-observation | CONCEPT | v0.9 | OG-CONN-015 |
+| supabase-observation | PLANNED | v0.3 | OG-CONN-015 |
 | guarded-changes | CONCEPT | v0.10 | OG-ACT-005, OG-ACT-006, OG-ACT-007 |
 | external-observability | CONCEPT | unscheduled | OG-OBS-006 |
 | third-party-comms-backends | CONCEPT | unscheduled | OG-CONN-016 |

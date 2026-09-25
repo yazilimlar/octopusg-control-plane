@@ -4,8 +4,18 @@ Read this first in every AI session. Keep it under one page.
 
 ## Where we are
 
-- Repository `~/Projects/agoraxai/control-plane`, **no remote**. `main` = `6a4954f` (Control
-  Plane v0.1). Block 0 (architecture pack) is `d5f1c6b` on `octopusg/block-0`, **approved by the
+- **Current (2026-09-25).** Canonical state is `origin/main` of the private remote
+  `yazilimlar/octopusg-control-plane` (PRs #1–#7 merged; `c2245c9` at the time of writing). Always
+  start from a fresh `origin/main`; a stale local branch is not canonical evidence. Controlling
+  sequence ([S14](docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#controlling-delivery-sequence)):
+  canonical truth/security preparation → **OD-03 containment** of the items relevant to WP-17
+  ([register](docs/security/OD-03-CONTAINMENT.md), no exception) → narrow **WP-17** preflight and
+  implementation (OG-CONN-015, APPROVED, `v0.3`) → first *governed* DayOS/Supabase observation →
+  usable **local-private Alpha** ([criteria](docs/09-ROADMAP.md#local-private-alpha-acceptance)).
+  No G3 is granted; no provider or credential is active. The registry MCP server (OG-AI-001) is an
+  unnumbered post-Alpha candidate.
+- *History below is chronological and kept as written.* Initially the repository had **no
+  remote** and `main` was `6a4954f` (Control Plane v0.1). Block 0 (architecture pack) is `d5f1c6b` on `octopusg/block-0`, **approved by the
   owner as the versioned working baseline (Gate G1), amendable through ADRs**. WP-01 is on
   `octopusg/wp-01-registry-lock`, branched from Block 0.
 - The app pins registry **v1.6** (18 rows) through `data/registry.lock.json`; v1.5.1 stays in
@@ -106,6 +116,20 @@ Read this first in every AI session. Keep it under one page.
   edges grant neither ownership nor access. Cross-tenancy ownership is rejected. OG-OBS-008 and
   OG-DATA-005/006 are proposals only, unscheduled. See [WP-15](docs/evidence/WP-15.md).
   Owner review is pending; no commit, push, deployment or WP-16 is authorized by this package.
+- WP-16 ([S10](docs/sources/S10-2026-09-21-owner-wp16-authorization.md), PR #4) implemented the
+  `CredentialRef → CredentialProvider` boundary (OG-SEC-003/004) with a fail-closed macOS Keychain
+  adapter; no credential is accessed. ADR-0008 is PROPOSED. Evidence: [WP-16](docs/evidence/WP-16.md).
+- Progressive delivery ([S12](docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md),
+  [ADR-0010](docs/decisions/ADR-0010-progressive-delivery-and-evolution.md) PROPOSED, PR #5).
+- WP-18 ([S11](docs/sources/S11-2026-09-22-owner-wp18-authorization.md), PR #6) defined the DayOS
+  Supabase design boundary; [ADR-0009](docs/decisions/ADR-0009-dayos-supabase-boundary.md) was
+  **accepted 2026-09-25** (S14). Evidence: [WP-18](docs/evidence/WP-18.md).
+- Multi-AI engineering milestone ([S13](docs/sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md),
+  [ADR-0011](docs/decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md) PROPOSED,
+  PR #7): history and governance only, no implementation.
+- Known debt: the truth read-model test fails when locally generated observations are folded into
+  the tracked snapshot (recorded as 180/181 in WP-16 and WP-18). An isolated maintenance correction
+  is prepared separately from WP-17 (S14 decision 7).
 
 <!-- GENERATED:STATUS:BEGIN -->
 | | |

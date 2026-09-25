@@ -363,7 +363,7 @@
       "id": "ai-registry-mcp",
       "title": "Registry MCP server for AI sessions",
       "status": "CONCEPT",
-      "target": "v0.3",
+      "target": "unscheduled",
       "requirements": [
         "OG-AI-001"
       ]
@@ -480,8 +480,8 @@
     {
       "id": "supabase-observation",
       "title": "Supabase metadata",
-      "status": "CONCEPT",
-      "target": "v0.9",
+      "status": "PLANNED",
+      "target": "v0.3",
       "requirements": [
         "OG-CONN-015"
       ]
@@ -2068,10 +2068,10 @@
       "id": "OG-CONN-015",
       "title": "Supabase read-only metadata",
       "plane": "INTEGRATION",
-      "milestone": "v0.9",
-      "workPackage": "WP-18",
-      "priority": "LATER",
-      "status": "PROPOSED",
+      "milestone": "v0.3",
+      "workPackage": "WP-17",
+      "priority": "NEXT",
+      "status": "APPROVED",
       "risk": "HIGH",
       "dependencies": [
         "OG-SEC-003",
@@ -2090,7 +2090,8 @@
       ],
       "sources": [
         "S1#connector-and-automation-strategy",
-        "S11#decisions"
+        "S11#decisions",
+        "S14#decisions"
       ],
       "ownerDecisions": [],
       "evidence": [
@@ -3128,9 +3129,9 @@
       "id": "OG-AI-001",
       "title": "Read-only registry MCP server for AI sessions",
       "plane": "INTEGRATION",
-      "milestone": "v0.3",
+      "milestone": "unscheduled",
       "workPackage": null,
-      "priority": "NEXT",
+      "priority": "LATER",
       "status": "PROPOSED",
       "risk": "LOW",
       "dependencies": [
@@ -3144,7 +3145,8 @@
         "tests/mcp.test.ts"
       ],
       "sources": [
-        "S3#session-setup-guidance"
+        "S3#session-setup-guidance",
+        "S14#decisions"
       ],
       "ownerDecisions": [],
       "evidence": []
