@@ -1,7 +1,7 @@
 // OG-DATA-001 (five-kind truth model) and OG-DATA-002 (observation store with freshness).
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,mkdtempSync,mkdirSync,copyFileSync,writeFileSync,rmSync} from 'node:fs';
+import {readFileSync,mkdtempSync,mkdirSync,copyFileSync,writeFileSync,rmSync,symlinkSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
@@ -194,24 +194,46 @@ test('the build reads work/observations/latest.json when present, deterministica
   mkdirSync(join(dir,'data'));mkdirSync(join(dir,'work/observations'),{recursive:true});
   for(const f of [lock.filename,'GATE_2D_REPORT.md','GATE_3_APPROVAL_CHECKLIST.md','registry.lock.json'])copyFileSync(join('data',f),join(dir,'data',f));
   const run=()=>{execFileSync(process.execPath,[resolve('scripts/import-registry.mjs')],{cwd:dir,env:{...process.env,OCTOPUSG_SNAPSHOT_MODE:'write'},stdio:'pipe'});return readFileSync(join(dir,'data/snapshot.json'),'utf8');};
-  const absent=JSON.parse(run());
+  const overlay=()=>readFileSync(join(dir,'work/observations/snapshot-observations.json'),'utf8');
+  const canonical=run();
+  const absent=JSON.parse(canonical);
   assert.equal(absent.observations.present,false);
   assert.deepEqual(absent.observations.records,[]);
+  assert.equal(JSON.parse(overlay()).present,false);
   const token='gh'+'p_'+'B'.repeat(36);
   writeFileSync(join(dir,'work/observations/latest.json'),JSON.stringify(file([obs(),obs({value:token}),{junk:true}])));
-  const first=run(),second=run();
+  const first=run(),firstOverlay=overlay(),second=run();
   assert.equal(first,second);                                 // same input, byte-identical output
-  const withFile=JSON.parse(first);
-  assert.equal(withFile.observations.present,true);
-  assert.equal(withFile.observations.collector,'tests/truth.test.ts');
-  assert.equal(withFile.observations.records.length,1);
-  assert.equal(withFile.observations.rejected.length,2);
-  assert.ok(!first.includes(token));                          // the secret never reaches the snapshot
+  assert.equal(firstOverlay,overlay());
+  assert.equal(first,canonical);                              // local observations never enter the tracked snapshot
+  const withFile=JSON.parse(firstOverlay);
+  assert.equal(withFile.present,true);
+  assert.equal(withFile.collector,'tests/truth.test.ts');
+  assert.equal(withFile.records.length,1);
+  assert.equal(withFile.rejected.length,2);
+  assert.ok(!first.includes(token)&&!firstOverlay.includes(token)); // the secret reaches neither file
+  rmSync(join(dir,'work/observations/latest.json'));
+  assert.equal(run(),canonical);
+  assert.equal(JSON.parse(overlay()).present,false);          // no stale overlay outlives its source
   writeFileSync(join(dir,'work/observations/latest.json'),'{not json');
   assert.throws(run,/work\/observations\/latest\.json is not valid JSON/);
   writeFileSync(join(dir,'work/observations/latest.json'),JSON.stringify({...file([]),schemaVersion:9}));
   assert.throws(run,/work\/observations\/latest\.json: schemaVersion must be 1/);
   writeFileSync(join(dir,'work/observations/latest.json'),JSON.stringify(file([obs({value:'uses fetch( at runtime'})])));
   assert.throws(run,/literal browser network API identifier/);
+ }finally{rmSync(dir,{recursive:true,force:true});}
+});
+test('the local bundle carries overlay observations; without an overlay it carries none',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'octopusg-bundle-'));
+ try{
+  for(const d of ['src','data','config','public','node_modules'])symlinkSync(resolve(d),join(dir,d));
+  mkdirSync(join(dir,'work/observations'),{recursive:true});
+  const probe='overlay-probe-'+'7c1d';
+  const overlay={present:true,source:'work/observations/latest.json',collector:'tests/truth.test.ts',collectedAt:'2026-09-17T11:00:00Z',records:[obs({value:probe})],rejected:[]};
+  writeFileSync(join(dir,'work/observations/snapshot-observations.json'),JSON.stringify(overlay));
+  const build=()=>{execFileSync(process.execPath,[resolve('scripts/build.mjs')],{cwd:dir,stdio:'pipe'});return readFileSync(join(dir,'dist/main.js'),'utf8');};
+  assert.ok(build().includes(probe));                         // observations reach the local runtime
+  rmSync(join(dir,'work/observations/snapshot-observations.json'));
+  assert.ok(!build().includes(probe));                        // and only through the overlay
  }finally{rmSync(dir,{recursive:true,force:true});}
 });

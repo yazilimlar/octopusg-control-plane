@@ -1575,6 +1575,7 @@
       ],
       "ownerDecisions": [],
       "evidence": [
+        "MAINT-01-local-observation-overlay.md",
         "WP-02.md",
         "WP-03.md",
         "WP-11.md"
@@ -1607,6 +1608,7 @@
       ],
       "ownerDecisions": [],
       "evidence": [
+        "MAINT-01-local-observation-overlay.md",
         "WP-02.md",
         "WP-03.md",
         "WP-11.md"
