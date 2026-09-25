@@ -1,5 +1,14 @@
 # Next vertical slice — read-only Artemis DayOS monitoring
 
+> **Superseded as the design authority (2026-09-25).** This 2026-09-18 specification is kept as
+> history. The accepted design boundary is [ADR-0009](decisions/ADR-0009-dayos-supabase-boundary.md)
+> (WP-18, [S11](sources/S11-2026-09-22-owner-wp18-authorization.md), accepted under
+> [S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions)).
+> Where they differ, ADR-0009 governs: object counts are **excluded** from the observed allowlist;
+> OG-SEC-003/004 are implemented by WP-16 (not "PLANNED"); OG-CONN-015 is now `v0.3`, `NEXT`,
+> APPROVED, implemented by WP-17 after OD-03 containment and G3. The open question below about
+> pulling the slice forward is answered by S14.
+
 Status: **specification only — not implemented**. Written 2026-09-18 per the owner's v0.3
 platform-foundation direction
 ([S7](sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md)), which explicitly

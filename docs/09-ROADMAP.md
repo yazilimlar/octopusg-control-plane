@@ -4,6 +4,58 @@ Status: **PROPOSED** · 2026-09-17 · Requirement-level detail:
 [`REQUIREMENTS.yaml`](requirements/REQUIREMENTS.yaml) · generated coverage:
 [`TRACEABILITY.md`](requirements/TRACEABILITY.md)
 
+## Current delivery sequence
+
+Owner decision 2026-09-25 ([S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#controlling-delivery-sequence)),
+specializing [ADR-0010](decisions/ADR-0010-progressive-delivery-and-evolution.md). This sequence
+controls; the block table below records original scope and is not itself a schedule.
+
+```text
+canonical truth/security preparation
+→ OD-03 containment                              (docs/security/OD-03-CONTAINMENT.md)
+→ narrow WP-17 preflight and implementation      (OG-CONN-015, ADR-0009)
+→ first GOVERNED OctopusG DayOS/Supabase observation
+→ usable local-private Alpha                     (acceptance below)
+→ evolution driven by usage, testing, evidence and explicit owner authorization
+```
+
+WP-17 is the first *governed* OctopusG DayOS/Supabase observation path. It is not necessarily the
+first historical provider access; known out-of-band accesses are preserved as provenance, and an
+identifier observed out of band is never authoritative identity ([ADR-0005](decisions/ADR-0005-source-cited-requirements.md)).
+
+### WP-17 preflight unknowns
+
+Open before any G3 for the DayOS Supabase connector; each is resolved in the WP-17 preflight, not
+by reading secret content or by provider access outside a governed step:
+
+- **Supabase credential/key architecture** — which keys exist and where they are configured
+  ([S14 decision 10](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions)).
+  Not an OD-03 exposure item; may block WP-17/G3 until resolved.
+- **Least-privilege access mechanism** for migration inventory and state, consistent with
+  [06 §6](06-SECURITY-AND-APPROVALS.md#6-kill-switch-and-blast-radius) (no long-lived admin tokens).
+- **Authoritative configured source** for the project identity and its cross-validation to `dayos`
+  ([ADR-0009](decisions/ADR-0009-dayos-supabase-boundary.md)); the registry records no project
+  reference and no `config.toml`.
+- **Whether the DayOS migrations are applied**, and to which project (registry blocker).
+- **G3 record format**, expiry/review and revocation; a `dayos`-scoped connection record (the
+  existing `supabase-owner` connection is scoped to other products).
+- **OD-03 relevance** of X-03 (currently UNKNOWN) in the
+  [containment register](security/OD-03-CONTAINMENT.md#relevance-to-the-proposed-dayos-supabase-connector-wp-17).
+
+## Local-private Alpha acceptance
+
+Adopted in [S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#local-private-alpha-acceptance),
+which holds the full wording. In short: green validation with local observations present and no
+accepted exception; loopback/local-private operation; a documented refresh and start workflow;
+the DayOS monitor showing the governed observation or an explicit blocked reason; source,
+freshness and declared-versus-observed shown; honest truth states; a passing audit; every
+connector except the authorized DayOS connector at Level 0; documented revocation to Level 0; a
+tagged, recoverable state; and owner usability without Git, terminal, WP/ADR/requirement IDs or
+authorization internals in normal operation (progressive disclosure: operational state →
+plain-language explanation → evidence → governance records). Before owner acceptance: at least
+three genuine operating sessions on at least three days, with findings recorded. Remaining G2 items
+must be VERIFIED, explicitly DEFERRED, or shown not to block the Alpha use case.
+
 ## Blocks and milestones
 
 One block is finished — requirements verified, evidence written, owner acceptance — before the
@@ -13,13 +65,13 @@ next starts. Source: [S1 Development roadmap](sources/S1-2026-09-17-conversation
 |---|---|---|---|---|
 | 0 | `B0` | Architecture and requirements pack (this) | None | None |
 | 1–2 | `v0.2` | Registry-driven cockpit; generated maps; local Git observation; provenance; Connection Center framework; simulated inbox; approval model | Read-only, local | None |
-| 3 | `v0.3` | First real connectors: Vercel (+ GitHub, OD-07) read-only; HTTP probes; credential store; kill switch; registry MCP server | Level 1 | GitHub + Vercel read-only tokens |
+| 3 | `v0.3` | First real connectors: DayOS Supabase read-only metadata (WP-17, first under [S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions)); Vercel (+ GitHub, OD-07) read-only; HTTP probes; credential store; kill switch. Registry MCP server moved to the candidate backlog | Level 1 | Supabase read-only (G3 after OD-03); GitHub + Vercel read-only tokens |
 | 4 | `v0.4` | Tailscale device inventory | Level 1 | Tailscale (installed manually on Mac + Windows) |
 | 5 | `v0.5` | Local Mac/Windows agent; allowlisted local actions | T2 local, approved | None new |
 | 6 | `v0.6` | Local state store; webhook receiver; real inbox; n8n bridge | Test workflows | n8n (self-hosted or cloud — decide at block start) |
 | 7 | `v0.7` | Gmail inquiry → draft pilot | Level 2 (drafts) | Google Cloud project + OAuth consent |
 | 8 | `v0.8` | ManyChat / Instagram / WhatsApp Business | Approved templates | ManyChat; Meta Business; WhatsApp Business Platform |
-| 9 | `v0.9` | Squarespace sales, business KPIs, Supabase metadata | Read-only | Squarespace; Supabase read access |
+| 9 | `v0.9` | Squarespace sales, business KPIs, further Supabase metadata beyond DayOS | Read-only | Squarespace; Supabase read access |
 | 10 | `v0.10` | Real approvals; guarded deployments, migrations, config changes | T3/T4 with approval | Write scopes, per decision |
 | 11 | `v0.11` | Bounded AI agents | Policy-controlled | — |
 | — | `unscheduled` | Cloud control plane; external observability; third-party comms backends | — | — |
@@ -78,8 +130,8 @@ and ends with `docs/evidence/WP-nn.md`. Order matters; arrows are hard dependenc
 | WP-13 | v0.3 platform foundation design, then execution (approved origin, CI, protected preview) | OG-GOV-007, OG-SEC-008, OG-SEC-009 | WP-11 |
 | WP-14 | Read-only DayOS monitor (source, checkout, deployment reference; Supabase stays blocked) | OG-OBS-007 | WP-13 |
 | WP-16 | Credential Reference and Connector Security Foundation | OG-SEC-003, OG-SEC-004 | WP-15, OD-03, OD-04 |
-| WP-18 | DayOS Supabase Connector Design and Authorization Boundary | OG-CONN-015 | WP-16 |
-| WP-17 (reserved) | Artemis DayOS Supabase Read-Only Observation Connector | OG-CONN-015 | WP-18, Supabase ADR, G3 |
+| WP-18 | DayOS Supabase Connector Design and Authorization Boundary — design provenance for OG-CONN-015; ADR-0009 accepted 2026-09-25 | — (design only; the requirement is implemented by WP-17) | WP-16 |
+| WP-17 (next, not started) | Artemis DayOS Supabase Read-Only Observation Connector | OG-CONN-015 | WP-18, ADR-0009 (accepted), containment of the OD-03 items relevant to it, preflight unknowns, G3 |
 
 WP-13 is a design/prepare package under OD-11 and [ADR-0007](decisions/ADR-0007-approved-origin-allowlist.md):
 it records the exact-allowlist origin policy, commits the (inert) CI workflow, and writes the
@@ -104,6 +156,10 @@ governed package.
   [ADR-0011](decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md) and the
   canonical [Evolution History](EVOLUTION-HISTORY.md) records EXP-001 / EXP-002. This theme
   authorizes no implementation, registry products, numbered work packages or Alpha scope change.
+- **Registry MCP server (post-Alpha candidate)** — OG-AI-001 is PROPOSED, `unscheduled`, priority
+  LATER ([S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions)
+  decision 4). Outside the active pre-Alpha sequence; no work package, registration or activation.
+  A candidate implementation prepared outside this repository on 2026-09-24 is not adopted.
 
 ## Owner decisions
 
@@ -114,8 +170,8 @@ applies unless the owner says otherwise.
 |---|---|---|---|
 | OD-01 | Where is `PROJECT_REGISTRY_v1.6.yaml` (SHA-256 `494bd33e…3286`)? It is not in the repo, which pins v1.5.1 ([S4](sources/S4-2026-09-17-v0.1-repository-inspection.md#registry-discrepancy)). | **Resolved in WP-01:** found at `~/Desktop/artemis-website/`, hash verified, copied to `data/` and pinned by `data/registry.lock.json`. | — |
 | OD-02 | The repository has no remote and the registry says no backup; S1 says a verified bundle exists. Where is the recovery copy? Add a private GitHub remote? | Confirm bundle location now; decide the remote separately (it changes the audit's zero-remote rule and needs an ADR). WP-01 verified the v0.1 bundle but it is on the same disk; the Block 0 bundle was not found ([manifest](archive/MANIFEST.md)). | **BLOCKING** OG-SEC-008 |
-| OD-03 | Finish containment of known plaintext secrets before any connector authorization? | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** yes. All connectors stay at Level 0 and unauthorized. Any real connector needs its own v0.3 connector-specific ADR and owner approval. | **BLOCKING** v0.3 G3 |
-| OD-04 | Credential store for v0.3 collectors | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** no credential store is selected in v0.2. Credential handling stays blocked until immediately before the first approved real connector. macOS Keychain by label remains the candidate, not the choice. | v0.3 |
+| OD-03 | Finish containment of known plaintext secrets before any connector authorization? | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** yes. All connectors stay at Level 0 and unauthorized. Any real connector needs its own v0.3 connector-specific ADR and owner approval. **2026-09-25 ([S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions)):** no exception; every known exposure is mandatory security debt, and blocks G3 for any connector it can materially compromise (connector, credential/provider boundary, target system, execution host, or another relevant shared trust domain). Items, relevance and append-only state: [OD-03 containment register](security/OD-03-CONTAINMENT.md). | **BLOCKING** v0.3 G3 |
+| OD-04 | Credential store for v0.3 collectors | **Owner decision 2026-09-18 ([S6](sources/S6-2026-09-18-owner-brand-decisions.md#v02-gate-decisions)):** no credential store is selected in v0.2. Credential handling stays blocked until immediately before the first approved real connector. macOS Keychain by label remains the candidate, not the choice. **Superseded in effect 2026-09-21:** WP-16 ([S10](sources/S10-2026-09-21-owner-wp16-authorization.md), [ADR-0008](decisions/ADR-0008-credential-reference-provider-boundary.md), still PROPOSED) implemented `CredentialRef → CredentialProvider` with macOS Keychain as the first provider, fail-closed. Real credential resolution is a separately authorized WP-17 preflight sub-scope (S11 decision 6). | v0.3 |
 | OD-05 | Declared ownership and control; asset ownership separately documented | **Owner clarification 2026-09-21 ([S9](sources/S9-2026-09-20-owner-ownership-declarations.md#owner-declarations)):** George owns/controls Great Order LLC; Great Order LLC owns/controls AgoraXAI as a business/platform and Artemis as a business/division. Project/product contractual or economic partners are not inferred LLC equity holders; holders and percentages stay undeclared. OctopusG and specific domains, repositories, trademarks, applications and other IP ownership remain undeclared. Service/client/funding declarations are separate edges. No nonprofit, tax, deductibility or accounting conclusion is declared. | Resolved for WP-15; specific assets/interests remain open |
 | OD-06 | Narrow v0.2 (move Connection Center, inbox, policy to v0.3) per [S3 Change 3](sources/S3-2026-09-17-claude-review.md#change-3--narrower-v02) | Keep the S1 boundary (owner-carried decision); revisit at G1 | Scope only |
 | OD-07 | Add GitHub read-only alongside Vercel in v0.3 | Yes | v0.3 |
@@ -152,4 +208,4 @@ future governed work package, not WP-15. Source: [S9](sources/S9-2026-09-20-owne
 
 OG-OBS-008, OG-DATA-005 and OG-DATA-006 are PROPOSED, unscheduled candidate requirements only.
 No explained-variance, financial basis, compliance calendar or legal-compliance implementation is
-included. WP-15 stops for owner review; no WP-16 is started.
+included. WP-15 stops for owner review; no WP-16 is started. *(Historical: WP-16 was later authorized by S10 and merged in PR #4.)*

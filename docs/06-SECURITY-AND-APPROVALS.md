@@ -61,7 +61,11 @@ An AI recommendation is never sufficient on its own.
 - **Existing exposure first:** plaintext secrets recorded in the historical map (ERP Plaid,
   Gmail, Squarespace, session secrets) and the `vercel-env-backup-artemis-omni` registry row
   (`SECURITY_REVIEW_NEEDED`) must be contained **before** any v0.3 connector authorization
-  (OD-03).
+  (OD-03). *Scope clarified 2026-09-25 ([S14](sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions),
+  not an exception):* each exposure blocks G3 for a connector it can materially compromise — the
+  connector, its credential/provider boundary, its target system, its execution host or runtime,
+  or another relevant shared trust domain. All remain mandatory security debt. Items, relevance
+  and state: [OD-03 containment register](security/OD-03-CONTAINMENT.md).
 
 ## 6. Kill switch and blast radius
 

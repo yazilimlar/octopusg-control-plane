@@ -1,6 +1,13 @@
 # ADR-0009 · DayOS Supabase connector design and authorization boundary
 
-Status: **PROPOSED** · 2026-09-22
+Status: **ACCEPTED** · proposed 2026-09-22 · accepted 2026-09-25 by the owner
+([S14](../sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#decisions))
+
+Acceptance approves this design boundary only. It grants no G3, activates no provider, authorizes
+no credential or Supabase access and begins no WP-17 implementation. `OG-CONN-015` becomes an
+APPROVED implementation target owned by WP-17; WP-18 remains the provenance of this design.
+Before any G3, OD-03 containment must be complete
+([containment register](../security/OD-03-CONTAINMENT.md)).
 
 ## Context
 
