@@ -1,4 +1,4 @@
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {parseDocument} from 'yaml';
 import {loadObservationFile} from '../src/truth.ts';
@@ -38,7 +38,13 @@ if(approvalCandidates.length<10)throw new Error('Checklist parsing lost items');
 // (WP-03); the build only reads it when it is there. No network, no clock: freshness is
 // computed at read time from the timestamps each record carries.
 const OBSERVATIONS='work/observations/latest.json';
-let observations={present:false,source:OBSERVATIONS,collector:null,collectedAt:null,records:[],rejected:[]};
+// Local observations are local state, not canonical truth: the tracked data/snapshot.json always
+// carries the empty block, and validated observations go to a git-ignored overlay that only the
+// local bundle reads (scripts/build.mjs). A clean checkout and a checkout with governed local
+// observations therefore produce the same tracked snapshot.
+const OBSERVATION_OVERLAY='work/observations/snapshot-observations.json';
+const emptyObservations={present:false,source:OBSERVATIONS,collector:null,collectedAt:null,records:[],rejected:[]};
+let observations=emptyObservations;
 const observationText=await readFile(OBSERVATIONS,'utf8').catch(error=>{if(error.code==='ENOENT')return null;throw error;});
 if(observationText!==null){
  if(bannedClientApi.test(observationText))throw new Error(`${OBSERVATIONS} contains a literal browser network API identifier; it would be inlined into the bundle and trip scripts/audit.mjs. Fix the collector output instead of loosening the audit.`);
@@ -49,7 +55,11 @@ if(observationText!==null){
  for(const r of loaded.rejected)console.log(`Rejected observation #${r.index}: ${r.reason} (value not stored, not printed)`);
  console.log(`Observations: ${loaded.records.length} accepted, ${loaded.rejected.length} rejected from ${OBSERVATIONS} (collector ${loaded.collector}).`);
 }
-const snapshot={schemaVersion:1,classification:{umbrella:'AGORAXAI_UMBRELLA',kind:'INTERNAL_PLATFORM',visibility:'private',codename:'Octopus'},asOf:registry.generated_at,sources:sources.map(({name,sha256})=>({name,sha256})),registry,approvalCandidates,observations};
+const snapshot={schemaVersion:1,classification:{umbrella:'AGORAXAI_UMBRELLA',kind:'INTERNAL_PLATFORM',visibility:'private',codename:'Octopus'},asOf:registry.generated_at,sources:sources.map(({name,sha256})=>({name,sha256})),registry,approvalCandidates,observations:emptyObservations};
+// The overlay is rewritten on every run (empty when no collector file exists), so a stale overlay
+// can never outlive the observation file it was derived from.
+await mkdir('work/observations',{recursive:true});
+await writeFile(OBSERVATION_OVERLAY,JSON.stringify(observations,null,2)+'\n');
 // OG-REG-007 / WP-15: validate a preserved working snapshot without writing it.
 // This mode still performs every ingestion check above and rejects any byte mismatch.
 const snapshotText=JSON.stringify(snapshot,null,2)+'\n';

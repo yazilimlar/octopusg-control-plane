@@ -27,7 +27,10 @@ const registry=snapshot.registry as Raw;
 // Declared registry facts first; an observation replaces one only where a collector recorded
 // that exact field (OG-DATA-002). With no observation file the read model is byte-for-byte the
 // v0.1 one, and freshness is evaluated here — at read time — never baked into the snapshot.
-const observations=(snapshot.observations?.records??[]) as Observation[];
+// Local observations come from the git-ignored overlay injected at build time (scripts/build.mjs);
+// the tracked snapshot never carries them.
+declare const __OCTOPUSG_LOCAL_OBSERVATIONS__:{records:Observation[]};
+const observations=__OCTOPUSG_LOCAL_OBSERVATIONS__.records;
 const readAt=new Date().toISOString();
 const projects:Project[]=applyObservations(registry.projects.map((p:Raw)=>normalize(p,registry)),observations,readAt);
 // Typed resource catalog (OG-REG-004/005, OG-MAP-002): derived from the pinned snapshot and the
