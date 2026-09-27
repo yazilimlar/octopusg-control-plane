@@ -1,0 +1,1805 @@
+{
+  "schema_version": "1.0.0",
+  "generated_from": {
+    "repository": "~/Projects/agoraxai/control-plane",
+    "branch": "main",
+    "commit": "c6620d9",
+    "commit_note": "origin/main as last fetched locally; merge of PR #8",
+    "generated_on": "2026-09-27",
+    "generator": "context-gateway task (documentation only)",
+    "human_gateway": "OCTOPUSG_CONTEXT.md",
+    "authority": "none — navigation index; primary sources win on any disagreement"
+  },
+  "project": {
+    "name": "OctopusG",
+    "long_name": "OctopusGinormous",
+    "statement": "OctopusG is the AgoraXAI Portfolio Operating System.",
+    "technical_subsystem": "AgoraXAI Control Plane",
+    "code_codename": "Octopus",
+    "owner": "George Oktem",
+    "runtime": "local, loopback-only, read-only static app plus owner-run CLI scripts",
+    "frozen_baseline_commit": "6a4954f",
+    "remote": "single private origin yazilimlar/octopusg-control-plane (ADR-0007)",
+    "sources": [
+      "docs/00-PRODUCT-CONSTITUTION.md",
+      "CLAUDE.md",
+      "README.md"
+    ]
+  },
+  "authority_model": {
+    "order": [
+      "docs/00-PRODUCT-CONSTITUTION.md",
+      "docs/requirements/REQUIREMENTS.yaml",
+      "docs/09-ROADMAP.md",
+      "docs/decisions/"
+    ],
+    "not_authoritative": [
+      "chat history",
+      "reflogs",
+      "filenames",
+      "model memory",
+      "this manifest"
+    ],
+    "owner_decision_channel": "docs/sources/S<n>-*.md source records",
+    "gates": [
+      {
+        "id": "G1",
+        "meaning": "Architecture approval"
+      },
+      {
+        "id": "G2",
+        "meaning": "MVP (v0.2) acceptance: all v0.2 requirements VERIFIED"
+      },
+      {
+        "id": "G3",
+        "meaning": "Connector authorization: exact account, scopes, max level"
+      },
+      {
+        "id": "G4",
+        "meaning": "Action authorization before any level ≥ 2"
+      }
+    ],
+    "roles_source": "docs/10-OPERATING-MODEL.md",
+    "session_rules_source": "CLAUDE.md",
+    "enforcement": [
+      ".claude/settings.json",
+      "scripts/audit.mjs",
+      "scripts/audit-remotes.mjs",
+      "scripts/validate-spec.mjs"
+    ],
+    "repository_status_vocabularies": {
+      "requirement": [
+        "PROPOSED",
+        "APPROVED",
+        "IMPLEMENTED",
+        "VERIFIED",
+        "DEFERRED",
+        "REJECTED"
+      ],
+      "adr": [
+        "PROPOSED",
+        "ACCEPTED"
+      ],
+      "capability": [
+        "CONCEPT",
+        "PLANNED",
+        "READY",
+        "BUILDING",
+        "VALIDATING",
+        "AVAILABLE",
+        "DEFERRED",
+        "RETIRED"
+      ],
+      "evolution_history": [
+        "DECISION",
+        "EXPERIMENT",
+        "CANDIDATE",
+        "WORK PACKAGE",
+        "RELEASE / MILESTONE"
+      ]
+    },
+    "gateway_authority_classes": [
+      "CANONICAL_CURRENT",
+      "CANONICAL_HISTORICAL",
+      "SUPERSEDED",
+      "SOURCE_RECORD",
+      "EVIDENCE",
+      "GENERATED",
+      "EXPERIMENTAL",
+      "CANDIDATE",
+      "TRANSIENT",
+      "UNKNOWN"
+    ],
+    "experimental_lineages_rule": "Experimental implementations (e.g. \"OctopusG // <Model> Mutant\") are never canonical unless accepted through the governance above. None exists in the repository."
+  },
+  "current_state": {
+    "canonical_branch": "origin/main",
+    "head": "c6620d9",
+    "merged_prs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "release_tags": [
+      {
+        "tag": "v0.2.0",
+        "commit": "165397c"
+      }
+    ],
+    "delivery_sequence": [
+      "canonical truth/security preparation",
+      "OD-03 containment",
+      "narrow WP-17 preflight and implementation",
+      "first governed OctopusG DayOS/Supabase observation",
+      "usable local-private Alpha",
+      "evolution driven by usage, testing, evidence and explicit owner authorization"
+    ],
+    "delivery_sequence_source": "docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md#controlling-delivery-sequence",
+    "next_work_package": "WP-17",
+    "next_work_package_state": "not started (docs/09-ROADMAP.md)",
+    "gates_state": {
+      "G1": "working baseline per SESSION_BRIEF; formal record UNKNOWN (C1)",
+      "G2": "not recorded for v0.2 as a whole",
+      "G3": "none granted",
+      "G4": "none granted"
+    },
+    "connectors": "all at Level 0; no provider or credential active",
+    "ledger": {
+      "requirements": 99,
+      "capabilities": 39,
+      "sources": 14,
+      "milestones": 13,
+      "owner_decisions": 11,
+      "requirements_by_status": {
+        "APPROVED": 1,
+        "DEFERRED": 1,
+        "IMPLEMENTED": 26,
+        "PROPOSED": 53,
+        "VERIFIED": 18
+      },
+      "v02_by_status": {
+        "IMPLEMENTED": 19,
+        "VERIFIED": 11
+      }
+    },
+    "sources": [
+      "SESSION_BRIEF.md",
+      "docs/09-ROADMAP.md",
+      "docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md"
+    ]
+  },
+  "reading_order": [
+    {
+      "level": 0,
+      "name": "Orientation",
+      "paths": [
+        "OCTOPUSG_CONTEXT.md",
+        "SESSION_BRIEF.md",
+        "CLAUDE.md"
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Governance",
+      "paths": [
+        "docs/00-PRODUCT-CONSTITUTION.md",
+        "docs/10-OPERATING-MODEL.md",
+        "docs/decisions/ADR-0005-source-cited-requirements.md"
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Current state",
+      "paths": [
+        "docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md",
+        "docs/09-ROADMAP.md",
+        "docs/security/OD-03-CONTAINMENT.md"
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Architecture",
+      "paths": [
+        "docs/01-SYSTEM-ARCHITECTURE.md",
+        "docs/02-DOMAIN-MODEL.md",
+        "docs/06-SECURITY-AND-APPROVALS.md",
+        "docs/04-CONNECTOR-CONTRACT.md",
+        "docs/decisions/ADR-0008-credential-reference-provider-boundary.md",
+        "docs/decisions/ADR-0009-dayos-supabase-boundary.md"
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Work package history",
+      "paths": [
+        "docs/evidence/"
+      ]
+    },
+    {
+      "level": 5,
+      "name": "ADR and requirement history",
+      "paths": [
+        "docs/decisions/",
+        "docs/requirements/REQUIREMENTS.yaml",
+        "docs/requirements/TRACEABILITY.md"
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Evidence and validation",
+      "paths": [
+        "tests/",
+        "scripts/validate-spec.mjs",
+        "scripts/audit.mjs",
+        ".github/workflows/validate.yml"
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Implementation",
+      "paths": [
+        "docs/DATA_MODEL.md",
+        "src/",
+        "config/",
+        "scripts/"
+      ]
+    }
+  ],
+  "work_packages": [
+    {
+      "id": "WP-01",
+      "title": "Baseline reconciliation and registry lock",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-GOV-005",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-GOV-006",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-REG-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-REG-003",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "OD-01",
+        "OD-02"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-01.md"
+      ],
+      "commit_refs": [
+        "bcee664"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-02",
+      "title": "Truth model and observation store",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-DATA-001",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-DATA-002",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-01"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-02.md"
+      ],
+      "commit_refs": [
+        "d1b8f8b"
+      ],
+      "pr": null,
+      "notes": "SESSION_BRIEF: \"accepted by the owner at Gate G2\" (see contradiction C8)."
+    },
+    {
+      "id": "WP-03",
+      "title": "Local Git observer and device record",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-OBS-001",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-DEV-001",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-SEC-002",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-02"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-03.md",
+        "docs/evidence/WP-03-REPAIR-01.md"
+      ],
+      "commit_refs": [
+        "e26d4ad",
+        "b86a0ff"
+      ],
+      "pr": null,
+      "notes": "SESSION_BRIEF: \"accepted by the owner at Gate G4\" (see contradiction C8)."
+    },
+    {
+      "id": "WP-04",
+      "title": "Resource catalog and typed graph",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-REG-004",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-REG-005",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-MAP-002",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-02"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-04.md"
+      ],
+      "commit_refs": [
+        "7a81ed2"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-05",
+      "title": "Generated map and presets",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-MAP-003",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-MAP-004",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-04"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-05.md"
+      ],
+      "commit_refs": [
+        "0489465"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-06",
+      "title": "Freshness badges, drift, OctopusG naming",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-UI-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-UI-003",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-OBS-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-03",
+        "WP-04"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-06.md"
+      ],
+      "commit_refs": [
+        "354699b"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-07",
+      "title": "Connection Center framework",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-CONN-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-CONN-003",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-03"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-07.md"
+      ],
+      "commit_refs": [
+        "4c682e9"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-08",
+      "title": "Event envelope and simulated inbox",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-EVT-001",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-EVT-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-02"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-08.md"
+      ],
+      "commit_refs": [
+        "bc5665a"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-09",
+      "title": "Action model and safe open actions",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-ACT-001",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-ACT-002",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-03",
+        "WP-04"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-09.md"
+      ],
+      "commit_refs": [
+        "c6a71db"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-10",
+      "title": "Devices and requirements views",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-UI-004",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-UI-005",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-03"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-10.md"
+      ],
+      "commit_refs": [
+        "f2ad90d"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-11",
+      "title": "v0.2 acceptance",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-GOV-004",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-01…WP-10",
+        "WP-12"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-11.md"
+      ],
+      "commit_refs": [
+        "c221451"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-12",
+      "title": "Brand asset and tagline",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-UI-007",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-06"
+      ],
+      "related_adrs": [
+        "ADR-0006"
+      ],
+      "evidence_refs": [
+        "docs/evidence/WP-12.md"
+      ],
+      "commit_refs": [
+        "165397c"
+      ],
+      "pr": null,
+      "notes": "Commit is tagged v0.2.0."
+    },
+    {
+      "id": "WP-13",
+      "title": "v0.3 platform foundation design (approved origin, CI, protected preview)",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-SEC-008",
+          "status": "VERIFIED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-GOV-007",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.3"
+        },
+        {
+          "id": "OG-SEC-009",
+          "status": "PROPOSED",
+          "milestone": "v0.3"
+        }
+      ],
+      "dependencies": [
+        "WP-11"
+      ],
+      "related_adrs": [
+        "ADR-0007"
+      ],
+      "evidence_refs": [
+        "docs/evidence/WP-13.md"
+      ],
+      "commit_refs": [
+        "42d949a",
+        "8b3850a"
+      ],
+      "pr": null,
+      "notes": null
+    },
+    {
+      "id": "WP-14",
+      "title": "Read-only DayOS monitor",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-OBS-007",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.3"
+        }
+      ],
+      "dependencies": [
+        "WP-13"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-14.md"
+      ],
+      "commit_refs": [
+        "4a2ab03"
+      ],
+      "pr": 2,
+      "notes": null
+    },
+    {
+      "id": "WP-15",
+      "title": "Owner ownership declarations and client tenancy",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-REG-007",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        },
+        {
+          "id": "OG-REG-008",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.2"
+        }
+      ],
+      "dependencies": [
+        "WP-04",
+        "OD-05",
+        "OD-09"
+      ],
+      "related_adrs": [],
+      "evidence_refs": [
+        "docs/evidence/WP-15.md"
+      ],
+      "commit_refs": [
+        "359f39c"
+      ],
+      "pr": 3,
+      "notes": null
+    },
+    {
+      "id": "WP-16",
+      "title": "Credential Reference and Connector Security Foundation",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-SEC-003",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.3"
+        },
+        {
+          "id": "OG-SEC-004",
+          "status": "IMPLEMENTED",
+          "milestone": "v0.3"
+        }
+      ],
+      "dependencies": [
+        "WP-15",
+        "OD-03",
+        "OD-04"
+      ],
+      "related_adrs": [
+        "ADR-0008"
+      ],
+      "evidence_refs": [
+        "docs/evidence/WP-16.md"
+      ],
+      "commit_refs": [
+        "adc3f4c"
+      ],
+      "pr": 4,
+      "notes": null
+    },
+    {
+      "id": "WP-17",
+      "title": "Artemis DayOS Supabase Read-Only Observation Connector",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "not started",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [
+        {
+          "id": "OG-CONN-015",
+          "status": "APPROVED",
+          "milestone": "v0.3"
+        }
+      ],
+      "dependencies": [
+        "WP-18",
+        "ADR-0009",
+        "OD-03 containment of relevant items",
+        "WP-17 preflight unknowns",
+        "G3"
+      ],
+      "related_adrs": [
+        "ADR-0009"
+      ],
+      "evidence_refs": [],
+      "commit_refs": [],
+      "pr": null,
+      "notes": "Next, not started. Implements OG-CONN-015."
+    },
+    {
+      "id": "WP-18",
+      "title": "DayOS Supabase Connector Design and Authorization Boundary",
+      "type": "work_package",
+      "status": null,
+      "status_note": "The ledger records no WP-level status; see requirement statuses.",
+      "landing": "on main",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "requirements": [],
+      "dependencies": [
+        "WP-16"
+      ],
+      "related_adrs": [
+        "ADR-0009"
+      ],
+      "evidence_refs": [
+        "docs/evidence/WP-18.md"
+      ],
+      "commit_refs": [
+        "7b207d2"
+      ],
+      "pr": 6,
+      "notes": "Design only; provenance for OG-CONN-015, which WP-17 implements (S14 decision 2)."
+    }
+  ],
+  "non_numbered_work": [
+    {
+      "id": "B0",
+      "title": "Block 0 architecture and requirements pack",
+      "evidence_refs": [
+        "docs/evidence/B0.md"
+      ],
+      "commit_refs": [
+        "d5f1c6b"
+      ]
+    },
+    {
+      "id": "MAINT-01",
+      "title": "Local observations as a git-ignored overlay",
+      "evidence_refs": [
+        "docs/evidence/MAINT-01-local-observation-overlay.md"
+      ],
+      "commit_refs": [
+        "4629cf1"
+      ],
+      "pr": 9
+    },
+    {
+      "id": "PR-1",
+      "title": "CI: normalize checkout origin before local audit",
+      "commit_refs": [
+        "f93aa8f"
+      ],
+      "pr": 1
+    },
+    {
+      "id": "PR-5",
+      "title": "Governance: progressive delivery and evolution principle",
+      "commit_refs": [
+        "66df94c"
+      ],
+      "pr": 5,
+      "related_ids": [
+        "S12",
+        "ADR-0010"
+      ]
+    },
+    {
+      "id": "PR-7",
+      "title": "Governance: multi-AI engineering evolution",
+      "commit_refs": [
+        "c2245c9"
+      ],
+      "pr": 7,
+      "related_ids": [
+        "S13",
+        "ADR-0011"
+      ]
+    },
+    {
+      "id": "PR-8",
+      "title": "Governance: canonicalize pre-WP-17 sequence",
+      "commit_refs": [
+        "c6620d9"
+      ],
+      "pr": 8,
+      "related_ids": [
+        "S14"
+      ]
+    }
+  ],
+  "adrs": [
+    {
+      "id": "ADR-0001",
+      "title": "Evolve the existing Control Plane repository into OctopusG",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0001-existing-repository.md",
+      "effect": "One repository; no rename or move.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [],
+      "notes": "File: \"formal acceptance at G1\"; see contradiction C1."
+    },
+    {
+      "id": "ADR-0002",
+      "title": "Modular monolith first",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0002-modular-monolith-first.md",
+      "effect": "One app and process; planes as folders.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [],
+      "notes": "Proposed folder layout differs from as-built src/ (C6)."
+    },
+    {
+      "id": "ADR-0003",
+      "title": "Read-only first for every connection",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0003-read-only-first.md",
+      "effect": "Level 0→1 only via G3; levels ≥2 via G4.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [],
+      "notes": null
+    },
+    {
+      "id": "ADR-0004",
+      "title": "Owner-run build-time collectors",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0004-build-time-collectors.md",
+      "effect": "npm run observe → build; no live server API.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [],
+      "notes": null
+    },
+    {
+      "id": "ADR-0005",
+      "title": "Source-cited requirements; generated traceability",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0005-source-cited-requirements.md",
+      "effect": "Sources never edited; S<n>#slug citations validated.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [],
+      "notes": null
+    },
+    {
+      "id": "ADR-0006",
+      "title": "Brand asset, provenance and tagline",
+      "type": "adr",
+      "status": "ACCEPTED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0006-brand-asset-and-tagline.md",
+      "effect": "Owner bytes are the master; served derivatives; approved tagline.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [
+        "WP-12",
+        "OG-UI-007",
+        "S6"
+      ],
+      "notes": null
+    },
+    {
+      "id": "ADR-0007",
+      "title": "Exact-allowlist origin",
+      "type": "adr",
+      "status": "ACCEPTED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0007-approved-origin-allowlist.md",
+      "effect": "Exactly one private origin (HTTPS or SSH form).",
+      "supersedes": "zero-remote audit rule",
+      "superseded_by": null,
+      "related_ids": [
+        "WP-13",
+        "OD-11",
+        "S7"
+      ],
+      "notes": null
+    },
+    {
+      "id": "ADR-0008",
+      "title": "Credential reference/provider boundary",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0008-credential-reference-provider-boundary.md",
+      "effect": "CredentialRef → CredentialProvider → secure backing store.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [
+        "WP-16",
+        "OG-SEC-003",
+        "OG-SEC-004",
+        "S10"
+      ],
+      "notes": "Implemented by WP-16 while the ADR remains PROPOSED."
+    },
+    {
+      "id": "ADR-0009",
+      "title": "DayOS Supabase connector design and authorization boundary",
+      "type": "adr",
+      "status": "ACCEPTED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0009-dayos-supabase-boundary.md",
+      "effect": "Design boundary for WP-17; grants no G3.",
+      "supersedes": "docs/NEXT-SLICE-DAYOS-MONITORING.md",
+      "superseded_by": null,
+      "related_ids": [
+        "WP-18",
+        "WP-17",
+        "OG-CONN-015",
+        "S11",
+        "S14"
+      ],
+      "notes": "Supersedes the NEXT-SLICE specification as design authority only; that file is kept as history."
+    },
+    {
+      "id": "ADR-0010",
+      "title": "Progressive delivery and evidence-driven evolution",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0010-progressive-delivery-and-evolution.md",
+      "effect": "Minimum safe foundation → first controlled integration → private Alpha.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [
+        "S12",
+        "S14"
+      ],
+      "notes": "Specialized by the S14 controlling sequence."
+    },
+    {
+      "id": "ADR-0011",
+      "title": "Multi-AI Engineering Core and evidence-governed spatial evolution",
+      "type": "adr",
+      "status": "PROPOSED",
+      "authority_class": "CANONICAL_CURRENT",
+      "path": "docs/decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md",
+      "effect": "Architecture/history direction only; no implementation.",
+      "supersedes": null,
+      "superseded_by": null,
+      "related_ids": [
+        "S13",
+        "OG-AI-005",
+        "EXP-001",
+        "EXP-002"
+      ],
+      "notes": null
+    }
+  ],
+  "registries": [
+    {
+      "id": "requirements-ledger",
+      "path": "docs/requirements/REQUIREMENTS.yaml",
+      "type": "registry",
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Requirements, capabilities, sources, milestones, work packages, owner decisions."
+    },
+    {
+      "id": "traceability",
+      "path": "docs/requirements/TRACEABILITY.md",
+      "type": "generated",
+      "authority_class": "GENERATED"
+    },
+    {
+      "id": "capability-atlas",
+      "path": "docs/03-CAPABILITY-ATLAS.md",
+      "type": "document_with_generated_table",
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "requirements-projection",
+      "path": "data/requirements.json",
+      "type": "generated",
+      "authority_class": "GENERATED"
+    },
+    {
+      "id": "owner-decisions",
+      "path": "docs/09-ROADMAP.md#owner-decisions",
+      "type": "registry",
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "portfolio-registry-pin",
+      "path": "data/registry.lock.json",
+      "type": "registry",
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Pins data/PROJECT_REGISTRY_v1.6.yaml by SHA-256."
+    },
+    {
+      "id": "od03-register",
+      "path": "docs/security/OD-03-CONTAINMENT.md",
+      "type": "registry",
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Append-only; contains no secret values."
+    },
+    {
+      "id": "evolution-history",
+      "path": "docs/EVOLUTION-HISTORY.md",
+      "type": "registry",
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Presence does not imply approval."
+    },
+    {
+      "id": "archive-manifest",
+      "path": "docs/archive/MANIFEST.md",
+      "type": "registry",
+      "authority_class": "CANONICAL_HISTORICAL"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "path": "docs/sources/S1-2026-09-17-conversation-export.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S2",
+      "path": "docs/sources/S2-2026-09-17-gpt-planning-thread.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S3",
+      "path": "docs/sources/S3-2026-09-17-claude-review.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S4",
+      "path": "docs/sources/S4-2026-09-17-v0.1-repository-inspection.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S5",
+      "path": "docs/archive/gate-3b/PRODUCT_BACKLOG.md",
+      "type": "source_record",
+      "authority_class": "CANONICAL_HISTORICAL"
+    },
+    {
+      "id": "S6",
+      "path": "docs/sources/S6-2026-09-18-owner-brand-decisions.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S7",
+      "path": "docs/sources/S7-2026-09-18-owner-v03-platform-foundation-authorization.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S8",
+      "path": "docs/sources/S8-2026-09-19-owner-dayos-monitoring-directive.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S9",
+      "path": "docs/sources/S9-2026-09-20-owner-ownership-declarations.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S10",
+      "path": "docs/sources/S10-2026-09-21-owner-wp16-authorization.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S11",
+      "path": "docs/sources/S11-2026-09-22-owner-wp18-authorization.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S12",
+      "path": "docs/sources/S12-2026-09-22-owner-progressive-delivery-principle.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S13",
+      "path": "docs/sources/S13-2026-09-22-owner-multi-ai-engineering-milestone.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    },
+    {
+      "id": "S14",
+      "path": "docs/sources/S14-2026-09-25-owner-canonicalization-and-pre-wp17-decisions.md",
+      "type": "source_record",
+      "authority_class": "SOURCE_RECORD"
+    }
+  ],
+  "architecture": [
+    {
+      "id": "planes-runtime",
+      "paths": [
+        "docs/01-SYSTEM-ARCHITECTURE.md",
+        "docs/decisions/ADR-0002-modular-monolith-first.md"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "domain-ownership-tenancy",
+      "paths": [
+        "docs/02-DOMAIN-MODEL.md",
+        "docs/DATA_MODEL.md",
+        "docs/sources/S9-2026-09-20-owner-ownership-declarations.md"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "truth-evidence-provenance",
+      "paths": [
+        "docs/01-SYSTEM-ARCHITECTURE.md#2-truth-model",
+        "docs/DATA_MODEL.md",
+        "src/truth.ts"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "authority-trust-approvals",
+      "paths": [
+        "docs/06-SECURITY-AND-APPROVALS.md",
+        "config/policy.json"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "connectors",
+      "paths": [
+        "docs/04-CONNECTOR-CONTRACT.md",
+        "docs/decisions/ADR-0003-read-only-first.md",
+        "config/connectors.json"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "credential-provider",
+      "paths": [
+        "docs/decisions/ADR-0008-credential-reference-provider-boundary.md",
+        "src/credentials.ts",
+        "docs/evidence/WP-16.md"
+      ],
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Implemented; ADR PROPOSED."
+    },
+    {
+      "id": "dayos-supabase-connector",
+      "paths": [
+        "docs/decisions/ADR-0009-dayos-supabase-boundary.md",
+        "src/supabase-boundary.ts"
+      ],
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Design ACCEPTED; not implemented."
+    },
+    {
+      "id": "events-inbox",
+      "paths": [
+        "docs/05-EVENT-MODEL.md"
+      ],
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "Simulated."
+    },
+    {
+      "id": "devices-observer",
+      "paths": [
+        "docs/07-DEVICE-AGENT-SPEC.md",
+        "scripts/observe.mjs",
+        "config/observe.allowlist.json"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "multi-ai-reality-kernel-temporal",
+      "paths": [
+        "docs/decisions/ADR-0011-multi-ai-engineering-core-and-evidence-governance.md",
+        "docs/EVOLUTION-HISTORY.md"
+      ],
+      "authority_class": "CANDIDATE",
+      "notes": "PROPOSED/CANDIDATE only; OG-AI-005 PROPOSED."
+    },
+    {
+      "id": "attention-decision",
+      "paths": [],
+      "authority_class": "UNKNOWN",
+      "notes": "No canonical architecture on main; UI Lab concepts exist only on a local experimental branch."
+    },
+    {
+      "id": "ui-projection",
+      "paths": [
+        "docs/08-UX-AND-SCREEN-MAP.md",
+        "src/main.ts"
+      ],
+      "authority_class": "CANONICAL_CURRENT"
+    }
+  ],
+  "ui": {
+    "canonical": {
+      "paths": [
+        "docs/08-UX-AND-SCREEN-MAP.md",
+        "src/main.ts",
+        "src/style.css",
+        "docs/decisions/ADR-0006-brand-asset-and-tagline.md"
+      ]
+    },
+    "experimental": {
+      "id": "ui-lab",
+      "authority_class": "EXPERIMENTAL",
+      "availability": "local branch only; not on main; not pushed; paths below do not exist on main",
+      "branch": "octopusg/ui-lab-foundation",
+      "review_commit": "9bc5cea",
+      "charter_path": "docs/ui-lab/UI-LAB-SPEC.md",
+      "state_path": "docs/ui-lab/UI-LAB-STATE.md",
+      "requirement": {
+        "id": "OG-UI-008",
+        "status": "IMPLEMENTED",
+        "milestone": "unscheduled",
+        "ledger": "branch only"
+      },
+      "sources": [
+        "S15",
+        "S16"
+      ],
+      "data": "demo only"
+    },
+    "responsive_architecture": "UNKNOWN (no canonical cross-device UI architecture on main)"
+  },
+  "security": {
+    "hard_boundaries": "docs/00-PRODUCT-CONSTITUTION.md#4-hard-boundaries-all-milestones-until-the-owner-changes-this-section",
+    "secrets_policy": "docs/06-SECURITY-AND-APPROVALS.md#5-secrets",
+    "od03": {
+      "register": "docs/security/OD-03-CONTAINMENT.md",
+      "exception": false,
+      "items": [
+        {
+          "id": "X-01",
+          "blocks_wp17_g3": true
+        },
+        {
+          "id": "X-02",
+          "blocks_wp17_g3": true
+        },
+        {
+          "id": "X-03",
+          "blocks_wp17_g3": "UNKNOWN"
+        }
+      ],
+      "note": "Register holds no secret values; never read secret content to resolve relevance."
+    },
+    "credential_store": "none selected (OD-04); fail-closed Keychain adapter exists, no credential accessed",
+    "remote_rule": "ADR-0007 exact allowlist",
+    "never_without_owner_authorization": {
+      "source": "CLAUDE.md#never-also-enforced-in-claudesettingsjson",
+      "items": [
+        "add any remote other than the approved origin",
+        "force-push",
+        "delete remote branches",
+        "rewrite history",
+        "make the repository public",
+        "deploy to production, attach a production domain, change DNS",
+        "call Vercel from the implementing machine",
+        "call Supabase/Google/Meta/Tailscale/n8n or connect any external account",
+        "read .env*, keys, Keychain items or any secret value; print or commit a token",
+        "install or add dependencies (npm ci from lockfile is fine)",
+        "delete files outside work/ or dist/",
+        "loosen scripts/audit.mjs beyond ADR-0007 Decision §1"
+      ]
+    },
+    "runtime": "loopback server; CSP connect-src none; no browser network client",
+    "vercel_preview": {
+      "requirement": "OG-SEC-009",
+      "status": "PROPOSED",
+      "note": "Vercel is owner-operated from a separate session"
+    }
+  },
+  "milestones": [
+    {
+      "date": "2026-09-16",
+      "event": "Control Plane v0.1 frozen baseline",
+      "commit_refs": [
+        "6a4954f"
+      ],
+      "refs": [
+        "docs/archive/MANIFEST.md"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "event": "Block 0 architecture pack; G1 working baseline per SESSION_BRIEF",
+      "commit_refs": [
+        "d5f1c6b"
+      ],
+      "refs": [
+        "docs/evidence/B0.md"
+      ]
+    },
+    {
+      "date": "2026-09-17/18",
+      "event": "v0.2 WP-01…WP-12",
+      "commit_refs": [
+        "bcee664",
+        "165397c"
+      ],
+      "refs": [
+        "docs/evidence/WP-11.md"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "event": "Brand decisions and v0.2 gate positions (OD-03, OD-04)",
+      "refs": [
+        "S6",
+        "ADR-0006"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "event": "v0.2.0 tag; approved origin; OG-SEC-008 VERIFIED",
+      "commit_refs": [
+        "165397c",
+        "8b3850a"
+      ],
+      "refs": [
+        "S7",
+        "ADR-0007",
+        "docs/evidence/WP-13.md"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "event": "DayOS monitor (WP-14)",
+      "commit_refs": [
+        "4a2ab03"
+      ],
+      "refs": [
+        "S8"
+      ]
+    },
+    {
+      "date": "2026-09-20/21",
+      "event": "Ownership and tenancy (WP-15)",
+      "commit_refs": [
+        "359f39c"
+      ],
+      "refs": [
+        "S9"
+      ]
+    },
+    {
+      "date": "2026-09-21/22",
+      "event": "Credential boundary (WP-16)",
+      "commit_refs": [
+        "adc3f4c"
+      ],
+      "refs": [
+        "S10",
+        "ADR-0008"
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "event": "Progressive delivery principle",
+      "commit_refs": [
+        "66df94c"
+      ],
+      "refs": [
+        "S12",
+        "ADR-0010"
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "event": "DayOS Supabase design boundary (WP-18)",
+      "commit_refs": [
+        "7b207d2"
+      ],
+      "refs": [
+        "S11",
+        "ADR-0009"
+      ]
+    },
+    {
+      "date": "2026-09-22/23",
+      "event": "Multi-AI engineering history (EXP-001, EXP-002)",
+      "commit_refs": [
+        "c2245c9"
+      ],
+      "refs": [
+        "S13",
+        "ADR-0011",
+        "docs/EVOLUTION-HISTORY.md"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "event": "Canonicalization: ADR-0009 accepted, WP-17 next, OD-03 register",
+      "commit_refs": [
+        "c6620d9"
+      ],
+      "refs": [
+        "S14"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "event": "Local observation overlay (MAINT-01)",
+      "commit_refs": [
+        "4629cf1"
+      ],
+      "refs": [
+        "docs/evidence/MAINT-01-local-observation-overlay.md"
+      ]
+    }
+  ],
+  "frontier": {
+    "active": [],
+    "next_authorized": [
+      {
+        "id": "WP-17",
+        "requirement": {
+          "id": "OG-CONN-015",
+          "status": "APPROVED",
+          "milestone": "v0.3"
+        },
+        "after": [
+          "OD-03 containment of X-01, X-02",
+          "preflight unknowns",
+          "G3"
+        ],
+        "source": "docs/09-ROADMAP.md#current-delivery-sequence"
+      }
+    ],
+    "blocked": [
+      {
+        "id": "WP-17 G3",
+        "by": [
+          "X-01",
+          "X-02",
+          "X-03 relevance UNKNOWN",
+          "WP-17 preflight unknowns"
+        ],
+        "source": "docs/security/OD-03-CONTAINMENT.md"
+      }
+    ],
+    "candidates": [
+      {
+        "id": "OG-AI-001",
+        "title": "Registry MCP server",
+        "requirement": {
+          "id": "OG-AI-001",
+          "status": "PROPOSED",
+          "milestone": "unscheduled"
+        }
+      },
+      {
+        "id": "multi-ai-engineering-core",
+        "requirement": {
+          "id": "OG-AI-005",
+          "status": "PROPOSED",
+          "milestone": "unscheduled"
+        }
+      }
+    ],
+    "awaiting_owner": [
+      "G2 for IMPLEMENTED v0.2 requirements",
+      "OG-SEC-009",
+      "acceptance of PROPOSED ADRs"
+    ],
+    "contradictions": [
+      {
+        "id": "C1",
+        "summary": "Constitution header PROPOSED vs SESSION_BRIEF G1 working-baseline approval; ADR-0001…0005 still PROPOSED",
+        "paths": [
+          "docs/00-PRODUCT-CONSTITUTION.md",
+          "SESSION_BRIEF.md",
+          "docs/decisions/ADR-0001-existing-repository.md"
+        ]
+      },
+      {
+        "id": "C2",
+        "summary": "SESSION_BRIEF names PRs #1–#7 / c2245c9 and an unmerged debt fix; main is at c6620d9 with MAINT-01 merged",
+        "paths": [
+          "SESSION_BRIEF.md",
+          "docs/evidence/MAINT-01-local-observation-overlay.md"
+        ]
+      },
+      {
+        "id": "C3",
+        "summary": "SESSION_BRIEF generated table \"Next work package: none\" vs roadmap WP-17 next",
+        "paths": [
+          "SESSION_BRIEF.md",
+          "docs/09-ROADMAP.md"
+        ]
+      },
+      {
+        "id": "C4",
+        "summary": "README says no remote; ADR-0007 origin exists (README refresh deferred by S14 decision 9)",
+        "paths": [
+          "README.md",
+          "docs/decisions/ADR-0007-approved-origin-allowlist.md"
+        ]
+      },
+      {
+        "id": "C5",
+        "summary": "Operating model: Claude does not push; reviews/ files — CLAUDE.md permits ADR-0007 pushes; no reviews/ directory",
+        "paths": [
+          "docs/10-OPERATING-MODEL.md",
+          "CLAUDE.md"
+        ]
+      },
+      {
+        "id": "C6",
+        "summary": "ADR-0002 proposed src/ plane folders; as-built src/ is flat",
+        "paths": [
+          "docs/decisions/ADR-0002-modular-monolith-first.md",
+          "src/"
+        ]
+      },
+      {
+        "id": "C7",
+        "summary": "CLAUDE.md branch naming octopusg/wp-xx-<slug>; merged governance/ and maint/ branches exist",
+        "paths": [
+          "CLAUDE.md"
+        ]
+      },
+      {
+        "id": "C8",
+        "summary": "SESSION_BRIEF says WP-02 accepted at G2 and WP-03 at G4; roadmap defines G2 as v0.2 MVP acceptance and G4 as action authorization",
+        "paths": [
+          "SESSION_BRIEF.md",
+          "docs/09-ROADMAP.md"
+        ]
+      }
+    ],
+    "unknowns": [
+      "G2 acceptance record for v0.2 as a whole",
+      "formal G1 acceptance record for the constitution",
+      "X-03 relevance to WP-17",
+      "Supabase key architecture",
+      "authoritative DayOS project identity",
+      "whether DayOS migrations are applied",
+      "G3 record format",
+      "canonical attention/decision/temporal architecture"
+    ]
+  },
+  "validation": {
+    "commands": [
+      "npm ci --ignore-scripts --no-audit --no-fund",
+      "npm run validate",
+      "npm run validate:spec",
+      "npm run test:browser (needs npm start)"
+    ],
+    "ci": ".github/workflows/validate.yml",
+    "unit_tests": "tests/*.test.ts",
+    "browser_test": "tests/browser.mjs",
+    "spec_validator": "scripts/validate-spec.mjs",
+    "audit": [
+      "scripts/audit.mjs",
+      "scripts/audit-remotes.mjs"
+    ],
+    "evidence_dir": "docs/evidence/",
+    "evidence_contract": "docs/evidence/WP-11.md",
+    "transient_local_state": [
+      "work/",
+      "dist/",
+      "work/observations/"
+    ]
+  },
+  "historical_sources": [
+    {
+      "path": "docs/archive/",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "notes": "Byte-identical Gate records; never edited; override nothing."
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "notes": "v0.1; architecture pack wins on conflict."
+    },
+    {
+      "path": "docs/DATA_MODEL.md",
+      "authority_class": "CANONICAL_CURRENT",
+      "notes": "v0.1 origin, extended through v0.2; architecture pack wins on conflict."
+    },
+    {
+      "path": "docs/CONNECTOR_PLAN_v0.2.md",
+      "authority_class": "CANONICAL_HISTORICAL",
+      "notes": "Proposal only."
+    },
+    {
+      "path": "docs/NEXT-SLICE-DAYOS-MONITORING.md",
+      "authority_class": "SUPERSEDED",
+      "superseded_by": "ADR-0009"
+    },
+    {
+      "path": "data/PROJECT_REGISTRY_v1.4.yaml",
+      "authority_class": "CANONICAL_HISTORICAL"
+    },
+    {
+      "path": "data/PROJECT_REGISTRY_v1.5.yaml",
+      "authority_class": "CANONICAL_HISTORICAL"
+    },
+    {
+      "path": "data/PROJECT_REGISTRY_v1.5.1.yaml",
+      "authority_class": "CANONICAL_HISTORICAL"
+    }
+  ],
+  "qualification_questions": [
+    "What is the authority order, and where do owner decisions have to be recorded to count?",
+    "Which WP is next, what requirement does it implement, and why does WP-18 precede it?",
+    "Which gates exist, which one does WP-17 need, and has it been granted?",
+    "Which OD-03 items block WP-17's G3, which is UNKNOWN, and why may you not read the files to find out?",
+    "What is the difference between IMPLEMENTED and VERIFIED here, and which v0.2 WPs are only IMPLEMENTED?",
+    "Is ADR-0008 accepted? What was built under it, and what does that imply for its status?",
+    "What does ADR-0007 permit and exactly what does it forbid?",
+    "Where do local observations live, and why are they not canonical truth?",
+    "What are the five truth kinds, and what should the UI show when nothing was observed?",
+    "Which document is superseded by ADR-0009, and what changed?",
+    "What is the controlling delivery sequence up to the local-private Alpha?",
+    "Is \"Reality Kernel\" canonical architecture? Where does it appear and with what status?",
+    "Is the UI Lab canonical? Where does it live and what data may it use?",
+    "What does the Evolution History ledger's presence of an item imply about approval?",
+    "What would you do if SESSION_BRIEF and the roadmap disagree about the next WP?",
+    "Which commands define \"done\", and what must the evidence file contain?"
+  ]
+}
